@@ -2,11 +2,14 @@
 
 The repository is private as required. The course account `ailt9019hku@gmail.com` must have **Read** access for the mid-term check and reproducibility review.
 
-GitHub's command-line API cannot look up this account by its non-public email address. Add it manually in the repository website:
+## Current status
 
-1. Open **Settings → Collaborators**.
-2. Choose **Add people** and search for `ailt9019hku@gmail.com`.
-3. Confirm the course account card before adding it.
-4. Select **Read** access and keep the repository private.
+The account was resolved as `AILT9019`. A write invitation was created and then withdrawn because the course instruction requires Read access.
+
+GitHub's API rejects a Read-only collaborator role on a repository owned by an individual account: it permits only Write for external collaborators. Do not send the course account a Write invitation as a workaround.
+
+## Required resolution
+
+Ask the course team whether its checker account can accept the unavoidable Write collaborator role on a personal private repository, or whether the repository should be transferred to a team GitHub organization that supports a Read role. Once we have that answer, apply only the approved option.
 
 Do not share the repository outside the team or add course account details to the anonymous Moodle proposal.

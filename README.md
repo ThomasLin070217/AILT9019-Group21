@@ -7,6 +7,7 @@ We are currently selecting a project topic and preparing the proposal due on 30 
 ## Start here
 
 - [Course plan](docs/COURSE_PLAN.md): dates, deliverables, grading, and non-negotiable rules.
+- [Team guide](docs/TEAM_GUIDE.md): what is set up, what every member should do now, and the open access issue.
 - [Proposal worksheet](proposal/PROPOSAL_WORKSHEET.md): the questions to settle before drafting the anonymous Moodle submission.
 - [Evaluation plan](tests/EVALUATION_PLAN.md): how we will define a real pass, failure, and safe refusal.
 - [AI-use log](docs/AI_USE_LOG.md): record prompts, changes, and verification as we work.
