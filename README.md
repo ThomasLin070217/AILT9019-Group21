@@ -4,6 +4,17 @@
 
 We are currently selecting a project topic and preparing the proposal due on 30 September 2026.
 
+## Team 21
+
+| Name | Contact email | GitHub |
+| --- | --- | --- |
+| Yunian Lin (Thomas) | u3660124@connect.hku.hk | [ThomasLin070217](https://github.com/ThomasLin070217) |
+| Xinyue Li (Angel) | 06.xinyue@gmail.com | [Tiramuffin](https://github.com/Tiramuffin) |
+| Qingyang Lin | u3659001@connect.hku.hk | — |
+| Ho Yeung Seto (Owen) | hiowenseto@gmail.com | [Owen-Seto](https://github.com/Owen-Seto) |
+
+This directory is for private repository coordination only. Do not copy these details into the anonymous Moodle proposal or peer-review forms.
+
 ## Start here
 
 - [Course plan](docs/COURSE_PLAN.md): dates, deliverables, grading, and non-negotiable rules.
