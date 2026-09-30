@@ -1,0 +1,15 @@
+{
+  "app/index.html": "3f0b57786331e8cc2462a07c3c28b91114fdcc002b196c15c379313c00f9875d",
+  "app/styles.css": "81855580a9a320652d6ee1c2d49c844bd1ca0bf47d9d014541bbcdd35bd196ed",
+  "app/about.html": "5bbdd66cee194af3679d531b84ab4267954702e721d4f5de43ac50c77ce461e8",
+  "app/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "app/repository.mjs": "b088964cbe5a447c444006e8a1c0b88787e8972d88189733f6b8eff190e9ed5e",
+  "app/domain.mjs": "71fcedbc93611c2fa73db0ef66bbf67b0a1be8e46173558f1346e1668aed8323",
+  "app/main.mjs": "feee9717d20fba2a01add33c5643ed3ec4c5c6875349ff91ee2db0a7c95fd2b6",
+  "serve.py": "c62166683ccafb622d67f2b4bbb3fb9d3db684ce329d16e881dc036bf268f980",
+  "tests/map.test.mjs": "960a173be6ed4a9690831b004ca02bcd0131a67aa09b0dd1900fbad0eaa51b23",
+  "tests/browser.e2e.mjs": "16958c331c8c50e1ca51994888cb8fd16a552cc5d1211da3f84cef6f481efee4",
+  "data/cities.json": "30a51441260b8b8255355da230aec3ee34887df545e575775c5e8eede4493a21",
+  "data/demo-trips.json": "c036de2dc5f99eff3ccd442bdb1d4ccd7733fd5b523957a0e61a9daccc9aecdc",
+  "data/map/land.geojson": "4de9276d40f8706945a2050dbd82f8e78daa952a963b6b118fec359f35701867"
+}

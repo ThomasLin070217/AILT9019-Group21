@@ -1,0 +1,44 @@
+/** Start python3 serve.py first. Optional PLAYWRIGHT_MODULE / CHROMIUM_EXECUTABLE overrides. */
+import assert from 'node:assert/strict';
+import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
+import path from 'node:path';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const output=process.env.EVIDENCE_DIR||'/tmp/travel-map-evidence';mkdirSync(output,{recursive:true});
+const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_EXECUTABLE?{executablePath:process.env.CHROMIUM_EXECUTABLE}:{})});
+const base=process.env.BASE_URL||'http://127.0.0.1:8019';
+const errors=[],checks=[],network=[];
+const context=await browser.newContext({viewport:{width:1440,height:1050},recordVideo:{dir:output,size:{width:1440,height:1050}}});
+const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));page.on('request',request=>network.push(request.url()));
+page.on('dialog',dialog=>dialog.accept());
+const count=async n=>assert.match(await page.locator('#city-count').innerText(),new RegExp(`^${n} visits?`));
+try{
+ await page.goto(base+'/app/');await page.waitForSelector('.city-button');await count(2);
+ assert.equal(await page.locator('.city-button').count(),19);assert.equal(await page.locator('.trip-card').count(),2);
+ await page.screenshot({path:path.join(output,'desktop.png'),fullPage:true});checks.push('Initial 19 cities, separate Osaka cards and fictional-data label');
+ await page.locator('[data-city-id="cn-beijing"].marker').focus();await page.keyboard.press('Enter');await count(0);
+ assert.equal(await page.evaluate(()=>document.activeElement.dataset.cityId),'cn-beijing');checks.push('Keyboard marker selection retains focus and shows empty city');
+ await page.locator('#search').fill('大阪');assert.equal(await page.locator('.city-button').count(),1);await count(2);
+ await page.locator('#search').fill('no such place');assert.equal(await page.locator('.city-button').count(),0);assert.match(await page.locator('#city-name').innerText(),/Keep exploring/);
+ await page.locator('#search').fill('');await page.locator('#region').selectOption('Japan');await page.locator('#visited').check();assert.equal(await page.locator('.city-button').count(),1);await count(2);checks.push('Chinese search, empty search and combined region/visited filters');
+ await page.locator('#demo-tools summary').click();await page.locator('#add-sample').click();await page.waitForFunction(()=>document.querySelector('#city-count').textContent.startsWith('3 visits'));await count(3);
+ await page.locator('#add-sample').click();await page.waitForFunction(()=>document.querySelector('#city-count').textContent.startsWith('4 visits'));assert.equal(await page.locator('.marker[data-city-id="jp-osaka"] .tier-3').count(),1);checks.push('New independent visits cross the 4+ brightness threshold');
+ await page.getByRole('button',{name:'Edit sample text'}).first().click();await page.locator('textarea').fill('<img src=x onerror=alert(1)> An edited sample');await page.getByRole('button',{name:'Save sample text'}).click();await page.waitForSelector('textarea',{state:'detached'});await count(4);
+ assert.equal(await page.locator('.trip-card img').count(),0);assert.match(await page.locator('#trip-list').innerText(),/<img src=x/);checks.push('Editing does not increment count; user text is not interpreted as HTML');
+ await page.reload();await page.waitForSelector('.city-button');await count(4);assert.match(await page.locator('#trip-list').innerText(),/An edited sample/);checks.push('Browser demo persistence across reload');
+ await page.getByRole('button',{name:'Remove sample',exact:true}).first().click();await page.waitForFunction(()=>document.querySelector('#city-count').textContent.startsWith('3 visits'));await count(3);assert.equal(await page.locator('.marker[data-city-id="jp-osaka"] .tier-2').count(),1);checks.push('Removing a saved trip recomputes brightness');
+ const before=await page.locator('#map').getAttribute('viewBox');await page.getByRole('button',{name:'Zoom in',exact:true}).click();assert.notEqual(await page.locator('#map').getAttribute('viewBox'),before);await page.getByRole('button',{name:'Show all cities'}).click();assert.equal(await page.locator('#map').getAttribute('viewBox'),before);checks.push('Zoom and fit controls');
+ await page.locator('#reset').click();await page.waitForFunction(()=>document.querySelector('#city-count').textContent.startsWith('2 visits'));await count(2);checks.push('Explicit reset restores original sample data');
+ await page.evaluate(()=>localStorage.setItem('travel-memory-map.demo.v1','broken json'));await page.reload();await page.waitForSelector('#error:not([hidden])');assert.equal(await page.evaluate(()=>localStorage.getItem('travel-memory-map.demo.v1')),'broken json');await page.locator('#recover').click();await page.waitForSelector('.city-button');await count(2);checks.push('Corrupt storage surfaces an error and requires explicit recovery');
+ const api=await browser.newContext();const apiPage=await api.newPage();apiPage.on('pageerror',e=>errors.push(e.message));
+ const cities=JSON.parse(readFileSync(new URL('../data/cities.json',import.meta.url))),seed=JSON.parse(readFileSync(new URL('../data/demo-trips.json',import.meta.url)));
+ await apiPage.route('**/api/cities',route=>route.fulfill({json:cities}));await apiPage.route('**/api/trips',route=>route.fulfill({json:[seed[0]]}));
+ await apiPage.goto(base+'/app/?mode=api');await apiPage.waitForSelector('.city-button');assert.match(await apiPage.locator('#city-count').innerText(),/^1 visit/);assert.equal(await apiPage.locator('#demo-tools').isVisible(),false);checks.push('Proposed backend adapter contract with mocked HTTP responses; not a live backend test');
+ await apiPage.route('**/api/trips',route=>route.fulfill({status:503,body:'unavailable'}));await apiPage.locator('#refresh').click();await apiPage.waitForSelector('#error:not([hidden])');assert.match(await apiPage.locator('#error-text').innerText(),/Demo data has not been substituted/);await api.close();checks.push('Backend failure does not silently fall back to demo');
+ const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const phone=await mobile.newPage();phone.on('pageerror',e=>errors.push(e.message));
+ await phone.goto(base+'/app/');await phone.waitForSelector('.city-button');assert.equal(await phone.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await phone.screenshot({path:path.join(output,'mobile.png'),fullPage:true});await phone.locator('#search').fill('台北');await phone.locator('.city-button').click();assert.equal(await phone.locator('#city-name').innerText(),'Taipei');checks.push('390px mobile layout and city selection');await mobile.close();
+ const empty=await browser.newContext();await empty.addInitScript(()=>localStorage.setItem('travel-memory-map.demo.v1','[]'));const ep=await empty.newPage();await ep.goto(base+'/app/');await ep.waitForSelector('.city-button');assert.match(await ep.locator('#progress').innerText(),/0 cities visited/);assert.match(await ep.locator('#trip-list').innerText(),/Your first memory/);await empty.close();checks.push('Empty local album state');
+ for(const forbidden of ['/.git/config','/docs/WORK_ALLOCATION.md','/data/../docs/WORK_ALLOCATION.md','/data/']){const response=await page.request.get(base+forbidden);assert.equal(response.status(),404);}checks.push('Preview server does not serve repository metadata or team documentation');
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.equal(errors.length,0,JSON.stringify(errors));assert.ok(network.every(url=>url.startsWith(base)),JSON.stringify(network));checks.push('No JavaScript errors, horizontal overflow or third-party requests');
+ const video=page.video();await context.close();await video.saveAs(path.join(output,'map-walkthrough.webm'));
+ writeFileSync(path.join(output,'browser-results.json'),JSON.stringify({status:'passed',checks,errors,notes:'Demo map and mocked API contract only; no real photos, SQLite or cloud AI tested.'},null,2));console.log(JSON.stringify({status:'passed',checks:checks.length,output}));
+}finally{await browser.close();}

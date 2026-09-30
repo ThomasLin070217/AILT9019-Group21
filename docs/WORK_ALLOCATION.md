@@ -1,6 +1,6 @@
 # Travel Memory Map work allocation
 
-Development plan dated 30 September 2026 for four members. Thomas reports that the proposal has been submitted; its scope is our baseline. Assignments below reflect members' stated backgrounds, not a claim that everyone has already accepted their role. Raise availability or workload conflicts before 2 October. All implementation tasks are **planned**, not completed.
+Development plan dated 30 September 2026 for four members. Thomas reports that the proposal has been submitted; its scope is our baseline. Assignments below reflect members' stated backgrounds, not a claim that everyone has already accepted their role. Raise availability or workload conflicts before 2 October. Update: Thomas’s map module and integration scaffolding are implemented with labelled fictional data; see [handoff and evidence](THOMAS_HANDOFF.md). Real backend/AI integration and the other modules remain planned.
 
 Dates use Hong Kong / Shanghai time (UTC+8), 2026. Internal dates are team targets; Moodle controls course deadlines.
 
@@ -61,7 +61,7 @@ Use the proposal's local browser app, Python backend and SQLite as the starting 
 
 ## Shared interfaces by 2 October
 
-Owen and Thomas coordinate `docs/API_CONTRACT.md`; this is a planned deliverable, not existing code.
+Thomas has drafted [API_CONTRACT.md](API_CONTRACT.md) and implemented its map-side read adapter. Owen, Angel and Qingyang still need to review it; the actual backend routes are not implemented.
 
 | Handoff | Owner → reviewers | Agreement required |
 | --- | --- | --- |
@@ -109,4 +109,4 @@ Thomas coordinates the required consultation and Friday standup posting; each me
 4. Never commit API keys, private photos/notes or chat screenshots. Only permission-cleared, non-sensitive demo fixtures belong in `data/`.
 5. Preserve the submitted proposal; record subsequent design changes for the revised submission.
 
-Start now: Thomas drafts city/map scope; Angel sketches the upload/card screen; Owen drafts the schema/API examples; Qingyang checks model access and drafts the five-case checklist. All implementation and testing remains to be done.
+Start now: Thomas drafts city/map scope; Angel sketches the upload/card screen; Owen drafts the schema/API examples; Qingyang checks model access and drafts the five-case checklist. Thomas’s map checks are complete for the demo adapter; integration and actual AI testing remain to be done.

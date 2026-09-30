@@ -1,6 +1,6 @@
 # Travel Memory Map evaluation plan
 
-Status on 30 September 2026: planned tests; no measured results. Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
+Status on 30 September 2026: the five AI cases remain unrun; Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). T01 has an initial synthetic fixture at `data/fixtures/T01/`, with realistic-photo evaluation still pending. Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
 
 ## Fixed AI cases
 

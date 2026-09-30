@@ -1,0 +1,27 @@
+{
+  "licence": "Public domain",
+  "licence_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "accessed": "2026-09-30",
+  "source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "sources": [
+    {
+      "name": "ne_110m_land",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_110m_land.geojson",
+      "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9"
+    },
+    {
+      "name": "ne_10m_populated_places",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_populated_places.geojson",
+      "sha256": "9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b"
+    }
+  ],
+  "transformations": [
+    "Land: remove unused feature properties; retain geometry.",
+    "Cities: select 19 named points; retain coordinates and NE_ID; add stable app IDs, display translations and UI group labels."
+  ],
+  "limitations": [
+    "Coarse 1:110m land outlines; tiny islands may be absent.",
+    "City markers indicate approximate centres, not routes, borders or proof of a visit.",
+    "UI groups and IDs are application organisation, not administrative-boundary data."
+  ]
+}

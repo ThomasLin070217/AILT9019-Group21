@@ -1,0 +1,173 @@
+[
+  {
+    "id": "cn-beijing",
+    "name": "Beijing",
+    "local_name": "北京",
+    "region": "Mainland China",
+    "longitude": 116.394201,
+    "latitude": 39.90172,
+    "source_ne_id": 1159151595
+  },
+  {
+    "id": "cn-shanghai",
+    "name": "Shanghai",
+    "local_name": "上海",
+    "region": "Mainland China",
+    "longitude": 121.434559,
+    "latitude": 31.218398,
+    "source_ne_id": 1159151605
+  },
+  {
+    "id": "cn-hangzhou",
+    "name": "Hangzhou",
+    "local_name": "杭州",
+    "region": "Mainland China",
+    "longitude": 120.168073,
+    "latitude": 30.25192,
+    "source_ne_id": 1159151387
+  },
+  {
+    "id": "cn-nanjing",
+    "name": "Nanjing",
+    "local_name": "南京",
+    "region": "Mainland China",
+    "longitude": 118.778029,
+    "latitude": 32.051965,
+    "source_ne_id": 1159151385
+  },
+  {
+    "id": "cn-chengdu",
+    "name": "Chengdu",
+    "local_name": "成都",
+    "region": "Mainland China",
+    "longitude": 104.068074,
+    "latitude": 30.671946,
+    "source_ne_id": 1159151533
+  },
+  {
+    "id": "cn-chongqing",
+    "name": "Chongqing",
+    "local_name": "重庆",
+    "region": "Mainland China",
+    "longitude": 106.593036,
+    "latitude": 29.566923,
+    "source_ne_id": 1159151327
+  },
+  {
+    "id": "cn-xian",
+    "name": "Xi’an",
+    "local_name": "西安",
+    "region": "Mainland China",
+    "longitude": 108.89305,
+    "latitude": 34.276971,
+    "source_ne_id": 1159151363
+  },
+  {
+    "id": "cn-guangzhou",
+    "name": "Guangzhou",
+    "local_name": "广州",
+    "region": "Mainland China",
+    "longitude": 113.261785,
+    "latitude": 23.124723,
+    "source_ne_id": 1159151331
+  },
+  {
+    "id": "cn-shenzhen",
+    "name": "Shenzhen",
+    "local_name": "深圳",
+    "region": "Mainland China",
+    "longitude": 114.061154,
+    "latitude": 22.548097,
+    "source_ne_id": 1159151215
+  },
+  {
+    "id": "hk-hong-kong",
+    "name": "Hong Kong",
+    "local_name": "香港",
+    "region": "Hong Kong and Macau",
+    "longitude": 114.183064,
+    "latitude": 22.306927,
+    "source_ne_id": 1159151629
+  },
+  {
+    "id": "mo-macau",
+    "name": "Macau",
+    "local_name": "澳门",
+    "region": "Hong Kong and Macau",
+    "longitude": 113.544375,
+    "latitude": 22.189135,
+    "source_ne_id": 1159149085
+  },
+  {
+    "id": "tw-taipei",
+    "name": "Taipei",
+    "local_name": "台北",
+    "region": "Taiwan",
+    "longitude": 121.568333,
+    "latitude": 25.035833,
+    "source_ne_id": 1159151567
+  },
+  {
+    "id": "tw-kaohsiung",
+    "name": "Kaohsiung",
+    "local_name": "高雄",
+    "region": "Taiwan",
+    "longitude": 120.266602,
+    "latitude": 22.633307,
+    "source_ne_id": 1159151213
+  },
+  {
+    "id": "jp-tokyo",
+    "name": "Tokyo",
+    "local_name": "東京",
+    "region": "Japan",
+    "longitude": 139.749462,
+    "latitude": 35.686963,
+    "source_ne_id": 1159151609
+  },
+  {
+    "id": "jp-osaka",
+    "name": "Osaka",
+    "local_name": "大阪",
+    "region": "Japan",
+    "longitude": 135.503754,
+    "latitude": 34.691095,
+    "source_ne_id": 1159151537
+  },
+  {
+    "id": "jp-kyoto",
+    "name": "Kyoto",
+    "local_name": "京都",
+    "region": "Japan",
+    "longitude": 135.748052,
+    "latitude": 35.031938,
+    "source_ne_id": 1159149967
+  },
+  {
+    "id": "jp-sapporo",
+    "name": "Sapporo",
+    "local_name": "札幌",
+    "region": "Japan",
+    "longitude": 141.338099,
+    "latitude": 43.076925,
+    "source_ne_id": 1159151399
+  },
+  {
+    "id": "jp-fukuoka",
+    "name": "Fukuoka",
+    "local_name": "福岡",
+    "region": "Japan",
+    "longitude": 130.408068,
+    "latitude": 33.596961,
+    "source_ne_id": 1159149927
+  },
+  {
+    "id": "jp-naha",
+    "name": "Naha",
+    "local_name": "那覇",
+    "region": "Japan",
+    "longitude": 127.672972,
+    "latitude": 26.207172,
+    "source_ne_id": 1159149931
+  }
+]

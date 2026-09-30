@@ -4,9 +4,19 @@
 
 We are building **Travel Memory Map**: a local travel album with city markers, separate cards for repeat visits, and user-triggered AI memory writing from the current trip’s photos and notes.
 
-Thomas reported on 30 September 2026 that the proposal was submitted. The [proposal baseline](proposal/Travel_Memory_Map_Proposal.docx) is preserved for the 10 October revision; the Moodle receipt has not been independently checked here. Application implementation and evaluation are still planned.
+Thomas reported on 30 September 2026 that the proposal was submitted. The [proposal baseline](proposal/Travel_Memory_Map_Proposal.docx) is preserved for the 10 October revision; the Moodle receipt has not been independently checked here. Thomas’s city-map module is now runnable with fictional demo data. Photo uploads, the SQLite backend and real cloud AI integration remain planned.
 
 **Start with the [four-person work allocation](docs/WORK_ALLOCATION.md)** for owners, deliverables, review partners and deadlines. Thomas owns map/integration, Angel owns the interface, Owen owns backend/storage, and Qingyang owns AI/evaluation.
+
+## Run the city map
+
+```bash
+python3 serve.py
+```
+
+Open **http://127.0.0.1:8019/app/**. Python 3.10+ is sufficient; no API key or npm installation is needed. Select a city, search by English/Chinese name, and open **Try visit counting** to add/edit fictional demo visits. Browser demo storage is not the planned real backend. No photos or notes are sent to a cloud service.
+
+Run `npm test` with Node.js 20+ for the map logic/storage checks. See [Thomas handoff](docs/THOMAS_HANDOFF.md) for browser checks and [API contract](docs/API_CONTRACT.md) for teammate integration. API mode (`/app/?mode=api`) requires Owen’s backend and never substitutes demo data when it fails.
 
 ## Team 21
 
