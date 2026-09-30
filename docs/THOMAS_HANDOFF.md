@@ -55,6 +55,10 @@ The short browser-test recording is functional evidence of this map module, not 
 - **Qingyang:** add the actual generation adapter with Owen/Angel. Use `data/fixtures/T01/case.json` as a narrow initial smoke case; prepare the other cases and evaluate real outputs separately. Realistic photo quality remains untested.
 - **Thomas:** collect teammate review, run the same checks against the genuine backend once ready, integrate uploads and AI, and record actual end-to-end evidence. No teammate acceptance or real API integration has been claimed.
 
+## Follow-up verification
+
+The [1 October test round and UI reference report](UI_REVIEW_2026-10-01.md) records passing regression tests and additional open issues: unsaved drafts, mobile card visibility, long titles and small touch targets. These findings are not yet fixed.
+
 ## Remaining limitations
 
 The map is city-centre level and uses coarse coastline geometry. Close markers in the Pearl River Delta and Kansai can overlap at the broadest view; the city list and zoom provide exact selection. No geographic visit verification or route guidance is offered. Demo data is stored per browser/origin; changing port changes its storage, and clearing browser storage removes demo edits.

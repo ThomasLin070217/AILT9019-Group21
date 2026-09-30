@@ -1,0 +1,517 @@
+{
+  "viewports": [
+    {
+      "width": 320,
+      "documentWidth": 320,
+      "cardTop": 1366,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 28
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 288,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 28
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 28
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 28
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 28
+        },
+        {
+          "label": "Try visit counting",
+          "w": 288,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 288,
+          "h": 39
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "cardTop": 1319,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 28
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 358,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 28
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 28
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 28
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 28
+        },
+        {
+          "label": "Try visit counting",
+          "w": 358,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 358,
+          "h": 39
+        }
+      ]
+    },
+    {
+      "width": 540,
+      "documentWidth": 540,
+      "cardTop": 1362,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 28
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 508,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 28
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 28
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 28
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 28
+        },
+        {
+          "label": "Try visit counting",
+          "w": 508,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 508,
+          "h": 39
+        }
+      ]
+    },
+    {
+      "width": 541,
+      "documentWidth": 541,
+      "cardTop": 941,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 27
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 185,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Try visit counting",
+          "w": 461,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 461,
+          "h": 39
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "documentWidth": 768,
+      "cardTop": 941,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 27
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 185,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Try visit counting",
+          "w": 688,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 688,
+          "h": 39
+        }
+      ]
+    },
+    {
+      "width": 851,
+      "documentWidth": 851,
+      "cardTop": 252,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 27
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 165,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Try visit counting",
+          "w": 217,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 217,
+          "h": 39
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "documentWidth": 1024,
+      "cardTop": 253,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 27
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 165,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Try visit counting",
+          "w": 217,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 217,
+          "h": 39
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "cardTop": 273,
+      "smallTargets": [
+        {
+          "label": "Reset sample album",
+          "w": 119,
+          "h": 27
+        },
+        {
+          "label": "All 19 citiesMainland ChinaHong Kong and MacauTaiwanJapan",
+          "w": 184,
+          "h": 42
+        },
+        {
+          "label": "visited",
+          "w": 16,
+          "h": 16
+        },
+        {
+          "label": "Zoom in",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Show all cities",
+          "w": 38,
+          "h": 38
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Edit sample text",
+          "w": 88,
+          "h": 25
+        },
+        {
+          "label": "Remove sample",
+          "w": 86,
+          "h": 25
+        },
+        {
+          "label": "Try visit counting",
+          "w": 245,
+          "h": 19
+        },
+        {
+          "label": "Add a sample visit",
+          "w": 245,
+          "h": 39
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "unsavedDraftSurvivesCitySwitch": false
+    },
+    {
+      "longTitleDocumentOverflow": false,
+      "longTitlePanelOverflow": true
+    }
+  ],
+  "gestures": {
+    "tapSelect": "Tokyo",
+    "cardVisibleAfterTap": false,
+    "touchPanChangedView": true,
+    "dragCleared": true
+  },
+  "tested_commit": "27d73d183706a02fe6212973d27d2ce1772cbd18",
+  "date": "2026-10-01 Asia/Shanghai"
+}
