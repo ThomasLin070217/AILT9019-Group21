@@ -1,15 +1,12 @@
 # Course Account Access
 
-The repository is private as required. The course account `ailt9019hku@gmail.com` must have **Read** access for the mid-term check and reproducibility review.
+The course requests Read access for `ailt9019hku@gmail.com`, resolved as GitHub account `AILT9019`.
 
-## Current status
+## Verified status on 30 September 2026
 
-The account was resolved as `AILT9019`. A write invitation was created and then withdrawn because the course instruction requires Read access.
+- Repository: private.
+- GitHub shows a pending invitation to `AILT9019` with Write permission; acceptance is not yet confirmed.
+- Thomas explicitly authorised Write after the personal repository rejected a Read collaborator role. This supersedes the older instruction to withhold the invitation.
+- User authorisation is not evidence that the course approved the permission difference. Confirm the exception with the course if needed; do not label it Read access.
 
-GitHub's API rejects a Read-only collaborator role on a repository owned by an individual account: it permits only Write for external collaborators. Do not send the course account a Write invitation as a workaround.
-
-## Required resolution
-
-Ask the course team whether its checker account can accept the unavoidable Write collaborator role on a personal private repository, or whether the repository should be transferred to a team GitHub organization that supports a Read role. Once we have that answer, apply only the approved option.
-
-Do not share the repository outside the team or add course account details to the anonymous Moodle proposal.
+No invitation or permission was changed while publishing the work allocation. Keep account and team identifiers out of the anonymous proposal.
