@@ -2,7 +2,11 @@
 
 ## Project status
 
-We are currently selecting a project topic and preparing the proposal due on 30 September 2026.
+We are building **Travel Memory Map**: a local travel album with city markers, separate cards for repeat visits, and user-triggered AI memory writing from the current trip’s photos and notes.
+
+Thomas reported on 30 September 2026 that the proposal was submitted. The [proposal baseline](proposal/Travel_Memory_Map_Proposal.docx) is preserved for the 10 October revision; the Moodle receipt has not been independently checked here. Application implementation and evaluation are still planned.
+
+**Start with the [four-person work allocation](docs/WORK_ALLOCATION.md)** for owners, deliverables, review partners and deadlines. Thomas owns map/integration, Angel owns the interface, Owen owns backend/storage, and Qingyang owns AI/evaluation.
 
 ## Team 21
 
@@ -18,8 +22,9 @@ This directory is for private repository coordination only. Do not copy these de
 ## Start here
 
 - [Course plan](docs/COURSE_PLAN.md): dates, deliverables, grading, and non-negotiable rules.
-- [Team guide](docs/TEAM_GUIDE.md): what is set up, what every member should do now, and the open access issue.
-- [Proposal worksheet](proposal/PROPOSAL_WORKSHEET.md): the questions to settle before drafting the anonymous Moodle submission.
+- [Work allocation](docs/WORK_ALLOCATION.md): concrete responsibilities, handoffs and milestones.
+- [Team guide](docs/TEAM_GUIDE.md): current scope and collaboration workflow.
+- [Proposal baseline and revision notes](proposal/README.md): the submitted draft and next revision.
 - [Evaluation plan](tests/EVALUATION_PLAN.md): how we will define a real pass, failure, and safe refusal.
 - [AI-use log](docs/AI_USE_LOG.md): record prompts, changes, and verification as we work.
 - [Friday standup](docs/FRIDAY_STANDUP.md): the required three-line weekly update format.
@@ -52,4 +57,4 @@ docs/         Project webpage and supporting documentation
 
 ## Next meeting
 
-Choose one focused user problem, define the minimum working version, and assign proposal sections.
+Review the work allocation and agree city/trip/AI interfaces by 2 October. Target four module demonstrations by 5 October and an integrated workflow by 8 October.

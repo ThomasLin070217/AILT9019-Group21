@@ -4,7 +4,9 @@
 
 Our private repository is ready: [AILT9019-Group21](https://github.com/ThomasLin070217/AILT9019-Group21). The `main` branch contains the project structure, course plan, proposal worksheet, testing template, AI-use log, Friday standup log, milestones, labels, and pull-request template.
 
-The project topic has not been chosen yet. Do not start building a large application before we agree on one user, one task, one data source, and one minimum working workflow.
+The topic is **Travel Memory Map**. Thomas reports that the proposal has been submitted. See the [proposal baseline](../proposal/Travel_Memory_Map_Proposal.docx) and [work allocation](WORK_ALLOCATION.md). Application code and evaluation results are not yet present.
+
+The flow is city selection → photos and optional notes → saved card and lit city, followed by optional user-triggered AI writing. Repeat trips get separate cards, and saved-trip counts determine brightness. The first version is local with a cloud AI API and preset cities in mainland China, Hong Kong, Macau, Taiwan and Japan.
 
 ## Current deadlines
 
@@ -12,11 +14,11 @@ The latest course overview says the proposal draft is due on **30 September 2026
 
 ## What every member should do now
 
-1. Accept the GitHub invitation and clone the repository.
-2. Read `docs/COURSE_PLAN.md` and `proposal/PROPOSAL_WORKSHEET.md` before the next discussion.
-3. Bring one focused project idea. It must name one primary user, one concrete task, a realistic data source, and a safe boundary.
-4. At the meeting, agree on the must-have version only. Put optional features in the should-have column.
-5. Help complete one part of the proposal worksheet, then turn it into the official anonymous Moodle template.
+1. Accept your invitation if needed and clone the repository.
+2. Read the proposal and `docs/WORK_ALLOCATION.md`.
+3. Check your module, first deliverable and reviewer; raise availability conflicts before 2 October.
+4. Agree shared interfaces before integration and use matching sample inputs.
+5. Prepare your evaluation case and record AI assistance and actual checks.
 
 ## How to work in the repository
 
@@ -40,8 +42,6 @@ We need a working AI application, a genuine domain customisation, a reproducible
 
 During Weeks 5–10, we post a three-line Ed standup every Friday. We also need one team consultation with the assigned consultant during Weeks 4–6 or Week 8, ideally before the revised proposal.
 
-## Open item: course-account access
+## Course account access
 
-The course requires `ailt9019hku@gmail.com` to receive Read access to the private repository. GitHub resolved it as `AILT9019`, but a personal GitHub repository cannot assign Read to an outside collaborator through GitHub's API: it only offers Write. The incorrect Write invitation was withdrawn.
-
-We need the course team to confirm whether Write is acceptable for its checker account, or tell us to transfer the repository to a team GitHub organization where Read access is available. Do not add the course account with Write until that is resolved.
+Checked on 30 September: the repository is private and a Write invitation for `AILT9019` is pending. Thomas previously authorised Write because the personal repository did not support the requested Read collaborator role. This records the actual setting, not course approval of the difference. See [access status](COURSE_ACCOUNT_ACCESS.md). No permissions were changed when publishing this plan.
