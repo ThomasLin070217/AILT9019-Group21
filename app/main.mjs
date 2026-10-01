@@ -18,6 +18,7 @@ async function mutate(action,success,afterSave=()=>{}){if(busy)return;setBusy(tr
 function filters(){return {query:$('search').value,region:$('region').value,visitedOnly:$('visited').checked};}
 function choose(id,keyboard=false){
  const origin=document.activeElement?.classList.contains('marker')?'markers':'cities';$('nearby-cities').hidden=true;selected=id;render();
+ $('memories').scrollTop=0;
  $(origin).querySelector(`[data-city-id="${CSS.escape(id)}"]`)?.focus({preventScroll:true});
  if(!keyboard&&matchMedia('(max-width:850px)').matches)$('memories').scrollIntoView({block:'start',behavior:'instant'});
  window.dispatchEvent(new CustomEvent('travel-map:city-selected',{detail:{city_id:id}}));
@@ -30,13 +31,18 @@ function render(){
  $('result-count').textContent=`${visible.length} of ${cities.length} cities`;
  $('cities').replaceChildren();
  if(!visible.length)$('cities').append(node('p','No matching cities. Change your search or turn off the visited filter.','empty'));
- for(const city of visible){
+ const catalogue=[...visible].sort((a,b)=>Number(counts.has(b.id))-Number(counts.has(a.id))||a.name.localeCompare(b.name));
+ for(const city of catalogue){
   const count=counts.get(city.id)||0,button=node('button',undefined,'city-button');button.type='button';button.dataset.cityId=city.id;button.setAttribute('aria-pressed',String(city.id===selected));button.setAttribute('aria-label',`${city.name}, ${count} ${count===1?'visit':'visits'}`);
   const label=node('span',city.name);label.append(node('small',city.local_name));button.append(label,node('span',count?String(count):'—',`visit-badge ${count?'visited':''}`));button.addEventListener('click',event=>choose(city.id,event.detail===0));$('cities').append(button);
  }
  renderMarkers(visible,counts);renderMemories();
 }
 function drawLand(data){
+ const grid=[];
+ for(let lon=90;lon<=160;lon+=10){const a=project(lon,60),b=project(lon,5);grid.push(svg('path',{d:`M${a}L${b}`,class:'graticule'}));}
+ for(let lat=10;lat<=60;lat+=10){const a=project(88,lat),b=project(160,lat);grid.push(svg('path',{d:`M${a}L${b}`,class:'graticule'}));}
+ $('grid').replaceChildren(...grid);
  const polygons=[];
  for(const feature of data.features){
   const geometry=feature.geometry;
@@ -58,11 +64,20 @@ function renderMarkers(visible,counts){
  const pixelsPerUnit=Math.min(rect.width/view.width,rect.height/view.height);
  const scale=pixelsPerUnit>0?12/pixelsPerUnit:view.width/initialView().width;
  $('markers').replaceChildren();
- for(const city of visible){
+ // Draw the selected marker last so its photo and hit area remain reachable.
+ for(const city of [...visible].sort((a,b)=>Number(a.id===selected)-Number(b.id===selected))){
   const [x,y]=project(city.longitude,city.latitude),count=counts.get(city.id)||0;
   const g=svg('g',{class:'marker',transform:`translate(${x} ${y})`,role:'button',tabindex:'0','aria-label':`${city.name}, ${count} ${count===1?'visit':'visits'}`,'aria-pressed':String(city.id===selected),'data-city-id':city.id});
-  const title=svg('title');title.textContent=`${city.name} · ${count} saved trips`;g.append(title,svg('circle',{r:1.85*scale,class:'hit'}),svg('circle',{r:.77*scale,class:'selection'}),svg('circle',{r:(count?.43:.28)*scale,class:`pin tier-${visitTier(count)}`}));
-  if(prominent.has(city.id)||city.id===selected){const rightEdge=x+(.85+city.name.length*.6)*scale>view.x+view.width-.5;const text=svg('text',{x:(rightEdge?-.85:.85)*scale,'text-anchor':rightEdge?'end':'start',y:.3*scale,style:`font-size:${scale}px;stroke-width:${.2*scale}px`});text.textContent=city.name;g.append(text);}
+  const title=svg('title');title.textContent=`${city.name} · ${count} saved trips`;g.append(title,svg('circle',{r:1.85*scale,class:'hit'}),svg('circle',{r:1.05*scale,class:'selection'}),svg('circle',{r:(count?.78:.3)*scale,class:`pin tier-${visitTier(count)}`}));
+  if(count){const number=svg('text',{class:`visit-number count-tier-${visitTier(count)}`,y:.3*scale,style:`font-size:${.9*scale}px`});number.textContent=String(count);g.append(number);}
+  const selectedTrip=city.id===selected?cityTrips(trips,city.id).find(t=>(mode==='demo'&&demoCovers[t.id])||t.photos.some(p=>photoURL(p,location.origin))):null;
+  if(selectedTrip){
+   const sample=mode==='demo'&&demoCovers[selectedTrip.id],url=sample?`../data/demo-covers/${sample.file}`:photoURL(selectedTrip.photos.find(p=>photoURL(p,location.origin)),location.origin);
+   g.append(svg('path',{d:`M0 ${-1.1*scale}V${-2*scale}`,class:'photo-stem'}),svg('rect',{x:-1.9*scale,y:-5.1*scale,width:3.8*scale,height:3.1*scale,rx:.35*scale,class:'photo-pin'}));
+   const image=svg('image',{href:url,x:-1.7*scale,y:-4.9*scale,width:3.4*scale,height:2.7*scale,preserveAspectRatio:'xMidYMid slice','aria-hidden':'true'});
+   image.addEventListener('error',()=>image.remove());g.append(image);
+  }
+  if(prominent.has(city.id)||city.id===selected){const rightEdge=x+(1.2+city.name.length*.6)*scale>view.x+view.width-.5;const text=svg('text',{x:(rightEdge?-1.2:1.2)*scale,'text-anchor':rightEdge?'end':'start',y:.3*scale,style:`font-size:${scale}px;stroke-width:${.2*scale}px`});text.textContent=city.name;g.append(text);}
   g.addEventListener('click',event=>{const nearby=visible.filter(other=>{const [ox,oy]=project(other.longitude,other.latitude);return Math.hypot(x-ox,y-oy)*pixelsPerUnit<38;});if(nearby.length>1&&event.detail!==0){showNearby(nearby);return;}choose(city.id,event.detail===0);});g.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();choose(city.id,true);}});$('markers').append(g);
  }
 }
@@ -141,7 +156,15 @@ $('map').addEventListener('pointermove',event=>{
  view=clampView({...drag.view,x:drag.view.x-(event.clientX-drag.x)/ratio,y:drag.view.y-(event.clientY-drag.y)/ratio});applyView();
 });
 for(const type of ['pointerup','pointercancel','lostpointercapture'])$('map').addEventListener(type,()=>{drag=null;$('map').classList.remove('dragging');});
-new ResizeObserver(()=>{if(ready)renderMarkers(visibleCities(),countVisits(trips));}).observe($('map'));
+function setAlbumView(album){
+ document.body.classList.toggle('album-view',album);
+ $('view-map').setAttribute('aria-pressed',String(!album));$('view-album').setAttribute('aria-pressed',String(album));
+ const url=new URL(location.href);if(album)url.searchParams.set('view','album');else url.searchParams.delete('view');history.replaceState(null,'',url);
+ if(!album&&ready)renderMarkers(visibleCities(),countVisits(trips));
+}
+$('view-map').addEventListener('click',()=>setAlbumView(false));$('view-album').addEventListener('click',()=>setAlbumView(true));
+setAlbumView(new URLSearchParams(location.search).get('view')==='album');
+new ResizeObserver(()=>{if(ready&&!document.body.classList.contains('album-view'))renderMarkers(visibleCities(),countVisits(trips));}).observe($('map'));
 load();
 
 $('back-map').addEventListener('click',()=>{$('map-wrap').scrollIntoView({block:'start',behavior:'instant'});$('fit').focus({preventScroll:true});});

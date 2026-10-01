@@ -1,6 +1,6 @@
 # Map and demonstration data
 
-`cities.json` is the initial 19-city integration catalogue. `map/land.geojson` is Natural Earth 1:110m land geometry with unused properties removed. `SOURCES.json` pins source URLs, commit, hashes, transformations and the public-domain licence. Rebuild with `python3 scripts/build_map_data.py` (network only during rebuilding). Runtime rendering is local and uses no tile service.
+`cities.json` is the initial 19-city integration catalogue. `map/land.geojson` is Natural Earth 1:50m land geometry, retaining polygons intersecting the regional bounding box and removing unused properties. `SOURCES.json` pins source URLs, commit, hashes, transformations and the public-domain licence. Rebuild with `python3 scripts/build_map_data.py` (network only during rebuilding). Runtime rendering is local and uses no tile service.
 
 Names/translations and filter groups were selected for the app. Coordinates are approximate city centres. The coarse coastline can omit small islands; it is not suitable for navigation or border interpretation. The catalogue is a small supported set, not full regional coverage.
 

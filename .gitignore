@@ -16,3 +16,6 @@ build/
 
 # Operating-system files
 .DS_Store
+
+# Local design review captures; published evidence lives in tests/evidence/
+.impeccable/review/

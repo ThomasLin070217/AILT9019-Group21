@@ -61,10 +61,19 @@ The [1 October test round and UI reference report](UI_REVIEW_2026-10-01.md) reco
 
 ## Remaining limitations
 
-The map is city-centre level and uses coarse coastline geometry. Close markers in the Pearl River Delta and Kansai can overlap at the broadest view; the city list and zoom provide exact selection. No geographic visit verification or route guidance is offered. Demo data is stored per browser/origin; changing port changes its storage, and clearing browser storage removes demo edits.
+The map is city-centre level and uses regional 1:50m coastline geometry. Close markers in the Pearl River Delta and Kansai can overlap at the broadest view; the city list and zoom provide exact selection. No geographic visit verification or route guidance is offered. Demo data is stored per browser/origin; changing port changes its storage, and clearing browser storage removes demo edits.
 
 A fictional sample album is the initial view, clearly labelled. API mode deliberately does not fall back to samples. AI, real image handling, data-folder backups and SQLite failure behaviour are not covered by the current map tests.
 
-## UI follow-up — 1 October
+## Earlier UI follow-up — 1 October (superseded layout)
 
 The city catalogue now sits above a map/photo-card split view. The first two Osaka demo cards include credited local example photographs; all other demo records remain text-only. Covers open in an accessible native dialog. API mode supports the proposed same-origin media preview objects in contract v0.2, tested only with mocked routes. Real upload and AI generation remain pending. `tests/album.e2e.mjs` adds regressions for these interactions; use the same environment variables as the existing browser suite.
+
+
+## Frontend redesign — 1 October
+
+The current layout replaces the earlier top catalogue with a left city index, central map and a larger selected-city album. Map / Album switches expand the same city’s separate trip cards without changing counts or drafts. The view choice is stored in the URL (`?view=album`, compatible with `mode=api`). The city catalogue lists visited cities first, alphabetically within each group. Selected cities can show a photo thumbnail above their map marker; unavailable images leave the visit marker usable. Repeat-trip counts are printed on visited markers, alongside brightness.
+
+Map data now uses pinned Natural Earth 1:50m geometry, filtered to the region. Headings use a bundled OFL-licensed Fraunces font. No external tiles, fonts or new service keys are needed. Google Maps remains an optional future integration requiring the user’s Cloud setup/key; it has not been connected.
+
+Run `tests/views.e2e.mjs` with the same browser environment variables to verify view switching, reload/draft continuity and 320–1440px layouts. Latest evidence: `tests/evidence/2026-10-01-redesign/`. Source reference notes: [frontend research](FRONTEND_REFERENCES.md). Angel can build on this view structure for the actual upload/gallery module; the sample controls remain prototype-only.

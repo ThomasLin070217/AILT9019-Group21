@@ -1,13 +1,13 @@
 {
   "licence": "Public domain",
   "licence_url": "https://www.naturalearthdata.com/about/terms-of-use/",
-  "accessed": "2026-09-30",
+  "accessed": "2026-10-01",
   "source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
   "sources": [
     {
-      "name": "ne_110m_land",
-      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_110m_land.geojson",
-      "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9"
+      "name": "ne_50m_land",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_50m_land.geojson",
+      "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b"
     },
     {
       "name": "ne_10m_populated_places",
@@ -16,11 +16,11 @@
     }
   ],
   "transformations": [
-    "Land: remove unused feature properties; retain geometry.",
+    "Land: retain polygons whose bounding boxes intersect 88\u2013160\u00b0E, 5\u201360\u00b0N; remove unused properties. Coordinates unchanged.",
     "Cities: select 19 named points; retain coordinates and NE_ID; add stable app IDs, display translations and UI group labels."
   ],
   "limitations": [
-    "Coarse 1:110m land outlines; tiny islands may be absent.",
+    "1:50m land outlines for regional browsing; tiny islands may still be absent.",
     "City markers indicate approximate centres, not routes, borders or proof of a visit.",
     "UI groups and IDs are application organisation, not administrative-boundary data."
   ]
