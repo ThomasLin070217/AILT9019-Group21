@@ -1,0 +1,13 @@
+{
+  "serve.py": "adf63b832ee25e8947fafdfab05e2b69c92121ba9ae8ca022e3381533838981d",
+  ".env.example": "48defbb893cbfd713150218cab9061bcfcf9f281e4ffa25739ec1f8ea87538d4",
+  "app/main.mjs": "09231c4acb47f310be2f36e3bcac75df434b20de49a85cb0b973955f22f6085b",
+  "app/google-map.mjs": "55963658317c57116f2072483f9a9dc9397c0cc9970c1b46e0541259846ad9bd",
+  "app/index.html": "fabab68ccb0b32a4baa08f95aba3e3f07cda2cb99c8acf5d92f0a9f8ef8500a9",
+  "app/styles.css": "47f266d5aeb26fa49c00fa0281ac230662c50bf28175b58c7c5af2bbd9162091",
+  "tests/google-map.e2e.mjs": "c83c148d3117675df9bc4f99221cd43520e63d55416898786213e5112f09f34f",
+  "tests/test_map_config.py": "dfbcfdfaffcee23123825a80d7b9158fcbe0dd800f77b87024eb6eff910ad2c0",
+  "tests/browser.e2e.mjs": "7048f589ebbc54eb4fc985903bcce7c5150ece7bd6f6fbd42e097f23045c6fdb",
+  "tests/album.e2e.mjs": "ee6009b365909102cdf263acdb610a52b9aded28d792ec646674109546ecf2c9",
+  "tests/views.e2e.mjs": "cb6fba357f547b5e1717aadef195e38705f70f7f3ac1b113dba4c0289a0e63d8"
+}

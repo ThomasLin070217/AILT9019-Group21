@@ -14,7 +14,7 @@ Thomas reported on 30 September 2026 that the proposal was submitted. The [propo
 python3 serve.py
 ```
 
-Open **http://127.0.0.1:8019/app/**. Python 3.10+ is sufficient; no API key or npm installation is needed. Switch between **Map** and **Album** to explore a place or see its photo cards side by side. Select a city, search by English/Chinese name, and open **Try visit counting** to add/edit fictional demo visits. The first two Osaka cards show credited example photos; click a cover to view it. Unsaved sample drafts survive city changes and reloads within the tab. Browser demo storage is not the planned real backend. No photos or notes are sent to a cloud service.
+Open **http://127.0.0.1:8019/app/**. Python 3.10+ is sufficient; no API key or npm installation is needed. Switch between **Map** and **Album** to explore a place or see its photo cards side by side. Select a city, search by English/Chinese name, and open **Try visit counting** to add/edit fictional demo visits. The first two Osaka cards show credited example photos; click a cover to view it. Unsaved sample drafts survive city changes and reloads within the tab. Browser demo storage is not the planned real backend. No photos or notes are sent to a cloud service by this prototype. Google Maps is optional: see [local key setup](docs/GOOGLE_MAPS_SETUP.md). With a configured key, Map view uses Google’s online tiles and custom city markers; `?map=local` uses the offline map.
 
 Run `npm test` with Node.js 20+ for the map logic/storage checks. See [Thomas handoff](docs/THOMAS_HANDOFF.md) for browser checks and [API contract](docs/API_CONTRACT.md) for teammate integration. API mode (`/app/?mode=api`) requires Owen’s backend and never substitutes demo data when it fails.
 

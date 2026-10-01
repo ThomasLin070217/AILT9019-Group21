@@ -386,7 +386,7 @@
     "donts": [
       "Don't reintroduce the replaced green-led catalogue styling or use Georgia as the primary display face.",
       "Don't imply that example photographs document fictional trips.",
-      "Don't depict routes or add upload, cloud AI, SQLite or Google Maps functionality that is not integrated.",
+      "Don't depict routes or imply real uploads, cloud AI or SQLite integration. Google Maps is optional and requires a local browser key.",
       "Don't use decorative shadows on every card or add motion beyond the restrained marker state change."
     ]
   }

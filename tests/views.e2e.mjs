@@ -8,7 +8,7 @@ const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_EXEC
 const checks=[],errors=[];
 try{
  const p=await browser.newPage({viewport:{width:1440,height:1000}});p.on('pageerror',e=>errors.push(e.message));
- await p.goto(base+'/app/');await p.waitForSelector('.trip-card');
+ await p.goto(base+'/app/?map=local');await p.waitForSelector('.trip-card');
  await p.getByRole('button',{name:'Edit sample text',exact:true}).first().click();await p.locator('textarea').fill('A draft across map and album views');
  const count=await p.locator('#city-count').innerText();
  const mapPhotoWidth=(await p.locator('.cover-button').first().boundingBox()).width;

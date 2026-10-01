@@ -14,7 +14,7 @@ Local first version, cloud AI on explicit request only, no automatic classificat
 
 ## Current implementation boundary
 
-Thomas's city-map module uses dependency-free browser JavaScript and a Python standard-library preview server. This is a reversible implementation choice for straightforward team handoff, not a claim that the team approved a framework. The demo uses fictional browser-local records. Backend/SQLite, uploads and the cloud VLM remain separate teammates' modules.
+Thomas's city-map module uses browser JavaScript and a Python standard-library preview server. It optionally loads Google Maps JavaScript API when a local key is configured; the bundled SVG remains available without a key or with map=local. This is a reversible implementation choice for straightforward team handoff, not a claim that the team approved a framework. The demo uses fictional browser-local records. Backend/SQLite, uploads and the cloud VLM remain separate teammates' modules.
 
 ## Evidence and accessibility
 

@@ -218,7 +218,7 @@ A trip card holds an optional cover, credit, date, wrapping title, memory text a
 
 ### Memory Map
 
-The map uses local Natural Earth SVG geometry and Mercator coordinates. Marker brightness is derived from saved trip IDs; labels and the written legend supply the meaning. Markers support keyboard activation, retain focus through selection and have large invisible hit areas. Close marker groups offer explicit city choices. Zoom and fit controls are fixed-size white buttons. Panning is enabled only after zoom so the default map permits normal mobile page scrolling.
+The offline map uses local Natural Earth SVG geometry and Mercator coordinates. With a configured key, Google Maps supplies the live base map, attribution and native map gestures; custom advanced markers inherit the same count/selection palette and link to the same album. The application preserves Google attribution, exposes provider/loading/fallback status and retains the local map on SDK failure. Marker brightness is derived from saved trip IDs; labels and the written legend supply the meaning. Markers support keyboard activation, retain focus through selection and have large invisible hit areas. Close marker groups offer explicit city choices. Zoom and fit controls are fixed-size white buttons. Panning is enabled only after zoom so the default map permits normal mobile page scrolling.
 
 The only animated state is marker fill (`180ms ease-out`); reduced-motion preference removes it. Card-cover hover uses a small brightness change without added animation.
 
@@ -226,7 +226,7 @@ The only animated state is marker fill (`180ms ease-out`); reduced-motion prefer
 
 The native dialog shows the full photograph with a Close photo action, caption and focus returned to the trigger. Loading, no matching cities, empty memories, failed media, backend errors and damaged local records have explicit text states. Status uses a polite live region; errors use an alert. Demo controls and fictional content labels stay distinct from backend mode.
 
-This is a local demonstration. Real uploads, cloud AI, SQLite and Google Maps are not integrated; the existing API-facing mode does not establish those capabilities.
+This is a local demonstration. Real uploads, cloud AI and SQLite are not integrated; the existing API-facing mode does not establish those capabilities.
 
 ## Do's and Don'ts
 
@@ -240,5 +240,5 @@ This is a local demonstration. Real uploads, cloud AI, SQLite and Google Maps ar
 ### Don't:
 - Don't reintroduce the replaced green-led catalogue styling or use Georgia as the primary display face.
 - Don't imply that example photographs document fictional trips.
-- Don't depict routes or add upload, cloud AI, SQLite or Google Maps functionality that is not integrated.
+- Don't depict routes or imply real uploads, cloud AI or SQLite integration. Google Maps is optional and requires a local browser key.
 - Don't use decorative shadows on every card or add motion beyond the restrained marker state change.

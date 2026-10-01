@@ -1,8 +1,10 @@
 import {visitTier,countVisits,cityTrips,filterCities,project,initialView,zoomView,clampView} from './domain.mjs';
 import {DemoRepository,ApiRepository,getJSON,DraftStore,photoURL} from './repository.mjs';
+import {createGoogleMap} from './google-map.mjs';
 const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
 const mode=new URLSearchParams(location.search).get('mode')==='api'?'api':'demo';
 let cities=[],trips=[],selected='jp-osaka',repository,view=initialView(),busy=false,ready=false;
+let googleMap=null,mapStarted=false,mapFailed=false;
 let draftStorage;try{draftStorage=sessionStorage;}catch{}
 const drafts=new DraftStore(draftStorage,text=>message(text));
 const demoCovers={'demo-01':{file:'osaka-castle-2.jpg',author:'Eleni Afiontzi',source:'https://unsplash.com/photos/JdIC1dJtO_U'},'demo-02':{file:'osaka-castle-1.jpg',author:'欣慧',source:'https://unsplash.com/photos/dEMBfH4nWY8'}};
@@ -17,9 +19,10 @@ function setBusy(value){busy=value;for(const id of ['add-sample','reset','refres
 async function mutate(action,success,afterSave=()=>{}){if(busy)return;setBusy(true);clearError();try{trips=await action();afterSave();render();message(success);}catch(error){showError(error);}finally{setBusy(false);}}
 function filters(){return {query:$('search').value,region:$('region').value,visitedOnly:$('visited').checked};}
 function choose(id,keyboard=false){
- const origin=document.activeElement?.classList.contains('marker')?'markers':'cities';$('nearby-cities').hidden=true;selected=id;render();
+ const origin=document.activeElement?.classList.contains('google-city-marker')?'google':document.activeElement?.classList.contains('marker')?'markers':'cities';$('nearby-cities').hidden=true;selected=id;render();
  $('memories').scrollTop=0;
- $(origin).querySelector(`[data-city-id="${CSS.escape(id)}"]`)?.focus({preventScroll:true});
+ if(origin==='google')googleMap?.focus(id);else $(origin).querySelector(`[data-city-id="${CSS.escape(id)}"]`)?.focus({preventScroll:true});
+ googleMap?.select(id);
  if(!keyboard&&matchMedia('(max-width:850px)').matches)$('memories').scrollIntoView({block:'start',behavior:'instant'});
  window.dispatchEvent(new CustomEvent('travel-map:city-selected',{detail:{city_id:id}}));
 }
@@ -60,6 +63,11 @@ function applyView(){
  if(ready)renderMarkers(visibleCities(),countVisits(trips));
 }
 function renderMarkers(visible,counts){
+ if(googleMap){googleMap.update(visible.map(city=>{
+  const trip=cityTrips(trips,city.id).find(t=>(mode==='demo'&&demoCovers[t.id])||t.photos.some(p=>photoURL(p,location.origin)));
+  const sample=trip&&mode==='demo'&&demoCovers[trip.id];
+  return {...city,count:counts.get(city.id)||0,tier:visitTier(counts.get(city.id)||0),cover:sample?`../data/demo-covers/${sample.file}`:photoURL(trip?.photos.find(p=>photoURL(p,location.origin)),location.origin)};
+ }),selected);return;}
  const rect=$('map').getBoundingClientRect();
  const pixelsPerUnit=Math.min(rect.width/view.width,rect.height/view.height);
  const scale=pixelsPerUnit>0?12/pixelsPerUnit:view.width/initialView().width;
@@ -136,9 +144,34 @@ async function load(){
   $('mode-label').textContent=mode==='demo'?'Demo album · fictional trips saved in this browser · no AI calls':'Backend mode · showing records from the local API';$('reset').hidden=mode!=='demo';$('refresh').hidden=mode!=='api';
  }catch(error){showError(error);$('progress').textContent='Map unavailable';}
  finally{$('loading').hidden=true;setBusy(false);}
+ if(ready)startGoogleMap();
+}
+async function startGoogleMap(){
+ if(mapStarted||new URLSearchParams(location.search).get('map')==='local')return;
+ // Defer billable/online loading while the user is only browsing the album.
+ if(document.body.classList.contains('album-view'))return;
+ mapStarted=true;
+ try{
+  const response=await fetch('/api/map-config');if(!response.ok)return;
+  const config=await response.json();if(!config.apiKey)return;
+  $('map-provider').textContent='Connecting to Google Maps…';
+  const fallback=()=>{
+   mapFailed=true;googleMap?.destroy();googleMap=null;
+   document.body.classList.remove('google-active');$('google-map').setAttribute('aria-hidden','true');$('google-map').inert=true;
+   $('map-provider').textContent='East Asia · local map';$('google-credit').hidden=true;$('local-credit').hidden=false;
+   $('map-notice').hidden=false;$('map-notice').textContent='Google Maps is unavailable. Showing the local map. Check the connection, API access and website restrictions, then reload to retry.';
+   if(ready){applyView();renderMarkers(visibleCities(),countVisits(trips));}
+  };
+  const candidate=await createGoogleMap({container:$('google-map'),config,onSelect:choose,onNearby:showNearby,onFailure:fallback,onZoom:zoom=>{$('zoom-in').disabled=zoom>=18;$('zoom-out').disabled=zoom<=3;}});
+  if(mapFailed){candidate.destroy();return;}
+  googleMap=candidate;renderMarkers(visibleCities(),countVisits(trips));await candidate.ready;
+  if(mapFailed)return;
+  document.body.classList.add('google-active');$('google-map').setAttribute('aria-hidden','false');$('google-map').inert=false;
+  $('map-provider').textContent='Google Maps';$('google-credit').hidden=false;$('local-credit').hidden=true;
+ }catch{if(!mapFailed){mapFailed=true;googleMap?.destroy();googleMap=null;document.body.classList.remove('google-active');$('map-provider').textContent='East Asia · local map';$('map-notice').hidden=false;$('map-notice').textContent='Google Maps could not start. The local map is still available. Reload to retry.';if(ready)applyView();}}
 }
 for(const id of ['search','region','visited'])$(id).addEventListener(id==='search'?'input':'change',()=>{if(ready)render();});
-$('zoom-in').addEventListener('click',()=>{view=zoomView(view,.65);applyView();});$('zoom-out').addEventListener('click',()=>{view=zoomView(view,1/.65);applyView();});$('fit').addEventListener('click',()=>{view=initialView();applyView();});
+$('zoom-in').addEventListener('click',()=>{if(googleMap){googleMap.zoom(1);return;}view=zoomView(view,.65);applyView();});$('zoom-out').addEventListener('click',()=>{if(googleMap){googleMap.zoom(-1);return;}view=zoomView(view,1/.65);applyView();});$('fit').addEventListener('click',()=>{if(googleMap){googleMap.fit();return;}view=initialView();applyView();});
 $('add-sample').addEventListener('click',()=>{if(selected)mutate(()=>repository.add(selected),'Sample visit saved in this browser. City brightness updated.');});
 $('reset').addEventListener('click',()=>{if(confirm('Replace your sample edits with the original fictional trips?'))mutate(()=>repository.reset(),'Original sample album restored.',()=>drafts.clear());});
 $('recover').addEventListener('click',async()=>{if(confirm('Replace damaged demo records with the original samples?')){try{await repository.reset();drafts.clear();await load();}catch(error){showError(error);}}});
@@ -160,7 +193,7 @@ function setAlbumView(album){
  document.body.classList.toggle('album-view',album);
  $('view-map').setAttribute('aria-pressed',String(!album));$('view-album').setAttribute('aria-pressed',String(album));
  const url=new URL(location.href);if(album)url.searchParams.set('view','album');else url.searchParams.delete('view');history.replaceState(null,'',url);
- if(!album&&ready)renderMarkers(visibleCities(),countVisits(trips));
+ if(!album&&ready){renderMarkers(visibleCities(),countVisits(trips));googleMap?.refresh();startGoogleMap();}
 }
 $('view-map').addEventListener('click',()=>setAlbumView(false));$('view-album').addEventListener('click',()=>setAlbumView(true));
 setAlbumView(new URLSearchParams(location.search).get('view')==='album');

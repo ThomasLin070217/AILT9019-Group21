@@ -13,4 +13,6 @@ Record substantive AI assistance while it happens. This supports the final Ethic
 
 | 1 Oct 2026 | Codex; model not recorded | Frontend redesign from OSS reference research | Identify travel-memory repositories; replace rejected layout with city index, map and photographic album views | app/, fonts/OFL, regional 1:50m data/build script, design/reference/handoff docs and tests | 13 unit tests and 28 browser groups; screenshots and independent assistant review; human acceptance pending | Local prototype redesigned; no upload, Google Maps, SQLite or cloud AI connection claimed |
 
+| 1 Oct 2026 | Codex; model not recorded | Google Maps integration | Configure user-supplied key locally; add optional SDK adapter and verify live markers/fallback | app/, serve.py, .env.example, tests and setup/handoff documentation | 13 domain tests, 3 config tests, 28 local browser groups and 8 live-map groups passed; screenshots inspected; Cloud account restrictions not inspected | Live Google Maps works with local key; actual key excluded from Git; upload/SQLite/AI remain pending |
+
 Do not paste API keys, private data, or sensitive prompts into this log.

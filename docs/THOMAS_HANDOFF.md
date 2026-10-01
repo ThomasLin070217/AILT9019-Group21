@@ -74,6 +74,13 @@ The city catalogue now sits above a map/photo-card split view. The first two Osa
 
 The current layout replaces the earlier top catalogue with a left city index, central map and a larger selected-city album. Map / Album switches expand the same city’s separate trip cards without changing counts or drafts. The view choice is stored in the URL (`?view=album`, compatible with `mode=api`). The city catalogue lists visited cities first, alphabetically within each group. Selected cities can show a photo thumbnail above their map marker; unavailable images leave the visit marker usable. Repeat-trip counts are printed on visited markers, alongside brightness.
 
-Map data now uses pinned Natural Earth 1:50m geometry, filtered to the region. Headings use a bundled OFL-licensed Fraunces font. No external tiles, fonts or new service keys are needed. Google Maps remains an optional future integration requiring the user’s Cloud setup/key; it has not been connected.
+Map data now uses pinned Natural Earth 1:50m geometry, filtered to the region. Headings use a bundled OFL-licensed Fraunces font. No external tiles, fonts or new service keys are needed. Google Maps is now an optional live integration; see the setup section below.
 
 Run `tests/views.e2e.mjs` with the same browser environment variables to verify view switching, reload/draft continuity and 320–1440px layouts. Latest evidence: `tests/evidence/2026-10-01-redesign/`. Source reference notes: [frontend research](FRONTEND_REFERENCES.md). Angel can build on this view structure for the actual upload/gallery module; the sample controls remain prototype-only.
+
+
+## Google Maps integration — 1 October
+
+The user supplied a browser key, saved locally in Git-ignored `.env.maps.local`. The key is not included in this repository. [Setup and boundaries](GOOGLE_MAPS_SETUP.md) explain the optional `/api/map-config` endpoint, website/API restrictions, SDK loading and local fallback. `app/google-map.mjs` keeps the Google adapter separate from the local map/domain rules. No new city lookup, routing or photo/AI service is introduced.
+
+Live Google map/marker tests passed on desktop and emulated phone, with SDK-failure fallback. Existing browser suites explicitly use `?map=local` and don't consume Google quota. Latest evidence: `tests/evidence/2026-10-01-google-maps/`. Uploaded photos, SQLite and cloud VLM integration still belong to the remaining team work.
