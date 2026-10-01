@@ -57,10 +57,14 @@ The short browser-test recording is functional evidence of this map module, not 
 
 ## Follow-up verification
 
-The [1 October test round and UI reference report](UI_REVIEW_2026-10-01.md) records passing regression tests and additional open issues: unsaved drafts, mobile card visibility, long titles and small touch targets. These findings are not yet fixed.
+The [1 October test round and UI reference report](UI_REVIEW_2026-10-01.md) records passing regression tests and additional open issues: unsaved drafts, mobile card visibility, long titles and small touch targets. The follow-up UI pass resolves draft persistence, long-title wrapping, mobile selection visibility and control sizing; see `tests/evidence/2026-10-01-followup/RESULTS.md` for fresh evidence.
 
 ## Remaining limitations
 
 The map is city-centre level and uses coarse coastline geometry. Close markers in the Pearl River Delta and Kansai can overlap at the broadest view; the city list and zoom provide exact selection. No geographic visit verification or route guidance is offered. Demo data is stored per browser/origin; changing port changes its storage, and clearing browser storage removes demo edits.
 
 A fictional sample album is the initial view, clearly labelled. API mode deliberately does not fall back to samples. AI, real image handling, data-folder backups and SQLite failure behaviour are not covered by the current map tests.
+
+## UI follow-up — 1 October
+
+The city catalogue now sits above a map/photo-card split view. The first two Osaka demo cards include credited local example photographs; all other demo records remain text-only. Covers open in an accessible native dialog. API mode supports the proposed same-origin media preview objects in contract v0.2, tested only with mocked routes. Real upload and AI generation remain pending. `tests/album.e2e.mjs` adds regressions for these interactions; use the same environment variables as the existing browser suite.

@@ -1,12 +1,12 @@
 # Map integration contract
 
-Version 0.1, 30 September 2026. Implemented by Thomas for the map prototype; **proposed for review by Owen, Angel and Qingyang**, not a claim of joint approval or a finished backend. The static preview does not implement `/api` routes.
+Version 0.2, 1 October 2026. Implemented by Thomas for the map prototype; **proposed for review by Owen, Angel and Qingyang**, not a claim of joint approval or a finished backend. The static preview does not implement `/api` routes.
 
 ## Running modes
 
 - `/app/`: explicit fictional demo. `DemoRepository` in `app/repository.mjs` uses a separate browser-local key `travel-memory-map.demo.v1`. It is replaceable and is not the proposed SQLite backend.
 - `/app/?mode=api`: reads `GET /api/cities` and `GET /api/trips` from the same origin. Errors remain errors; no demo fallback. Demo write controls are absent. Owen's local Python server can serve the existing static files plus these routes.
-- No cloud calls, map tile calls, account login, analytics or uploaded photos in this module. Refresh the API view after another component saves a record.
+- No cloud calls, map tile calls, account login, analytics or upload endpoint in this module. Two credited example covers are bundled locally for demo mode. Refresh the API view after another component saves a record.
 
 ## City records
 
@@ -39,7 +39,7 @@ IDs are stable integration keys, not display names. `region` is a UI filter grou
 - `city_id`: an existing catalogue ID.
 - `trip_date`: real ISO calendar date `YYYY-MM-DD`, or `null`; sorted newest first, unknown dates last.
 - `title`: text, up to 200 characters. `notes` and `memory_text`: text, up to 5,000 characters each; empty strings allowed. The map uses `textContent`, never HTML from user/model text.
-- `photos`: array; the map only displays its length. Owen and Angel must agree the photo-object/media route format before upload integration. No arbitrary remote photo URLs are fetched by the map.
+- `photos`: array. Optional preview objects may contain `{"id":"photo-id","url":"/media/photo-id.jpg","alt":"User-provided description"}`. The first object with a same-origin `/media/` URL supplies the cover; legacy ID-only objects remain valid and render as text-only cards. URLs outside this path are ignored. Failed image loads leave the memory text visible. This optional shape is proposed for Owen/Angel review; photo upload, cover choice and multi-photo gallery remain integration work. The static server does not implement `/media/`; browser checks mock it.
 - `source`: provenance such as `demo` or `user`; not used to infer a visit.
 
 Duplicate snapshots with the same ID are counted once, with the final array occurrence winning. The backend should return exactly one current snapshot per ID. The UI never uses the number of photos or generation calls as a visit count.
@@ -81,3 +81,9 @@ Return non-2xx for failures and do not return success with missing/corrupt trip 
 - Angel: confirm selection event, replace sample card UI with the real album component, and trigger refresh after successful writes.
 - Qingyang: agree generation and clarification semantics with Owen/Angel; map counts must not depend on generation outcomes.
 - Thomas: integrate actual modules once available and repeat the browser checks against the real backend. Mocked HTTP tests do not complete that handoff.
+
+## Draft and cover behaviour
+
+Demo text drafts use a separate per-tab session-storage key (`travel-memory-map.demo-drafts.v1`), survive city changes/reloads, and never count as saved trips. Saving clears that draft only after the repository reports success. Explicit discard/reset/delete clears the corresponding drafts. If draft persistence fails, in-memory edits remain and the user is told to keep the tab open. These controls are not enabled in API mode.
+
+Clicking a cover opens the native image dialog; Escape/Close restores focus. Demo covers always retain their separate photographer/example label and are never used as backend fallbacks or AI inputs.

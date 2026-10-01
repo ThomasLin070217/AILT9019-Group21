@@ -9,27 +9,28 @@
 <a class="skip" href="#cities">Skip to city list</a>
 <header class="topbar"><a class="brand" href="./"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="m3 6 7-3 8 3 7-3v19l-7 3-8-3-7 3V6Z M10 3v19 M18 6v19"/></svg><span>Travel Memory Map</span></a><span class="local-label"><span class="dot"></span>Your places, kept close.</span></header>
 <main>
-<section class="intro"><div><h1>A map of your memories.</h1><p>Every visit has a story. Find yours by city.</p></div><p class="progress" id="progress">Loading your map…</p></section>
+<section class="intro"><div><h1>A map of your memories.</h1><p>The places you went. The moments you kept.</p></div><p class="progress" id="progress">Loading your map…</p></section>
 <div class="mode-banner"><span id="mode-label">Demo album · fictional trips · no AI calls</span><button id="reset" class="text-button" hidden>Reset sample album</button><button id="refresh" class="text-button" hidden>Refresh from backend</button></div>
 <div id="status" role="status" aria-live="polite" class="status"></div>
 <div id="error" role="alert" class="error" hidden><p id="error-text"></p><button id="retry">Try again</button><button id="recover" hidden>Restore demo samples</button></div>
 <div id="workspace" class="workspace" aria-busy="true">
 <aside class="city-panel" aria-label="City catalogue">
-<h2>Your next stop down memory lane</h2>
+<h2 class="sr-only">Choose a city</h2><div class="catalogue-controls"><div class="search-field">
 <label for="search">Find a city</label><input type="search" id="search" placeholder="City name or 中文" autocomplete="off">
-<label for="region">Explore</label><select id="region"><option value="">All 19 cities</option><option>Mainland China</option><option>Hong Kong and Macau</option><option>Taiwan</option><option>Japan</option></select>
-<label class="check"><input type="checkbox" id="visited"> Visited cities only</label>
-<p id="result-count" class="small"></p><div id="cities" class="city-list" tabindex="-1"></div>
+</div><div class="region-field"><label for="region">Explore</label><select id="region"><option value="">All 19 cities</option><option>Mainland China</option><option>Hong Kong and Macau</option><option>Taiwan</option><option>Japan</option></select>
+</div><label class="check"><input type="checkbox" id="visited"> Visited cities only</label>
+<p id="result-count" class="small"></p></div><div id="cities" class="city-list" tabindex="-1"></div>
 </aside>
 <section class="map-panel" aria-label="Interactive city map">
 <div class="map-heading"><h2>Your memory map</h2><span>East Asia</span></div>
 <div id="map-wrap" class="map-wrap"><svg id="map" role="group" aria-label="City map. Choose a marker or use the city list. Use the buttons to zoom." viewBox="0 0 900 680"><g id="land" aria-hidden="true"></g><g id="markers"></g></svg><p id="loading" class="map-loading">Drawing the coastline…</p>
 <div class="map-controls"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="fit" aria-label="Show all cities">Fit</button></div></div>
+<div id="nearby-cities" class="nearby-cities" role="group" aria-label="Nearby cities" hidden></div>
 <div class="legend" aria-label="Visit count legend"><span><i class="tier-0"></i>Not yet</span><span><i class="tier-1"></i>1 visit</span><span><i class="tier-2"></i>2–3</span><span><i class="tier-3"></i>4+</span></div>
 <p class="map-credit">City centres, not routes. Map data: <a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noreferrer">Natural Earth</a>. Scroll to browse; drag to pan after zooming.</p>
 </section>
-<aside class="memory-panel" aria-label="Selected city memories">
-<div class="selected-heading"><p id="city-region" class="small">Choose a city</p><h2 id="city-name">Your memories</h2><p id="city-local" class="local-name"></p><p id="city-count"></p></div>
+<aside id="memories" class="memory-panel" aria-label="Selected city memories">
+<button id="back-map" class="text-button">Back to map</button><div class="selected-heading"><h2 id="city-name">Your memories</h2><p id="city-local" class="local-name"></p><p id="city-region" class="small">Choose a city</p><p id="city-count"></p></div>
 <div id="trip-list"></div>
 <details id="demo-tools" hidden><summary>Try visit counting</summary><p class="small">These controls change fictional sample records in this browser only. Photo uploads and AI generation are not connected yet.</p><button id="add-sample">Add a sample visit</button></details>
 <p id="api-handoff" class="small" hidden>The map is reading backend records. Uploads and AI editing connect through the shared trip interface.</p>
@@ -37,4 +38,5 @@
 </div>
 <footer><span>Made for remembering, one city at a time.</span><a href="./about.html">About this prototype</a></footer>
 </main>
+<dialog id="photo-viewer" aria-labelledby="viewer-caption"><div class="viewer-toolbar"><button id="close-viewer">Close photo</button></div><img id="viewer-image" alt=""><p id="viewer-caption"></p></dialog>
 </body></html>

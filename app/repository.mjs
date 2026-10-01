@@ -39,3 +39,24 @@ export class ApiRepository {
     return uniqueTrips(rows.map(row=>validateTrip(row,this.cities)));
   }
 }
+
+/** Per-tab drafts survive city changes and reloads without becoming saved trips. */
+export class DraftStore {
+  constructor(storage, onWarning=()=>{}) {
+    this.storage=storage;this.onWarning=onWarning;this.key='travel-memory-map.demo-drafts.v1';this.rows={};
+    try {const raw=storage?.getItem(this.key);if(raw){const parsed=JSON.parse(raw);if(!parsed||Array.isArray(parsed)||typeof parsed!=='object'||Object.values(parsed).some(v=>typeof v!=='string'||v.length>5000))throw new Error('Invalid drafts');this.rows=parsed;}}
+    catch {onWarning('Saved drafts could not be read. New edits will be kept in this tab.');}
+  }
+  has(id){return Object.hasOwn(this.rows,id);}
+  get(id){return this.rows[id];}
+  set(id,text){Object.defineProperty(this.rows,id,{value:text,writable:true,configurable:true,enumerable:true});this.persist();}
+  remove(id){delete this.rows[id];this.persist();}
+  clear(){this.rows={};this.persist();}
+  persist(){try{if(!this.storage)throw new Error('Unavailable');this.storage.setItem(this.key,JSON.stringify(this.rows));}catch{this.onWarning('Draft kept in this tab only. Keep this page open until you save.');}}
+}
+
+/** Only the backend's same-origin media paths may supply user-photo previews. */
+export function photoURL(photo, origin) {
+  if(!photo||typeof photo.url!=='string'||!photo.url.startsWith('/media/'))return null;
+  try{const url=new URL(photo.url,origin);return url.origin===origin&&url.pathname.startsWith('/media/')?url.href:null;}catch{return null;}
+}

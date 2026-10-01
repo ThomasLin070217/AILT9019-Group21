@@ -1,0 +1,115 @@
+{
+  "viewports": [
+    {
+      "width": 320,
+      "documentWidth": 320,
+      "cardTop": 1005,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "cardTop": 988,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
+    {
+      "width": 540,
+      "documentWidth": 540,
+      "cardTop": 956,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
+    {
+      "width": 541,
+      "documentWidth": 541,
+      "cardTop": 1017,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "documentWidth": 768,
+      "cardTop": 1000,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
+    {
+      "width": 851,
+      "documentWidth": 851,
+      "cardTop": 442,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "documentWidth": 1024,
+      "cardTop": 443,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "cardTop": 425,
+      "smallTargets": [
+        {
+          "label": "visited",
+          "w": 18,
+          "h": 18
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "unsavedDraftSurvivesCitySwitch": true
+    },
+    {
+      "longTitleDocumentOverflow": false,
+      "longTitlePanelOverflow": false
+    }
+  ],
+  "gestures": {
+    "tapSelect": "Tokyo",
+    "cardVisibleAfterTap": true,
+    "touchPanChangedView": true,
+    "dragCleared": true
+  }
+}

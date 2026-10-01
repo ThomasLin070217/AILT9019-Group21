@@ -9,3 +9,5 @@ Names/translations and filter groups were selected for the app. Coordinates are 
 `fixtures/T01/` contains original synthetic image cards and fictional notes for Thomas's initial test case. Its provenance and limitations are in that folder. Other cases and live AI results are still pending.
 
 Only permission-cleared, non-sensitive fixtures belong here. Do not place private albums, chat screenshots, keys or real personal notes in this directory: it is served by the local preview.
+
+`demo-covers/` contains two separately licensed Osaka example photographs used by the UI for demo cards only. See its source manifest for credits and hashes. They are not user uploads or AI evaluation inputs.

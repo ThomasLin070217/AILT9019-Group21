@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {countVisits,visitTier,updateTrip,cityTrips,filterCities,validateTrip,initialView,zoomView,clampView,project} from '../app/domain.mjs';
-import {DemoRepository,ApiRepository,STORAGE_KEY} from '../app/repository.mjs';
+import {DemoRepository,ApiRepository,STORAGE_KEY,DraftStore,photoURL} from '../app/repository.mjs';
 const cities=JSON.parse(readFileSync(new URL('../data/cities.json',import.meta.url)));
 const seed=JSON.parse(readFileSync(new URL('../data/demo-trips.json',import.meta.url)));
 const storage=()=>{const records=new Map();return {getItem:k=>records.get(k)??null,setItem:(k,v)=>records.set(k,v)};};
@@ -72,4 +72,21 @@ test('API adapter reads backend data and never silently substitutes demo trips',
   assert.deepEqual(await new ApiRepository(cities).list(),[seed[0]]);
   globalThis.fetch=async()=>({ok:false,status:503});await assert.rejects(new ApiRepository(cities).list(),/503/);
  }finally{globalThis.fetch=old;}
+});
+
+
+test('drafts survive reconstruction but never enter saved visit records',()=>{
+ const store=storage(),drafts=new DraftStore(store);drafts.set('demo-01','A draft');
+ const reloaded=new DraftStore(store);assert.equal(reloaded.get('demo-01'),'A draft');
+ assert.equal(countVisits(seed).get('jp-osaka'),2);reloaded.remove('demo-01');assert.equal(new DraftStore(store).has('demo-01'),false);
+ drafts.set('__proto__','Safe text');assert.equal(drafts.get('__proto__'),'Safe text');
+});
+test('draft storage failures retain in-tab text and warn',()=>{
+ const warnings=[];const drafts=new DraftStore({getItem:()=>null,setItem:()=>{throw new Error('quota')}},m=>warnings.push(m));
+ drafts.set('demo-01','Keep this');assert.equal(drafts.get('demo-01'),'Keep this');assert.match(warnings[0],/Keep this page open/);
+});
+test('photo previews accept only same-origin media paths',()=>{
+ const origin='http://localhost:8019';assert.equal(photoURL({url:'/media/a.jpg'},origin),origin+'/media/a.jpg');
+ for(const url of ['https://example.org/a.jpg','//example.org/a.jpg','data:image/png;base64,a','/media/../docs/a.jpg','/api/secret','javascript:alert(1)'])assert.equal(photoURL({url},origin),null);
+ assert.equal(photoURL({id:'old-reference'},origin),null);
 });
