@@ -18,6 +18,14 @@ Open **http://127.0.0.1:8019/app/**. Python 3.10+ is sufficient; no API key or n
 
 Run `npm test` with Node.js 20+ for the map logic/storage checks. See [Thomas handoff](docs/THOMAS_HANDOFF.md) for browser checks and [API contract](docs/API_CONTRACT.md) for teammate integration. API mode (`/app/?mode=api`) requires Owen’s backend and never substitutes demo data when it fails.
 
+### Mid-term check: reproduce the working path
+
+1. Run `python3 serve.py` and open **http://127.0.0.1:8019/app/?map=local** in a fresh browser profile. No API key or package installation is needed.
+2. Osaka starts with **2 fictional trips**. Expand **Try visit counting**, then choose **Add a sample visit**. The app saves a third independent trip in browser-local storage; Osaka now shows **3 visits** and a third card.
+3. Choose **Edit sample text** on the new card, type a short fictional memory, and save. The text changes but the visit count remains **3**. Reload the page: both the card and count remain. **Reset sample album** restores the starting data.
+
+This is a real running input → local processing → output path for the map and album prototype. It uses fictional test data. Photo upload, SQLite persistence and cloud AI generation are **not yet implemented**; the browser demo does not prove those proposed functions. The [20 October test record](tests/evidence/2026-10-20-midterm/RESULTS.md) gives the observed result and limits.
+
 ## Team 21
 
 | Name | Contact email | GitHub |
@@ -65,6 +73,6 @@ docs/         Project webpage and supporting documentation
 | 26 Oct 2026 | Mid-term check |
 | 20 Nov 2026 | Final deliverables |
 
-## Next meeting
+## Next integration step
 
-Review the work allocation and agree city/trip/AI interfaces by 2 October. Target four module demonstrations by 5 October and an integrated workflow by 8 October.
+Connect a real photo upload and saved trip to the city album, then add current-trip-only AI drafting with review and explicit save. The [shared API contract](docs/API_CONTRACT.md) describes the existing map handoff; teammates still need to approve and implement the backend and AI routes.
