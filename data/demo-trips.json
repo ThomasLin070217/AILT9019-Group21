@@ -1,0 +1,92 @@
+[
+  {
+    "id": "demo-01",
+    "city_id": "jp-osaka",
+    "trip_date": "2026-05-16",
+    "title": "The rainy weekend",
+    "notes": "A fictional weekend: rain on Saturday, a quiet lunch and a long walk.",
+    "memory_text": "A fictional weekend: rain on Saturday, a quiet lunch and a long walk.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-02",
+    "city_id": "jp-osaka",
+    "trip_date": "2025-11-03",
+    "title": "A little more time",
+    "notes": "A second fictional visit, kept as its own memory.",
+    "memory_text": "A second fictional visit, kept as its own memory.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-03",
+    "city_id": "cn-shanghai",
+    "trip_date": "2026-08-12",
+    "title": "An afternoon by the river",
+    "notes": "A fictional afternoon with a notebook and a riverside walk.",
+    "memory_text": "A fictional afternoon with a notebook and a riverside walk.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-04",
+    "city_id": "hk-hong-kong",
+    "trip_date": "2026-08-01",
+    "title": "Back for the weekend",
+    "notes": "A fictional return to a familiar city.",
+    "memory_text": "A fictional return to a familiar city.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-05",
+    "city_id": "hk-hong-kong",
+    "trip_date": "2026-06-09",
+    "title": "Slow Sunday",
+    "notes": "Another fictional visit, another card.",
+    "memory_text": "Another fictional visit, another card.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-06",
+    "city_id": "hk-hong-kong",
+    "trip_date": "2026-04-04",
+    "title": "A place to return to",
+    "notes": "Fictional demo text for testing repeat visits.",
+    "memory_text": "Fictional demo text for testing repeat visits.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-07",
+    "city_id": "hk-hong-kong",
+    "trip_date": "2025-12-23",
+    "title": "The first page",
+    "notes": "The oldest fictional visit in this sample album.",
+    "memory_text": "The oldest fictional visit in this sample album.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-08",
+    "city_id": "tw-taipei",
+    "trip_date": "2026-07-20",
+    "title": "An unhurried day",
+    "notes": "A fictional day for the map demo.",
+    "memory_text": "A fictional day for the map demo.",
+    "photos": [],
+    "source": "demo"
+  },
+  {
+    "id": "demo-09",
+    "city_id": "cn-chengdu",
+    "trip_date": "2026-03-14",
+    "title": "A small escape",
+    "notes": "A fictional trip record. No photos or personal data are included.",
+    "memory_text": "A fictional trip record. No photos or personal data are included.",
+    "photos": [],
+    "source": "demo"
+  }
+]

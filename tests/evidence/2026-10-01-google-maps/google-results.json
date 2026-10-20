@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "checks": [
+    "Live Maps SDK and tiles load with 19 custom city markers; attribution is visible in capture",
+    "Keyboard marker activation selects the city and preserves focus",
+    "City list, selected marker, album view and draft remain in sync without increasing visits",
+    "Google zoom and fit controls alter the rendered geographic view",
+    "Close live-map city markers offer exact city choice",
+    "Browser config is available locally, not cached; raw key file and cross-origin config read are blocked",
+    "390px live map has no page overflow; city selection reveals the correct album",
+    "Blocked SDK restores local map and keeps search/photos usable"
+  ],
+  "errors": [],
+  "warnings": []
+}

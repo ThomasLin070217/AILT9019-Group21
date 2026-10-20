@@ -1,0 +1,17 @@
+{
+  "app/index.html": "ba60662f48a3b88d9b3fe8863377fb7fc299a97ae3c54e34039093afa87dac43",
+  "app/styles.css": "5e11aa999e6eab5190bd351410b09c4ce90a3e6dff8cb04c28083be8613c275f",
+  "app/about.html": "11f0997bb13351a47f69621fa3c02df1b1b9b657b55768c9d917354bce8230b1",
+  "app/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "app/repository.mjs": "b5eabe3ea5b06a78222113dd497cf91bd4e1b6a886e1c855b3b2de7dd6a9b862",
+  "app/domain.mjs": "71fcedbc93611c2fa73db0ef66bbf67b0a1be8e46173558f1346e1668aed8323",
+  "app/main.mjs": "72f806e9ca4102ae5ff23e5e265b5f69814a9da7788bb31e1d4211c01591e254",
+  "app/fonts/Fraunces.ttf": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb",
+  "app/fonts/README.md": "7f424b1023d69a706542404abebf75bd02ca4feae8b46f4af2ffb153222342f7",
+  "app/fonts/OFL.txt": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b",
+  "data/cities.json": "30a51441260b8b8255355da230aec3ee34887df545e575775c5e8eede4493a21",
+  "data/map/land.geojson": "5d46e85c2e8b3db2946ebd2b712dff73a9122b5a0f1765fcc1385b3cfa12bef6",
+  "data/SOURCES.json": "411c0b7d1c517d3a4015ed241a97a42f602d25097569db6184590e08605d819d",
+  "scripts/build_map_data.py": "ebabfaacea67da39d49bc79b0473c6a6da1396f9f02d028ad566030bbbd6b920",
+  "tests/views.e2e.mjs": "dd90854f0f01cfa377c669ada26f8c04d083a2e0b4048c6ca217cc1369b9823a"
+}

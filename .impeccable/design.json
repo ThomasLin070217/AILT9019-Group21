@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T02:21:56.467463+00:00",
+  "title": "Design System: Travel Memory Map",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Charcoal",
+        "tonalRamp": [
+          "oklch(15% 0.0079 223.70)",
+          "oklch(27% 0.0079 223.70)",
+          "oklch(38% 0.0079 223.70)",
+          "oklch(50% 0.0079 223.70)",
+          "oklch(61% 0.0079 223.70)",
+          "oklch(73% 0.0079 223.70)",
+          "oklch(84% 0.0079 223.70)",
+          "oklch(95% 0.0079 223.70)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Quiet Grey",
+        "tonalRamp": [
+          "oklch(15% 0.0062 196.96)",
+          "oklch(27% 0.0062 196.96)",
+          "oklch(38% 0.0062 196.96)",
+          "oklch(50% 0.0062 196.96)",
+          "oklch(61% 0.0062 196.96)",
+          "oklch(73% 0.0062 196.96)",
+          "oklch(84% 0.0062 196.96)",
+          "oklch(95% 0.0062 196.96)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0054 95.10)",
+          "oklch(27% 0.0054 95.10)",
+          "oklch(38% 0.0054 95.10)",
+          "oklch(50% 0.0054 95.10)",
+          "oklch(61% 0.0054 95.10)",
+          "oklch(73% 0.0054 95.10)",
+          "oklch(84% 0.0054 95.10)",
+          "oklch(95% 0.0054 95.10)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(27% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(50% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(73% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Fine Rule",
+        "tonalRamp": [
+          "oklch(15% 0.0055 117.93)",
+          "oklch(27% 0.0055 117.93)",
+          "oklch(38% 0.0055 117.93)",
+          "oklch(50% 0.0055 117.93)",
+          "oklch(61% 0.0055 117.93)",
+          "oklch(73% 0.0055 117.93)",
+          "oklch(84% 0.0055 117.93)",
+          "oklch(95% 0.0055 117.93)"
+        ]
+      },
+      "sea": {
+        "role": "secondary",
+        "displayName": "Pale Water",
+        "tonalRamp": [
+          "oklch(15% 0.0121 209.80)",
+          "oklch(27% 0.0121 209.80)",
+          "oklch(38% 0.0121 209.80)",
+          "oklch(50% 0.0121 209.80)",
+          "oklch(61% 0.0121 209.80)",
+          "oklch(73% 0.0121 209.80)",
+          "oklch(84% 0.0121 209.80)",
+          "oklch(95% 0.0121 209.80)"
+        ]
+      },
+      "land": {
+        "role": "neutral",
+        "displayName": "Land Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0067 97.35)",
+          "oklch(27% 0.0067 97.35)",
+          "oklch(38% 0.0067 97.35)",
+          "oklch(50% 0.0067 97.35)",
+          "oklch(61% 0.0067 97.35)",
+          "oklch(73% 0.0067 97.35)",
+          "oklch(84% 0.0067 97.35)",
+          "oklch(95% 0.0067 97.35)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Rust",
+        "tonalRamp": [
+          "oklch(15% 0.1381 38.47)",
+          "oklch(27% 0.1381 38.47)",
+          "oklch(38% 0.1381 38.47)",
+          "oklch(50% 0.1381 38.47)",
+          "oklch(61% 0.1381 38.47)",
+          "oklch(73% 0.1381 38.47)",
+          "oklch(84% 0.1381 38.47)",
+          "oklch(95% 0.1381 38.47)"
+        ]
+      },
+      "green": {
+        "role": "secondary",
+        "displayName": "Forest Status",
+        "tonalRamp": [
+          "oklch(15% 0.0538 170.80)",
+          "oklch(27% 0.0538 170.80)",
+          "oklch(38% 0.0538 170.80)",
+          "oklch(50% 0.0538 170.80)",
+          "oklch(61% 0.0538 170.80)",
+          "oklch(73% 0.0538 170.80)",
+          "oklch(84% 0.0538 170.80)",
+          "oklch(95% 0.0538 170.80)"
+        ]
+      },
+      "selected-city": {
+        "role": "primary",
+        "displayName": "Warm Selection Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0204 62.86)",
+          "oklch(27% 0.0204 62.86)",
+          "oklch(38% 0.0204 62.86)",
+          "oklch(50% 0.0204 62.86)",
+          "oklch(61% 0.0204 62.86)",
+          "oklch(73% 0.0204 62.86)",
+          "oklch(84% 0.0204 62.86)",
+          "oklch(95% 0.0204 62.86)"
+        ]
+      },
+      "selected-city-ink": {
+        "role": "primary",
+        "displayName": "Deep Rust Text",
+        "tonalRamp": [
+          "oklch(15% 0.1166 39.17)",
+          "oklch(27% 0.1166 39.17)",
+          "oklch(38% 0.1166 39.17)",
+          "oklch(50% 0.1166 39.17)",
+          "oklch(61% 0.1166 39.17)",
+          "oklch(73% 0.1166 39.17)",
+          "oklch(84% 0.1166 39.17)",
+          "oklch(95% 0.1166 39.17)"
+        ]
+      },
+      "tier-0": {
+        "role": "secondary",
+        "displayName": "Unvisited Slate",
+        "tonalRamp": [
+          "oklch(15% 0.0281 196.50)",
+          "oklch(27% 0.0281 196.50)",
+          "oklch(38% 0.0281 196.50)",
+          "oklch(50% 0.0281 196.50)",
+          "oklch(61% 0.0281 196.50)",
+          "oklch(73% 0.0281 196.50)",
+          "oklch(84% 0.0281 196.50)",
+          "oklch(95% 0.0281 196.50)"
+        ]
+      },
+      "tier-1": {
+        "role": "secondary",
+        "displayName": "One-Visit Olive",
+        "tonalRamp": [
+          "oklch(15% 0.0572 131.98)",
+          "oklch(27% 0.0572 131.98)",
+          "oklch(38% 0.0572 131.98)",
+          "oklch(50% 0.0572 131.98)",
+          "oklch(61% 0.0572 131.98)",
+          "oklch(73% 0.0572 131.98)",
+          "oklch(84% 0.0572 131.98)",
+          "oklch(95% 0.0572 131.98)"
+        ]
+      },
+      "tier-2": {
+        "role": "secondary",
+        "displayName": "Return-Visit Rust",
+        "tonalRamp": [
+          "oklch(15% 0.1148 42.41)",
+          "oklch(27% 0.1148 42.41)",
+          "oklch(38% 0.1148 42.41)",
+          "oklch(50% 0.1148 42.41)",
+          "oklch(61% 0.1148 42.41)",
+          "oklch(73% 0.1148 42.41)",
+          "oklch(84% 0.1148 42.41)",
+          "oklch(95% 0.1148 42.41)"
+        ]
+      },
+      "tier-3": {
+        "role": "secondary",
+        "displayName": "Frequent-Visit Amber",
+        "tonalRamp": [
+          "oklch(15% 0.1375 68.22)",
+          "oklch(27% 0.1375 68.22)",
+          "oklch(38% 0.1375 68.22)",
+          "oklch(50% 0.1375 68.22)",
+          "oklch(61% 0.1375 68.22)",
+          "oklch(73% 0.1375 68.22)",
+          "oklch(84% 0.1375 68.22)",
+          "oklch(95% 0.1375 68.22)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Selected city heading."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Catalogue heading."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Trip title."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "General interface copy."
+      },
+      "memory-body": {
+        "displayName": "Memory Body",
+        "purpose": "Memory prose."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Rust trip date."
+      }
+    },
+    "shadows": [
+      {
+        "name": "map-overlay",
+        "value": "0 6px 24px #233c4220",
+        "purpose": "Nearby-city choice overlay."
+      },
+      {
+        "name": "map-control",
+        "value": "0 2px 8px #233c4218",
+        "purpose": "Zoom and fit controls."
+      },
+      {
+        "name": "selected-view",
+        "value": "0 2px 5px #26332a10",
+        "purpose": "Active Map/Album segment."
+      }
+    ],
+    "motion": [
+      {
+        "name": "marker-fill",
+        "value": "fill 180ms ease-out",
+        "purpose": "Marker fill state; disabled under prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone-max",
+        "value": "540px"
+      },
+      {
+        "name": "stacked-max",
+        "value": "850px"
+      },
+      {
+        "name": "narrow-desktop-max",
+        "value": "1200px"
+      },
+      {
+        "name": "wide-desktop-min",
+        "value": "1700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "White utility control for save, discard and close actions.",
+      "html": "<button class=\"ds-button\">Save sample text</button>",
+      "css": ".ds-button{font:550 14px/1.55 var(--font,system-ui,sans-serif);color:var(--ink,#292e30);background:var(--surface,#fff);border:1px solid #adb5b2;border-radius:8px;padding:10px 14px;min-height:44px;cursor:pointer}.ds-button:hover{background:#eeefeb}.ds-button:focus-visible{outline:3px solid var(--accent,#ad4a29);outline-offset:3px}.ds-button:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "Sample Visit Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Rust action inside the explicitly labelled demo tools.",
+      "html": "<button class=\"ds-primary\">Add a sample visit</button>",
+      "css": ".ds-primary{font:550 14px/1.55 var(--font,system-ui,sans-serif);background:var(--accent,#ad4a29);color:white;border:1px solid var(--accent,#ad4a29);border-radius:8px;padding:10px 14px;min-height:44px;width:100%;font-size:13px;cursor:pointer}.ds-primary:hover{background:#8c381e}.ds-primary:focus-visible{outline:3px solid var(--accent,#ad4a29);outline-offset:3px}.ds-primary:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Underlined action below trip content.",
+      "html": "<button class=\"ds-text\">Edit sample text</button>",
+      "css": ".ds-text{font:550 14px/1.55 var(--font,system-ui,sans-serif);border:0;background:transparent;padding:10px 0;text-decoration:underline;text-underline-offset:3px;font-size:11px;min-height:44px;color:var(--muted,#626767);cursor:pointer}.ds-text:hover{color:var(--accent,#ad4a29)}.ds-text:focus-visible{outline:3px solid var(--accent,#ad4a29);outline-offset:3px}"
+    },
+    {
+      "name": "City Search",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "A compact labelled search field with a literal SVG icon.",
+      "html": "<label class=\"ds-search\"><span class=\"ds-sr\">Find a city</span><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"m16 16 5 5\"/></svg><input type=\"search\" placeholder=\"Find a city / 中文\"></label>",
+      "css": ".ds-search{display:block;position:relative}.ds-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.ds-search svg{width:17px;height:17px;position:absolute;left:12px;top:14px;fill:none;stroke:var(--muted,#626767);stroke-width:1.7;pointer-events:none}.ds-search input{font:13px/1.55 var(--font,system-ui,sans-serif);color:var(--ink,#292e30);width:100%;min-height:44px;min-width:0;border:1px solid #c8cecb;border-radius:8px;padding:10px 12px 10px 37px;background:#f8f9f6;caret-color:var(--accent,#ad4a29)}.ds-search input::placeholder{color:var(--muted,#626767)}.ds-search input:focus-visible{outline:3px solid var(--accent,#ad4a29);outline-offset:3px}"
+    },
+    {
+      "name": "Map / Album Navigation",
+      "kind": "nav",
+      "refersTo": "view-switch",
+      "description": "Segmented view controls; snippet shows Map selected.",
+      "html": "<nav class=\"ds-switch\" aria-label=\"Album view\"><button aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16\"/></svg>Map</button><button aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/></svg>Album</button></nav>",
+      "css": ".ds-switch{display:inline-flex;gap:3px;padding:4px;background:#f1f2ee;border-radius:10px}.ds-switch button{font:550 14px/1.55 var(--font,system-ui,sans-serif);display:flex;align-items:center;justify-content:center;gap:8px;min-width:106px;border:0;background:transparent;min-height:44px;padding:7px 14px;border-radius:8px;color:var(--muted,#626767);cursor:pointer}.ds-switch button[aria-pressed=true]{background:white;color:var(--ink,#292e30);box-shadow:0 2px 5px #26332a10}.ds-switch svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.ds-switch button:focus-visible{outline:3px solid var(--accent,#ad4a29);outline-offset:3px}"
+    },
+    {
+      "name": "Selected City",
+      "kind": "nav",
+      "refersTo": "city-selected",
+      "description": "A selected city row pairs local naming with a numerical visit badge.",
+      "html": "<button class=\"ds-city\" aria-pressed=\"true\" aria-label=\"Osaka, 2 visits\"><span>Osaka<small>大阪</small></span><span class=\"ds-city-count\">2</span></button>",
+      "css": ".ds-city{font:550 13px/1.55 var(--font,system-ui,sans-serif);display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:60px;border:0;border-radius:8px;padding:10px 12px;text-align:left;cursor:pointer;background:var(--selected-city,#f5e8dd);color:#8c3c20}.ds-city small{display:block;font-size:11px;font-weight:400;color:#7c5848;margin-top:1px}.ds-city-count{font-size:12px;font-variant-numeric:tabular-nums;border-radius:50%;background:var(--accent,#ad4a29);color:white;width:26px;height:26px;display:grid;place-items:center}.ds-city:focus-visible{outline:3px solid var(--accent,#ad4a29);outline-offset:3px}"
+    },
+    {
+      "name": "Visit Badge",
+      "kind": "chip",
+      "refersTo": "visit-badge",
+      "description": "A non-interactive numerical status inside an unselected visited city row.",
+      "html": "<span class=\"ds-badge\" aria-label=\"2 visits\">2</span>",
+      "css": ".ds-badge{font:550 12px/1.55 var(--font,system-ui,sans-serif);font-variant-numeric:tabular-nums;border-radius:50%;background:#e9eee8;color:#365847;width:26px;height:26px;display:grid;place-items:center}"
+    },
+    {
+      "name": "Memory Card",
+      "kind": "card",
+      "refersTo": "trip-card",
+      "description": "The text-only card variant retains the trip date, title, prose and demo provenance.",
+      "html": "<article class=\"ds-card\"><time datetime=\"2026-04-12\">12 Apr 2026</time><h3>An afternoon in Osaka</h3><p>Sample memory text appears here.</p><p class=\"ds-provenance\">Fictional trip · sample content</p><div class=\"ds-actions\"><button>Edit sample text</button></div></article>",
+      "css": ".ds-card{background:var(--surface,#fff);color:var(--ink,#292e30);border-radius:var(--radius,12px);padding:0 20px 12px;min-width:0;overflow:hidden;border:1px solid var(--line,#e2e3df);font-family:var(--font,system-ui,sans-serif)}.ds-card time{display:block;font-size:11px;line-height:1.55;color:var(--accent,#ad4a29);font-weight:600;margin:20px 0 9px}.ds-card h3{font:470 25px/1.2 var(--display,Fraunces,Georgia,serif);letter-spacing:-.025em;margin:0 0 12px;overflow-wrap:anywhere}.ds-card p{font-size:13px;line-height:1.75;color:var(--muted,#626767);overflow-wrap:anywhere;margin:0 0 12px}.ds-card .ds-provenance{font-size:10px;margin:14px 0 0}.ds-actions{display:flex;gap:16px;border-top:1px solid var(--line,#e2e3df);margin-top:12px}.ds-actions button{font:550 11px/1.55 var(--font,system-ui,sans-serif);border:0;background:transparent;padding:10px 0;text-decoration:underline;text-underline-offset:3px;min-height:44px;color:var(--muted,#626767);cursor:pointer}.ds-actions button:hover{color:var(--accent,#ad4a29)}.ds-actions button:focus-visible{outline:3px solid var(--accent,#ad4a29);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Open City Album",
+    "overview": "A compact city index and a working map sit beside an open album. Warm paper, pale water, white controls and rust selection keep the place legible while photographs and personal text carry the memory. This is the implemented direction recorded for team review, not a claim of a separate user-approved brand system.\n\nFraunces gives city names and trip titles an album-like voice; system sans keeps navigation and metadata clear. The interface stays practical and quietly tactile: fine rules separate persistent regions, rounded cards hold individual trips, and small lifted controls sit above the map. The older green-led, Georgia-led catalogue treatment has been replaced.",
+    "keyCharacteristics": [
+      "A persistent city index coordinates map selection and the selected city’s memories.",
+      "Locally bundled Fraunces headings with compact system sans controls.",
+      "White cards and controls, warm paper albums, pale blue water and rust selection.",
+      "Credited example photos and explicit fictional-trip labels remain visible."
+    ],
+    "rules": [
+      {
+        "name": "The Count Before Colour Rule",
+        "body": "Every visit tier has a written legend, and saved visit totals remain visible in the index and album; colour never carries the count alone.",
+        "section": "colors"
+      },
+      {
+        "name": "The Album Voice Rule",
+        "body": "Use Fraunces for the brand, city headings and memory titles; use system sans for controls, dates, counts and readable memory text.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Surface Rule",
+        "body": "Cards and persistent panels use borders and background tone. Reserve shadows for selected view controls, floating map controls and nearby-city choices.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve visible counts, keyboard selection, focus outlines and reduced-motion support.",
+      "Do use the same selected city and drafts when switching Map and Album views.",
+      "Do retain photo credits, fictional-story labels and useful memory text when media fails.",
+      "Do let long city names and trip titles wrap without clipping.",
+      "Do keep the complete photograph reachable from its cropped card cover."
+    ],
+    "donts": [
+      "Don't reintroduce the replaced green-led catalogue styling or use Georgia as the primary display face.",
+      "Don't imply that example photographs document fictional trips.",
+      "Don't depict routes or imply real uploads, cloud AI or SQLite integration. Google Maps is optional and requires a local browser key.",
+      "Don't use decorative shadows on every card or add motion beyond the restrained marker state change."
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "app/index.html": "2f7a4176e3a51fc39b542328035b0e32a33508c368570104b51b098a3a770e63",
+  "app/styles.css": "e42ec662830187a65400823b6ae03d1160d49c0b2db5720f7f1b01ed946883a0",
+  "app/about.html": "8a8576c19e8cd5c3729661c36cabed298f19ca0522c17ba13106b331a09d76b2",
+  "app/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "app/repository.mjs": "b5eabe3ea5b06a78222113dd497cf91bd4e1b6a886e1c855b3b2de7dd6a9b862",
+  "app/domain.mjs": "71fcedbc93611c2fa73db0ef66bbf67b0a1be8e46173558f1346e1668aed8323",
+  "app/main.mjs": "9a7c79e5e1f0d241a51a2a6090f29ec3bda34a11ea5f36ea9094fc87f1ea1eab",
+  "data/demo-covers/osaka-castle-1.jpg": "40095f11ed13c2a523426b18e0f0b6f315b247f87d566f708616be5834b03eb2",
+  "data/demo-covers/SOURCES.json": "b10539719dd34a7fd1e214158bb16604329143ee6f39d63e7f300d5ce34744fc",
+  "data/demo-covers/osaka-castle-2.jpg": "fd03db16a4f836ab2ce9ef0f922175921a3896076c5b66cb3fe5bdc8848eb0a2",
+  "data/demo-covers/README.md": "5160d71a444092f8aa88088f995d81f05c84678f800d77d5b32107c70070f58e",
+  "tests/album.e2e.mjs": "30cc3460ac6f2dabecd7485b3da7aa1832707261709e9f6e8cd4429d0d640458",
+  "tests/browser.e2e.mjs": "ead778484a1e504482e83e679e677978bd7144cd63ae5846c6ae968f45934cc5",
+  "tests/map.test.mjs": "62a72a3e8575fd68498d6bf3d99a25086cbeaad7512ead4e40e85a20468efe83",
+  "tests/audit-browser.mjs": "e2fce1a01b0f3d4fb10827e13de689769064f1941631f2b2af9a3fc0f8046f7d"
+}
