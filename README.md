@@ -1,5 +1,7 @@
 # AILT9019 — Group 21
 
+The current runnable review branch is published in [draft PR #3](https://github.com/ThomasLin070217/AILT9019-Group21/pull/3). See [team release instructions](docs/TEAM_RELEASE.md) for the tested source, startup and remaining acceptance tasks.
+
 Travel Memory Map saves completed trips as a local photo album. Each trip is one visit; repeated trips get separate cards and change the city marker brightness (1 / 2–3 / 4+ visits). The catalogue has 19 cities with English/Chinese search, Map/Album views and a bundled map. [Proposal](proposal/Travel_Memory_Map_Proposal.docx) · [Product acceptance record](docs/PRODUCT_ACCEPTANCE.md)
 
 ## Install and run

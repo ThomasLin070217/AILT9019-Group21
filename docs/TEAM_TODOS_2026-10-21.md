@@ -15,11 +15,13 @@ Each member owns one verification package, independent AI reviews, a short writt
 | Owen | Fresh installation, persistence and backup/restore | T03, T04 | Architecture / reproduction section and storage demonstration |
 | Qingyang | AI failure handling, privacy and evaluation consolidation | T01, T02, T05 | Evaluation / limitations section and AI clarification demonstration |
 
-**Dependency:** the latest implementation is currently in Thomas's local working tree. Thomas must first share the runnable branch and commit ID. Everyone should test that same commit, rather than assume the current main branch contains the latest work. The existing raw evaluation files can be reviewed as soon as they are shared; they do not require additional paid API calls.
+**Release update:** [draft PR #3](https://github.com/ThomasLin070217/AILT9019-Group21/pull/3) now publishes the runnable review branch. Use [TEAM_RELEASE.md](TEAM_RELEASE.md) for the branch, tested source commit and startup commands. Test the same review version rather than assume main already contains it. Existing raw model outputs are available in that branch and do not require additional paid API calls.
 
 ## Thomas — Release and integration
 
-- [ ] **By 21 October: share the runnable version.** Prepare and push the review branch, excluding credentials, personal albums and chat attachments. Share the branch, commit ID and README startup instructions. Handle course-key configuration privately. Done when all three teammates can retrieve the same version.
+Current progress: branch/PR published; map checks and recording complete; assistant T02/T05 assessments and written/script/outline drafts ready. Thomas’s independent human verdict, speech recording and authenticated course checks remain pending; teammate clips have not been received. See [Thomas’s record](reviews/thomas.md).
+
+- [x] **By 21 October: share the runnable version (published for review).** Prepare and push the review branch, excluding credentials, personal albums and chat attachments. Share the branch, commit ID and README startup instructions. Handle course-key configuration privately. Done when all three teammates can retrieve the same version.
 - [ ] **By 22 October, 22:00: verify the map and review T02 / T05.** Check separate repeat-visit cards, exact counts, brightness at 1 / 2–3 / 4+ visits, unchanged counts after edits/AI saves, and reduced counts after deletion. Record steps, actual results and independent AI scores in `docs/reviews/thomas.md`.
 - [ ] **By 23 October, 22:00: prepare the integration section.** Write approximately 200–300 words on the problem and overall workflow, plus a roughly 45-second presentation segment. Assemble the four members' existing sections/clips into the shared outline; assign each blocking defect to its module owner rather than fixing everything yourself. Check Moodle requirements, submission/access arrangements and outstanding course-administration items. Deliver the shared issue list and presentation outline.
 

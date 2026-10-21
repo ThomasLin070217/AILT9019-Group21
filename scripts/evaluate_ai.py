@@ -43,7 +43,7 @@ def main():
     print(case['id']+': '+('error' if 'error' in run else 'received; human review pending'))
   report['status']='collected' if all('result' in r for r in report['runs']) else 'incomplete'
  with (out/'review.csv').open('w',newline='') as stream:
-  writer=csv.writer(stream);writer.writerow(['case','reviewer','facts_retained','no_invention','uncertainty_handled','verdict','notes'])
+  writer=csv.writer(stream,lineterminator='\n');writer.writerow(['case','reviewer','facts_retained','no_invention','uncertainty_handled','verdict','notes'])
   for case in manifest['cases']:
    for reviewer in ['reviewer_1','reviewer_2']:writer.writerow([case['id'],reviewer,'','','','pending',''])
  (out/'results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

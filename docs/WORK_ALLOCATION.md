@@ -1,6 +1,6 @@
 # Travel Memory Map work allocation
 
-**21 October update:** implementation and real course-model calls are now complete enough for independent acceptance. Use [current balanced English TODOs](TEAM_TODOS_2026-10-21.md) for immediate actions, review assignments and proposed internal deadlines. The September development plan below is historical and its pending-implementation statements are superseded by [current acceptance status](PRODUCT_ACCEPTANCE.md).
+**21 October update:** implementation and real course-model calls are now available for independent acceptance in [draft PR #3](https://github.com/ThomasLin070217/AILT9019-Group21/pull/3); [release instructions](TEAM_RELEASE.md) identify the tested source. Use [current balanced English TODOs](TEAM_TODOS_2026-10-21.md) for immediate actions, review assignments and proposed internal deadlines. The September development plan below is historical and its pending-implementation statements are superseded by [current acceptance status](PRODUCT_ACCEPTANCE.md).
 
 Development plan dated 30 September 2026 for four members. Thomas reports that the proposal has been submitted; its scope is our baseline. Assignments below reflect members' stated backgrounds, not a claim that everyone has already accepted their role. Raise availability or workload conflicts before 2 October. Update: Thomas’s map module and integration scaffolding are implemented with labelled fictional data; see [handoff and evidence](THOMAS_HANDOFF.md). Real backend/AI integration and the other modules remain planned.
 
