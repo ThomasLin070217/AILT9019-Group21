@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "provider": "Alibaba Cloud Bailian",
+  "model": "qwen3.8-flash",
+  "live": true,
+  "input": "Licensed public image with fictional notes; isolated temporary album",
+  "checks": [
+    "Provider/model disclosed before explicit send",
+    "Real image request returned editable text",
+    "Draft did not alter saved record",
+    "Explicit edited save kept trip ID and one visit"
+  ],
+  "draft": {
+    "title": "大阪城散步",
+    "memory_text": "2026年5月16日，在大阪城周围散步并拍摄了建筑照片。途中停下来休息了一会儿。"
+  }
+}

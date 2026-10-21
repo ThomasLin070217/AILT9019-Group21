@@ -1,0 +1,139 @@
+{
+  "case": "T05",
+  "expected_status": "clarification",
+  "human_verdict": "pending",
+  "result": {
+    "status": "clarification",
+    "title": "",
+    "memory_text": "",
+    "warnings": [
+      "用户备注与照片内容严重不符。备注称“只有被白雪覆盖的山，没有任何建筑”，但照片中明显可见一座大型城堡式建筑（大阪城）、池塘、石灯笼及树木，且无积雪迹象。"
+    ],
+    "questions": [
+      "您的备注提到“照片里只有被白雪覆盖的山，没有任何建筑”，但这与实际上传的照片（显示有大阪城等建筑和景观）完全矛盾。请确认您是否上传了错误的照片，或者需要修改备注以匹配当前照片？"
+    ],
+    "provider": "Alibaba Cloud Bailian (course Group 21)",
+    "model": "qwen3.8-flash",
+    "prompt_version": "travel-memory-v4",
+    "expected_revision": 1,
+    "usage": {
+      "input_tokens": 1850,
+      "input_tokens_details": {
+        "cached_tokens": 1024
+      },
+      "output_tokens": 121,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1971,
+      "x_details": [
+        {
+          "input_tokens": 1850,
+          "output_tokens": 121,
+          "total_tokens": 1971,
+          "input_tokens_details": {
+            "text_tokens": 1176,
+            "image_tokens": 674
+          },
+          "output_tokens_details": {},
+          "image_tokens": 674,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    }
+  },
+  "status_matches": true,
+  "raw_response": {
+    "id": "resp_dbd71734-d676-4298-aa68-c2fdf6d49795",
+    "created_at": 1792486339,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "qwen3.8-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_5805770c-f098-4432-8601-7c1b587266d9",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"status\": \"clarification\", \"title\": \"\", \"memory_text\": \"\", \"warnings\": [\"用户备注与照片内容严重不符。备注称“只有被白雪覆盖的山，没有任何建筑”，但照片中明显可见一座大型城堡式建筑（大阪城）、池塘、石灯笼及树木，且无积雪迹象。\"], \"questions\": [\"您的备注提到“照片里只有被白雪覆盖的山，没有任何建筑”，但这与实际上传的照片（显示有大阪城等建筑和景观）完全矛盾。请确认您是否上传了错误的照片，或者需要修改备注以匹配当前照片？\"]}",
+            "type": "output_text",
+            "logprobs": null
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "conversation": null,
+    "max_output_tokens": 1500,
+    "max_tool_calls": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "effort": "none",
+      "generate_summary": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "type": "json_object"
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": null,
+    "usage": {
+      "input_tokens": 1850,
+      "input_tokens_details": {
+        "cached_tokens": 1024
+      },
+      "output_tokens": 121,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1971,
+      "x_details": [
+        {
+          "input_tokens": 1850,
+          "output_tokens": 121,
+          "total_tokens": 1971,
+          "input_tokens_details": {
+            "text_tokens": 1176,
+            "image_tokens": 674
+          },
+          "output_tokens_details": {},
+          "image_tokens": 674,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    },
+    "user": null,
+    "completed_at": 1792486342,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "moderation": null,
+    "billing": null
+  }
+}

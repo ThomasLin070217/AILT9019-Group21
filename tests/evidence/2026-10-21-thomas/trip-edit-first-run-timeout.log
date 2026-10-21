@@ -1,0 +1,1 @@
+Concurrent regression run made no progress receipt after five minutes; coordinator stopped its isolated Node/server/browser processes. Original harness used unbounded waits. Added bounded timeouts and failure capture, then reran alone for diagnosis. No passing result claimed for this attempt.

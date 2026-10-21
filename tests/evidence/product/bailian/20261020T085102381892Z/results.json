@@ -1,0 +1,825 @@
+{
+  "source_commit": "265253c9719efe92c57302365b2f6c44c988d336",
+  "working_tree_dirty": true,
+  "adapter_sha256": "f3e0f4121d6aca30404514ab89fd074ecd4181d2555f8123eb5ea0276f8371df",
+  "created_at": "20261020T085102381892Z",
+  "status": "incomplete",
+  "provider": "Alibaba Cloud Bailian (course Group 21)",
+  "model": "qwen3.8-flash",
+  "prompt_version": "travel-memory-v3",
+  "manifest_sha256": "058f95dc2a80bb31bba6ecc4498f5e16337e49a742f47e0261ad25211649b241",
+  "human_review": "pending; two independent reviewers required",
+  "runs": [
+    {
+      "case": "T01",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "error": "The AI returned an invalid draft format. Your saved trip is unchanged. Retry manually.",
+      "raw_response": {
+        "id": "resp_a6857bea-aa8f-42ac-8746-99cf3a98687f",
+        "created_at": 1792486263,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_b65ba5ec-9e03-4c3c-950d-f9a23414ebfd",
+            "content": [
+              {
+                "annotations": [],
+                "text": "[]",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 2126,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 2,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2128,
+          "x_details": [
+            {
+              "input_tokens": 2126,
+              "output_tokens": 2,
+              "total_tokens": 2128,
+              "input_tokens_details": {
+                "text_tokens": 790,
+                "image_tokens": 1336
+              },
+              "output_tokens_details": {},
+              "image_tokens": 1336,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486263,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T02",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "result": {
+        "status": "draft",
+        "title": "Osaka Castle View",
+        "memory_text": "A multi-tiered structure with a green tiled roof and white walls is visible in the background. In the foreground, there is a body of water reflecting the building, along with a stone lantern and landscaped garden elements.",
+        "warnings": [],
+        "questions": [],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v3",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 1429,
+          "input_tokens_details": {
+            "cached_tokens": 512
+          },
+          "output_tokens": 86,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1515,
+          "x_details": [
+            {
+              "input_tokens": 1429,
+              "output_tokens": 86,
+              "total_tokens": 1515,
+              "input_tokens_details": {
+                "text_tokens": 755,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_819686e1-e811-4b16-b37e-f512ab75ab6f",
+        "created_at": 1792486266,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_2d353683-2911-431d-bb5e-c9e979e6c242",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\n  \"status\": \"draft\",\n  \"title\": \"Osaka Castle View\",\n  \"memory_text\": \"A multi-tiered structure with a green tiled roof and white walls is visible in the background. In the foreground, there is a body of water reflecting the building, along with a stone lantern and landscaped garden elements.\",\n  \"warnings\": [],\n  \"questions\": []\n}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1429,
+          "input_tokens_details": {
+            "cached_tokens": 512
+          },
+          "output_tokens": 86,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1515,
+          "x_details": [
+            {
+              "input_tokens": 1429,
+              "output_tokens": 86,
+              "total_tokens": 1515,
+              "input_tokens_details": {
+                "text_tokens": 755,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486268,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T03",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "error": "The AI returned an invalid draft format. Your saved trip is unchanged. Retry manually.",
+      "raw_response": {
+        "id": "resp_1dd85210-ecb4-4a5e-9838-928d2f0103c1",
+        "created_at": 1792486269,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_3538cd2d-bff4-4e9f-9abd-5553fb4c1390",
+            "content": [
+              {
+                "annotations": [],
+                "text": "[]",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1425,
+          "input_tokens_details": {
+            "cached_tokens": 512
+          },
+          "output_tokens": 2,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1427,
+          "x_details": [
+            {
+              "input_tokens": 1425,
+              "output_tokens": 2,
+              "total_tokens": 1427,
+              "input_tokens_details": {
+                "text_tokens": 763,
+                "image_tokens": 662
+              },
+              "output_tokens_details": {},
+              "image_tokens": 662,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486269,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T04",
+      "expected_status": "clarification",
+      "human_verdict": "pending",
+      "result": {
+        "status": "clarification",
+        "title": "",
+        "memory_text": "",
+        "warnings": [
+          "The provided image is a solid grey block and does not contain any visible travel details."
+        ],
+        "questions": [
+          "Please upload a clearer photo from your trip to Osaka or provide short factual notes about the completed trip so I can draft a memory."
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v3",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 837,
+          "input_tokens_details": {
+            "cached_tokens": 512
+          },
+          "output_tokens": 70,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 907,
+          "x_details": [
+            {
+              "input_tokens": 837,
+              "output_tokens": 70,
+              "total_tokens": 907,
+              "input_tokens_details": {
+                "text_tokens": 755,
+                "image_tokens": 82
+              },
+              "output_tokens_details": {},
+              "image_tokens": 82,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_c0efbe44-17c2-4186-8756-cb253a3537cc",
+        "created_at": 1792486271,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_e79532c9-1010-4111-a324-ced7b5e98600",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"status\": \"clarification\", \"title\": \"\", \"memory_text\": \"\", \"warnings\": [\"The provided image is a solid grey block and does not contain any visible travel details.\"], \"questions\": [\"Please upload a clearer photo from your trip to Osaka or provide short factual notes about the completed trip so I can draft a memory.\"]}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 837,
+          "input_tokens_details": {
+            "cached_tokens": 512
+          },
+          "output_tokens": 70,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 907,
+          "x_details": [
+            {
+              "input_tokens": 837,
+              "output_tokens": 70,
+              "total_tokens": 907,
+              "input_tokens_details": {
+                "text_tokens": 755,
+                "image_tokens": 82
+              },
+              "output_tokens_details": {},
+              "image_tokens": 82,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486273,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T05",
+      "expected_status": "clarification",
+      "human_verdict": "pending",
+      "result": {
+        "status": "clarification",
+        "title": "",
+        "memory_text": "",
+        "warnings": [
+          "The notes state that the photo only shows snow-covered mountains with no buildings, but the image clearly depicts a large building (likely Osaka Castle) surrounded by trees and a pond. This is a direct contradiction between the provided text and the visible content."
+        ],
+        "questions": [
+          "Please confirm if you intended to upload a different photo showing snow-covered mountains.",
+          "If this photo of the castle is correct, please provide updated notes describing what is actually visible in the image."
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v3",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 1448,
+          "input_tokens_details": {
+            "cached_tokens": 512
+          },
+          "output_tokens": 139,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1587,
+          "x_details": [
+            {
+              "input_tokens": 1448,
+              "output_tokens": 139,
+              "total_tokens": 1587,
+              "input_tokens_details": {
+                "text_tokens": 774,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_e738b37f-1e96-45c9-93bc-ef63897a844b",
+        "created_at": 1792486274,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_086cce9c-4dbd-4338-b89a-0f15abc8a3fd",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\n  \"status\": \"clarification\",\n  \"title\": \"\",\n  \"memory_text\": \"\",\n  \"warnings\": [\n    \"The notes state that the photo only shows snow-covered mountains with no buildings, but the image clearly depicts a large building (likely Osaka Castle) surrounded by trees and a pond. This is a direct contradiction between the provided text and the visible content.\"\n  ],\n  \"questions\": [\n    \"Please confirm if you intended to upload a different photo showing snow-covered mountains.\",\n    \"If this photo of the castle is correct, please provide updated notes describing what is actually visible in the image.\"\n  ]\n}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1448,
+          "input_tokens_details": {
+            "cached_tokens": 512
+          },
+          "output_tokens": 139,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1587,
+          "x_details": [
+            {
+              "input_tokens": 1448,
+              "output_tokens": 139,
+              "total_tokens": 1587,
+              "input_tokens_details": {
+                "text_tokens": 774,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486276,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    }
+  ]
+}

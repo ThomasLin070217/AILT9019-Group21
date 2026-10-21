@@ -8,7 +8,7 @@
     "license_url": "https://unsplash.com/license",
     "retrieved": "2026-10-01",
     "sha256": "fd03db16a4f836ab2ce9ef0f922175921a3896076c5b66cb3fe5bdc8848eb0a2",
-    "purpose": "Local example cover for fictional Osaka trip. Not a user upload, not evidence of trip events, not an AI evaluation input."
+    "purpose": "Public example cover for fictional trips and explicitly frozen evaluation cases in data/evaluation/cases.json; not evidence of trip events."
   },
   {
     "file": "osaka-castle-1.jpg",
@@ -19,6 +19,6 @@
     "license_url": "https://unsplash.com/license",
     "retrieved": "2026-10-01",
     "sha256": "40095f11ed13c2a523426b18e0f0b6f315b247f87d566f708616be5834b03eb2",
-    "purpose": "Local example cover for fictional Osaka trip. Not a user upload, not evidence of trip events, not an AI evaluation input."
+    "purpose": "Public example cover for fictional trips and explicitly frozen evaluation cases in data/evaluation/cases.json; not evidence of trip events."
   }
 ]

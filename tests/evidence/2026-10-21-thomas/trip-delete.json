@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Delete requires a second explicit action; Keep trip preserves the record, photos, count and edit draft",
+    "Failed delete preserves the saved trip, photos, map count and unsaved editor",
+    "Confirmed delete removes the target, local photo access and its draft; 4 visits become 3 and other trips remain",
+    "Repeated deletion is idempotent and never removes another visit",
+    "A stale tab cannot delete a newer version without refreshing and reviewing it",
+    "Lost response after a committed delete can be retried safely and reconciles the displayed count",
+    "2\u21921\u21920 recalculates brightness and returns the city to its empty unvisited state",
+    "390px and 320px confirmation fits; deleting the last trip works on mobile",
+    "Deleted trips stay deleted after restart, other-city records remain, and no JavaScript errors occur"
+  ]
+}

@@ -33,10 +33,33 @@ export class DemoRepository {
 }
 export class ApiRepository {
   constructor(cities){this.cities=cities;}
+  async create(data){
+    const response=await fetch('/api/trips',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(30000)});
+    const result=await response.json();
+    if(!response.ok)throw new Error(result.error||`Could not save: HTTP ${response.status}`);
+    return validateTrip(result,this.cities);
+  }
   async list(){
     const rows=await getJSON('/api/trips');
     if (!Array.isArray(rows)) throw new Error('The backend must return a trip array.');
     return uniqueTrips(rows.map(row=>validateTrip(row,this.cities)));
+  }
+  async edit(id,patch){
+    const response=await fetch(`/api/trips/${encodeURIComponent(id)}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(patch),signal:AbortSignal.timeout(30000)});
+    const result=await response.json();
+    if(!response.ok)throw new Error(result.error||`Could not save changes: HTTP ${response.status}`);
+    return validateTrip(result,this.cities);
+  }
+  async remove(id,revision){
+    const response=await fetch(`/api/trips/${encodeURIComponent(id)}`,{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({expected_revision:revision}),signal:AbortSignal.timeout(30000)});
+    const result=await response.json();
+    if(!response.ok)throw new Error(result.error||`Could not delete: HTTP ${response.status}`);
+    if(result.id!==id||result.deleted!==true)throw new Error('The server did not confirm deletion. Refresh the album to check this trip.');
+    return result;
+  }
+  async replacePhotos(id,data){
+    const response=await fetch(`/api/trips/${encodeURIComponent(id)}/photos`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(30000)});
+    const result=await response.json();if(!response.ok)throw new Error(result.error||'Could not update photos.');return validateTrip(result,this.cities);
   }
 }
 

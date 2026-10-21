@@ -1,0 +1,180 @@
+{
+  "case": "T04",
+  "expected_status": "clarification",
+  "human_verdict": "pending",
+  "result": {
+    "status": "clarification",
+    "title": "",
+    "memory_text": "",
+    "warnings": [
+      "The provided image is a solid grey block and does not contain any visible travel details."
+    ],
+    "questions": [
+      "Please upload a clearer photo from your trip to Osaka or provide short factual notes about the completed trip so I can draft a memory."
+    ],
+    "provider": "Alibaba Cloud Bailian (course Group 21)",
+    "model": "qwen3.8-flash",
+    "prompt_version": "travel-memory-v3",
+    "expected_revision": 1,
+    "usage": {
+      "input_tokens": 837,
+      "input_tokens_details": {
+        "cached_tokens": 512
+      },
+      "output_tokens": 70,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 907,
+      "x_details": [
+        {
+          "input_tokens": 837,
+          "output_tokens": 70,
+          "total_tokens": 907,
+          "input_tokens_details": {
+            "text_tokens": 755,
+            "image_tokens": 82
+          },
+          "output_tokens_details": {},
+          "image_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    }
+  },
+  "status_matches": true,
+  "raw_response": {
+    "id": "resp_c0efbe44-17c2-4186-8756-cb253a3537cc",
+    "created_at": 1792486271,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "qwen3.8-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_e79532c9-1010-4111-a324-ced7b5e98600",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"status\": \"clarification\", \"title\": \"\", \"memory_text\": \"\", \"warnings\": [\"The provided image is a solid grey block and does not contain any visible travel details.\"], \"questions\": [\"Please upload a clearer photo from your trip to Osaka or provide short factual notes about the completed trip so I can draft a memory.\"]}",
+            "type": "output_text",
+            "logprobs": null
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "conversation": null,
+    "max_output_tokens": 1500,
+    "max_tool_calls": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "effort": "none",
+      "generate_summary": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "travel_memory",
+        "schema_": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "clarification"
+              ]
+            },
+            "title": {
+              "type": "string"
+            },
+            "memory_text": {
+              "type": "string"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "questions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "title",
+            "memory_text",
+            "warnings",
+            "questions"
+          ]
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": true
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": null,
+    "usage": {
+      "input_tokens": 837,
+      "input_tokens_details": {
+        "cached_tokens": 512
+      },
+      "output_tokens": 70,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 907,
+      "x_details": [
+        {
+          "input_tokens": 837,
+          "output_tokens": 70,
+          "total_tokens": 907,
+          "input_tokens_details": {
+            "text_tokens": 755,
+            "image_tokens": 82
+          },
+          "output_tokens_details": {},
+          "image_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    },
+    "user": null,
+    "completed_at": 1792486273,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "moderation": null,
+    "billing": null
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "checks": [
+    "Local credited example cover loads; viewer opens and Escape restores focus",
+    "Unsaved draft survives city switch and reload without increasing visit count",
+    "Successful save clears draft and persists one existing trip",
+    "Explicit discard removes draft without changing saved text",
+    "Valid 198-character title wraps without panel or document overflow",
+    "Mobile pin selection brings selected-city memories into view",
+    "Overlapping Pearl River Delta pins open an exact city chooser",
+    "API photo contract displays same-origin media and ignores external photo URLs (mocked backend)",
+    "Missing cover shows a fallback while memory text remains accessible"
+  ],
+  "errors": []
+}

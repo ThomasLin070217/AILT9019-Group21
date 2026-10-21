@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "checks": [
+    "Map / Album switching and reload preserve the current trip count and draft",
+    "No document overflow at 320\u20131440px in either view",
+    "Album mode retains search, empty state and separate repeat-visit cards"
+  ],
+  "errors": []
+}

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Real form submissions create four separate trips; counts 0→1→2→3→4 and tiers 0→1→2→2→3 match",
+    "Editing the existing title keeps four IDs, four cards and tier3",
+    "Saving reviewed memory through the real update API retains identity/count; live AI generation is covered by the separate recorded live check",
+    "Confirmed deletions produce counts 3→2→1→0 and tiers2→2→1→0",
+    "No uncaught browser errors; no user album or real AI request used"
+  ],
+  "real_backend": true,
+  "live_ai": false,
+  "fixture": "data/demo-covers/osaka-castle-2.jpg; public licensed photo, fictional test trips",
+  "video": "walkthrough.webm"
+}

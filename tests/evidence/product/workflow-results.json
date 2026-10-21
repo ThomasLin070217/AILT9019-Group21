@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "ai": "simulated provider contract tests; not live AI evaluation",
+  "checks": [
+    "Disclosure identifies provider, exact content and retention/cost before any cloud request",
+    "Current-trip-only sanitized request returns an unsaved draft; edited explicit save preserves visit identity and draft survives reload",
+    "Unclear/conflicting result asks for correction and cannot be saved as an invented memory",
+    "Malformed output, rate limits and missing configuration preserve the saved album and require manual retry",
+    "Saved card exports a real PNG locally without calling the AI provider",
+    "Inclusive date filter affects displayed cards only, validates ranges and leaves map counts unchanged",
+    "Replacing a photo set keeps the trip and memory, removes access to old photo copies and adds no visit",
+    "Backup download/preview/restore skips identical records, imports conflicts only as new copies and rejects corrupt archives",
+    "Mobile AI disclosure fits 390/320px and map feedback respects reduced-motion preference"
+  ],
+  "evidence": "Local workspace .context/final/product (Git-ignored)"
+}

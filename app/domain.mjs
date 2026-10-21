@@ -26,6 +26,11 @@ export function countVisits(trips) {
 export function cityTrips(trips, cityId) {
   return uniqueTrips(trips).filter(trip => trip.city_id === cityId).sort((a,b) => (b.trip_date || '').localeCompare(a.trip_date || '') || a.id.localeCompare(b.id));
 }
+export function filterTripDates(trips,{from='',to='',includeUndated=true}={}){
+  for(const value of [from,to])if(value&&(!/^\d{4}-\d{2}-\d{2}$/.test(value)||!Number.isFinite(Date.parse(value))||new Date(value).toISOString().slice(0,10)!==value))throw new Error('Choose a valid date.');
+  if(from&&to&&from>to)throw new Error('The start date must be on or before the end date.');
+  return trips.filter(trip=>trip.trip_date?(!from||trip.trip_date>=from)&&(!to||trip.trip_date<=to):includeUndated);
+}
 export function updateTrip(trips, id, patch, cities) {
   const current = trips.find(trip => trip.id === id);
   if (!current) throw new Error('Trip was not found.');

@@ -1,0 +1,916 @@
+{
+  "source_commit": "265253c9719efe92c57302365b2f6c44c988d336",
+  "working_tree_dirty": true,
+  "adapter_sha256": "0d4bb40ee1ad8f2e602c3da3c7c605795402a309cbad925f2a10feed4439a18c",
+  "created_at": "20261020T084958751804Z",
+  "status": "collected",
+  "provider": "Alibaba Cloud Bailian (course Group 21)",
+  "model": "qwen3.8-flash",
+  "prompt_version": "travel-memory-v2",
+  "manifest_sha256": "058f95dc2a80bb31bba6ecc4498f5e16337e49a742f47e0261ad25211649b241",
+  "human_review": "pending; two independent reviewers required",
+  "runs": [
+    {
+      "case": "T01",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "result": {
+        "status": "draft",
+        "title": "大阪城漫步",
+        "memory_text": "2026年5月16日，我在大阪城周围散步，拍了建筑照片。途中停下来休息。",
+        "warnings": [
+          "根据您提供的图片来看，树木大多呈现枯枝或秋色（如红叶），这与日期“5月16日”通常对应的春季/初夏绿意盎然的景象不符。请确认日期是否准确，或者这是否是不同季节拍摄的照片合集。"
+        ],
+        "questions": [],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v2",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 1580,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 126,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1706,
+          "x_details": [
+            {
+              "input_tokens": 1580,
+              "output_tokens": 126,
+              "total_tokens": 1706,
+              "input_tokens_details": {
+                "text_tokens": 244,
+                "image_tokens": 1336
+              },
+              "output_tokens_details": {},
+              "image_tokens": 1336,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_78e2403a-cfe0-4132-83ec-cf714f4ba2bf",
+        "created_at": 1792486199,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_555f3349-9110-4a6b-9a9a-cf767af44094",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\n  \"status\": \"draft\",\n  \"title\": \"大阪城漫步\",\n  \"memory_text\": \"2026年5月16日，我在大阪城周围散步，拍了建筑照片。途中停下来休息。\",\n  \"warnings\": [\n    \"根据您提供的图片来看，树木大多呈现枯枝或秋色（如红叶），这与日期“5月16日”通常对应的春季/初夏绿意盎然的景象不符。请确认日期是否准确，或者这是否是不同季节拍摄的照片合集。\"\n  ],\n  \"questions\": []\n}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1580,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 126,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1706,
+          "x_details": [
+            {
+              "input_tokens": 1580,
+              "output_tokens": 126,
+              "total_tokens": 1706,
+              "input_tokens_details": {
+                "text_tokens": 244,
+                "image_tokens": 1336
+              },
+              "output_tokens_details": {},
+              "image_tokens": 1336,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486202,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T02",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "result": {
+        "status": "clarification",
+        "title": "",
+        "memory_text": "",
+        "warnings": [
+          "Ensure you check the opening hours of Osaka Castle before your visit."
+        ],
+        "questions": [
+          "What specific aspects of Osaka Castle are you interested in exploring?",
+          "Are there any particular events or exhibits at the castle you'd like to attend?"
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v2",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 883,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 113,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 996,
+          "x_details": [
+            {
+              "input_tokens": 883,
+              "output_tokens": 113,
+              "total_tokens": 996,
+              "input_tokens_details": {
+                "text_tokens": 209,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": false,
+      "raw_response": {
+        "id": "resp_940abf39-464e-4cc8-8087-ed33ae56980b",
+        "created_at": 1792486203,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_feb90a01-d1df-41e0-916c-66028679d366",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"status\": \"clarification\", \"title\": \"Osaka Castle Visit\", \"memory_text\": \"The image shows Osaka Castle, a historic landmark in Japan, with its iconic white walls and green roofs reflected in the surrounding pond. The castle is surrounded by lush gardens and traditional Japanese landscaping.\", \"warnings\": [\"Ensure you check the opening hours of Osaka Castle before your visit.\"], \"questions\": [\"What specific aspects of Osaka Castle are you interested in exploring?\", \"Are there any particular events or exhibits at the castle you'd like to attend?\"] }",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 883,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 113,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 996,
+          "x_details": [
+            {
+              "input_tokens": 883,
+              "output_tokens": 113,
+              "total_tokens": 996,
+              "input_tokens_details": {
+                "text_tokens": 209,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486206,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T03",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "result": {
+        "status": "draft",
+        "title": "大阪城散步",
+        "memory_text": "在大阪漫步时，我拍下了一座宏伟的建筑——大阪城。这座城堡在蓝天的映衬下显得格外壮观，白色的墙壁和绿色的屋顶交织出一种古典的美感。周围树木的秋色也为画面增添了几分温暖与生机。这是一次令人难忘的散步体验，仿佛时间在这一刻静止，让我感受到历史与现代的完美融合。",
+        "warnings": [],
+        "questions": [
+          "您是否记得拍摄这张照片的具体日期？",
+          "除了拍照外，您在附近还进行了哪些活动或探索？"
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v2",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 879,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 142,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1021,
+          "x_details": [
+            {
+              "input_tokens": 879,
+              "output_tokens": 142,
+              "total_tokens": 1021,
+              "input_tokens_details": {
+                "text_tokens": 217,
+                "image_tokens": 662
+              },
+              "output_tokens_details": {},
+              "image_tokens": 662,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_190dd341-ad7c-45d4-b677-74e14fd0eec9",
+        "created_at": 1792486207,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_0d9c0616-c3d9-4a73-9b0a-0554acfa40b8",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\n  \"status\": \"draft\",\n  \"title\": \"大阪城散步\",\n  \"memory_text\": \"在大阪漫步时，我拍下了一座宏伟的建筑——大阪城。这座城堡在蓝天的映衬下显得格外壮观，白色的墙壁和绿色的屋顶交织出一种古典的美感。周围树木的秋色也为画面增添了几分温暖与生机。这是一次令人难忘的散步体验，仿佛时间在这一刻静止，让我感受到历史与现代的完美融合。\",\n  \"warnings\": [],\n  \"questions\": [\n    \"您是否记得拍摄这张照片的具体日期？\",\n    \"除了拍照外，您在附近还进行了哪些活动或探索？\"\n  ]\n}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 879,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 142,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1021,
+          "x_details": [
+            {
+              "input_tokens": 879,
+              "output_tokens": 142,
+              "total_tokens": 1021,
+              "input_tokens_details": {
+                "text_tokens": 217,
+                "image_tokens": 662
+              },
+              "output_tokens_details": {},
+              "image_tokens": 662,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486209,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T04",
+      "expected_status": "clarification",
+      "human_verdict": "pending",
+      "result": {
+        "status": "clarification",
+        "title": "",
+        "memory_text": "",
+        "warnings": [
+          "缺少明确的出行日期，可能影响行程安排的可行性。",
+          "未提供其他具体需求或偏好，例如住宿、景点兴趣等。"
+        ],
+        "questions": [
+          "您计划什么时候前往大阪？",
+          "您对大阪有哪些特别想参观的景点或体验的活动？",
+          "是否需要推荐住宿地点或餐饮选择？"
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v2",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 291,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 144,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 435,
+          "x_details": [
+            {
+              "input_tokens": 291,
+              "output_tokens": 144,
+              "total_tokens": 435,
+              "input_tokens_details": {
+                "text_tokens": 209,
+                "image_tokens": 82
+              },
+              "output_tokens_details": {},
+              "image_tokens": 82,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_b771e203-61ab-43b4-bec4-00b788eb1e7d",
+        "created_at": 1792486210,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_f78cb8b9-a2a3-4a1a-9931-bd008c382851",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\n  \"status\": \"clarification\",\n  \"title\": \"大阪旅行计划\",\n  \"memory_text\": \"用户正在规划一次前往大阪（日文：大阪）的旅行。目前尚未提供具体的出行日期或其他详细信息。\",\n  \"warnings\": [\n    \"缺少明确的出行日期，可能影响行程安排的可行性。\",\n    \"未提供其他具体需求或偏好，例如住宿、景点兴趣等。\"\n  ],\n  \"questions\": [\n    \"您计划什么时候前往大阪？\",\n    \"您对大阪有哪些特别想参观的景点或体验的活动？\",\n    \"是否需要推荐住宿地点或餐饮选择？\"\n  ]\n}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 291,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 144,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 435,
+          "x_details": [
+            {
+              "input_tokens": 291,
+              "output_tokens": 144,
+              "total_tokens": 435,
+              "input_tokens_details": {
+                "text_tokens": 209,
+                "image_tokens": 82
+              },
+              "output_tokens_details": {},
+              "image_tokens": 82,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486213,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T05",
+      "expected_status": "clarification",
+      "human_verdict": "pending",
+      "result": {
+        "status": "clarification",
+        "title": "",
+        "memory_text": "",
+        "warnings": [
+          "The description mentions snow-covered mountains, but the image clearly depicts Osaka Castle without any visible snow."
+        ],
+        "questions": [
+          "Could you clarify if there are additional photos that show snow-covered mountains?",
+          "Should we focus on describing only what is present in this specific photo?"
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v2",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 902,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 149,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1051,
+          "x_details": [
+            {
+              "input_tokens": 902,
+              "output_tokens": 149,
+              "total_tokens": 1051,
+              "input_tokens_details": {
+                "text_tokens": 228,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_2642610e-6be7-47d9-8a45-0c27eed21a43",
+        "created_at": 1792486214,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_ab48635a-4cbb-4a2a-8659-6f3d44466d22",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\n  \"status\": \"clarification\",\n  \"title\": \"Osaka Castle in Winter?\",\n  \"memory_text\": \"The photo shows Osaka Castle (大阪城) surrounded by a moat, with trees and shrubs in the foreground. The sky is clear, suggesting it might be winter or early spring due to the bare branches.\",\n  \"warnings\": [\n    \"The description mentions snow-covered mountains, but the image clearly depicts Osaka Castle without any visible snow.\"\n  ],\n  \"questions\": [\n    \"Could you clarify if there are additional photos that show snow-covered mountains?\",\n    \"Should we focus on describing only what is present in this specific photo?\"\n  ]\n}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "travel_memory",
+            "schema_": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "clarification"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "memory_text": {
+                  "type": "string"
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "title",
+                "memory_text",
+                "warnings",
+                "questions"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 902,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 149,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1051,
+          "x_details": [
+            {
+              "input_tokens": 902,
+              "output_tokens": 149,
+              "total_tokens": 1051,
+              "input_tokens_details": {
+                "text_tokens": 228,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486217,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    }
+  ]
+}
