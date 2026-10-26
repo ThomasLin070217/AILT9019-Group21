@@ -33,13 +33,13 @@ Open **http://127.0.0.1:8019/app/?mode=api**. Trips, edits and sanitised photos 
 
 Run `.venv/bin/python -m pytest` for the 54 backend and configuration tests, and `.venv/bin/python -m unittest discover -s tests -p 'test_*.py'` for the legacy config check.
 
-### Mid-term check: reproduce the working path
+### Mid-term check: reproduce the working backend path
 
-1. Run `python3 serve.py` and open **http://127.0.0.1:8019/app/?map=local** in a fresh browser profile. No API key or package installation is needed.
-2. Osaka starts with **2 fictional trips**. Expand **Try visit counting**, then choose **Add a sample visit**. The app saves a third independent trip in browser-local storage; Osaka now shows **3 visits** and a third card.
-3. Choose **Edit sample text** on the new card, type a short fictional memory, and save. The text changes but the visit count remains **3**. Reload the page: both the card and count remain. **Reset sample album** restores the starting data.
+1. Start `python3 -m backend` after installing `requirements-dev.txt`; open **http://127.0.0.1:8019/app/?mode=api&map=local**.
+2. Select Tokyo and save a fictional trip with a short note. The map lights up and a new trip card appears. Add `data/fixtures/T04/blur_sample.png` to that card; the backend validates and re-encodes the image before storing it with the trip in SQLite.
+3. Edit and save the card, then reload the page. The card, photo and text remain. Save a second Tokyo trip to check that the city shows two independent visits.
 
-This is a real running input → local processing → output path for the map and album prototype. It uses fictional test data. The backend now implements photo upload and SQLite persistence, but no cloud AI provider is configured: the proxy returns an explicit `503` until Qingyang’s adapter is added. The [20 October test record](tests/evidence/2026-10-20-midterm/RESULTS.md) covers the demo path only.
+This is the current input → local processing → output path. Use only the synthetic fixture and fictional text when recording the screen. AI writing is **not** part of this verified path: without a live provider adapter its route returns `503` and does not change the saved card. The [20 October test record](tests/evidence/2026-10-20-midterm/RESULTS.md) documents the older demo-only path; see the [26 October integration review](docs/INTEGRATION_REVIEW_2026-10-26.md) for the combined build.
 
 ## Team 21
 
@@ -93,4 +93,4 @@ var/          Git-ignored runtime database, uploads, and temp files
 
 ## Next integration step
 
-Angel and Thomas can switch the album controls to `?mode=api` and use the implemented upload, edit, delete and memory routes described in the [shared API contract](docs/API_CONTRACT.md). Qingyang implements the provider adapter behind `backend/ai/base.py`; the existing proxy already enforces the confirmation, current-trip-only payload and failure rules. Demo-only map controls stay prototype material.
+The album controls already work in `?mode=api`. The next step is a live provider adapter behind `backend/ai/base.py`, followed by real AI runs and independent human reviews. Before enabling uploads to that provider, decide whether the current trip's date and title are included alongside its city, notes and photos, and make the pre-send notice match the actual payload. Demo-only map controls remain prototype material.

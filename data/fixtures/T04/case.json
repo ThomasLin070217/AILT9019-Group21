@@ -4,7 +4,7 @@
   "status": "prepared_not_run",
   "kind": "low‑information visual test",
   "input": {
-    "city_id": "jp‑tokyo",
+    "city_id": "jp-tokyo",
     "city": "Tokyo",
     "photos": [
       "blur_sample.png"
@@ -26,7 +26,7 @@
     "licence": "CC0‑1.0",
     "permission": "Prepared for inclusion in team repository; no human subjects, no personal data.",
     "sha256": {
-      "blur_sample.png": "TO‑BE‑FILLED‑AFTER‑GENERATING‑IMAGE"
+      "blur_sample.png": "a556accb063974a67577dfc0360710bfd725352d1ddb1c93908c153dcb549829"
     }
   },
   "limitations": [

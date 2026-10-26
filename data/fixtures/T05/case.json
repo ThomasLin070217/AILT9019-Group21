@@ -4,7 +4,7 @@
   "status": "prepared_not_run",
   "kind": "photo‑note contradiction conflict test",
   "input": {
-    "city_id": "jp‑osaka",
+    "city_id": "jp-osaka",
     "city": "Osaka",
     "photos": [
       "sign_closed.png"
@@ -29,7 +29,7 @@
     "licence": "CC0‑1.0",
     "permission": "Prepared for inclusion in team repository; no human subjects, no personal data.",
     "sha256": {
-      "sign_closed.png": "TO‑BE‑FILLED‑AFTER‑GENERATING‑IMAGE"
+      "sign_closed.png": "37edffc772b133c7b140fc03c3b39f5d9ab017658dcd8200cb37b1a6ee7d072b"
     }
   },
   "limitations": [

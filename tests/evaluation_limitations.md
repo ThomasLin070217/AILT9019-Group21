@@ -4,7 +4,7 @@ Mid‑term date: 26 Oct 2026
 
 ## Project mid‑term status
 Front‑end map‑album prototype is functional with browser‑side fictional demo trips.
-Photo upload, SQLite persistence and Qwen3‑VL‑Plus AI generation integration: work‑in‑progress.
+Photo upload and SQLite persistence are implemented in Owen's integration branch and passed an isolated local API smoke check on the combined build. A fresh-machine and full browser check remain outstanding. A live AI provider adapter has not been integrated into this backend. The earlier Qwen3‑VL‑Plus label is provisional; report the actual model used with each future run.
 Fixture assets status：
 - T01：complete
 - T04, T05：added by Qingyang (data/fixtures/)
