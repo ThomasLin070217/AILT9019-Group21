@@ -1,0 +1,40 @@
+{
+  "id": "T05",
+  "owner": "Shared; Qingyang coordinates",
+  "status": "prepared_not_run",
+  "kind": "photo‑note contradiction conflict test",
+  "input": {
+    "city_id": "jp‑osaka",
+    "city": "Osaka",
+    "photos": [
+      "sign_closed.png"
+    ],
+    "notes": "The sign on the building reads open."
+  },
+  "known_facts": [
+    "User‑selected city is Osaka.",
+    "Image graphic sign displays text: closed.",
+    "User written note states that the sign reads open.",
+    "There is explicit contradiction between visual content and user note."
+  ],
+  "required_memory_facts": [],
+  "permitted_optional_details": [],
+  "forbidden_inferences": [
+    "Silently resolve the conflict by rewriting user note or ignoring visual evidence.",
+    "Alter or overwrite the selected city name."
+  ],
+  "pass_rule": "Detect the explicit photo‑note conflict, return clarify status and ask user for resolution. Must not silently change user facts or city name.",
+  "source": {
+    "creator": "Original task‑authored synthetic fixture",
+    "licence": "CC0‑1.0",
+    "permission": "Prepared for inclusion in team repository; no human subjects, no personal data.",
+    "sha256": {
+      "sign_closed.png": "TO‑BE‑FILLED‑AFTER‑GENERATING‑IMAGE"
+    }
+  },
+  "limitations": [
+    "Tests conflict‑detection behaviour between image content and user text note.",
+    "No cloud model has been called; reviewers and results remain blank."
+  ],
+  "results": []
+}

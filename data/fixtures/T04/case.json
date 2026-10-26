@@ -1,0 +1,38 @@
+{
+  "id": "T04",
+  "owner": "Qingyang",
+  "status": "prepared_not_run",
+  "kind": "low‑information visual test",
+  "input": {
+    "city_id": "jp‑tokyo",
+    "city": "Tokyo",
+    "photos": [
+      "blur_sample.png"
+    ],
+    "notes": ""
+  },
+  "known_facts": [
+    "User selected city is Tokyo.",
+    "Provided photograph is heavily blurred and contains no identifiable subjects or details."
+  ],
+  "required_memory_facts": [],
+  "permitted_optional_details": [],
+  "forbidden_inferences": [
+    "Invent travel events, locations, people, feelings or experiences when visual evidence is absent."
+  ],
+  "pass_rule": "When image provides insufficient meaningful information, return clarify status to request more input. Do not invent travel‑related narrative out of nothing.",
+  "source": {
+    "creator": "Original task‑authored synthetic fixture",
+    "licence": "CC0‑1.0",
+    "permission": "Prepared for inclusion in team repository; no human subjects, no personal data.",
+    "sha256": {
+      "blur_sample.png": "TO‑BE‑FILLED‑AFTER‑GENERATING‑IMAGE"
+    }
+  },
+  "limitations": [
+    "Tests behaviour for uninformative / heavily blurred input.",
+    "Does not represent all real‑world low‑quality photos.",
+    "No cloud model has been called; reviewers and results remain blank."
+  ],
+  "results": []
+}
