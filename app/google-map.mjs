@@ -1,5 +1,5 @@
 /** Optional Maps JavaScript API adapter. No city search, routing, or photo upload. */
-export async function createGoogleMap({container,config,onSelect,onNearby,onFailure,onZoom}) {
+export async function createGoogleMap({container,config,regionData,onSelect,onNearby,onFailure,onZoom}) {
   let failed=false, disposed=false, rejectLoad;
   const fail=()=>{if(!failed&&!disposed){failed=true;rejectLoad?.(new Error('Google Maps unavailable'));onFailure();}};
   // Google may reject authentication after the SDK callback has already run.
@@ -16,6 +16,14 @@ export async function createGoogleMap({container,config,onSelect,onNearby,onFail
   const [{Map:GoogleMap},{AdvancedMarkerElement}]=await Promise.all([google.maps.importLibrary('maps'),google.maps.importLibrary('marker')]);
   if(failed)throw new Error('Google Maps unavailable');
   const map=new GoogleMap(container,{center:{lat:33,lng:123},zoom:4,mapId:config.mapId||'DEMO_MAP_ID',renderingType:google.maps.RenderingType.RASTER,disableDefaultUI:true,clickableIcons:false,gestureHandling:'cooperative',minZoom:3,maxZoom:18,streetViewControl:false,tilt:0});
+  const areaLayer=new google.maps.Data({map});areaLayer.addGeoJson(regionData);
+  const areaColours={1:'#71946a',2:'#cb754d',3:'#eca33f'};
+  let areaCounts=new Map(),visibleAreas=new Set(),selectedArea=null;
+  const areaStyle=feature=>{
+    const id=feature.getProperty('city_id'),count=areaCounts.get(id)||0,tier=count===0?0:count===1?1:count<4?2:3,selected=id===selectedArea;
+    return {visible:visibleAreas.has(id),clickable:false,fillColor:areaColours[tier]||'#ad4a29',fillOpacity:tier?[.0,.58,.67,.76][tier]:selected?.08:0,strokeColor:selected?'#943c1d':areaColours[tier]||'#7d9794',strokeOpacity:selected?1:tier?.83:.65,strokeWeight:selected?2.4:tier?1.3:1.1,zIndex:selected?2:1};
+  };
+  areaLayer.setStyle(areaStyle);
   const markers=new globalThis.Map();let current=[],selectedId=null,hasFitted=false;
   const notifyZoom=()=>onZoom(map.getZoom()||4);
   map.addListener('zoom_changed',notifyZoom);
@@ -31,6 +39,10 @@ export async function createGoogleMap({container,config,onSelect,onNearby,onFail
   });
   const adapter={
     ready,
+    updateRegions(items,counts,selected){
+      if(failed||disposed)return;
+      areaCounts=counts;visibleAreas=new Set(items.map(item=>item.id));selectedArea=selected;areaLayer.setStyle(areaStyle);
+    },
     update(items,selected){
       if(failed||disposed)return;
       current=items;selectedId=selected;
@@ -69,11 +81,19 @@ export async function createGoogleMap({container,config,onSelect,onNearby,onFail
       if(!hasFitted&&items.length){hasFitted=true;fit();}
     },
     select(id){const item=current.find(c=>c.id===id);if(item&&!map.getBounds()?.contains({lat:item.latitude,lng:item.longitude}))map.panTo({lat:item.latitude,lng:item.longitude});},
+    focusRegion(id){
+      const feature=regionData.features.find(row=>row.properties.city_id===id);if(!feature)return;
+      const bounds=new google.maps.LatLngBounds();
+      const polygons=feature.geometry.type==='Polygon'?[feature.geometry.coordinates]:feature.geometry.coordinates;
+      for(const polygon of polygons)for(const [lng,lat] of polygon[0])bounds.extend({lat,lng});
+      map.fitBounds(bounds,90);
+      google.maps.event.addListenerOnce(map,'idle',()=>{if(map.getZoom()>12)map.setZoom(12);});
+    },
     focus(id){markers.get(id)?.marker.focus();},
     zoom(delta){map.setZoom(Math.max(3,Math.min(18,(map.getZoom()||4)+delta)));},
     fit,
     refresh(){google.maps.event.trigger(map,'resize');notifyZoom();adapter.select(selectedId);},
-    destroy(){disposed=true;for(const {marker} of markers.values())marker.map=null;google.maps.event.clearInstanceListeners(map);container.replaceChildren();}
+    destroy(){disposed=true;for(const {marker} of markers.values())marker.map=null;areaLayer.setMap(null);google.maps.event.clearInstanceListeners(map);container.replaceChildren();}
   };
   notifyZoom();return adapter;
 }

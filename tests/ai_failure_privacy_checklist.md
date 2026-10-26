@@ -1,7 +1,7 @@
 # AI Failure & Privacy Risk Checklist
 Owner: Qingyang
-Test Cases: T01, T02, T05, Safety S01, S02
-> Midterm note：Fixture assets are ready. AI backend runtime results [PENDING‑TEAM‑AI‑RUN]. Raw AI outputs will be filled after team runs the model.
+Test Cases: T01, T02, T03, T04, T05, Safety S01, S02
+> Update 26 Oct: T01, T03, T04 and T05 fixtures are prepared; T02 is still pending. Angel added T03. The combined backend has a Responses adapter with simulated HTTP tests, but AI runtime results on these fixtures remain [PENDING‑TEAM‑AI‑RUN].
 
 ## Functional Test Cases
 ### T01 Clear photos + full notes
@@ -67,6 +67,6 @@ Observation: [PENDING‑TEAM‑AI‑RUN]
 
 ---
 Mid‑term checkpoint 26 Oct 2026
-> Fixture status: T01 ready; T04,T05 added by Qingyang; T02 pending Owen; T03 pending Angel.
+> Fixture status: T01 ready; T03 added by Angel; T04,T05 added by Qingyang; T02 pending Owen.
 > All test definitions follow tests/EVALUATION_PLAN.md.
-> Actual AI execution blocked by missing local DASHSCOPE_API_KEY; waiting for team shared runtime environment.
+> The Responses adapter is now integrated. Actual AI execution on the combined build still requires provider configuration, permission/privacy checks, raw-output capture and independent review.

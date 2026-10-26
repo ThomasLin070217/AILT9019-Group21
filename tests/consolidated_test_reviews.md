@@ -23,20 +23,20 @@ Issue categories：
 | High | AI test outputs not yet generated; fixtures prepared waiting for backend‑AI handoff | Qingyang |
 
 ### 2. UI & interaction defects (map demo)
-| Medium | Demo trips stored in browser memory, lost on hard refresh (expected demo limitation) | Thomas |
+| To verify | Demo trips use browser `localStorage`; any reported loss on hard refresh needs a reproducible case and browser/storage details | Thomas |
 
 ###3. Deployment & installation problems
 | Low | Offline local map works out‑of‑box; Google Maps requires separate .env.maps.local key file | Owen |
 
 ###4. Privacy & security risks
-| High | AI request payload inspection cannot be performed without live AI calls | Qingyang, Owen |
+| High | Backend tests inspect the selected-trip payload with a fake provider; the actual outbound cloud request remains unverified until the live adapter is integrated | Qingyang, Owen |
 
 ###5. Minor enhancement / wishlist
 | Low | Add better keyboard navigation hints for map panel | Angel |
 
 ## Summary & action recommendations
 1. High‑priority items must be addressed before final submission.
-2. Medium items resolve in next two‑week sprint.
+2. Reproduce and classify unverified UI observations before assigning a severity.
 3. Low‑priority polish items may be deferred for v1 scope control.
 
 ### Mid‑term scope decision

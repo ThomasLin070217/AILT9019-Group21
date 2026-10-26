@@ -1,0 +1,8 @@
+# Local backend runtime. Python 3.10+.
+# Install: python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+# Tests: also install requirements-dev.txt.
+fastapi==0.158.1
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32
+pillow==13.0.0
+httpx==0.28.1

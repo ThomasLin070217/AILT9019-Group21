@@ -1,0 +1,47 @@
+{
+  "id": "T03",
+  "owner": "Angel",
+  "status": "prepared_not_run",
+  "kind": "real_photo_with_brief_fictional_notes",
+  "input": {
+    "city_id": "cn-hangzhou",
+    "city": "Hangzhou",
+    "photos": [
+      "hangzhou-01.jpg"
+    ],
+    "notes": "Fictional test record: I spent an afternoon in Hangzhou and took this photo."
+  },
+  "known_facts": [
+    "The user-specified city is Hangzhou.",
+    "The user says the visit lasted one afternoon.",
+    "The user took the supplied photograph.",
+    "The image shows a lake or pond, green trees, lotus leaves and distant hills.",
+    "The image may be described only for details that are visibly supported."
+  ],
+  "required_memory_facts": [
+    "Hangzhou",
+    "an afternoon visit"
+  ],
+  "permitted_optional_details": [
+    "A lake or pond, green trees, lotus leaves, distant hills, sky or reflections, if described accurately."
+  ],
+  "forbidden_inferences": [
+    "Any companion, relationship, meal, specific landmark, transport method, weather, emotion or date not supplied in the notes or visibly certain in the photograph.",
+    "Claims that a visible place proves the city without a reliable, visible identifying feature.",
+    "Personal information, precise location, or metadata that is not present in the sanitised input."
+  ],
+  "pass_rule": "An editable title and short memory preserve Hangzhou and the afternoon visit, add no unsupported experiences, and request clarification rather than guess when the photograph cannot safely support a meaningful detail.",
+  "source": {
+    "creator": "Angel's original Hangzhou travel photograph",
+    "licence": "Permission granted by the creator for limited private course-repository evaluation use only.",
+    "permission": "Creator supplied the image for limited private course-repository evaluation use. The checked fixture has no recognisable people, documents or addresses.",
+    "sha256": {
+      "hangzhou-01.jpg": "1967872e3578b42187a038a2770f4163dc7a75e5297a8ce530e2d9947cb6099d"
+    }
+  },
+  "limitations": [
+    "The notes are fictional to avoid making a test claim about Angel's real trip.",
+    "No cloud model has been called; raw output, reviewer verdicts and results remain blank."
+  ],
+  "results": []
+}

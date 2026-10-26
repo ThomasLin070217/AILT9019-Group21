@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "checks": [
+    "Create a trip from the API composer",
+    "Upload a photo from the card",
+    "Edit the memory text and save",
+    "Unconfigured AI fails visibly without changing the trip",
+    "Delete the trip and its photos",
+    "No horizontal overflow at 390px"
+  ],
+  "errors": []
+}
