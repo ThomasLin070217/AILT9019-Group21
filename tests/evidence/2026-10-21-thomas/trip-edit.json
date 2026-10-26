@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checks": [
+    "Title, date and notes are prefilled; drafts survive city/view switches and tab reload",
+    "A failed edit keeps the draft and leaves the saved trip unchanged",
+    "Saving updates text/date and card order without changing ID, photo bytes or two-visit count",
+    "Retrying the completed edit is idempotent",
+    "Confirmed cancel discards only the draft",
+    "Stale-tab conflict preserves both the newer saved record and the local draft until explicit reload",
+    "390px and 320px editing fits the screen and saves on mobile without adding visits",
+    "Edited data and original photos survive a server restart; no JavaScript errors"
+  ]
+}

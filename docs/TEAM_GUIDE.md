@@ -4,7 +4,7 @@
 
 Our private repository is ready: [AILT9019-Group21](https://github.com/ThomasLin070217/AILT9019-Group21). The `main` branch contains the project structure, course plan, proposal worksheet, testing template, AI-use log, Friday standup log, milestones, labels, and pull-request template.
 
-The topic is **Travel Memory Map**. Thomas reports that the proposal has been submitted. See the [proposal baseline](../proposal/Travel_Memory_Map_Proposal.docx) and [work allocation](WORK_ALLOCATION.md). Thomas’s [map module](THOMAS_HANDOFF.md) is runnable with labelled fictional data and map test evidence. Actual photo uploads, SQLite and cloud AI remain unintegrated; there are no AI evaluation results.
+The topic is **Travel Memory Map**. Thomas reports that the proposal has been submitted. See the [proposal baseline](../proposal/Travel_Memory_Map_Proposal.docx) and [work allocation](WORK_ALLOCATION.md). The local album, SQLite/photo storage and real course Bailian AI integration are implemented. Five fixed cases have real raw outputs; independent human reviews, teammate-device reproduction and delivery materials remain to be completed. Follow the [21 October per-person TODOs](TEAM_TODOS_2026-10-21.md) and [current acceptance record](PRODUCT_ACCEPTANCE.md). The runnable review branch is published in [draft PR #3](https://github.com/ThomasLin070217/AILT9019-Group21/pull/3); use [team release instructions](TEAM_RELEASE.md) to fetch the correct version. It is not merged into main.
 
 The flow is city selection → photos and optional notes → saved card and lit city, followed by optional user-triggered AI writing. Repeat trips get separate cards, and saved-trip counts determine brightness. The first version is local with a cloud AI API and preset cities in mainland China, Hong Kong, Macau, Taiwan and Japan.
 
@@ -16,9 +16,9 @@ The latest course overview says the proposal draft is due on **30 September 2026
 
 1. Accept your invitation if needed and clone the repository.
 2. Read the proposal and `docs/WORK_ALLOCATION.md`.
-3. Check your module, first deliverable and reviewer; raise availability conflicts before 2 October.
-4. Agree shared interfaces before integration and use matching sample inputs.
-5. Prepare your evaluation case and record AI assistance and actual checks.
+3. Check the current TODOs, first deliverable and reviewer; raise availability conflicts immediately.
+4. Work from the same shared commit, reproduce the integrated workflow, and record concrete failures.
+5. Complete assigned independent case reviews and record AI assistance and actual checks.
 
 ## How to work in the repository
 

@@ -1,89 +1,35 @@
-# Map integration contract
+# Local album API contract
 
-Version 0.2, 1 October 2026. Implemented by Thomas for the map prototype; **proposed for review by Owen, Angel and Qingyang**, not a claim of joint approval or a finished backend. The static preview does not implement `/api` routes.
+Version 1.0 — 20 October 2026. Implemented in `serve.py`, `album_store.py`, `album_backup.py` and `ai_memory.py`. Host/origin must match loopback server. JSON failures use `{error:message}`. No key is returned to the browser. Assets are limited to app/data; private album files have dedicated authenticated-by-local-origin media routes.
 
-## Running modes
+## Routes
 
-- `/app/`: explicit fictional demo. `DemoRepository` in `app/repository.mjs` uses a separate browser-local key `travel-memory-map.demo.v1`. It is replaceable and is not the proposed SQLite backend.
-- `/app/?mode=api`: reads `GET /api/cities` and `GET /api/trips` from the same origin. Errors remain errors; no demo fallback. Demo write controls are absent. Owen's local Python server can serve the existing static files plus these routes.
-- No cloud calls, map tile calls, account login, analytics or upload endpoint in this module. Two credited example covers are bundled locally for demo mode. Refresh the API view after another component saves a record.
+| Route | Request / response |
+| --- | --- |
+| `GET /api/cities` | Array from `data/cities.json`, 19 stable IDs |
+| `GET /api/trips` | All active saved snapshots, no demo fallback |
+| `POST /api/trips` | JSON `{request_id,city_id,trip_date,title,notes,photos:[{data:base64}]}` → 201 saved snapshot |
+| `PATCH /api/trips/{id}` | JSON `{expected_revision,title?,trip_date?,notes?,memory_text?}` → updated snapshot; at least one edited field |
+| `DELETE /api/trips/{id}` | JSON `{expected_revision}` → `{id,deleted:true,cleanup_pending}` |
+| `POST /api/trips/{id}/photos` | JSON `{expected_revision,request_id,photos:[{data:base64}]}` → same trip with replacement photos |
+| `GET /media/{trip_id}/{photo_id}.jpg` | Active referenced local JPEG only; removed references return 404 |
+| `GET /api/backup` | Download ZIP: album.json plus referenced JPEGs and SHA-256 hashes |
+| `POST /api/backups/preview` | `application/zip` → `{total,new,unchanged,conflicts,conflict_titles}` |
+| `POST /api/backups/restore` | `application/zip` → merge new records; conflicts return 409 |
+| `POST /api/backups/restore?copies=1` | Explicitly import conflicting records as new IDs, skip identical records |
+| `GET /api/ai-config` | `{configured,provider,endpoint,model,prompt_version,privacy_url}`; no key |
+| `POST /api/trips/{id}/generate` | JSON `{expected_revision,consent:true}` → unsaved AI result |
 
-## City records
+Trip snapshot fields: `id`, `city_id`, nullable ISO `trip_date`, `title`, `notes`, `memory_text`, `photos:[{id,url,alt}]`, `source:'user'`, integer `revision`. Photo-update idempotency metadata may also be present. Each distinct active trip ID is one visit. Editing, generating and replacing photos retain that identity. Empty titles default to `A visit to <city>`.
 
-`GET /api/cities` returns a JSON array matching `data/cities.json`:
+Photo limits: 1–5 still JPEG/PNG/WebP, 5 MB each/20 MB total/25 MP, 28 MB JSON upload. Saved copies are oriented JPEGs at most 4096 px; EXIF/GPS stripped. Text limits: title 200; notes/memory 5,000. PATCH/DELETE bodies max64 KB. Generation body max16 KB; provider timeout60s. Backups max100 MB ZIP/200 MB expanded/500 trips; reject unexpected paths, duplicates, invalid files and hash mismatches.
 
-```json
-[{"id":"jp-osaka","name":"Osaka","local_name":"大阪","region":"Japan","longitude":135.503754,"latitude":34.691095,"source_ne_id":1159151537}]
-```
+New trip revision starts at1; legacy missing revision is0. Changed edits increment revision atomically. Stale edits return409 and preserve drafts. Immediate identical create/edit/photo retries are idempotent. Delete keeps minimal request/identity tombstones to prevent create replay resurrecting removed trips; content is cleared. Physical cleanup follows commit; reads retry cleanup and media access is denied regardless. Restore never overwrites existing records and rolls back newly added files on failure.
 
-IDs are stable integration keys, not display names. `region` is a UI filter group. Return unique IDs and numeric coordinates. The initial catalogue has 19 cities; source coordinates and licence are recorded in `data/SOURCES.json`. Owen should seed from this catalogue rather than invent another spelling/ID set. Changing the supported geography requires reviewing the initial map extent.
+AI result: `{status:'draft'|'clarification',title,memory_text,warnings:[],questions:[],provider,model,prompt_version,expected_revision,usage}`. A clarification has empty title/memory. Save reviewed drafts through PATCH using the returned revision. Generate never writes trip data, checks revisions before and after the external request, sends only selected city/date/notes/current sanitized photos, uses `store:false`, strict JSON-schema output for OpenAI, or explicit task text plus JSON-object output and local schema validation for the course Bailian gateway, and never automatically retries. Provider errors are sanitized. 400 validation, 403 origin/host, 404 missing trip/media, 409 conflict, 415 content type (upload limits may use413), 429 rate/credit, 503 missing configuration/access, 504 timeout, 500/502 storage/provider failure.
 
-## Trip snapshots
+## Frontend integration
 
-`GET /api/trips` returns all **saved** trip snapshots, not draft or per-photo rows:
+`travel-map:city-selected` has `detail.city_id`; dispatch `travel-map:trips-changed` after a successful external component save to reload snapshots. Counts deduplicate IDs and derive from all saved records. `filterTripDates` only filters displayed cards; never map counts. Brightness: 0 unvisited;1 tier1;2–3 tier2;4+ tier3. User/model text renders through textContent. Demo drafts/records use separate browser keys and never enter real backups or AI requests.
 
-```json
-[{
-  "id":"trip-stable-id",
-  "city_id":"jp-osaka",
-  "trip_date":"2026-05-16",
-  "title":"A rainy weekend",
-  "notes":"My own notes",
-  "memory_text":"Text reviewed and saved by the user",
-  "photos":[],
-  "source":"user"
-}]
-```
-
-- `id`: non-empty stable string. One distinct ID is one visit. Changing a note, photos or AI text must retain this ID and city ID.
-- `city_id`: an existing catalogue ID.
-- `trip_date`: real ISO calendar date `YYYY-MM-DD`, or `null`; sorted newest first, unknown dates last.
-- `title`: text, up to 200 characters. `notes` and `memory_text`: text, up to 5,000 characters each; empty strings allowed. The map uses `textContent`, never HTML from user/model text.
-- `photos`: array. Optional preview objects may contain `{"id":"photo-id","url":"/media/photo-id.jpg","alt":"User-provided description"}`. The first object with a same-origin `/media/` URL supplies the cover; legacy ID-only objects remain valid and render as text-only cards. URLs outside this path are ignored. Failed image loads leave the memory text visible. This optional shape is proposed for Owen/Angel review; photo upload, cover choice and multi-photo gallery remain integration work. The static server does not implement `/media/`; browser checks mock it.
-- `source`: provenance such as `demo` or `user`; not used to infer a visit.
-
-Duplicate snapshots with the same ID are counted once, with the final array occurrence winning. The backend should return exactly one current snapshot per ID. The UI never uses the number of photos or generation calls as a visit count.
-
-## Visit calculation
-
-`countVisits()` deduplicates trip IDs then groups by city. `visitTier()` maps 0 to unvisited, 1 to tier 1, 2–3 to tier 2 and 4+ to tier 3. Text always displays the exact count. Removing the last trip returns a city to unvisited. Counts are derived from saved records instead of maintaining a separate counter that can drift.
-
-## Component events
-
-After a city is selected, the map dispatches:
-
-```js
-window.addEventListener('travel-map:city-selected', event => {
-  const cityId = event.detail.city_id;
-  // Angel can open the corresponding trip form/list.
-});
-```
-
-After the backend confirms a trip create/update/delete, an integrated component can request a fresh snapshot:
-
-```js
-window.dispatchEvent(new Event('travel-map:trips-changed'));
-```
-
-The map re-reads the active repository. This event must follow a successful save, not an unsaved edit. API refresh failure is visible and does not fabricate success.
-
-## Proposed writes for the backend team
-
-Owen and Angel should review route names before implementing them: `POST /api/trips` creates an independent trip ID, `PATCH /api/trips/{id}` edits an existing card, and `DELETE /api/trips/{id}` removes that visit. Editing AI text must use update, never create. Photo upload and AI generation request/response limits remain Owen/Angel/Qingyang's review items.
-
-Qingyang's draft result should distinguish a draft from a request for clarification. The map has **not** implemented or validated that AI endpoint. Keep API keys in the backend; send only the selected trip after the agreed notice. Do not expose them in these read responses.
-
-## Failure contract and review checklist
-
-Return non-2xx for failures and do not return success with missing/corrupt trip arrays. Frontend requests time out after 10 seconds. Invalid city IDs/dates/text shape fail visibly. Demo writes also report quota/access errors instead of pretending to persist.
-
-- Owen: approve catalogue IDs, read-array shapes, persistence semantics and local hosting.
-- Angel: confirm selection event, replace sample card UI with the real album component, and trigger refresh after successful writes.
-- Qingyang: agree generation and clarification semantics with Owen/Angel; map counts must not depend on generation outcomes.
-- Thomas: integrate actual modules once available and repeat the browser checks against the real backend. Mocked HTTP tests do not complete that handoff.
-
-## Draft and cover behaviour
-
-Demo text drafts use a separate per-tab session-storage key (`travel-memory-map.demo-drafts.v1`), survive city changes/reloads, and never count as saved trips. Saving clears that draft only after the repository reports success. Explicit discard/reset/delete clears the corresponding drafts. If draft persistence fails, in-memory edits remain and the user is told to keep the tab open. These controls are not enabled in API mode.
-
-Clicking a cover opens the native image dialog; Escape/Close restores focus. Demo covers always retain their separate photographer/example label and are never used as backend fallbacks or AI inputs.
+Current course configuration: Bailian Token Plan, qwen3.8-flash, prompt travel-memory-v4. Its Responses route uses explicit system/user task delivery and reasoning.effort=none. Separate provider instructions/schema handling were unreliable in observed earlier calls; failed attempts are preserved. Real requests remain current-trip-only, with no automatic provider fallback or retry.

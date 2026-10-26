@@ -1,4 +1,10 @@
-# Thomas map module handoff
+# Travel Memory Map handoff
+
+Current status — 20 October 2026: use [README](../README.md), [implemented API](API_CONTRACT.md) and [acceptance record](PRODUCT_ACCEPTANCE.md). All local album features and OpenAI integration are implemented. Real Bailian qwen3.8-flash generation and five-case runs are recorded; two independent human factual reviews remain pending. Historical notes below preserve earlier milestones and pending items as they were then; they are superseded by current documents.
+
+## Full browser regression
+
+Install Playwright with the instructions below, then start the preview on port8020. Set PLAYWRIGHT_MODULE to the absolute Playwright index.mjs path and optionally CHROMIUM_EXECUTABLE to an installed Chrome. Run each tests/{browser,album,views,trip-create,trip-edit,trip-delete,product}.e2e.mjs with Node. The product suite starts an isolated simulated Responses provider and temporary album; no real OpenAI calls or charges. The trip suites create isolated storage; the map suites use BASE_URL (default8019). Set BASE_URL=http://127.0.0.1:8020 and EVIDENCE_DIR to a separate directory per suite. Browser scripts clean up their temporary albums and servers.
 
 ## Delivered on 30 September 2026
 
@@ -19,7 +25,7 @@ python3 serve.py
 # Open http://127.0.0.1:8019/app/
 ```
 
-Requires Python 3.10+; no Python packages, npm install, model key or external map service are needed for the app preview. The server binds only to 127.0.0.1 and serves `app/` and `data/`, not the entire repository. Do not use this development server on a public network.
+Requires Python 3.10+ and pinned Pillow: install requirements.txt in a virtual environment before starting. No model key or external map service is required for the local album. The server binds only to 127.0.0.1 and serves `app/` and `data/`, not the entire repository. Do not use this development server on a public network.
 
 ```bash
 npm test

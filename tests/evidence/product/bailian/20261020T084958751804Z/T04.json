@@ -1,0 +1,183 @@
+{
+  "case": "T04",
+  "expected_status": "clarification",
+  "human_verdict": "pending",
+  "result": {
+    "status": "clarification",
+    "title": "",
+    "memory_text": "",
+    "warnings": [
+      "缺少明确的出行日期，可能影响行程安排的可行性。",
+      "未提供其他具体需求或偏好，例如住宿、景点兴趣等。"
+    ],
+    "questions": [
+      "您计划什么时候前往大阪？",
+      "您对大阪有哪些特别想参观的景点或体验的活动？",
+      "是否需要推荐住宿地点或餐饮选择？"
+    ],
+    "provider": "Alibaba Cloud Bailian (course Group 21)",
+    "model": "qwen3.8-flash",
+    "prompt_version": "travel-memory-v2",
+    "expected_revision": 1,
+    "usage": {
+      "input_tokens": 291,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 144,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 435,
+      "x_details": [
+        {
+          "input_tokens": 291,
+          "output_tokens": 144,
+          "total_tokens": 435,
+          "input_tokens_details": {
+            "text_tokens": 209,
+            "image_tokens": 82
+          },
+          "output_tokens_details": {},
+          "image_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    }
+  },
+  "status_matches": true,
+  "raw_response": {
+    "id": "resp_b771e203-61ab-43b4-bec4-00b788eb1e7d",
+    "created_at": 1792486210,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "qwen3.8-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_f78cb8b9-a2a3-4a1a-9931-bd008c382851",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\n  \"status\": \"clarification\",\n  \"title\": \"大阪旅行计划\",\n  \"memory_text\": \"用户正在规划一次前往大阪（日文：大阪）的旅行。目前尚未提供具体的出行日期或其他详细信息。\",\n  \"warnings\": [\n    \"缺少明确的出行日期，可能影响行程安排的可行性。\",\n    \"未提供其他具体需求或偏好，例如住宿、景点兴趣等。\"\n  ],\n  \"questions\": [\n    \"您计划什么时候前往大阪？\",\n    \"您对大阪有哪些特别想参观的景点或体验的活动？\",\n    \"是否需要推荐住宿地点或餐饮选择？\"\n  ]\n}",
+            "type": "output_text",
+            "logprobs": null
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "conversation": null,
+    "max_output_tokens": 1500,
+    "max_tool_calls": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "effort": "none",
+      "generate_summary": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "travel_memory",
+        "schema_": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "clarification"
+              ]
+            },
+            "title": {
+              "type": "string"
+            },
+            "memory_text": {
+              "type": "string"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "questions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "title",
+            "memory_text",
+            "warnings",
+            "questions"
+          ]
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": true
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": null,
+    "usage": {
+      "input_tokens": 291,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 144,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 435,
+      "x_details": [
+        {
+          "input_tokens": 291,
+          "output_tokens": 144,
+          "total_tokens": 435,
+          "input_tokens_details": {
+            "text_tokens": 209,
+            "image_tokens": 82
+          },
+          "output_tokens_details": {},
+          "image_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    },
+    "user": null,
+    "completed_at": 1792486213,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "moderation": null,
+    "billing": null
+  }
+}

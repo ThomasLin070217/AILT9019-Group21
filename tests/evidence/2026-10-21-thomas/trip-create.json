@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Real local album starts empty and never imports demo records",
+    "Missing and corrupt photos are rejected before saving",
+    "Failed save keeps title, date, notes and both photo selections",
+    "Real two-photo upload creates a card, safe notes, working photo viewer and one map visit",
+    "Retrying the completed save does not duplicate the visit",
+    "Server restart reloads the same SQLite trip and photo files",
+    "A second independent trip produces two cards and the 2\u20133 visit map tier",
+    "390px mobile form fits and confirmed cancellation creates no trip",
+    "320px layout has no horizontal overflow"
+  ]
+}

@@ -1,6 +1,8 @@
 # Travel Memory Map evaluation plan
 
-Status on 30 September 2026: the five AI cases remain unrun; Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). T01 has an initial synthetic fixture at `data/fixtures/T01/`, with realistic-photo evaluation still pending. Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
+Updated 20 October 2026: all five cases are frozen in [cases.json](../data/evaluation/cases.json), with licensed public photos, fictional non-personal notes, one deterministic grey fixture, image hashes, required facts and forbidden inferences. Historical synthetic T01 remains a smoke fixture only. Real Bailian qwen3.8-flash evaluation has now run. The final travel-memory-v4 run returned the expected draft/clarification type for all five cases; two human factual-quality reviews remain pending. All failed earlier attempts are preserved with the final run in evidence/product/bailian/. Type matching is not a factual-quality acceptance verdict.
+
+Run `python3 scripts/evaluate_ai.py` to validate hashes. After configuring the chosen provider, `python3 scripts/evaluate_ai.py --live` sends these five fixtures and saves raw responses/errors/usage/model/prompt provenance plus a blank two-reviewer CSV under `.context/ai-evaluation/<timestamp>/`. Each run has its own directory; prior outcomes are preserved. Status matching is only a mechanical check, never a factual accuracy pass. Two humans must score raw outputs independently. The proposal’s 5/5 target is a target, not an observed result.
 
 ## Fixed AI cases
 

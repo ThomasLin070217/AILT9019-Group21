@@ -1,0 +1,17 @@
+# Integration and delivery issue register
+
+Checked21 October2026. Priorities distinguish application defects from unverified acceptance or administrative evidence. No teammate's test or review is marked complete on their behalf.
+
+| ID | Priority / category | Reproduction or evidence | Owner / target | Status / closure condition |
+| --- | --- | --- | --- | --- |
+| E01 | Medium — evaluation completeness | Read frozen T02 required facts, then final T02 memory: multi-tiered building is described, but greenery is omitted | Qingyang, with Thomas's confirmation;23 Oct | Open. Provisional strict-completeness failure in assistant review; obtain independent human scores before aggregate reporting. Preserve raw output and rubric. Do not relabel type-match5/5 as accuracy5/5 |
+| E02 | High — evaluation acceptance | Final review.csv entries are pending, and assistant triage is not two human reviewers | Each assigned reviewer; Qingyang consolidates;22–23 Oct | Open. Collect ten genuinely independent human reviews and resolve disagreements |
+| R01 | High — independent reproduction | Assistant tests pass on this workspace; no Owen own-device setup result yet | Owen;23 Oct | Open. Provide OS/versions/commit, commands, outputs and any README corrections |
+| U01 | Medium — first-use acceptance | No Angel first-time user trial record has been received | Angel;23 Oct | Open. Record actual participant workflow, help needed and result using permitted test data |
+| A01 | High — current course requirements | Local official Course Overview checked; no authenticated current Moodle view available | Thomas;before submission | Unverified. Read current Moodle deadline time, mid-term fields, format and any superseding announcements. Do not infer final-production rules are mid-term rules |
+| A02 | High — course repository access | GitHub on21 Oct lists course account AILT9019 as a pending write invitation, not an accepted collaborator | Thomas / course account holder;before course inspection | Open. Verify acceptance with the course holder; accepted-access evidence required. No invitation resent or permissions changed |
+| A03 | Medium — course participation evidence | Local Friday standup log is blank; no consultation completion receipt in the repository | Thomas / team;23 Oct | Unverified, not evidence of non-completion. Locate actual Ed links and consultation record, or arrange permitted follow-up separately |
+| D01 | Medium — webpage publication | app/about.html contains project content; GitHub Pages API returned404 on21 Oct; no published Pages URL verified | Thomas;confirm delivery route23 Oct | Open. Confirm Moodle's expected webpage route and private-repository accessibility before final publication; no audience or hosting configuration changed |
+| D02 | High — presentation assembly | Thomas section/script and map demo ready; no teammates' final sections/clips or rehearsal record received | Angel, Owen, Qingyang supply; Thomas assembles;23–25 Oct | Open. Collect actual contributions, rehearse<=3-minute presentation and review separate demo; retain final submission receipt |
+
+Application map/count checks and automated storage/AI-flow regressions have no newly confirmed product blocker in this check. The case-level completeness concern remains a real limitation even though the application handles the response successfully. Update this statement if a later regression fails.

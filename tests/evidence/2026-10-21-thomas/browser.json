@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "checks": [
+    "Initial 19 cities, separate Osaka cards and fictional-data label",
+    "Keyboard marker selection retains focus and shows empty city",
+    "Chinese search, empty search and combined region/visited filters",
+    "New independent visits cross the 4+ brightness threshold",
+    "Editing does not increment count; user text is not interpreted as HTML",
+    "Browser demo persistence across reload",
+    "Removing a saved trip recomputes brightness",
+    "Zoom and fit controls",
+    "Explicit reset restores original sample data",
+    "Corrupt storage surfaces an error and requires explicit recovery",
+    "Proposed backend adapter contract with mocked HTTP responses; not a live backend test",
+    "Backend failure does not silently fall back to demo",
+    "390px mobile layout and city selection",
+    "Empty local album state",
+    "Preview server does not serve repository metadata or team documentation",
+    "No JavaScript errors, horizontal overflow or third-party requests"
+  ],
+  "errors": [],
+  "notes": "Demo map and mocked API contract only; no real photos, SQLite or cloud AI tested."
+}

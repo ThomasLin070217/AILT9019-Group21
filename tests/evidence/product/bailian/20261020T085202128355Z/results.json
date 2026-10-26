@@ -1,0 +1,697 @@
+{
+  "source_commit": "265253c9719efe92c57302365b2f6c44c988d336",
+  "working_tree_dirty": true,
+  "adapter_sha256": "9c6ff28f8c36741986b83a4794613ab4f1c7f2a36b0dae2d13c727bfc4be72b2",
+  "created_at": "20261020T085202128355Z",
+  "status": "collected",
+  "provider": "Alibaba Cloud Bailian (course Group 21)",
+  "model": "qwen3.8-flash",
+  "prompt_version": "travel-memory-v4",
+  "manifest_sha256": "058f95dc2a80bb31bba6ecc4498f5e16337e49a742f47e0261ad25211649b241",
+  "human_review": "pending; two independent reviewers required",
+  "runs": [
+    {
+      "case": "T01",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "result": {
+        "status": "draft",
+        "title": "大阪城散步",
+        "memory_text": "2026年5月16日，我在大阪城周围散步并拍摄了建筑照片。途中停下来休息，记录了这座白色墙体、绿色屋顶的城堡及其在水中的倒影。",
+        "warnings": [],
+        "questions": [],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v4",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 2528,
+          "input_tokens_details": {
+            "cached_tokens": 2304
+          },
+          "output_tokens": 70,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2598,
+          "x_details": [
+            {
+              "input_tokens": 2528,
+              "output_tokens": 70,
+              "total_tokens": 2598,
+              "input_tokens_details": {
+                "text_tokens": 1192,
+                "image_tokens": 1336
+              },
+              "output_tokens_details": {},
+              "image_tokens": 1336,
+              "prompt_tokens_details": {
+                "cached_tokens": 2304
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_3633a551-9223-49a5-8dbf-0246e90a7389",
+        "created_at": 1792486323,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_7af70542-f1d8-4cae-a7d7-a0d4d9cf979b",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"status\": \"draft\", \"title\": \"大阪城散步\", \"memory_text\": \"2026年5月16日，我在大阪城周围散步并拍摄了建筑照片。途中停下来休息，记录了这座白色墙体、绿色屋顶的城堡及其在水中的倒影。\", \"warnings\": [], \"questions\": []}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 2528,
+          "input_tokens_details": {
+            "cached_tokens": 2304
+          },
+          "output_tokens": 70,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2598,
+          "x_details": [
+            {
+              "input_tokens": 2528,
+              "output_tokens": 70,
+              "total_tokens": 2598,
+              "input_tokens_details": {
+                "text_tokens": 1192,
+                "image_tokens": 1336
+              },
+              "output_tokens_details": {},
+              "image_tokens": 1336,
+              "prompt_tokens_details": {
+                "cached_tokens": 2304
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486325,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T02",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "result": {
+        "status": "draft",
+        "title": "Osaka Castle View",
+        "memory_text": "A multi-tiered castle structure with white walls and green roofs is visible in the distance. The building is reflected in a calm pond, which features a stone lantern on its bank.",
+        "warnings": [],
+        "questions": [],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v4",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 1831,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 66,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1897,
+          "x_details": [
+            {
+              "input_tokens": 1831,
+              "output_tokens": 66,
+              "total_tokens": 1897,
+              "input_tokens_details": {
+                "text_tokens": 1157,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_f6dcfaff-2305-4532-a8da-8d084c527f98",
+        "created_at": 1792486327,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_c636a703-e656-45d2-8687-e374457423cf",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"status\": \"draft\", \"title\": \"Osaka Castle View\", \"memory_text\": \"A multi-tiered castle structure with white walls and green roofs is visible in the distance. The building is reflected in a calm pond, which features a stone lantern on its bank.\", \"warnings\": [], \"questions\": []}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1831,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 66,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1897,
+          "x_details": [
+            {
+              "input_tokens": 1831,
+              "output_tokens": 66,
+              "total_tokens": 1897,
+              "input_tokens_details": {
+                "text_tokens": 1157,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486328,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T03",
+      "expected_status": "draft",
+      "human_verdict": "pending",
+      "result": {
+        "status": "draft",
+        "title": "大阪散步与建筑留影",
+        "memory_text": "在大阪散步时，拍下了一座多层传统日式建筑。该建筑具有白色墙面、绿色屋顶和金色装饰细节，周围有树木环绕。",
+        "warnings": [],
+        "questions": [],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v4",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 1827,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 63,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1890,
+          "x_details": [
+            {
+              "input_tokens": 1827,
+              "output_tokens": 63,
+              "total_tokens": 1890,
+              "input_tokens_details": {
+                "text_tokens": 1165,
+                "image_tokens": 662
+              },
+              "output_tokens_details": {},
+              "image_tokens": 662,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_4cecbf19-5b46-47df-ab66-0570bb74142a",
+        "created_at": 1792486329,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_54ccf8e1-429f-45ec-8f1b-3532b75774ad",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"status\": \"draft\", \"title\": \"大阪散步与建筑留影\", \"memory_text\": \"在大阪散步时，拍下了一座多层传统日式建筑。该建筑具有白色墙面、绿色屋顶和金色装饰细节，周围有树木环绕。\", \"warnings\": [], \"questions\": []}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1827,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 63,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1890,
+          "x_details": [
+            {
+              "input_tokens": 1827,
+              "output_tokens": 63,
+              "total_tokens": 1890,
+              "input_tokens_details": {
+                "text_tokens": 1165,
+                "image_tokens": 662
+              },
+              "output_tokens_details": {},
+              "image_tokens": 662,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486331,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T04",
+      "expected_status": "clarification",
+      "human_verdict": "pending",
+      "result": {
+        "status": "clarification",
+        "title": "",
+        "memory_text": "",
+        "warnings": [
+          "The provided image is a solid gray placeholder and contains no visible travel details."
+        ],
+        "questions": [
+          "Please upload a clear photo of your trip to Osaka, or provide a short factual note about the location or activity so I can draft the memory for you."
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v4",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 1239,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 73,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1312,
+          "x_details": [
+            {
+              "input_tokens": 1239,
+              "output_tokens": 73,
+              "total_tokens": 1312,
+              "input_tokens_details": {
+                "text_tokens": 1157,
+                "image_tokens": 82
+              },
+              "output_tokens_details": {},
+              "image_tokens": 82,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_054ffa17-c3fb-4a8a-b3f4-f9543a5bda6c",
+        "created_at": 1792486333,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_f44066f3-0f49-4c0c-9abb-a48d36e442fd",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"status\": \"clarification\", \"title\": \"\", \"memory_text\": \"\", \"warnings\": [\"The provided image is a solid gray placeholder and contains no visible travel details.\"], \"questions\": [\"Please upload a clear photo of your trip to Osaka, or provide a short factual note about the location or activity so I can draft the memory for you.\"]}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1239,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 73,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1312,
+          "x_details": [
+            {
+              "input_tokens": 1239,
+              "output_tokens": 73,
+              "total_tokens": 1312,
+              "input_tokens_details": {
+                "text_tokens": 1157,
+                "image_tokens": 82
+              },
+              "output_tokens_details": {},
+              "image_tokens": 82,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486334,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    },
+    {
+      "case": "T05",
+      "expected_status": "clarification",
+      "human_verdict": "pending",
+      "result": {
+        "status": "clarification",
+        "title": "",
+        "memory_text": "",
+        "warnings": [
+          "用户备注与照片内容严重不符。备注称“只有被白雪覆盖的山，没有任何建筑”，但照片中明显可见一座大型城堡式建筑（大阪城）、池塘、石灯笼及树木，且无积雪迹象。"
+        ],
+        "questions": [
+          "您的备注提到“照片里只有被白雪覆盖的山，没有任何建筑”，但这与实际上传的照片（显示有大阪城等建筑和景观）完全矛盾。请确认您是否上传了错误的照片，或者需要修改备注以匹配当前照片？"
+        ],
+        "provider": "Alibaba Cloud Bailian (course Group 21)",
+        "model": "qwen3.8-flash",
+        "prompt_version": "travel-memory-v4",
+        "expected_revision": 1,
+        "usage": {
+          "input_tokens": 1850,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 121,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1971,
+          "x_details": [
+            {
+              "input_tokens": 1850,
+              "output_tokens": 121,
+              "total_tokens": 1971,
+              "input_tokens_details": {
+                "text_tokens": 1176,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        }
+      },
+      "status_matches": true,
+      "raw_response": {
+        "id": "resp_dbd71734-d676-4298-aa68-c2fdf6d49795",
+        "created_at": 1792486339,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": null,
+        "metadata": {},
+        "model": "qwen3.8-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_5805770c-f098-4432-8601-7c1b587266d9",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"status\": \"clarification\", \"title\": \"\", \"memory_text\": \"\", \"warnings\": [\"用户备注与照片内容严重不符。备注称“只有被白雪覆盖的山，没有任何建筑”，但照片中明显可见一座大型城堡式建筑（大阪城）、池塘、石灯笼及树木，且无积雪迹象。\"], \"questions\": [\"您的备注提到“照片里只有被白雪覆盖的山，没有任何建筑”，但这与实际上传的照片（显示有大阪城等建筑和景观）完全矛盾。请确认您是否上传了错误的照片，或者需要修改备注以匹配当前照片？\"]}",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "conversation": null,
+        "max_output_tokens": 1500,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "generate_summary": null,
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "top_logprobs": 0,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 1850,
+          "input_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "output_tokens": 121,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1971,
+          "x_details": [
+            {
+              "input_tokens": 1850,
+              "output_tokens": 121,
+              "total_tokens": 1971,
+              "input_tokens_details": {
+                "text_tokens": 1176,
+                "image_tokens": 674
+              },
+              "output_tokens_details": {},
+              "image_tokens": 674,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "user": null,
+        "completed_at": 1792486342,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "store": false,
+        "moderation": null,
+        "billing": null
+      }
+    }
+  ]
+}

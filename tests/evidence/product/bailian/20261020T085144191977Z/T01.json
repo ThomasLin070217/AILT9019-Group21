@@ -1,0 +1,135 @@
+{
+  "case": "T01",
+  "expected_status": "draft",
+  "human_verdict": "pending",
+  "result": {
+    "status": "draft",
+    "title": "大阪城散步",
+    "memory_text": "2026年5月16日在大阪城周围散步，拍摄了建筑照片。途中停下来休息，看到护城河水面倒映着城堡和石灯笼。",
+    "warnings": [],
+    "questions": [],
+    "provider": "Alibaba Cloud Bailian (course Group 21)",
+    "model": "qwen3.8-flash",
+    "prompt_version": "travel-memory-v4",
+    "expected_revision": 1,
+    "usage": {
+      "input_tokens": 2528,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 68,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 2596,
+      "x_details": [
+        {
+          "input_tokens": 2528,
+          "output_tokens": 68,
+          "total_tokens": 2596,
+          "input_tokens_details": {
+            "text_tokens": 1192,
+            "image_tokens": 1336
+          },
+          "output_tokens_details": {},
+          "image_tokens": 1336,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    }
+  },
+  "status_matches": true,
+  "raw_response": {
+    "id": "resp_d4147e2c-a5b3-4e34-84d1-3176dd60e63f",
+    "created_at": 1792486305,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "qwen3.8-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_9bfe9858-f024-4f24-b9b6-ba50d8243479",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"status\": \"draft\", \"title\": \"大阪城散步\", \"memory_text\": \"2026年5月16日在大阪城周围散步，拍摄了建筑照片。途中停下来休息，看到护城河水面倒映着城堡和石灯笼。\", \"warnings\": [], \"questions\": []}",
+            "type": "output_text",
+            "logprobs": null
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "conversation": null,
+    "max_output_tokens": 1500,
+    "max_tool_calls": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "effort": "none",
+      "generate_summary": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "type": "json_object"
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": null,
+    "usage": {
+      "input_tokens": 2528,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 68,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 2596,
+      "x_details": [
+        {
+          "input_tokens": 2528,
+          "output_tokens": 68,
+          "total_tokens": 2596,
+          "input_tokens_details": {
+            "text_tokens": 1192,
+            "image_tokens": 1336
+          },
+          "output_tokens_details": {},
+          "image_tokens": 1336,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    },
+    "user": null,
+    "completed_at": 1792486306,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "moderation": null,
+    "billing": null
+  }
+}

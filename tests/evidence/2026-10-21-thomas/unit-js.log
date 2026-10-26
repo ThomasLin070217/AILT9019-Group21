@@ -1,0 +1,27 @@
+
+> test
+> node --test tests/*.test.mjs
+
+✔ date filters are inclusive and do not change the saved trip array (1.738083ms)
+✔ invalid or reversed date ranges are rejected (0.13275ms)
+✔ a saved trip ID, not photos or repeated snapshots, defines a visit (0.442958ms)
+✔ brightness changes only at 1, 2 and 4 visits (0.358542ms)
+✔ create, edit, reconstruct repository, and remove preserve the visit invariant (3.813625ms)
+✔ card edits cannot change identity; invalid dates and cities do not persist (0.275291ms)
+✔ corrupt and unavailable storage surface errors instead of overwriting or claiming a save (0.306792ms)
+✔ city filtering supports native names, regions and visited-only without altering counts (0.123792ms)
+✔ city cards are separate, newest-first and selected-city-only (5.20725ms)
+✔ all city IDs are unique, licensed points fit initial view, and fixtures validate (0.203917ms)
+✔ zoom/pan stays within catalogue bounds and zoom limits (0.162917ms)
+✔ API adapter reads backend data and never silently substitutes demo trips (0.261125ms)
+✔ drafts survive reconstruction but never enter saved visit records (0.12675ms)
+✔ draft storage failures retain in-tab text and warn (0.087917ms)
+✔ photo previews accept only same-origin media paths (0.082375ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 47.538917

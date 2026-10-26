@@ -1,0 +1,31 @@
+................................127.0.0.1 - - [21/Oct/2026 10:32:10] code 403, message Forbidden
+127.0.0.1 - - [21/Oct/2026 10:32:10] "POST /api/trips HTTP/1.1" 403 -
+127.0.0.1 - - [21/Oct/2026 10:32:10] "POST /api/trips HTTP/1.1" 400 -
+127.0.0.1 - - [21/Oct/2026 10:32:10] "POST /api/trips HTTP/1.1" 415 -
+127.0.0.1 - - [21/Oct/2026 10:32:10] "POST /api/trips HTTP/1.1" 413 -
+.127.0.0.1 - - [21/Oct/2026 10:32:11] "POST /api/trips HTTP/1.1" 201 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] "GET /media/1fe66e33-e086-4030-8fff-cad89ae0a22c/2e497f58-b090-4f8e-afe1-e0de045ecbfd.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] "GET /api/trips HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] code 404, message Not Found
+127.0.0.1 - - [21/Oct/2026 10:32:11] "GET /.local-album/album.sqlite3 HTTP/1.1" 404 -
+.127.0.0.1 - - [21/Oct/2026 10:32:11] "DELETE /api/trips/f8b61f51-13f6-4a92-9c67-afb81b634fc8 HTTP/1.1" 409 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] "DELETE /api/trips/f8b61f51-13f6-4a92-9c67-afb81b634fc8 HTTP/1.1" 400 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] code 403, message Forbidden
+127.0.0.1 - - [21/Oct/2026 10:32:11] "DELETE /api/trips/f8b61f51-13f6-4a92-9c67-afb81b634fc8 HTTP/1.1" 403 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] "DELETE /api/trips/f8b61f51-13f6-4a92-9c67-afb81b634fc8 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] "DELETE /api/trips/f8b61f51-13f6-4a92-9c67-afb81b634fc8 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 10:32:11] code 404, message Not Found
+127.0.0.1 - - [21/Oct/2026 10:32:11] "GET /media/f8b61f51-13f6-4a92-9c67-afb81b634fc8/840f43cf-236c-416d-b684-8ed862e7e2bf.jpg HTTP/1.1" 404 -
+.127.0.0.1 - - [21/Oct/2026 10:32:12] "PATCH /api/trips/27628327-0dc7-4ba0-8f80-b1869e816385 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 10:32:12] "PATCH /api/trips/27628327-0dc7-4ba0-8f80-b1869e816385 HTTP/1.1" 409 -
+127.0.0.1 - - [21/Oct/2026 10:32:12] "PATCH /api/trips/27628327-0dc7-4ba0-8f80-b1869e816385 HTTP/1.1" 400 -
+127.0.0.1 - - [21/Oct/2026 10:32:12] code 403, message Forbidden
+127.0.0.1 - - [21/Oct/2026 10:32:12] "PATCH /api/trips/27628327-0dc7-4ba0-8f80-b1869e816385 HTTP/1.1" 403 -
+....127.0.0.1 - - [21/Oct/2026 10:32:13] "POST /api/trips/945de2e0-d72a-47be-acb5-1a96ba0ffdfb/generate HTTP/1.1" 400 -
+127.0.0.1 - - [21/Oct/2026 10:32:13] "POST /api/trips/945de2e0-d72a-47be-acb5-1a96ba0ffdfb/generate HTTP/1.1" 409 -
+127.0.0.1 - - [21/Oct/2026 10:32:13] "POST /api/trips/945de2e0-d72a-47be-acb5-1a96ba0ffdfb/generate HTTP/1.1" 409 -
+....
+----------------------------------------------------------------------
+Ran 43 tests in 2.833s
+
+OK

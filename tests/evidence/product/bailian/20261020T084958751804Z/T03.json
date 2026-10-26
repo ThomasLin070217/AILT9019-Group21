@@ -1,0 +1,179 @@
+{
+  "case": "T03",
+  "expected_status": "draft",
+  "human_verdict": "pending",
+  "result": {
+    "status": "draft",
+    "title": "大阪城散步",
+    "memory_text": "在大阪漫步时，我拍下了一座宏伟的建筑——大阪城。这座城堡在蓝天的映衬下显得格外壮观，白色的墙壁和绿色的屋顶交织出一种古典的美感。周围树木的秋色也为画面增添了几分温暖与生机。这是一次令人难忘的散步体验，仿佛时间在这一刻静止，让我感受到历史与现代的完美融合。",
+    "warnings": [],
+    "questions": [
+      "您是否记得拍摄这张照片的具体日期？",
+      "除了拍照外，您在附近还进行了哪些活动或探索？"
+    ],
+    "provider": "Alibaba Cloud Bailian (course Group 21)",
+    "model": "qwen3.8-flash",
+    "prompt_version": "travel-memory-v2",
+    "expected_revision": 1,
+    "usage": {
+      "input_tokens": 879,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 142,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1021,
+      "x_details": [
+        {
+          "input_tokens": 879,
+          "output_tokens": 142,
+          "total_tokens": 1021,
+          "input_tokens_details": {
+            "text_tokens": 217,
+            "image_tokens": 662
+          },
+          "output_tokens_details": {},
+          "image_tokens": 662,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    }
+  },
+  "status_matches": true,
+  "raw_response": {
+    "id": "resp_190dd341-ad7c-45d4-b677-74e14fd0eec9",
+    "created_at": 1792486207,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "qwen3.8-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_0d9c0616-c3d9-4a73-9b0a-0554acfa40b8",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\n  \"status\": \"draft\",\n  \"title\": \"大阪城散步\",\n  \"memory_text\": \"在大阪漫步时，我拍下了一座宏伟的建筑——大阪城。这座城堡在蓝天的映衬下显得格外壮观，白色的墙壁和绿色的屋顶交织出一种古典的美感。周围树木的秋色也为画面增添了几分温暖与生机。这是一次令人难忘的散步体验，仿佛时间在这一刻静止，让我感受到历史与现代的完美融合。\",\n  \"warnings\": [],\n  \"questions\": [\n    \"您是否记得拍摄这张照片的具体日期？\",\n    \"除了拍照外，您在附近还进行了哪些活动或探索？\"\n  ]\n}",
+            "type": "output_text",
+            "logprobs": null
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "conversation": null,
+    "max_output_tokens": 1500,
+    "max_tool_calls": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "effort": "none",
+      "generate_summary": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "travel_memory",
+        "schema_": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "clarification"
+              ]
+            },
+            "title": {
+              "type": "string"
+            },
+            "memory_text": {
+              "type": "string"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "questions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "title",
+            "memory_text",
+            "warnings",
+            "questions"
+          ]
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": true
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": null,
+    "usage": {
+      "input_tokens": 879,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 142,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1021,
+      "x_details": [
+        {
+          "input_tokens": 879,
+          "output_tokens": 142,
+          "total_tokens": 1021,
+          "input_tokens_details": {
+            "text_tokens": 217,
+            "image_tokens": 662
+          },
+          "output_tokens_details": {},
+          "image_tokens": 662,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    },
+    "user": null,
+    "completed_at": 1792486209,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "moderation": null,
+    "billing": null
+  }
+}

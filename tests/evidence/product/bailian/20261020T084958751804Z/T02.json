@@ -1,0 +1,181 @@
+{
+  "case": "T02",
+  "expected_status": "draft",
+  "human_verdict": "pending",
+  "result": {
+    "status": "clarification",
+    "title": "",
+    "memory_text": "",
+    "warnings": [
+      "Ensure you check the opening hours of Osaka Castle before your visit."
+    ],
+    "questions": [
+      "What specific aspects of Osaka Castle are you interested in exploring?",
+      "Are there any particular events or exhibits at the castle you'd like to attend?"
+    ],
+    "provider": "Alibaba Cloud Bailian (course Group 21)",
+    "model": "qwen3.8-flash",
+    "prompt_version": "travel-memory-v2",
+    "expected_revision": 1,
+    "usage": {
+      "input_tokens": 883,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 113,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 996,
+      "x_details": [
+        {
+          "input_tokens": 883,
+          "output_tokens": 113,
+          "total_tokens": 996,
+          "input_tokens_details": {
+            "text_tokens": 209,
+            "image_tokens": 674
+          },
+          "output_tokens_details": {},
+          "image_tokens": 674,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    }
+  },
+  "status_matches": false,
+  "raw_response": {
+    "id": "resp_940abf39-464e-4cc8-8087-ed33ae56980b",
+    "created_at": 1792486203,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "qwen3.8-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_feb90a01-d1df-41e0-916c-66028679d366",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"status\": \"clarification\", \"title\": \"Osaka Castle Visit\", \"memory_text\": \"The image shows Osaka Castle, a historic landmark in Japan, with its iconic white walls and green roofs reflected in the surrounding pond. The castle is surrounded by lush gardens and traditional Japanese landscaping.\", \"warnings\": [\"Ensure you check the opening hours of Osaka Castle before your visit.\"], \"questions\": [\"What specific aspects of Osaka Castle are you interested in exploring?\", \"Are there any particular events or exhibits at the castle you'd like to attend?\"] }",
+            "type": "output_text",
+            "logprobs": null
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "conversation": null,
+    "max_output_tokens": 1500,
+    "max_tool_calls": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "effort": "none",
+      "generate_summary": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "travel_memory",
+        "schema_": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "clarification"
+              ]
+            },
+            "title": {
+              "type": "string"
+            },
+            "memory_text": {
+              "type": "string"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "questions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "title",
+            "memory_text",
+            "warnings",
+            "questions"
+          ]
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": true
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": null,
+    "usage": {
+      "input_tokens": 883,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 113,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 996,
+      "x_details": [
+        {
+          "input_tokens": 883,
+          "output_tokens": 113,
+          "total_tokens": 996,
+          "input_tokens_details": {
+            "text_tokens": 209,
+            "image_tokens": 674
+          },
+          "output_tokens_details": {},
+          "image_tokens": 674,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    },
+    "user": null,
+    "completed_at": 1792486206,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "moderation": null,
+    "billing": null
+  }
+}

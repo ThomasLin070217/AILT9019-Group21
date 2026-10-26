@@ -1,0 +1,139 @@
+{
+  "case": "T04",
+  "expected_status": "clarification",
+  "human_verdict": "pending",
+  "result": {
+    "status": "clarification",
+    "title": "",
+    "memory_text": "",
+    "warnings": [
+      "The provided image is a solid gray placeholder and contains no visible travel details."
+    ],
+    "questions": [
+      "Please upload a clear photo of your trip to Osaka, or provide a short factual note about the location or activity so I can draft the memory for you."
+    ],
+    "provider": "Alibaba Cloud Bailian (course Group 21)",
+    "model": "qwen3.8-flash",
+    "prompt_version": "travel-memory-v4",
+    "expected_revision": 1,
+    "usage": {
+      "input_tokens": 1239,
+      "input_tokens_details": {
+        "cached_tokens": 1024
+      },
+      "output_tokens": 73,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1312,
+      "x_details": [
+        {
+          "input_tokens": 1239,
+          "output_tokens": 73,
+          "total_tokens": 1312,
+          "input_tokens_details": {
+            "text_tokens": 1157,
+            "image_tokens": 82
+          },
+          "output_tokens_details": {},
+          "image_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    }
+  },
+  "status_matches": true,
+  "raw_response": {
+    "id": "resp_054ffa17-c3fb-4a8a-b3f4-f9543a5bda6c",
+    "created_at": 1792486333,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "qwen3.8-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_f44066f3-0f49-4c0c-9abb-a48d36e442fd",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"status\": \"clarification\", \"title\": \"\", \"memory_text\": \"\", \"warnings\": [\"The provided image is a solid gray placeholder and contains no visible travel details.\"], \"questions\": [\"Please upload a clear photo of your trip to Osaka, or provide a short factual note about the location or activity so I can draft the memory for you.\"]}",
+            "type": "output_text",
+            "logprobs": null
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "conversation": null,
+    "max_output_tokens": 1500,
+    "max_tool_calls": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "effort": "none",
+      "generate_summary": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "type": "json_object"
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": null,
+    "usage": {
+      "input_tokens": 1239,
+      "input_tokens_details": {
+        "cached_tokens": 1024
+      },
+      "output_tokens": 73,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1312,
+      "x_details": [
+        {
+          "input_tokens": 1239,
+          "output_tokens": 73,
+          "total_tokens": 1312,
+          "input_tokens_details": {
+            "text_tokens": 1157,
+            "image_tokens": 82
+          },
+          "output_tokens_details": {},
+          "image_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "x_billing_type": "response_api"
+        }
+      ]
+    },
+    "user": null,
+    "completed_at": 1792486334,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "moderation": null,
+    "billing": null
+  }
+}

@@ -1,10 +1,21 @@
-import {visitTier,countVisits,cityTrips,filterCities,project,initialView,zoomView,clampView} from './domain.mjs';
+import {visitTier,countVisits,cityTrips,filterCities,project,initialView,zoomView,clampView,filterTripDates} from './domain.mjs';
 import {DemoRepository,ApiRepository,getJSON,DraftStore,photoURL} from './repository.mjs';
 import {createGoogleMap} from './google-map.mjs';
+import {setupTripForm} from './trip-form.mjs';
+import {createTripEditor} from './trip-editor.mjs';
+import {setupAlbumTools} from './album-tools.mjs';
+import {createAIControls} from './ai-controls.mjs';
+import {exportCard} from './card-export.mjs';
+import {createPhotoEditor} from './photo-editor.mjs';
 const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
-const mode=new URLSearchParams(location.search).get('mode')==='api'?'api':'demo';
+const requestedMode=new URLSearchParams(location.search).get('mode');
+const mode=['api','local'].includes(requestedMode)?requestedMode:'demo';
+if(mode!=='local')$('trip-composer').remove();
 let cities=[],trips=[],selected='jp-osaka',repository,view=initialView(),busy=false,ready=false;
 let googleMap=null,mapStarted=false,mapFailed=false;
+let tripEditor,aiControls,photoEditor;
+let dateFilter={from:'',to:'',includeUndated:true};
+const previousMarkers=new Map();
 let draftStorage;try{draftStorage=sessionStorage;}catch{}
 const drafts=new DraftStore(draftStorage,text=>message(text));
 const demoCovers={'demo-01':{file:'osaka-castle-2.jpg',author:'Eleni Afiontzi',source:'https://unsplash.com/photos/JdIC1dJtO_U'},'demo-02':{file:'osaka-castle-1.jpg',author:'欣慧',source:'https://unsplash.com/photos/dEMBfH4nWY8'}};
@@ -13,7 +24,7 @@ const prominent=new Set(['cn-beijing','cn-shanghai','cn-chengdu','hk-hong-kong',
 function node(tag,text,classes){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(classes)el.className=classes;return el;}
 function svg(tag,attrs={}){const el=document.createElementNS(NS,tag);for(const [key,value]of Object.entries(attrs))el.setAttribute(key,value);return el;}
 function message(text){$('status').textContent=text;}
-function showError(error){$('error').hidden=false;$('error-text').textContent=mode==='api'?`Could not load backend records. ${error.message} Start the backend and retry. Demo data has not been substituted.`:`Could not read or save this browser's sample album. ${error.message} Retry, or restore samples if the saved demo is damaged.`;$('recover').hidden=mode!=='demo'||!repository;}
+function showError(error){$('error').hidden=false;$('error-text').textContent=mode!=='demo'?`Could not load local album records. ${error.message} Start the backend and retry. Demo data has not been substituted.`:`Could not read or save this browser's sample album. ${error.message} Retry, or restore samples if the saved demo is damaged.`;$('recover').hidden=mode!=='demo'||!repository;}
 function clearError(){$('error').hidden=true;$('error-text').textContent='';}
 function setBusy(value){busy=value;for(const id of ['add-sample','reset','refresh','retry','recover'])$(id).disabled=value;$('workspace').setAttribute('aria-busy',String(value));}
 async function mutate(action,success,afterSave=()=>{}){if(busy)return;setBusy(true);clearError();try{trips=await action();afterSave();render();message(success);}catch(error){showError(error);}finally{setBusy(false);}}
@@ -30,7 +41,7 @@ function visibleCities(){return filterCities(cities,trips,filters());}
 function render(){
  const visible=visibleCities(),counts=countVisits(trips);
  if(!visible.some(c=>c.id===selected))selected=visible[0]?.id||null;
- $('progress').replaceChildren(node('strong',`${counts.size} cities visited`),document.createTextNode(` of ${cities.length} supported · ${trips.length} trips`));
+ $('progress').replaceChildren(node('strong',`${counts.size} ${counts.size===1?'city':'cities'} visited`),document.createTextNode(` of ${cities.length} supported · ${trips.length} ${trips.length===1?'trip':'trips'}`));
  $('result-count').textContent=`${visible.length} of ${cities.length} cities`;
  $('cities').replaceChildren();
  if(!visible.length)$('cities').append(node('p','No matching cities. Change your search or turn off the visited filter.','empty'));
@@ -76,6 +87,7 @@ function renderMarkers(visible,counts){
  for(const city of [...visible].sort((a,b)=>Number(a.id===selected)-Number(b.id===selected))){
   const [x,y]=project(city.longitude,city.latitude),count=counts.get(city.id)||0;
   const g=svg('g',{class:'marker',transform:`translate(${x} ${y})`,role:'button',tabindex:'0','aria-label':`${city.name}, ${count} ${count===1?'visit':'visits'}`,'aria-pressed':String(city.id===selected),'data-city-id':city.id});
+  const markerKey=`${count}:${city.id===selected}`,previous=previousMarkers.get(city.id);if(previous!==undefined&&previous!==markerKey)g.classList.add('marker-changed');previousMarkers.set(city.id,markerKey);
   const title=svg('title');title.textContent=`${city.name} · ${count} saved trips`;g.append(title,svg('circle',{r:1.85*scale,class:'hit'}),svg('circle',{r:1.05*scale,class:'selection'}),svg('circle',{r:(count?.78:.3)*scale,class:`pin tier-${visitTier(count)}`}));
   if(count){const number=svg('text',{class:`visit-number count-tier-${visitTier(count)}`,y:.3*scale,style:`font-size:${.9*scale}px`});number.textContent=String(count);g.append(number);}
   const selectedTrip=city.id===selected?cityTrips(trips,city.id).find(t=>(mode==='demo'&&demoCovers[t.id])||t.photos.some(p=>photoURL(p,location.origin))):null;
@@ -90,20 +102,23 @@ function renderMarkers(visible,counts){
  }
 }
 function renderMemories(){
+ if(mode==='local'){$('trip-composer').hidden=false;$('new-trip').disabled=!selected;$('new-trip').dataset.cityId=selected||'';}
  const city=cities.find(c=>c.id===selected);$('trip-list').replaceChildren();$('demo-tools').hidden=mode!=='demo'||!city;$('api-handoff').hidden=mode!=='api'||!city;
  if(!city){$('city-region').textContent='No city selected';$('city-name').textContent='Keep exploring';$('city-local').textContent='';$('city-count').textContent='Clear a filter to return to your cities.';return;}
- const rows=cityTrips(trips,city.id);$('city-region').textContent=city.region;$('city-name').textContent=city.name;$('city-local').textContent=city.local_name;$('city-count').textContent=`${rows.length} ${rows.length===1?'visit':'visits'} · ${rows.length?'Each trip, its own memory.':'A story still to come.'}`;
- if(!rows.length){const empty=node('div',undefined,'empty');empty.append(node('strong','Your first memory belongs here.'),node('p',mode==='demo'?'Open “Try visit counting” below to light up this city with a fictional visit.':'No saved trips for this city yet.'));$('trip-list').append(empty);}
+ const allRows=cityTrips(trips,city.id),rows=mode==='local'?filterTripDates(allRows,dateFilter):allRows;
+ $('trip-filter-status').hidden=mode!=='local'||(!dateFilter.from&&!dateFilter.to&&dateFilter.includeUndated);$('trip-filter-status').textContent=`Showing ${rows.length} of ${allRows.length} visits. Map counts include all saved trips.`;$('city-region').textContent=city.region;$('city-name').textContent=city.name;$('city-local').textContent=city.local_name;$('city-count').textContent=`${allRows.length} ${allRows.length===1?'visit':'visits'} · ${allRows.length?'Each trip, its own memory.':'A story still to come.'}`;
+ if(!rows.length){const empty=node('div',undefined,'empty');empty.append(node('strong',allRows.length?'No trips in this date range.':'Your first memory belongs here.'),node('p',mode==='demo'?'Open “Try visit counting” below to light up this city with a fictional visit.':allRows.length?'Clear or adjust the date filter to see your saved trips.':'Choose “Add a trip” to save photos and notes from your visit.'));$('trip-list').append(empty);}
  for(const trip of rows){
   const card=node('article',undefined,'trip-card');card.dataset.tripId=trip.id;
   const date=node('time',trip.trip_date?new Intl.DateTimeFormat('en',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(trip.trip_date)):'Date not recorded');if(trip.trip_date)date.dateTime=trip.trip_date;
   const cover=makeCover(trip);if(cover)card.append(cover);
-  card.append(date,node('h3',trip.title||'Untitled memory'),node('p',trip.memory_text||trip.notes||'No notes yet.'),node('p',mode==='demo'?'Fictional trip · sample content':`${trip.photos.length} photo references`,'photo-count'));
+  card.append(date,node('h3',trip.title||'Untitled memory'),node('p',trip.memory_text||trip.notes||'No notes yet.'),node('p',mode==='demo'?'Fictional trip · sample content':`${trip.photos.length} ${trip.photos.length===1?'photo':'photos'} · saved on this computer`,'photo-count'));
   if(mode==='demo'){
    const actions=node('div',undefined,'card-actions'),edit=node('button','Edit sample text','text-button'),remove=node('button','Remove sample','text-button');
    edit.addEventListener('click',()=>editCard(card,trip,true));remove.addEventListener('click',()=>{if(confirm('Remove this sample visit and any draft for it?'))mutate(()=>repository.remove(trip.id),'Sample visit removed. Counts recalculated from saved trip IDs.',()=>drafts.remove(trip.id));});
    actions.append(edit,remove);card.append(actions);
   }
+  if(mode==='local'){tripEditor.draw(card,trip);aiControls.draw(card,trip);photoEditor.draw(card,trip);const exportButton=node('button','Export PNG','text-button');exportButton.type='button';exportButton.addEventListener('click',async()=>{exportButton.disabled=true;try{await exportCard(trip,city);message('Saved card exported as PNG.');}catch(e){message(e.message);}finally{exportButton.disabled=false;}});card.querySelector('.card-actions').append(exportButton);}
   $('trip-list').append(card);if(mode==='demo'&&drafts.has(trip.id))editCard(card,trip,false);
  }
 }
@@ -127,7 +142,14 @@ function makeCover(trip){
  const alt=sample?'Osaka Castle — example photograph':(typeof photo.alt==='string'?photo.alt:'Trip photograph');
  button.setAttribute('aria-label',`Open photo for ${trip.title||'this memory'}`);img.alt=alt;img.src=url;img.loading='lazy';img.decoding='async';img.width=960;img.height=640;
  button.append(img);button.addEventListener('click',()=>{viewerTrigger=button;$('viewer-image').src=url;$('viewer-image').alt=alt;$('viewer-caption').textContent=sample?`Example photo by ${sample.author} / Unsplash · not a photo from this fictional trip`:alt;$('photo-viewer').showModal();});
- figure.append(button);if(sample){const caption=node('figcaption','Example photo · '),link=node('a',`${sample.author} / Unsplash`);link.href=sample.source;link.target='_blank';link.rel='noreferrer';caption.append(link);figure.append(caption);}
+ figure.append(button);if(!sample&&trip.photos.length>1){
+  const gallery=node('div',undefined,'saved-photo-strip');gallery.setAttribute('aria-label','All trip photos');
+  for(const [index,item] of trip.photos.entries()){
+   const source=photoURL(item,location.origin);if(!source)continue;
+   const thumb=node('button'),picture=node('img');thumb.type='button';thumb.setAttribute('aria-label',`Open trip photo ${index+1}`);picture.src=source;picture.alt='';picture.loading='lazy';thumb.append(picture);
+   thumb.addEventListener('click',()=>{viewerTrigger=thumb;$('viewer-image').src=source;$('viewer-image').alt=`Trip photograph ${index+1}`;$('viewer-caption').textContent=`Photo ${index+1} of ${trip.photos.length}`;$('photo-viewer').showModal();});gallery.append(thumb);
+  }figure.append(gallery);
+ }if(sample){const caption=node('figcaption','Example photo · '),link=node('a',`${sample.author} / Unsplash`);link.href=sample.source;link.target='_blank';link.rel='noreferrer';caption.append(link);figure.append(caption);}
  img.addEventListener('error',()=>{button.replaceWith(node('p','Photo unavailable. Your memory text is still here.','photo-missing'));});return figure;
 }
 function showNearby(nearby){
@@ -136,12 +158,13 @@ function showNearby(nearby){
  const close=node('button','Close choices','text-button');close.addEventListener('click',()=>{panel.hidden=true;$('fit').focus();});panel.append(close);panel.hidden=false;panel.querySelector('button').focus({preventScroll:true});if(matchMedia('(max-width:850px)').matches)panel.scrollIntoView({block:'center',behavior:'instant'});
 }
 async function load(){
- setBusy(true);clearError();ready=false;message('');$('loading').hidden=false;$('mode-label').textContent=mode==='api'?'Backend mode · waiting for local API records':'Demo album · fictional trips · no AI calls';
+ setBusy(true);clearError();ready=false;message('');$('loading').hidden=false;$('mode-label').textContent=mode!=='demo'?'Loading your local album…':'Demo album · fictional trips · no AI calls';
  try{
-  const [catalogue,land,seed]=await Promise.all([getJSON(mode==='api'?'/api/cities':'../data/cities.json'),getJSON('../data/map/land.geojson'),mode==='demo'?getJSON('../data/demo-trips.json'):Promise.resolve([])]);
+  const [catalogue,land,seed]=await Promise.all([getJSON(mode!=='demo'?'/api/cities':'../data/cities.json'),getJSON('../data/map/land.geojson'),mode==='demo'?getJSON('../data/demo-trips.json'):Promise.resolve([])]);
   if(!Array.isArray(catalogue)||!catalogue.length||catalogue.some(c=>!c.id||!c.name||!Number.isFinite(c.longitude)||!Number.isFinite(c.latitude))||new Set(catalogue.map(c=>c.id)).size!==catalogue.length)throw new Error('Invalid city catalogue.');
-  cities=catalogue;repository=mode==='demo'?new DemoRepository(cities,seed):new ApiRepository(cities);trips=await repository.list();ready=true;drawLand(land);render();
-  $('mode-label').textContent=mode==='demo'?'Demo album · fictional trips saved in this browser · no AI calls':'Backend mode · showing records from the local API';$('reset').hidden=mode!=='demo';$('refresh').hidden=mode!=='api';
+  cities=catalogue;repository=mode==='demo'?new DemoRepository(cities,seed):new ApiRepository(cities);trips=await repository.list();tripEditor?.reconcile(trips);aiControls?.reconcile(trips);photoEditor?.reconcile(trips);ready=true;drawLand(land);render();
+  $('mode-label').textContent=mode==='demo'?'Demo album · fictional trips saved in this browser · no AI calls':'Local album · cloud AI only when you choose to send';$('reset').hidden=mode!=='demo';$('refresh').hidden=mode==='demo';
+  $('album-mode-link').href=mode==='demo'?'?mode=local&map=local':'?map=local';$('album-mode-link').textContent=mode==='demo'?'My local album':'Try demo';
  }catch(error){showError(error);$('progress').textContent='Map unavailable';}
  finally{$('loading').hidden=true;setBusy(false);}
  if(ready)startGoogleMap();
@@ -198,6 +221,24 @@ function setAlbumView(album){
 $('view-map').addEventListener('click',()=>setAlbumView(false));$('view-album').addEventListener('click',()=>setAlbumView(true));
 setAlbumView(new URLSearchParams(location.search).get('view')==='album');
 new ResizeObserver(()=>{if(ready&&!document.body.classList.contains('album-view'))renderMarkers(visibleCities(),countVisits(trips));}).observe($('map'));
+if(mode==='local')tripEditor=createTripEditor({repository:()=>repository,onRender:render,onWarning:message,
+ onSaved:trip=>{trips=trips.map(row=>row.id===trip.id?trip:row);render();message('Trip changes saved. Your photos and visit count are unchanged.');},
+ onRemoved:result=>{trips=trips.filter(row=>row.id!==result.id);aiControls.reconcile(trips);photoEditor.reconcile(trips);render();message(result.cleanup_pending?'Trip deleted and visit count updated. Local photo cleanup is pending; refresh the album to retry cleanup.':'Trip and its saved photos deleted. Visit count and map brightness updated.');($('trip-list').querySelector('.edit-trip')||$('new-trip')).focus({preventScroll:true});},
+ onReload:rows=>{trips=rows;tripEditor.reconcile(trips);aiControls.reconcile(trips);photoEditor.reconcile(trips);render();message('Latest saved trips loaded.');}
+});
+if(mode==='local'){
+ photoEditor=createPhotoEditor({repository:()=>repository,onSaved:trip=>{trips=trips.map(row=>row.id===trip.id?trip:row);render();},onRender:render,onMessage:message});
+ aiControls=createAIControls({repository:()=>repository,onSaved:trip=>{trips=trips.map(row=>row.id===trip.id?trip:row);render();},onRender:render,onMessage:message});
+ $('album-tools').hidden=false;$('trip-date-tools').hidden=false;
+ setupAlbumTools({onRestored:load,onMessage:message});
+ const updateDates=()=>{const next={from:$('trip-from').value,to:$('trip-to').value,includeUndated:$('trip-undated').checked};try{filterTripDates([],next);dateFilter=next;$('trip-date-error').hidden=true;if(ready)renderMemories();}catch(e){$('trip-date-error').textContent=e.message;$('trip-date-error').hidden=false;}};
+ for(const id of ['trip-from','trip-to','trip-undated'])$(id).addEventListener('change',updateDates);
+ $('clear-trip-dates').addEventListener('click',()=>{$('trip-from').value='';$('trip-to').value='';$('trip-undated').checked=true;updateDates();});
+}
+if(mode==='local')setupTripForm({repository:()=>ready?repository:null,onSaved:trip=>{
+ trips=[...trips.filter(row=>row.id!==trip.id),trip];selected=trip.city_id;$('search').value='';$('region').value='';$('visited').checked=false;render();message('Trip saved on this computer. Your map now includes this visit.');
+ $('trip-list').querySelector(`[data-trip-id="${CSS.escape(trip.id)}"]`)?.scrollIntoView({block:'nearest'});$('new-trip').focus({preventScroll:true});
+}});
 load();
 
 $('back-map').addEventListener('click',()=>{$('map-wrap').scrollIntoView({block:'start',behavior:'instant'});$('fit').focus({preventScroll:true});});

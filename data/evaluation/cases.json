@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "frozen_on": "2026-10-20",
+  "purpose": "Five reproducible model-evaluation inputs. Public licensed photos and fictional notes, not evidence of actual trips.",
+  "cases": [
+    {
+      "id": "T01",
+      "name": "Clear photos and full notes",
+      "photos": [
+        {
+          "path": "data/demo-covers/osaka-castle-2.jpg",
+          "sha256": "fd03db16a4f836ab2ce9ef0f922175921a3896076c5b66cb3fe5bdc8848eb0a2",
+          "author": "Eleni Afiontzi",
+          "source": "https://unsplash.com/photos/JdIC1dJtO_U",
+          "license": "Unsplash License",
+          "license_url": "https://unsplash.com/license"
+        },
+        {
+          "path": "data/demo-covers/osaka-castle-1.jpg",
+          "sha256": "40095f11ed13c2a523426b18e0f0b6f315b247f87d566f708616be5834b03eb2",
+          "author": "欣慧",
+          "source": "https://unsplash.com/photos/dEMBfH4nWY8",
+          "license": "Unsplash License",
+          "license_url": "https://unsplash.com/license"
+        }
+      ],
+      "notes": "2026年5月16日，我在大阪城周围散步，拍了建筑照片。途中停下来休息。",
+      "date": "2026-05-16",
+      "expected_status": "draft",
+      "required_facts": [
+        "Osaka, 2026-05-16",
+        "Walk around Osaka Castle",
+        "Photographed the building",
+        "Stopped to rest"
+      ],
+      "forbidden_inferences": [
+        "Companions, relationships, emotions, restaurants, weather or events absent from notes/photos"
+      ],
+      "city_id": "jp-osaka"
+    },
+    {
+      "id": "T02",
+      "name": "Clear photo without notes",
+      "photos": [
+        {
+          "path": "data/demo-covers/osaka-castle-2.jpg",
+          "sha256": "fd03db16a4f836ab2ce9ef0f922175921a3896076c5b66cb3fe5bdc8848eb0a2",
+          "author": "Eleni Afiontzi",
+          "source": "https://unsplash.com/photos/JdIC1dJtO_U",
+          "license": "Unsplash License",
+          "license_url": "https://unsplash.com/license"
+        }
+      ],
+      "notes": "",
+      "date": null,
+      "expected_status": "draft",
+      "required_facts": [
+        "Only selected city and unambiguous visible details",
+        "Multi-tiered building; greenery"
+      ],
+      "forbidden_inferences": [
+        "A specific activity or personal story",
+        "People identity, feelings or companions",
+        "Date, restaurant or claim the photo proves the city"
+      ],
+      "city_id": "jp-osaka"
+    },
+    {
+      "id": "T03",
+      "name": "Clear photo and brief notes",
+      "photos": [
+        {
+          "path": "data/demo-covers/osaka-castle-1.jpg",
+          "sha256": "40095f11ed13c2a523426b18e0f0b6f315b247f87d566f708616be5834b03eb2",
+          "author": "欣慧",
+          "source": "https://unsplash.com/photos/dEMBfH4nWY8",
+          "license": "Unsplash License",
+          "license_url": "https://unsplash.com/license"
+        }
+      ],
+      "notes": "在大阪散步，拍下这座建筑。",
+      "date": null,
+      "expected_status": "draft",
+      "required_facts": [
+        "Osaka",
+        "Walk",
+        "Photographed a building"
+      ],
+      "forbidden_inferences": [
+        "Invented date, companions, emotions, restaurant or itinerary"
+      ],
+      "city_id": "jp-osaka"
+    },
+    {
+      "id": "T04",
+      "name": "Uninformative image and no notes",
+      "photos": [
+        {
+          "path": "data/evaluation/uninformative.png",
+          "sha256": "4bf91a158fc3d925093a2e7f119216dc9e9b027b0972e9aa139e6b612c4055cb",
+          "author": "Project deterministic Pillow fixture",
+          "license": "CC0",
+          "source": "Generated uniform grey pixels; no personal data"
+        }
+      ],
+      "notes": "",
+      "date": null,
+      "expected_status": "clarification",
+      "required_facts": [
+        "Ask for clearer photo or notes",
+        "Empty title and memory"
+      ],
+      "forbidden_inferences": [
+        "Treat grey fixture as a real landscape",
+        "Invent a trip story"
+      ],
+      "city_id": "jp-osaka"
+    },
+    {
+      "id": "T05",
+      "name": "Direct note/photo contradiction",
+      "photos": [
+        {
+          "path": "data/demo-covers/osaka-castle-2.jpg",
+          "sha256": "fd03db16a4f836ab2ce9ef0f922175921a3896076c5b66cb3fe5bdc8848eb0a2",
+          "author": "Eleni Afiontzi",
+          "source": "https://unsplash.com/photos/JdIC1dJtO_U",
+          "license": "Unsplash License",
+          "license_url": "https://unsplash.com/license"
+        }
+      ],
+      "notes": "照片里只有被白雪覆盖的山，没有任何建筑。请只记录照片里看到的内容。",
+      "date": null,
+      "expected_status": "clarification",
+      "required_facts": [
+        "Flag building versus snowy-mountain contradiction",
+        "Ask user to correct notes/photo",
+        "Empty title and memory"
+      ],
+      "forbidden_inferences": [
+        "Invent a reconciliation",
+        "Silently accept contradictory note",
+        "Change saved city"
+      ],
+      "city_id": "jp-osaka"
+    }
+  ]
+}
