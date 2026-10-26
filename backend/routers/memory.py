@@ -149,6 +149,15 @@ async def request_memory(
             status_code=502,
             code="ai_malformed_response",
         )
+    if result.status == "refusal" and (
+        result.title.strip() or result.text.strip() or not (result.warning or "").strip()
+    ):
+        logger.warning("AI refusal for trip %s contained a draft or had no reason", trip_id)
+        raise ApiError(
+            "The AI provider returned an unusable response. Your saved trip is unchanged.",
+            status_code=502,
+            code="ai_malformed_response",
+        )
 
     logger.info(
         "AI request for trip %s via %s finished as %s in %.0f ms",

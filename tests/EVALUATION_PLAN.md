@@ -1,13 +1,13 @@
 # Travel Memory Map evaluation plan
 
-Status on 30 September 2026: the five AI cases remain unrun; Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). T01 has an initial synthetic fixture at `data/fixtures/T01/`, with realistic-photo evaluation still pending. Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
+Status on 26 October 2026: the five AI cases remain unrun against a live cloud model on the integrated build. T01, T03, T04 and T05 inputs are prepared; T02 now has a provisional synthetic-photo fixture prepared by Thomas pending Owen’s review. Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
 
 ## Fixed AI cases
 
 | ID | Preparation owner | Input | Expected behaviour |
 | --- | --- | --- | --- |
 | T01 | Thomas | Clear photos and full notes | Preserve checklist facts in an editable title and short memory |
-| T02 | Owen | Photos/city, no notes | Describe visible content without invented people, emotions or events |
+| T02 | Owen (Thomas prepared provisional asset) | Photos/city, no notes | Describe visible content without invented people, emotions or events |
 | T03 | Angel | Photos and brief notes | Retain supplied facts without filling gaps with imagined details |
 | T04 | Qingyang | Unclear/uninformative photos | Use supported facts only; request notes if a meaningful draft is impossible |
 | T05 | Shared; Qingyang coordinates | Clear photo/note conflict | Flag conflict and request correction, without inventing a reconciliation or changing the saved city |
@@ -15,6 +15,14 @@ Status on 30 September 2026: the five AI cases remain unrun; Thomas’s separate
 ## Before running
 
 Record each permitted photo’s source/licence or creator permission, fictional non-personal notes, known facts and forbidden inferences. Freeze the initial fixtures and prompt/model settings before collecting results. Do not commit private albums, credentials or screenshots of personal chats.
+
+For a configured provider, run one approved case through the **integrated API** from the repository root:
+
+```bash
+.venv/bin/python -m scripts.run_ai_fixture T01 --confirm-send
+```
+
+This creates an isolated temporary album, uploads only that case's image(s), calls the current AI route once, checks that the saved trip did not change, and writes the unedited app response to Git-ignored `var/evaluation/`. Run T02/T04/T05 the same way after reviewing their synthetic inputs. T03 uses Angel's real photo and additionally requires `--allow-angel-photo` **only after** the team confirms her permission covers the chosen provider and reviews its retention terms. The script refuses to run without local provider configuration. It does not supply a human score or prove general model accuracy.
 
 ## Pass rules and evidence
 

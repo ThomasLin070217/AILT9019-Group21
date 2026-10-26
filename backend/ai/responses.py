@@ -24,6 +24,9 @@ activities or events unless explicitly supplied or unambiguously visible. Do not
 proves the selected city. Never use other trips or tools. If the photo clearly contradicts
 the notes or city, ask for clarification. If images are unclear and notes are insufficient,
 ask for a clearer image or a short factual note; never fill gaps. A missing date is fine.
+If the user requests identification of a person or an inferred private relationship, or asks
+for credentials or information from other trips, return status refusal with a short warning.
+Do not include a title or memory text in a refusal.
 For clear photos without notes, give an impersonal description of visible features.
 These are completed trips, not future travel plans. For a draft, write a short title and
 2–5 factual sentences matching the notes' language, or English if notes are empty.
@@ -31,7 +34,7 @@ Return only JSON with status, title, memory_text, warnings and questions."""
 SCHEMA = {
     "type": "object", "additionalProperties": False,
     "properties": {
-        "status": {"type": "string", "enum": ["draft", "clarification"]},
+        "status": {"type": "string", "enum": ["draft", "clarification", "refusal"]},
         "title": {"type": "string"},
         "memory_text": {"type": "string"},
         "warnings": {"type": "array", "items": {"type": "string"}},
@@ -59,7 +62,7 @@ def _parse_result(envelope: dict, model: str) -> MemoryResult:
              and item.get("type") == "message" for part in item.get("content", [])
              if isinstance(part, dict)]
     if any(part.get("type") == "refusal" for part in parts):
-        raise ProviderError("The model declined the request.")
+        return MemoryResult(status="refusal", warning="The AI provider declined this request.", model=model)
     raw = "".join(part.get("text", "") for part in parts if part.get("type") == "output_text")
     try:
         result = json.loads(raw)
@@ -67,7 +70,7 @@ def _parse_result(envelope: dict, model: str) -> MemoryResult:
         raise ProviderError("The model did not return valid JSON.") from exc
     if not isinstance(result, dict) or set(result) != set(SCHEMA["required"]):
         raise ProviderError("The model returned an unexpected schema.")
-    if result["status"] not in {"draft", "clarification"}:
+    if result["status"] not in {"draft", "clarification", "refusal"}:
         raise ProviderError("The model returned an invalid status.")
     if any(not isinstance(result[field], str) for field in ("title", "memory_text")):
         raise ProviderError("The model returned invalid text.")
@@ -82,8 +85,12 @@ def _parse_result(envelope: dict, model: str) -> MemoryResult:
             raise ProviderError("The model returned an empty draft.")
         if result["questions"]:
             raise ProviderError("The model mixed a draft with clarification questions.")
-    elif not result["questions"] and not result["warnings"]:
-        raise ProviderError("The model requested clarification without a reason.")
+    elif result["status"] == "clarification":
+        if not result["questions"] and not result["warnings"]:
+            raise ProviderError("The model requested clarification without a reason.")
+    elif (result["title"].strip() or result["memory_text"].strip() or
+          not result["warnings"]):
+        raise ProviderError("The model returned an invalid refusal.")
     return MemoryResult(
         status=result["status"],
         title=result["title"] if result["status"] == "draft" else "",

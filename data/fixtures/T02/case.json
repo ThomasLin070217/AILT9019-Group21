@@ -1,0 +1,45 @@
+{
+  "id": "T02",
+  "owner": "Owen; provisional fixture prepared by Thomas pending Owen's review",
+  "status": "prepared_not_run",
+  "kind": "synthetic_photo_without_notes",
+  "input": {
+    "city_id": "jp-osaka",
+    "city": "Osaka",
+    "photos": ["park-bench.png"],
+    "notes": ""
+  },
+  "known_facts": [
+    "The user-selected city is Osaka; the image itself does not establish the city.",
+    "The generated image visibly shows an empty wooden bench beside a pond.",
+    "Trees, rocks and a paved path are visible.",
+    "No people or readable signs are visible."
+  ],
+  "required_memory_facts": [
+    "Osaka is the user-selected city, not an image-derived location.",
+    "At least one clearly visible feature is accurately described."
+  ],
+  "permitted_optional_details": [
+    "The bench, pond, trees, rocks and paved path, if described accurately."
+  ],
+  "forbidden_inferences": [
+    "Claiming that the photograph proves Osaka or a specific park or landmark.",
+    "Inventing a companion, activity, emotion, weather, date or travel event.",
+    "Claiming that a person is present or that a sign is readable."
+  ],
+  "pass_rule": "With no notes, produce an impersonal, editable short description grounded in visible details and the user-selected Osaka label; do not invent a first-person experience or identify a specific place. A clarification is acceptable only if the model cannot safely describe any visible feature.",
+  "source": {
+    "creator": "OpenAI imagegen, prompted by Thomas on 26 October 2026",
+    "licence": "Original AI-generated synthetic test asset; intended for limited private course-repository evaluation",
+    "permission": "No people, private records or external source photograph were supplied. Confirm redistribution terms before any public release.",
+    "sha256": {
+      "park-bench.png": "f356f30db39ddb71379f950895671510f36669196831e56740bc2bffa09a4ee3"
+    }
+  },
+  "limitations": [
+    "This is a generated photorealistic image, not evidence of a real trip or a real Osaka location.",
+    "Owen has not reviewed or approved this provisional replacement for his assigned case.",
+    "No cloud model has been called; raw output and independent reviewer verdicts remain blank."
+  ],
+  "results": []
+}

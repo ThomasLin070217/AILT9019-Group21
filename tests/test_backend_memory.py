@@ -100,6 +100,30 @@ def test_clarification_result_is_returned(client, make_trip):
     assert body["question"].startswith("Which city")
 
 
+def test_refusal_is_returned_without_changing_the_saved_trip(client, make_trip):
+    trip = make_trip(notes="Please identify a stranger in this photo")
+    client.app.state.generator = SpyGenerator(
+        result=MemoryResult(status="refusal", warning="I cannot identify a person in a photo.")
+    )
+    response = client.post(f"/api/trips/{trip['id']}/memory", json={"confirmed": True})
+    assert response.status_code == 200
+    assert response.json()["status"] == "refusal"
+    assert response.json()["text"] == ""
+    assert client.get(f"/api/trips/{trip['id']}").json() == trip
+
+
+def test_refusal_cannot_include_generated_memory_text(client, make_trip):
+    trip = make_trip()
+    client.app.state.generator = SpyGenerator(
+        result=MemoryResult(status="refusal", title="Leaked", text="private text", warning="Declined")
+    )
+    response = client.post(f"/api/trips/{trip['id']}/memory", json={"confirmed": True})
+    assert response.status_code == 502
+    assert response.json()["error"]["code"] == "ai_malformed_response"
+    assert "private text" not in response.text
+    assert client.get(f"/api/trips/{trip['id']}").json() == trip
+
+
 def test_timeout_returns_504_and_does_not_touch_the_trip(client_factory):
     generator = SpyGenerator(delay=0.3)
     client, _ = client_factory(generator=generator, ai_timeout_seconds=0.01)

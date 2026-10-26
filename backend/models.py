@@ -97,7 +97,7 @@ class MemoryRequestIn(StrictModel):
 
 
 class MemoryOut(BaseModel):
-    status: Literal["draft", "clarification"]
+    status: Literal["draft", "clarification", "refusal"]
     title: str = ""
     text: str = ""
     question: str | None = None

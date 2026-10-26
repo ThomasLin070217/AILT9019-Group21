@@ -80,6 +80,30 @@ def test_invalid_model_output_and_redirect_are_rejected(tmp_path):
         run(generator(tmp_path, redirect).generate(request(tmp_path)))
 
 
+def test_unsafe_request_can_return_refusal_without_a_draft(tmp_path):
+    def refusal(req):
+        return httpx.Response(200, json=envelope({"status": "refusal", "title": "",
+            "memory_text": "", "warnings": ["I cannot identify people or reveal private data."],
+            "questions": []}))
+    result = run(generator(tmp_path, refusal).generate(request(tmp_path)))
+    assert result.status == "refusal"
+    assert result.title == result.text == ""
+    assert "private data" in result.warning
+
+    def unsafe_draft(req):
+        return httpx.Response(200, json=envelope({"status": "refusal", "title": "Leaked",
+            "memory_text": "private text", "warnings": ["Declined"], "questions": []}))
+    with pytest.raises(ProviderError):
+        run(generator(tmp_path, unsafe_draft).generate(request(tmp_path)))
+
+    def native_refusal(req):
+        return httpx.Response(200, json={"status": "completed", "output": [
+            {"type": "message", "content": [{"type": "refusal", "refusal": "Declined"}]}
+        ]})
+    native = run(generator(tmp_path, native_refusal).generate(request(tmp_path)))
+    assert native.status == "refusal" and native.text == ""
+
+
 def test_existing_local_ai_config_is_recognised(tmp_path):
     (tmp_path / ".env.ai.local").write_text("TRAVEL_AI_API_KEY=test\nTRAVEL_AI_MODEL=qwen3.8-flash\n"
                                             "TRAVEL_AI_BASE_URL=https://api.openai.com/v1\n")

@@ -255,13 +255,19 @@ function openAiNotice(card,trip){
   send.disabled=true;setBusy(true);clearError();message('Requesting an AI draft…');
   try{
    const result=await repository.requestMemory(trip.id,{confirmed:true});
-   notice.remove();
-   if(result.status==='clarification'){
+   if(result.status==='refusal'){
+    message('AI request declined. Your saved trip is unchanged.');
+    notice.replaceChildren(node('p',result.warning||'The AI provider declined this request. Your saved trip is unchanged.'));
+   }else if(result.status==='clarification'){
+    notice.remove();
     message('The model needs more detail. Your saved trip is unchanged.');
     openApiEditor(card,trip,{notice:`Clarification request: ${result.question||'Add more detail to the notes.'}${result.warning?` ${result.warning}`:''}`});
-   }else{
+   }else if(result.status==='draft'){
+    notice.remove();
     message('AI draft ready. Review it, then save if you want to keep it.');
     openApiEditor(card,trip,{title:result.title||trip.title,notes:trip.notes,text:result.text||trip.memory_text,notice:result.warning||'AI draft — review before saving. Nothing has been saved yet.'});
+   }else{
+    throw new Error('The AI provider returned an unexpected result. Your saved trip is unchanged.');
    }
   }catch(error){showActionError(error,'AI draft failed.');message('');}
   finally{send.disabled=false;setBusy(false);}

@@ -32,7 +32,7 @@ class MemoryRequest:
 
 
 class MemoryResult(BaseModel):
-    status: Literal["draft", "clarification"]
+    status: Literal["draft", "clarification", "refusal"]
     title: str = Field(default="", max_length=200)
     text: str = Field(default="", max_length=5_000)
     question: str | None = Field(default=None, max_length=500)
