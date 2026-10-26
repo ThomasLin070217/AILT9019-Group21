@@ -21,7 +21,7 @@ export async function createGoogleMap({container,config,regionData,onSelect,onNe
   let areaCounts=new Map(),visibleAreas=new Set(),selectedArea=null;
   const areaStyle=feature=>{
     const id=feature.getProperty('city_id'),count=areaCounts.get(id)||0,tier=count===0?0:count===1?1:count<4?2:3,selected=id===selectedArea;
-    return {visible:visibleAreas.has(id),clickable:false,fillColor:areaColours[tier]||'#ad4a29',fillOpacity:tier?[.0,.58,.67,.76][tier]:selected?.08:0,strokeColor:selected?'#943c1d':areaColours[tier]||'#943c1d',strokeOpacity:selected?1:tier?.83:0,strokeWeight:selected?2.4:1.3,zIndex:selected?2:1};
+    return {visible:visibleAreas.has(id),clickable:false,fillColor:areaColours[tier]||'#ad4a29',fillOpacity:tier?[.0,.58,.67,.76][tier]:selected?.08:0,strokeColor:selected?'#943c1d':areaColours[tier]||'#7d9794',strokeOpacity:selected?1:tier?.83:.65,strokeWeight:selected?2.4:tier?1.3:1.1,zIndex:selected?2:1};
   };
   areaLayer.setStyle(areaStyle);
   const markers=new globalThis.Map();let current=[],selectedId=null,hasFitted=false;
