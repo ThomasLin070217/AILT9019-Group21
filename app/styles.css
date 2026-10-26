@@ -19,6 +19,12 @@ main{margin:0}.workspace{display:grid;grid-template-columns:264px minmax(0,1fr) 
 #google-map{position:absolute;inset:0;visibility:hidden}.google-active #google-map{visibility:visible}.google-active #map{visibility:hidden}.google-active .map-controls{bottom:40px;z-index:2}.map-notice{font-size:11px;color:var(--accent);text-align:center;margin:8px 0}.google-city-pin{position:relative;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:var(--ink);cursor:pointer}.google-visit-count{display:grid;place-items:center;min-width:22px;height:22px;border:2px solid white;border-radius:50%;background:#829b9b;font:650 12px/1 var(--font);color:white;box-shadow:0 2px 5px #233c4220}.google-visit-count:empty{min-width:12px;width:12px;height:12px}.google-city-pin[data-tier="1"] .google-visit-count{background:#516442}.google-city-pin[data-tier="2"] .google-visit-count{background:#9f502f}.google-city-pin[data-tier="3"] .google-visit-count{background:#eea348;color:#3f311f}.google-city-pin.is-selected .google-visit-count{outline:2px solid var(--accent);outline-offset:2px}.google-city-label{position:absolute;left:36px;top:14px;background:#fffefbea;border-radius:3px;padding:2px 4px;white-space:nowrap;font:500 11px/1.2 var(--font);color:#30463e}.google-city-pin.is-selected .google-city-label{color:var(--accent);font-weight:650}.google-pin-photo{position:absolute;bottom:44px;left:0;width:48px;height:38px;object-fit:cover;border:3px solid white;border-radius:6px;box-shadow:0 3px 8px #233c4220}.google-city-marker:focus-visible .google-visit-count{outline:3px solid var(--ink);outline-offset:3px}
 .google-city-pin[data-tier="0"] .google-city-label{display:none}.google-city-pin[data-tier="0"].is-selected .google-city-label,.google-city-pin:hover .google-city-label,.google-city-marker:focus-visible .google-city-label{display:block}
 
+/* Browser focus/tap highlights can cover a whole SVG city group. Keep the authored marker ring instead. */
+#map,.marker,.city-button{-webkit-tap-highlight-color:transparent}
+.marker:focus{outline:none}
+.marker,.marker text{user-select:none;-webkit-user-select:none}
+.marker .selection{pointer-events:none}
+
 /* API-mode composer, photo strip and card actions */
 .api-composer{margin:0 0 24px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:grid;gap:14px}
 .form-title{margin:0;font:470 25px/1.2 var(--display);letter-spacing:-.025em;overflow-wrap:anywhere}
