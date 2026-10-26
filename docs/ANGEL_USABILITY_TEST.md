@@ -2,36 +2,49 @@
 
 ## Purpose
 
-This observation was made on the earlier fictional demo. The integrated API
-mode now has a visible **Add a memory** form. Its first-use experience still
-needs a fresh desktop/mobile check; the findings below must not be reported as
-a test of the newer interface.
-
-Check whether a first-time user can understand the current map-and-album prototype on desktop and mobile. This record covers the existing fictional demo only; it does not claim that photo upload, backend storage, or AI generation has been tested.
+Check whether a first-time user can understand the current map-and-album
+prototype on desktop and mobile. The original observation was made on the
+fictional demo; a follow-up check on 26 October 2026 confirmed that the
+integrated API-mode interface resolves the reported creation-control problem.
 
 ## Completed first-use observation
 
 **Date:** 26 October 2026
 **Observer:** Angel
 
-The desktop and mobile sample workflow ran successfully. User feedback was that the buttons for adding a new place and memory were unclear. On the selected-city panel, the only creation control is hidden inside **Try visit counting** and is labelled **Add a sample visit**. A new user could reasonably expect a visible "Create new memory" action, but that action does not exist in the current prototype.
+The desktop and mobile sample workflow ran successfully. In the earlier
+fictional demo, user feedback was that the controls for adding a new place and
+memory were unclear: the only creation control was hidden inside **Try visit
+counting** and labelled **Add a sample visit**.
+
+### Follow-up result: resolved in the integrated interface
+
+The current API-mode interface now presents a visible **Add a memory** action.
+It opens the real trip form, after which the user can add a photo, edit the
+memory, request an AI draft, review it, and save it explicitly. Angel tested
+this flow successfully on desktop and mobile on 26 October 2026. The original
+usability issue is therefore **resolved for the current interface**. The
+fictional `serve.py` demo intentionally retains its separate sample-visit
+control and should not be used as evidence for the real creation workflow.
 
 ### Recommended product change
 
-When the real trip workflow is implemented, add a visible primary action such as **Create new memory** in the selected-city panel. It should open a form with city, photos, optional notes, and save controls. Until that exists, clearly label the current hidden control as a fictional map demo rather than a real creation feature.
+This recommendation has been implemented in API mode through the visible
+**Add a memory** action. Keep the fictional sample-visit control clearly
+separated from the real workflow in documentation and demonstrations.
 
 ## Desktop walkthrough checklist
 
-Run the prototype with `python serve.py`, then open `http://127.0.0.1:8019/app/?map=local`.
+Run `python -m backend`, then open
+`http://127.0.0.1:8019/app/?mode=api`.
 
 | Check | Result | Notes |
 | --- | --- | --- |
-| Choose Osaka from the map or city list | Pass | Workflow ran successfully. |
-| Find the sample-visit control without help | Issue found | User feedback: the control for adding a new place/memory was unclear. |
-| Add a sample visit and see the count become 3 | Pass | Workflow ran successfully. |
-| Edit sample text without changing the count | Pass | Workflow ran successfully. |
-| Reload and confirm the demo record remains | Pass | Workflow ran successfully. |
-| Understand that the app is a fictional demo, not real memory creation | Issue found | A visible creation action and clearer demo label are needed. |
+| Choose a city from the map or city list | Pass | Workflow ran successfully. |
+| Find the control to add a new memory without help | Pass | **Add a memory** is visible in API mode. |
+| Create a trip, add a photo and edit the memory | Pass | Real local album workflow completed. |
+| Request, review and save an AI draft | Pass | Draft required review before explicit saving. |
+| Reload and confirm the saved record remains | Pass | Local trip, photo and reviewed text persisted. |
 
 ## Mobile walkthrough checklist
 
@@ -42,7 +55,7 @@ Use a phone or browser device emulation. Complete the same checks above and note
 | Map and Album tabs remain usable | Pass | Workflow ran successfully on mobile. |
 | City list/search remains usable | Pass | Workflow ran successfully on mobile. |
 | Selected-city panel is readable and scrollable | Pass | Workflow ran successfully on mobile. |
-| Demo creation control can be found and tapped | Issue found | The control is technically usable but its purpose is unclear. |
+| **Add a memory** control can be found and tapped | Pass | The visible real-workflow action resolves the earlier ambiguity. |
 
 ## First-use user trial
 
@@ -55,6 +68,7 @@ Record only non-sensitive observations. Do not use personal photos, travel notes
 | Date | Tester description | Completed without help? | Where they hesitated | One improvement |
 | --- | --- | --- | --- | --- |
 | 26 October 2026 | First-time user | Completed the sample workflow | Finding the control to add a new place/memory | Add a visible **Create new memory** button and label the existing control as a fictional demo |
+| 26 October 2026 | Follow-up integrated-interface check | Completed the real workflow | No hesitation at creation step | Resolved: visible **Add a memory** action opens the trip form |
 
 ## Evidence to attach after testing
 
