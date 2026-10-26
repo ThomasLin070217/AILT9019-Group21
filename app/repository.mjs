@@ -89,7 +89,8 @@ export class ApiRepository {
     return null;
   }
   async requestMemory(id,{confirmed=true}={}){
-    return requestJSON(`/api/trips/${encodeURIComponent(id)}/memory`,{method:'POST',json:{confirmed},timeout:25000});
+    // The backend's default AI budget is 60 seconds; leave time for its 504 response to reach the browser.
+    return requestJSON(`/api/trips/${encodeURIComponent(id)}/memory`,{method:'POST',json:{confirmed},timeout:75000});
   }
 }
 

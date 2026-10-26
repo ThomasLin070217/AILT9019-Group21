@@ -34,10 +34,12 @@ main{margin:0}.workspace{display:grid;grid-template-columns:264px minmax(0,1fr) 
 .city-region.is-selected{stroke:#943c1d;stroke-width:2.4px;stroke-opacity:1}
 .city-region.is-selected[data-tier="0"]{fill-opacity:.09}
 .map-selection{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 10px;font-size:12px;font-weight:600;color:#3d5a53;text-align:center;margin:0 0 9px;font-variant-numeric:tabular-nums}
+.map-keyboard-hint{margin:0 0 8px;text-align:center;color:#50686d;font-size:11px}
 .map-focus-text{border:0;background:transparent;padding:0 2px;min-height:30px;color:#943c1d;text-decoration:underline;text-underline-offset:3px;font-size:11px;white-space:nowrap}
 .map-focus-text:hover{background:transparent;color:#6f321e}
 .map-controls #focus-city{margin-bottom:5px;color:var(--accent)}
 @media(prefers-reduced-motion:reduce){.city-region{transition:none}}
+@media(max-width:850px){.map-keyboard-hint{display:none}}
 
 /* API-mode composer, photo strip and card actions */
 .api-composer{margin:0 0 24px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:grid;gap:14px}
