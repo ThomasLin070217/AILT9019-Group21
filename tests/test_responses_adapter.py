@@ -1,0 +1,108 @@
+"""Provider boundary checks with a fake HTTP transport; no real key or photo leaves the test."""
+from __future__ import annotations
+
+import asyncio
+import base64
+import json
+
+import httpx
+import pytest
+
+from backend.ai.base import MemoryRequest, ProviderError
+from backend.ai.responses import ResponsesGenerator
+from backend.config import Settings
+from conftest import upload, jpeg_bytes
+
+
+def run(coroutine):
+    return asyncio.run(coroutine)
+
+
+def generator(tmp_path, handler, *, base_url="https://api.openai.com/v1", model="test-model"):
+    settings = Settings(root=tmp_path, ai_api_key="test-only-key", ai_model=model,
+                        ai_base_url=base_url, ai_timeout_seconds=2)
+    return ResponsesGenerator(settings, httpx.MockTransport(handler))
+
+
+def request(tmp_path):
+    photo = tmp_path / "current.jpg"
+    photo.write_bytes(b"sanitised-photo")
+    return MemoryRequest(city_name="Hangzhou", trip_date=None, title="", notes="An afternoon visit",
+                         photo_paths=(photo,))
+
+
+def envelope(result):
+    return {"status": "completed", "output": [{"type": "message", "content":
+            [{"type": "output_text", "text": json.dumps(result)}]}]}
+
+
+def test_openai_payload_is_single_trip_and_draft_is_not_saved(tmp_path):
+    seen = []
+    def handler(req):
+        seen.append(req)
+        return httpx.Response(200, json=envelope({"status": "draft", "title": "Hangzhou afternoon",
+            "memory_text": "I spent an afternoon in Hangzhou.", "warnings": [], "questions": []}))
+    result = run(generator(tmp_path, handler).generate(request(tmp_path)))
+    assert result.status == "draft" and result.model == "test-model"
+    payload = json.loads(seen[0].content)
+    assert payload["store"] is False
+    assert payload["input"][0]["content"][0]["text"] == json.dumps({
+        "city": "Hangzhou", "trip_date": None, "title": "", "notes": "An afternoon visit"}, ensure_ascii=False)
+    image = payload["input"][0]["content"][1]["image_url"]
+    assert base64.b64decode(image.split(",", 1)[1]) == b"sanitised-photo"
+    assert len(payload["input"]) == 1
+
+
+def test_course_gateway_uses_compatible_json_mode_and_clarification(tmp_path):
+    seen = []
+    def handler(req):
+        seen.append(json.loads(req.content))
+        return httpx.Response(200, json=envelope({"status": "clarification", "title": "",
+            "memory_text": "", "warnings": [], "questions": ["Please add a clearer photo."]}))
+    adapter = generator(tmp_path, handler,
+        base_url="https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+        model="qwen3.8-flash")
+    result = run(adapter.generate(request(tmp_path)))
+    assert result.status == "clarification" and result.question == "Please add a clearer photo."
+    assert seen[0]["reasoning"] == {"effort": "none"}
+    assert seen[0]["text"] == {"format": {"type": "json_object"}}
+    assert seen[0]["input"][0]["role"] == "system"
+
+
+def test_invalid_model_output_and_redirect_are_rejected(tmp_path):
+    def bad_output(req):
+        return httpx.Response(200, json=envelope({"status": "draft", "title": "Invented", "memory_text": "X"}))
+    with pytest.raises(ProviderError):
+        run(generator(tmp_path, bad_output).generate(request(tmp_path)))
+    def redirect(req):
+        return httpx.Response(307, headers={"Location": "https://example.net/steal"})
+    with pytest.raises(ProviderError):
+        run(generator(tmp_path, redirect).generate(request(tmp_path)))
+
+
+def test_existing_local_ai_config_is_recognised(tmp_path):
+    (tmp_path / ".env.ai.local").write_text("TRAVEL_AI_API_KEY=test\nTRAVEL_AI_MODEL=qwen3.8-flash\n"
+                                            "TRAVEL_AI_BASE_URL=https://api.openai.com/v1\n")
+    settings = Settings.from_env(tmp_path, environ={})
+    assert settings.ai_provider == "responses"
+    assert settings.ai_api_key == "test"
+    assert settings.ai_model == "qwen3.8-flash"
+
+
+def test_combined_route_returns_editable_draft_without_changing_saved_trip(tmp_path, client_factory):
+    seen = []
+    def handler(req):
+        seen.append(json.loads(req.content))
+        return httpx.Response(200, json=envelope({"status": "draft", "title": "Hangzhou afternoon",
+            "memory_text": "I spent an afternoon in Hangzhou.", "warnings": [], "questions": []}))
+    adapter = generator(tmp_path, handler)
+    client, _ = client_factory(generator=adapter)
+    trip = client.post("/api/trips", json={"city_id": "cn-hangzhou", "notes": "An afternoon visit"}).json()
+    upload(client, trip["id"], jpeg_bytes())
+    before = client.get(f"/api/trips/{trip['id']}").json()
+    result = client.post(f"/api/trips/{trip['id']}/memory", json={"confirmed": True})
+    assert result.status_code == 200, result.text
+    assert result.json()["text"] == "I spent an afternoon in Hangzhou."
+    assert client.get(f"/api/trips/{trip['id']}").json() == before
+    assert len(seen) == 1
+    assert seen[0]["input"][0]["content"][0]["text"].find("Hangzhou") >= 0

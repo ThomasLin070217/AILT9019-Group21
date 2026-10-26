@@ -16,13 +16,15 @@ For any future replacement image:
 4. Record its SHA-256 checksum and replace the placeholder in `case.json`.
 5. Confirm that Angel owns the image and gives permission for this limited private course-repository use.
 
-Do not send the image to a cloud AI provider until the team has agreed on the provider, its retention/privacy terms, and the pre-send notice in the interface.
+The backend now has an OpenAI-compatible Responses adapter and a pre-send notice.
+Before sending this image, the team must still check the chosen provider's
+retention/privacy terms and agree that this permission covers that provider.
 
-## Test procedure once the AI path exists
+## Test procedure
 
 1. Create a trip with the sanitised image and exactly the fictional notes in `case.json`.
 2. Trigger AI generation once; save the unedited raw response, model/settings, prompt version and date.
 3. Check the output against `known_facts`, `required_memory_facts` and `forbidden_inferences`.
 4. Angel and Thomas independently record a pass/fail verdict before any human editing.
 
-No AI result has been collected yet.
+No AI result for this fixture has been collected yet.

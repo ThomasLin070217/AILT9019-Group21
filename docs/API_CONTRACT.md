@@ -105,7 +105,7 @@ photograph separately.
 - Failures: `413` too large, `415` unsupported, `422` invalid/too small/limit
   reached, `404` unknown trip. A failed upload leaves neither a row nor a file.
 
-## AI memory route (implemented proxy, provider pending)
+## AI memory route (implemented proxy and optional Responses provider)
 
 `POST /api/trips/{id}/memory`
 
@@ -136,8 +136,9 @@ Rules enforced by the route:
 - Missing configuration → `503 ai_not_configured`; provider failure or unusable
   output → `502 ai_provider_error` / `ai_malformed_response`; timeout → `504
   ai_timeout`. The saved trip is unchanged in every case.
-- Qingyang implements the adapter against `backend/ai/base.py`
-  (`MemoryGenerator`); no route or payload change is needed.
+- `AI_PROVIDER=responses` selects Thomas's OpenAI-compatible adapter against
+  `backend/ai/base.py`. A real provider call on this combined branch remains
+  to be verified; without configuration the route returns `503`.
 
 ## Error envelope
 
@@ -193,8 +194,9 @@ quota/access errors instead of pretending to persist.
 - **Angel:** review the new API-mode composer, editor, photo strip and AI notice
   states, refine the visual/interaction details, and keep the demo-only controls
   separate. Dispatch `travel-map:trips-changed` only after a confirmed save.
-- **Qingyang:** implement the provider adapter and agree draft/clarification
-  semantics; map counts must not depend on generation outcomes.
+- **Qingyang:** run the combined Responses adapter on approved fixtures and
+  coordinate independent draft/clarification review; map counts must not depend
+  on generation outcomes.
 - **Thomas:** repeat the browser checks in `?mode=api` against the real backend.
   A focused workflow check is in `tests/api-ui.e2e.mjs`; mocked HTTP tests do not
   complete the full integration handoff.

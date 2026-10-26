@@ -1,5 +1,9 @@
 # Owen backend + Qingyang fixture integration review
 
+This records the initial Owen/Qingyang integration. Angel's T03 fixture and
+Thomas's Responses adapter were added afterward; see
+[the current team sync](TEAM_SYNC_2026-10-26.md) for the combined status.
+
 This review branch starts from `main` at `835c124` and merges Owen's
 `feat/backend-api-ui` at `7afde24`. It does not merge the separate PR #3 or the
 uncommitted `feat/local-photo-trips` checkout.

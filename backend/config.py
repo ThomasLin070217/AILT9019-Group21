@@ -32,9 +32,9 @@ def _load_env_file(path: Path, environ: dict[str, str]) -> None:
 
 
 def load_dotenv(root: Path | str = REPO_ROOT, environ: Mapping[str, str] | None = None) -> dict[str, str]:
-    """Load ``.env`` and ``.env.maps.local`` without overriding real env vars."""
+    """Load local configuration files without overriding real env vars."""
     target = dict(os.environ) if environ is None else dict(environ)
-    for name in (".env", ".env.maps.local"):
+    for name in (".env", ".env.maps.local", ".env.ai.local"):
         _load_env_file(Path(root) / name, target)
     return target
 
@@ -133,11 +133,11 @@ class Settings:
             stored_jpeg_quality=integer("TMM_STORED_JPEG_QUALITY", 85),
             ai_max_edge=integer("TMM_AI_MAX_EDGE", 1280),
             ai_jpeg_quality=integer("TMM_AI_JPEG_QUALITY", 80),
-            ai_provider=env.get("AI_PROVIDER", "").strip(),
-            ai_api_key=env.get("AI_API_KEY", "").strip(),
-            ai_model=env.get("AI_MODEL", "").strip(),
-            ai_base_url=env.get("AI_BASE_URL", "").strip(),
-            ai_timeout_seconds=number("AI_TIMEOUT_SECONDS", 20.0),
+            ai_provider=(env.get("AI_PROVIDER") or ("responses" if env.get("TRAVEL_AI_API_KEY") else "")).strip(),
+            ai_api_key=(env.get("AI_API_KEY") or env.get("TRAVEL_AI_API_KEY") or "").strip(),
+            ai_model=(env.get("AI_MODEL") or env.get("TRAVEL_AI_MODEL") or "").strip(),
+            ai_base_url=(env.get("AI_BASE_URL") or env.get("TRAVEL_AI_BASE_URL") or "").strip(),
+            ai_timeout_seconds=number("AI_TIMEOUT_SECONDS", 60.0),
         )
 
 

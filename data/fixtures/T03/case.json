@@ -1,7 +1,7 @@
 {
   "id": "T03",
   "owner": "Angel",
-  "status": "prepared_pending_ai_run",
+  "status": "prepared_not_run",
   "kind": "real_photo_with_brief_fictional_notes",
   "input": {
     "city_id": "cn-hangzhou",

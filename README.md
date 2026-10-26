@@ -4,7 +4,7 @@
 
 We are building **Travel Memory Map**: a local travel album where saving a trip lights the city area on the map, repeat visits create separate cards and brighter visit tiers, and user-triggered AI can draft a memory from the current trip’s photos and notes.
 
-Thomas reported on 30 September 2026 that the proposal was submitted. The [proposal baseline](proposal/Travel_Memory_Map_Proposal.docx) is preserved for the 10 October revision; the Moodle receipt has not been independently checked here. Thomas’s city-map module is runnable with fictional demo data. Owen’s local backend provides SQLite trip storage, sanitised photo uploads and the AI proxy route, and the API-mode album now has browser controls for creating, uploading, editing, requesting an AI draft and deleting. A real cloud provider adapter is still planned.
+Thomas reported on 30 September 2026 that the proposal was submitted. The [proposal baseline](proposal/Travel_Memory_Map_Proposal.docx) is preserved for the 10 October revision; the Moodle receipt has not been independently checked here. Thomas’s city-map module is runnable with fictional demo data. Owen’s local backend provides SQLite trip storage, sanitised photo uploads and the AI proxy route, and the API-mode album now has browser controls for creating, uploading, editing, requesting an AI draft and deleting. Thomas's OpenAI-compatible Responses adapter is integrated; its live call on this combined build has not yet been verified.
 
 **Start with the [four-person work allocation](docs/WORK_ALLOCATION.md)** for owners, deliverables, review partners and deadlines. Thomas owns map/integration, Angel owns the interface, Owen owns backend/storage, and Qingyang owns AI/evaluation.
 
@@ -41,7 +41,7 @@ Run `.venv/bin/python -m pytest` for the 54 backend and configuration tests, and
 2. Select Tokyo and save a fictional trip with a short note. The map lights up and a new trip card appears. Add `data/fixtures/T04/blur_sample.png` to that card; the backend validates and re-encodes the image before storing it with the trip in SQLite.
 3. Edit and save the card, then reload the page. The card, photo and text remain. Save a second Tokyo trip to check that the city shows two independent visits.
 
-This is the current input → local processing → output path. Use only the synthetic fixture and fictional text when recording the screen. AI writing is **not** part of this verified path: without a live provider adapter its route returns `503` and does not change the saved card. The [20 October test record](tests/evidence/2026-10-20-midterm/RESULTS.md) documents the older demo-only path; see the [26 October integration review](docs/INTEGRATION_REVIEW_2026-10-26.md) for the combined build.
+This is the current input → local processing → output path. Use only the synthetic fixture and fictional text when recording the screen. AI writing is **not** part of this verified combined-build path: without provider configuration its route returns `503` and does not change the saved card. Thomas's earlier standalone branch has [live Bailian evidence](https://github.com/ThomasLin070217/AILT9019-Group21/blob/ThomasLin070217/thomaslin070217/explore-local-files/tests/evidence/product/bailian/RESULTS.md), but the ported adapter still needs a live check here. The [20 October test record](tests/evidence/2026-10-20-midterm/RESULTS.md) documents the older demo-only path; see the [26 October integration review](docs/INTEGRATION_REVIEW_2026-10-26.md) for the combined build.
 
 ## Team 21
 
@@ -95,4 +95,4 @@ var/          Git-ignored runtime database, uploads, and temp files
 
 ## Next integration step
 
-The album controls already work in `?mode=api`. The next step is a live provider adapter behind `backend/ai/base.py`, followed by real AI runs and independent human reviews. Before enabling uploads to that provider, decide whether the current trip's date and title are included alongside its city, notes and photos, and make the pre-send notice match the actual payload. Demo-only map controls remain prototype material.
+The album controls already work in `?mode=api`. The Responses adapter sends the selected trip's city, date, title, notes and sanitised photos, matching the pre-send notice. The next step is a live call on this combined build, then five-fixture evaluation and independent human reviews. Demo-only map controls remain prototype material. Start with the updated [quick start](docs/QUICK_START.md) and [team sync](docs/TEAM_SYNC_2026-10-26.md).

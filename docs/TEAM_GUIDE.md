@@ -1,5 +1,9 @@
 # AILT9019 Group 21 Team Guide
 
+For the current integrated status and each member's next step, read
+[the 26 October team sync](TEAM_SYNC_2026-10-26.md). This guide retains the
+original work plan and earlier status notes for context.
+
 ## Where we are now
 
 Our private repository is ready: [AILT9019-Group21](https://github.com/ThomasLin070217/AILT9019-Group21). The `main` branch contains the project structure, course plan, proposal worksheet, testing template, AI-use log, Friday standup log, milestones, labels, and pull-request template.

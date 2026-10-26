@@ -1,5 +1,8 @@
 # Travel Memory Map work allocation
 
+This is the original allocation. See [the current team sync](TEAM_SYNC_2026-10-26.md)
+for verified contributions and updated next actions.
+
 Development plan dated 30 September 2026 for four members. Thomas reports that the proposal has been submitted; its scope is our baseline. Assignments below reflect members' stated backgrounds, not a claim that everyone has already accepted their role. Raise availability or workload conflicts before 2 October. Update: Thomas’s map module and integration scaffolding are implemented with labelled fictional data; see [handoff and evidence](THOMAS_HANDOFF.md). Owen’s backend now implements SQLite trips, sanitised photo uploads, media serving and the AI proxy, and the API-mode album provides browser create/upload/edit/AI/delete controls; see [the backend guide](BACKEND.md). Angel should review the interface states, while the real provider adapter and AI evaluation remain planned.
 
 Dates use Hong Kong / Shanghai time (UTC+8), 2026. Internal dates are team targets; Moodle controls course deadlines.

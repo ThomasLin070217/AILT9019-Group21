@@ -12,7 +12,7 @@ def test_prepared_ai_fixtures_reference_real_cities_and_verified_images():
     city_ids = {city["id"] for city in json.loads((ROOT / "data/cities.json").read_text())}
     fixture_root = ROOT / "data/fixtures"
     cases = sorted(fixture_root.glob("T*/case.json"))
-    assert {"T01", "T04", "T05"} <= {path.parent.name for path in cases}
+    assert {"T01", "T03", "T04", "T05"} <= {path.parent.name for path in cases}
 
     for case_path in cases:
         case = json.loads(case_path.read_text())

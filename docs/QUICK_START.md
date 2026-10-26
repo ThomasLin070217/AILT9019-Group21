@@ -1,34 +1,43 @@
 # Travel Memory Map quick start
 
-This guide explains the **current map-and-album prototype**. It is a fictional demo, not yet the final photo-upload and AI-memory application.
+This guide covers the current integrated branch. Use fictional notes and a
+permission-cleared photo for testing; the local album persists its records.
 
-## Start the prototype
+## Run the complete local album
 
-1. Open PowerShell in the project folder.
-2. Run:
+From the repository root, with Python 3.10+:
 
-   ```powershell
-   python serve.py
-   ```
+```bash
+python3 -m venv .venv
+source .venv/bin/activate       # Windows PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python3 -m backend
+```
 
-3. Open [http://127.0.0.1:8019/app/?map=local](http://127.0.0.1:8019/app/?map=local) in a browser.
+Open **http://127.0.0.1:8019/app/?mode=api**. The map uses online street tiles
+by default; append `&map=local` for the bundled offline map. No AI or Google key
+is needed for this core workflow.
 
-No API key, account, photo upload, or npm installation is needed for this demo.
+1. Choose a supported city, then select **Add a memory**.
+2. Enter a title or notes and save the trip. Add a JPG, PNG or WebP photo to its card.
+3. Edit and save the memory. Reload the page: the card and photo remain in the
+   local SQLite album, and the city's visit count remains one.
+4. Add another trip in the same city. It becomes a separate card and the city's
+   highlighted area changes visit tier.
 
-## Try the working sample flow
+The browser's **Write with AI** action displays exactly what will be sent and
+requires a second click. With no provider configured it returns an honest error
+and leaves the trip unchanged. To enable Thomas's OpenAI-compatible Responses
+adapter, use the server-side settings in [the backend guide](BACKEND.md). A
+generated draft must be reviewed and saved separately.
 
-1. On the map, choose **Osaka** from the city list or its map marker.
-2. Confirm that Osaka starts with **2 visits** and two fictional memory cards.
-3. Scroll to the bottom of the Osaka panel and open **Try visit counting**.
-4. Select **Add a sample visit**. Osaka should now show **3 visits** and a third card.
-5. On the new card, select **Edit sample text**, type a short fictional memory, then choose **Save sample text**.
-6. Confirm that the text changes while the visit count remains **3**.
-7. Reload the page. The third sample card and the count should still be present in the same browser.
+## Fictional no-install demo
 
-Use **Reset sample album** in the footer when you are finished to restore the original fictional records.
+Run `python3 serve.py` and open **http://127.0.0.1:8019/app/?map=local**.
+This is a sample map with fictional Osaka visits, kept in browser storage. It
+does not upload photos, create real trips or call AI. Stop one server before
+starting the other on the same port.
 
-## Important current limitation
-
-The current interface does **not** let you create a real memory from your own city, photos, or notes. "Add a sample visit" only creates a fictional record for testing the map. Photo upload, real saved trips, and AI-generated memory drafts are planned work and are not available yet.
-
-Do not enter personal travel notes or upload private photos for this prototype.
+Use **Reset sample album** in the demo footer when finished. To preserve real
+API-mode trips, back up `var/travel.db` and `var/media/` together; see the
+[backend guide](BACKEND.md).

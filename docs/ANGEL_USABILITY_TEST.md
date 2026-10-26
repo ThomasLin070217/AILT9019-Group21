@@ -2,6 +2,11 @@
 
 ## Purpose
 
+This observation was made on the earlier fictional demo. The integrated API
+mode now has a visible **Add a memory** form. Its first-use experience still
+needs a fresh desktop/mobile check; the findings below must not be reported as
+a test of the newer interface.
+
 Check whether a first-time user can understand the current map-and-album prototype on desktop and mobile. This record covers the existing fictional demo only; it does not claim that photo upload, backend storage, or AI generation has been tested.
 
 ## Completed first-use observation
