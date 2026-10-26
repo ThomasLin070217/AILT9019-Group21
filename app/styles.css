@@ -25,6 +25,20 @@ main{margin:0}.workspace{display:grid;grid-template-columns:264px minmax(0,1fr) 
 .marker,.marker text{user-select:none;-webkit-user-select:none}
 .marker .selection{pointer-events:none}
 
+/* Saved trips illuminate the city footprint itself. Keep the boundary flat and crisp. */
+#regions{pointer-events:none}
+.city-region{fill:#ad4a29;fill-opacity:0;stroke:#ad4a29;stroke-opacity:0;stroke-width:1.3px;vector-effect:non-scaling-stroke;transition:fill-opacity 220ms ease-out,stroke-opacity 220ms ease-out}
+.city-region[data-tier="1"]{fill:#71946a;fill-opacity:.68;stroke:#496e47;stroke-opacity:.92}
+.city-region[data-tier="2"]{fill:#cb754d;fill-opacity:.76;stroke:#a45634;stroke-opacity:.94}
+.city-region[data-tier="3"]{fill:#eca33f;fill-opacity:.88;stroke:#a65b26;stroke-opacity:1}
+.city-region.is-selected{stroke:#943c1d;stroke-width:2.4px;stroke-opacity:1}
+.city-region.is-selected[data-tier="0"]{fill-opacity:.09}
+.map-selection{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 10px;font-size:12px;font-weight:600;color:#3d5a53;text-align:center;margin:0 0 9px;font-variant-numeric:tabular-nums}
+.map-focus-text{border:0;background:transparent;padding:0 2px;min-height:30px;color:#943c1d;text-decoration:underline;text-underline-offset:3px;font-size:11px;white-space:nowrap}
+.map-focus-text:hover{background:transparent;color:#6f321e}
+.map-controls #focus-city{margin-bottom:5px;color:var(--accent)}
+@media(prefers-reduced-motion:reduce){.city-region{transition:none}}
+
 /* API-mode composer, photo strip and card actions */
 .api-composer{margin:0 0 24px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:grid;gap:14px}
 .form-title{margin:0;font:470 25px/1.2 var(--display);letter-spacing:-.025em;overflow-wrap:anywhere}

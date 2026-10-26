@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {countVisits,visitTier,updateTrip,cityTrips,filterCities,validateTrip,initialView,zoomView,clampView,project} from '../app/domain.mjs';
 import {DemoRepository,ApiRepository,STORAGE_KEY,DraftStore,photoURL} from '../app/repository.mjs';
+import {polygonsOf,regionBounds,regionPath,viewForRegion} from '../app/city-regions.mjs';
 const cities=JSON.parse(readFileSync(new URL('../data/cities.json',import.meta.url)));
+const cityRegions=JSON.parse(readFileSync(new URL('../data/map/city-regions.geojson',import.meta.url)));
 const seed=JSON.parse(readFileSync(new URL('../data/demo-trips.json',import.meta.url)));
 const storage=()=>{const records=new Map();return {getItem:k=>records.get(k)??null,setItem:(k,v)=>records.set(k,v)};};
 test('a saved trip ID, not photos or repeated snapshots, defines a visit',()=>{
@@ -57,10 +59,34 @@ test('all city IDs are unique, licensed points fit initial view, and fixtures va
  for(const city of cities){const [x,y]=project(city.longitude,city.latitude);assert.ok(x>=v.x&&x<=v.x+v.width&&y>=v.y&&y<=v.y+v.height);assert.ok(city.source_ne_id);}
  seed.forEach(t=>validateTrip(t,cities));
 });
+test('each supported city has a geographic footprint containing its marker centre',()=>{
+ assert.equal(cityRegions.features.length,cities.length);
+ const features=new Map(cityRegions.features.map(feature=>[feature.properties.city_id,feature]));
+ assert.equal(features.size,cities.length);
+ const inRing=([x,y],ring)=>{
+  let inside=false;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+   const [ax,ay]=ring[i],[bx,by]=ring[j];
+   if((ay>y)!==(by>y)&&x<(bx-ax)*(y-ay)/(by-ay)+ax)inside=!inside;
+  }
+  return inside;
+ };
+ for(const city of cities){
+  const feature=features.get(city.id);assert.ok(feature,city.id);
+  assert.ok(Number.isInteger(feature.properties.osm_relation_id));
+  assert.ok(polygonsOf(feature.geometry).some(poly=>inRing([city.longitude,city.latitude],poly[0])&&!poly.slice(1).some(hole=>inRing([city.longitude,city.latitude],hole))),city.id);
+  assert.match(regionPath(feature.geometry),/^M/);
+  const bounds=regionBounds(feature.geometry),[x,y]=project(city.longitude,city.latitude);
+  assert.ok(x>=bounds.west&&x<=bounds.east&&y>=bounds.north&&y<=bounds.south,city.id);
+  const focused=viewForRegion(feature.geometry),full=initialView();
+  assert.ok(focused.width<=full.width&&focused.width>=full.width/32,city.id);
+  assert.ok(x>=focused.x&&x<=focused.x+focused.width&&y>=focused.y&&y<=focused.y+focused.height,city.id);
+ }
+});
 test('zoom/pan stays within catalogue bounds and zoom limits',()=>{
  const full=initialView();let v=full;
  for(let i=0;i<30;i++)v=zoomView(v,.65);
- assert.equal(v.width,full.width/8);
+ assert.equal(v.width,full.width/32);
  v=clampView({...v,x:-10000,y:10000});assert.equal(v.x,full.x);assert.equal(v.y,full.y+full.height-v.height);
  for(let i=0;i<30;i++)v=zoomView(v,1/.65);
  assert.equal(v.width,full.width);

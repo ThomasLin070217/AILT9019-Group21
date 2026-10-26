@@ -2,7 +2,7 @@
 
 ## Project status
 
-We are building **Travel Memory Map**: a local travel album with city markers, separate cards for repeat visits, and user-triggered AI memory writing from the current trip’s photos and notes.
+We are building **Travel Memory Map**: a local travel album where saving a trip lights the city area on the map, repeat visits create separate cards and brighter visit tiers, and user-triggered AI can draft a memory from the current trip’s photos and notes.
 
 Thomas reported on 30 September 2026 that the proposal was submitted. The [proposal baseline](proposal/Travel_Memory_Map_Proposal.docx) is preserved for the 10 October revision; the Moodle receipt has not been independently checked here. Thomas’s city-map module is runnable with fictional demo data. Owen’s local backend provides SQLite trip storage, sanitised photo uploads and the AI proxy route, and the API-mode album now has browser controls for creating, uploading, editing, requesting an AI draft and deleting. A real cloud provider adapter is still planned.
 
@@ -14,7 +14,7 @@ Thomas reported on 30 September 2026 that the proposal was submitted. The [propo
 python3 serve.py
 ```
 
-Open **http://127.0.0.1:8019/app/**. Python 3.10+ is sufficient; no API key or npm installation is needed. Switch between **Map** and **Album** to explore a place or see its photo cards side by side. Select a city, search by English/Chinese name, and open **Try visit counting** to add/edit fictional demo visits. The first two Osaka cards show credited example photos; click a cover to view it. Unsaved sample drafts survive city changes and reloads within the tab. Browser demo storage is not the planned real backend. No photos or notes are sent to a cloud service by this prototype. Google Maps is optional: see [local key setup](docs/GOOGLE_MAPS_SETUP.md). With a configured key, Map view uses Google’s online tiles and custom city markers; `?map=local` uses the offline map.
+Open **http://127.0.0.1:8019/app/**. Python 3.10+ is sufficient; no API key or npm installation is needed. Switch between **Map** and **Album** to explore a place or see its photo cards side by side. Select a city, search by English/Chinese name, and open **Try visit counting** to add/edit fictional demo visits. A saved visit colours that city's mapped area; use **Focus on selected city** to inspect a small city at regional scale. The first two Osaka cards show credited example photos; click a cover to view it. Unsaved sample drafts survive city changes and reloads within the tab. Browser demo storage is not the planned real backend. No photos or notes are sent to a cloud service by this prototype. Google Maps is optional: see [local key setup](docs/GOOGLE_MAPS_SETUP.md). With a configured key, Map view uses Google’s online tiles with the same city-area layer and custom markers; `?map=local` uses the offline map.
 
 Run `npm test` with Node.js 20+ for the map logic/storage checks. See [Thomas handoff](docs/THOMAS_HANDOFF.md) for browser checks and [API contract](docs/API_CONTRACT.md) for teammate integration. API mode (`/app/?mode=api`) requires Owen’s backend and never substitutes demo data when it fails.
 

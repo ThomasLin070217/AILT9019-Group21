@@ -1,0 +1,131 @@
+{
+  "source": "OpenStreetMap contributors via Nominatim",
+  "licence": "ODbL 1.0",
+  "licence_url": "https://www.openstreetmap.org/copyright",
+  "accessed": "2026-10-26",
+  "transformations": [
+    "Selected the city administrative relation whose geometry contains the catalogue centre; Hong Kong uses the region relation and Fukuoka uses the city relation.",
+    "Simplified rings to a tolerance of 0.0015 degrees (0.0005 for Macau) and rounded coordinates to six decimals.",
+    "For Tokyo and Kaohsiung, omitted distant disconnected island components so the displayed footprint describes the city around the selected centre."
+  ],
+  "limitations": [
+    "These are display footprints, not authoritative boundaries or proof of a visit.",
+    "Coverage is restricted to the 19 catalogue cities."
+  ],
+  "features": [
+    {
+      "city_id": "cn-beijing",
+      "osm_relation_id": 912940,
+      "osm_name": "北京市, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/912940"
+    },
+    {
+      "city_id": "cn-shanghai",
+      "osm_relation_id": 913067,
+      "osm_name": "上海市, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/913067"
+    },
+    {
+      "city_id": "cn-hangzhou",
+      "osm_relation_id": 3221112,
+      "osm_name": "杭州市, 浙江省, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/3221112"
+    },
+    {
+      "city_id": "cn-nanjing",
+      "osm_relation_id": 2131524,
+      "osm_name": "南京市, 江苏省, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/2131524"
+    },
+    {
+      "city_id": "cn-chengdu",
+      "osm_relation_id": 2110264,
+      "osm_name": "成都市, 四川省, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/2110264"
+    },
+    {
+      "city_id": "cn-chongqing",
+      "osm_relation_id": 913069,
+      "osm_name": "重庆市, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/913069"
+    },
+    {
+      "city_id": "cn-xian",
+      "osm_relation_id": 3226004,
+      "osm_name": "西安市, 陕西省, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/3226004"
+    },
+    {
+      "city_id": "cn-guangzhou",
+      "osm_relation_id": 3287346,
+      "osm_name": "广州市, 广东省, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/3287346"
+    },
+    {
+      "city_id": "cn-shenzhen",
+      "osm_relation_id": 3464353,
+      "osm_name": "深圳市, 广东省, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/3464353"
+    },
+    {
+      "city_id": "hk-hong-kong",
+      "osm_relation_id": 913110,
+      "osm_name": "香港 Hong Kong, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/913110"
+    },
+    {
+      "city_id": "mo-macau",
+      "osm_relation_id": 1867188,
+      "osm_name": "澳門 Macau, 中国",
+      "source_url": "https://www.openstreetmap.org/relation/1867188"
+    },
+    {
+      "city_id": "tw-taipei",
+      "osm_relation_id": 1293250,
+      "osm_name": "臺北市, 臺灣",
+      "source_url": "https://www.openstreetmap.org/relation/1293250"
+    },
+    {
+      "city_id": "tw-kaohsiung",
+      "osm_relation_id": 2127079,
+      "osm_name": "高雄市, 臺灣",
+      "source_url": "https://www.openstreetmap.org/relation/2127079"
+    },
+    {
+      "city_id": "jp-tokyo",
+      "osm_relation_id": 1543125,
+      "osm_name": "東京都, 日本",
+      "source_url": "https://www.openstreetmap.org/relation/1543125"
+    },
+    {
+      "city_id": "jp-osaka",
+      "osm_relation_id": 358674,
+      "osm_name": "大阪市, 大阪府, 日本",
+      "source_url": "https://www.openstreetmap.org/relation/358674"
+    },
+    {
+      "city_id": "jp-kyoto",
+      "osm_relation_id": 357794,
+      "osm_name": "京都市, 京都府, 日本",
+      "source_url": "https://www.openstreetmap.org/relation/357794"
+    },
+    {
+      "city_id": "jp-sapporo",
+      "osm_relation_id": 4085749,
+      "osm_name": "札幌市, 石狩振興局, 北海道, 北海道地方, 日本",
+      "source_url": "https://www.openstreetmap.org/relation/4085749"
+    },
+    {
+      "city_id": "jp-fukuoka",
+      "osm_relation_id": 4008611,
+      "osm_name": "福岡市, 福岡県, 日本",
+      "source_url": "https://www.openstreetmap.org/relation/4008611"
+    },
+    {
+      "city_id": "jp-naha",
+      "osm_relation_id": 4556097,
+      "osm_name": "那覇市, 沖縄県, 900-8585, 日本",
+      "source_url": "https://www.openstreetmap.org/relation/4556097"
+    }
+  ]
+}

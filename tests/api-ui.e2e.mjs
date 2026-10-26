@@ -16,6 +16,8 @@ try{
  await p.locator('.api-composer input[type=text]').fill(title);await p.locator('.api-composer textarea').fill('Fictional notes from the browser workflow.');await p.locator('.api-composer button[type=submit]').click();
  await p.waitForFunction(t=>[...document.querySelectorAll('.trip-card h3')].some(h=>h.textContent===t),title);
  const card=p.locator('.trip-card').filter({hasText:title}).first();tripId=await card.getAttribute('data-trip-id');assert.ok(tripId,'the server trip ID is present on the card');
+ assert.equal(await p.locator('.city-region[data-city-id="cn-nanjing"]').getAttribute('data-tier'),'1');
+ assert.match(await p.locator('#map-selection').innerText(),/Nanjing · 1 trip saved · area lit/);
  checks.push('Create a trip from the API composer');
  await card.locator('input[type=file]').setInputFiles({name:'api-ui.jpg',mimeType:'image/jpeg',buffer:photo});await card.locator('.photo-strip img').waitFor({state:'visible'});
  checks.push('Upload a photo from the card');
@@ -29,6 +31,7 @@ try{
  await p.screenshot({path:out+'/api-ui.png'});
  await card.getByRole('button',{name:'Delete trip'}).click();
  await p.waitForFunction(t=>![...document.querySelectorAll('.trip-card h3')].some(h=>h.textContent===t),title);tripId=null;
+ assert.equal(await p.locator('.city-region[data-city-id="cn-nanjing"]').getAttribute('data-tier'),'0');
  checks.push('Delete the trip and its photos');
  await p.setViewportSize({width:390,height:844});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'390px horizontal overflow');checks.push('No horizontal overflow at 390px');
  assert.deepEqual(errors,[]);writeFileSync(out+'/api-ui-results.json',JSON.stringify({status:'passed',checks,errors},null,2));console.log(JSON.stringify({status:'passed',checks:checks.length,out}));

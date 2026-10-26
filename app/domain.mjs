@@ -49,7 +49,7 @@ export function initialView() {
 }
 export function zoomView(view, factor) {
   const full=initialView();
-  const width=Math.max(full.width/8,Math.min(full.width,view.width*factor));
+  const width=Math.max(full.width/32,Math.min(full.width,view.width*factor));
   const height=width*680/900;
   return clampView({x:view.x+(view.width-width)/2,y:view.y+(view.height-height)/2,width,height});
 }

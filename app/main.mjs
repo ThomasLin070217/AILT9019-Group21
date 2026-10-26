@@ -1,10 +1,12 @@
 import {visitTier,countVisits,cityTrips,filterCities,project,initialView,zoomView,clampView} from './domain.mjs';
 import {DemoRepository,ApiRepository,getJSON,DraftStore,photoURL} from './repository.mjs';
 import {createGoogleMap} from './google-map.mjs';
+import {regionPath,viewForRegion} from './city-regions.mjs';
 const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
 const mode=new URLSearchParams(location.search).get('mode')==='api'?'api':'demo';
-let cities=[],trips=[],selected='jp-osaka',repository,view=initialView(),busy=false,ready=false;
+let cities=[],trips=[],selected='jp-osaka',repository,view=initialView(),busy=false,ready=false,regionData;
 let googleMap=null,mapStarted=false,mapFailed=false;
+const regionElements=new Map(),regionFeatures=new Map();
 let draftStorage;try{draftStorage=sessionStorage;}catch{}
 const drafts=new DraftStore(draftStorage,text=>message(text));
 const composerKey='travel-memory-map.api-composer.v1';let composerDrafts={};
@@ -35,6 +37,7 @@ function choose(id,keyboard=false){
  $('memories').scrollTop=0;
  if(origin==='google')googleMap?.focus(id);else $(origin).querySelector(`[data-city-id="${CSS.escape(id)}"]`)?.focus({preventScroll:true});
  googleMap?.select(id);
+ if(origin==='cities')focusCity(id);
  if(!keyboard&&matchMedia('(max-width:850px)').matches)$('memories').scrollIntoView({block:'start',behavior:'instant'});
  window.dispatchEvent(new CustomEvent('travel-map:city-selected',{detail:{city_id:id}}));
 }
@@ -44,6 +47,9 @@ function render(){
  if(!visible.some(c=>c.id===selected))selected=visible[0]?.id||null;
  $('progress').replaceChildren(node('strong',`${counts.size} cities visited`),document.createTextNode(` of ${cities.length} supported · ${trips.length} trips`));
  $('result-count').textContent=`${visible.length} of ${cities.length} cities`;
+ const chosen=cities.find(city=>city.id===selected),visits=counts.get(selected)||0;
+ $('map-selection').textContent=chosen?`${chosen.name} · ${visits?`${visits} ${visits===1?'trip':'trips'} saved · area lit`:'No saved trips yet · area unlit'}`:'Choose a city to see its visit area.';
+ $('focus-city').disabled=!chosen;$('focus-city-text').disabled=!chosen;
  $('cities').replaceChildren();
  if(!visible.length)$('cities').append(node('p','No matching cities. Change your search or turn off the visited filter.','empty'));
  const catalogue=[...visible].sort((a,b)=>Number(counts.has(b.id))-Number(counts.has(a.id))||a.name.localeCompare(b.name));
@@ -68,13 +74,36 @@ function drawLand(data){
  $('land').replaceChildren(svg('path',{d:path,class:'land','fill-rule':'evenodd'}));
  applyView();
 }
+function drawRegions(data){
+ regionElements.clear();regionFeatures.clear();const paths=[];
+ for(const feature of data.features){
+  const id=feature.properties.city_id,path=svg('path',{d:regionPath(feature.geometry),class:'city-region','fill-rule':'evenodd','data-city-id':id});
+  regionFeatures.set(id,feature);regionElements.set(id,path);paths.push(path);
+ }
+ $('regions').replaceChildren(...paths);
+}
+function renderRegions(visible,counts){
+ const shown=new Set(visible.map(city=>city.id));
+ for(const [id,path] of regionElements){
+  const count=counts.get(id)||0;
+  path.toggleAttribute('hidden',!shown.has(id));path.dataset.tier=String(visitTier(count));path.classList.toggle('is-selected',id===selected);
+  if(id===selected)path.parentNode.append(path);
+ }
+ googleMap?.updateRegions(visible,counts,selected);
+}
+function focusCity(id){
+ const feature=regionFeatures.get(id);if(!feature)return;
+ if(googleMap){googleMap.focusRegion(id);return;}
+ view=viewForRegion(feature.geometry);applyView();
+}
 function applyView(){
  $('map').setAttribute('viewBox',`${view.x} ${view.y} ${view.width} ${view.height}`);
  const zoomed=view.width<initialView().width-.01;$('map').classList.toggle('zoomed',zoomed);
- $('zoom-out').disabled=!zoomed;$('zoom-in').disabled=view.width<=initialView().width/8+.01;
+ $('zoom-out').disabled=!zoomed;$('zoom-in').disabled=view.width<=initialView().width/32+.01;
  if(ready)renderMarkers(visibleCities(),countVisits(trips));
 }
 function renderMarkers(visible,counts){
+ renderRegions(visible,counts);
  if(googleMap){googleMap.update(visible.map(city=>{
   const trip=cityTrips(trips,city.id).find(t=>(mode==='demo'&&demoCovers[t.id])||t.photos.some(p=>photoURL(p,location.origin)));
   const sample=trip&&mode==='demo'&&demoCovers[trip.id];
@@ -88,7 +117,7 @@ function renderMarkers(visible,counts){
  for(const city of [...visible].sort((a,b)=>Number(a.id===selected)-Number(b.id===selected))){
   const [x,y]=project(city.longitude,city.latitude),count=counts.get(city.id)||0;
   const g=svg('g',{class:'marker',transform:`translate(${x} ${y})`,role:'button',tabindex:'0','aria-label':`${city.name}, ${count} ${count===1?'visit':'visits'}`,'aria-pressed':String(city.id===selected),'data-city-id':city.id});
-  const title=svg('title');title.textContent=`${city.name} · ${count} saved trips`;g.append(title,svg('circle',{r:1.85*scale,class:'hit'}),svg('circle',{r:1.05*scale,class:'selection'}),svg('circle',{r:(count?.78:.3)*scale,class:`pin tier-${visitTier(count)}`}));
+  const title=svg('title');title.textContent=`${city.name} · ${count} saved ${count===1?'trip':'trips'}`;g.append(title,svg('circle',{r:1.85*scale,class:'hit'}),svg('circle',{r:1.05*scale,class:'selection'}),svg('circle',{r:(count?.78:.3)*scale,class:`pin tier-${visitTier(count)}`}));
   if(count){const number=svg('text',{class:`visit-number count-tier-${visitTier(count)}`,y:.3*scale,style:`font-size:${.9*scale}px`});number.textContent=String(count);g.append(number);}
   const selectedTrip=city.id===selected?cityTrips(trips,city.id).find(t=>(mode==='demo'&&demoCovers[t.id])||t.photos.some(p=>photoURL(p,location.origin))):null;
   if(selectedTrip){
@@ -161,7 +190,7 @@ function makeTripComposer(city){
  const remember=()=>saveComposerDraft(city.id,{date:date.value,title:title.value,notes:notes.value});
  date.addEventListener('change',remember);title.addEventListener('input',remember);notes.addEventListener('input',remember);
  form.append(node('h3',`Add a memory to ${city.name}`,'form-title'),formField('Date',date),formField('Title',title),formField('Notes',notes),save,node('p','Saved to the local backend on this computer. Add photos after saving. Your unsaved text stays in this tab.','form-hint'));
- form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});return [...trips,created];},'Trip saved. Add photos or write a memory.',()=>clearComposerDraft(city.id));});
+ form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;const hadVisit=Boolean(countVisits(trips).get(city.id));mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});return [...trips,created];},`${city.name} ${hadVisit?'brightened':'lit up'}. Add photos or write a memory.`,()=>{clearComposerDraft(city.id);queueMicrotask(()=>focusCity(city.id));});});
  return form;
 }
 function makeApiActions(card,trip){
@@ -246,9 +275,10 @@ function showNearby(nearby){
 async function load(){
  setBusy(true);clearError();ready=false;message('');$('loading').hidden=false;$('mode-label').textContent=mode==='api'?'Backend mode · waiting for local API records':'Demo album · fictional trips · no AI calls';
  try{
-  const [catalogue,land,seed]=await Promise.all([getJSON(mode==='api'?'/api/cities':'../data/cities.json'),getJSON('../data/map/land.geojson'),mode==='demo'?getJSON('../data/demo-trips.json'):Promise.resolve([])]);
+  const [catalogue,land,regions,seed]=await Promise.all([getJSON(mode==='api'?'/api/cities':'../data/cities.json'),getJSON('../data/map/land.geojson'),getJSON('../data/map/city-regions.geojson'),mode==='demo'?getJSON('../data/demo-trips.json'):Promise.resolve([])]);
   if(!Array.isArray(catalogue)||!catalogue.length||catalogue.some(c=>!c.id||!c.name||!Number.isFinite(c.longitude)||!Number.isFinite(c.latitude))||new Set(catalogue.map(c=>c.id)).size!==catalogue.length)throw new Error('Invalid city catalogue.');
-  cities=catalogue;repository=mode==='demo'?new DemoRepository(cities,seed):new ApiRepository(cities);trips=await repository.list();ready=true;drawLand(land);render();
+  if(regions?.type!=='FeatureCollection'||regions.features?.length!==catalogue.length||new Set(regions.features.map(f=>f.properties?.city_id)).size!==catalogue.length||regions.features.some(f=>!catalogue.some(c=>c.id===f.properties?.city_id)))throw new Error('City area data does not match the catalogue.');
+  cities=catalogue;regionData=regions;repository=mode==='demo'?new DemoRepository(cities,seed):new ApiRepository(cities);trips=await repository.list();ready=true;drawRegions(regions);drawLand(land);render();
   $('mode-label').textContent=mode==='demo'?'Demo album · fictional trips saved in this browser · no AI calls':'Backend mode · showing records from the local API';$('reset').hidden=mode!=='demo';$('refresh').hidden=mode!=='api';
  }catch(error){showError(error);$('progress').textContent='Map unavailable';}
  finally{$('loading').hidden=true;setBusy(false);}
@@ -270,7 +300,7 @@ async function startGoogleMap(){
    $('map-notice').hidden=false;$('map-notice').textContent='Google Maps is unavailable. Showing the local map. Check the connection, API access and website restrictions, then reload to retry.';
    if(ready){applyView();renderMarkers(visibleCities(),countVisits(trips));}
   };
-  const candidate=await createGoogleMap({container:$('google-map'),config,onSelect:choose,onNearby:showNearby,onFailure:fallback,onZoom:zoom=>{$('zoom-in').disabled=zoom>=18;$('zoom-out').disabled=zoom<=3;}});
+  const candidate=await createGoogleMap({container:$('google-map'),config,regionData,onSelect:choose,onNearby:showNearby,onFailure:fallback,onZoom:zoom=>{$('zoom-in').disabled=zoom>=18;$('zoom-out').disabled=zoom<=3;}});
   if(mapFailed){candidate.destroy();return;}
   googleMap=candidate;renderMarkers(visibleCities(),countVisits(trips));await candidate.ready;
   if(mapFailed)return;
@@ -280,7 +310,9 @@ async function startGoogleMap(){
 }
 for(const id of ['search','region','visited'])$(id).addEventListener(id==='search'?'input':'change',()=>{if(ready)render();});
 $('zoom-in').addEventListener('click',()=>{if(googleMap){googleMap.zoom(1);return;}view=zoomView(view,.65);applyView();});$('zoom-out').addEventListener('click',()=>{if(googleMap){googleMap.zoom(-1);return;}view=zoomView(view,1/.65);applyView();});$('fit').addEventListener('click',()=>{if(googleMap){googleMap.fit();return;}view=initialView();applyView();});
-$('add-sample').addEventListener('click',()=>{if(selected)mutate(()=>repository.add(selected),'Sample visit saved in this browser. City brightness updated.');});
+$('focus-city').addEventListener('click',()=>{if(selected)focusCity(selected);});
+$('focus-city-text').addEventListener('click',()=>{if(selected)focusCity(selected);});
+$('add-sample').addEventListener('click',()=>{if(selected){const id=selected,city=cities.find(row=>row.id===id),hadVisit=Boolean(countVisits(trips).get(id));mutate(()=>repository.add(id),`${city.name} ${hadVisit?'brightened':'lit up'} in this sample album.`,()=>queueMicrotask(()=>focusCity(id)));}});
 $('reset').addEventListener('click',()=>{if(confirm('Replace your sample edits with the original fictional trips?'))mutate(()=>repository.reset(),'Original sample album restored.',()=>drafts.clear());});
 $('recover').addEventListener('click',async()=>{if(confirm('Replace damaged demo records with the original samples?')){try{await repository.reset();drafts.clear();await load();}catch(error){showError(error);}}});
 $('retry').addEventListener('click',load);$('refresh').addEventListener('click',load);
