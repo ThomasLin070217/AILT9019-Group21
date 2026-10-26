@@ -6,7 +6,9 @@ This is Angel's proposed evaluation fixture for the condition **photos plus brie
 
 This fixture is in the same team repository, under `data/fixtures/T03/`; do **not** create a separate repository.
 
-The intended image is Angel's own Hangzhou travel photograph. Before committing it:
+The image is Angel's own Hangzhou travel photograph. It was checked before inclusion: it contains no clearly recognisable people, documents, or addresses, and no EXIF fields were found. The original remains outside the repository; `hangzhou-01.jpg` is the course-fixture copy.
+
+For any future replacement image:
 
 1. Choose an image with no recognisable people, personal documents, hotel/transport identifiers, home address, or other sensitive information.
 2. Create a copy with EXIF/GPS metadata removed. Keep the original outside this repository.
