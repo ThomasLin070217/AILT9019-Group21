@@ -4,7 +4,7 @@
 
 Our private repository is ready: [AILT9019-Group21](https://github.com/ThomasLin070217/AILT9019-Group21). The `main` branch contains the project structure, course plan, proposal worksheet, testing template, AI-use log, Friday standup log, milestones, labels, and pull-request template.
 
-The topic is **Travel Memory Map**. Thomas reports that the proposal has been submitted. See the [proposal baseline](../proposal/Travel_Memory_Map_Proposal.docx) and [work allocation](WORK_ALLOCATION.md). Thomas’s [map module](THOMAS_HANDOFF.md) is runnable with labelled fictional data and map test evidence. Actual photo uploads, SQLite and cloud AI remain unintegrated; there are no AI evaluation results.
+The topic is **Travel Memory Map**. Thomas reports that the proposal has been submitted. See the [proposal baseline](../proposal/Travel_Memory_Map_Proposal.docx) and [work allocation](WORK_ALLOCATION.md). Thomas’s [map module](THOMAS_HANDOFF.md) is runnable with labelled fictional data and map test evidence. Owen’s [local backend](BACKEND.md) implements trip storage in SQLite, sanitised photo uploads and the AI proxy, and the API-mode album now provides browser controls for create, upload, edit, AI draft and delete. No cloud AI provider is configured yet, so there are still no AI evaluation results; Angel should review the new interface states.
 
 The flow is city selection → photos and optional notes → saved card and lit city, followed by optional user-triggered AI writing. Repeat trips get separate cards, and saved-trip counts determine brightness. The first version is local with a cloud AI API and preset cities in mainland China, Hong Kong, Macau, Taiwan and Japan.
 

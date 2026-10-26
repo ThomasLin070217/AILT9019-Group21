@@ -1,25 +1,17 @@
-"""Local-only static preview. This is not Owen's trip API or a production server."""
+"""Local-only demo preview. The real local backend is ``python3 -m backend``."""
 import argparse
-import json
-import os
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from map_config import read_map_config
+
 ROOT = Path(__file__).resolve().parent
 
 def map_config():
     """Only publish browser Maps settings, never arbitrary environment values."""
-    values = {}
-    config = ROOT / '.env.maps.local'
-    if config.exists():
-        for line in config.read_text().splitlines():
-            name, separator, value = line.partition('=')
-            if separator and name.strip() in ('GOOGLE_MAPS_API_KEY', 'GOOGLE_MAPS_MAP_ID'):
-                values[name.strip()] = value.strip().strip('\"\'')
-    key = os.environ.get('GOOGLE_MAPS_API_KEY', values.get('GOOGLE_MAPS_API_KEY', ''))
-    return {'apiKey': key, 'mapId': os.environ.get('GOOGLE_MAPS_MAP_ID', values.get('GOOGLE_MAPS_MAP_ID', 'DEMO_MAP_ID')) or 'DEMO_MAP_ID'}
+    return read_map_config(ROOT)
 
 class Handler(SimpleHTTPRequestHandler):
     extensions_map={**SimpleHTTPRequestHandler.extensions_map,'.mjs':'text/javascript','.geojson':'application/geo+json'}

@@ -1,14 +1,38 @@
 import {validateTrip, uniqueTrips, updateTrip} from './domain.mjs';
 export const STORAGE_KEY='travel-memory-map.demo.v1';
-export async function getJSON(url) {
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),10000);
-  try {
-    const response=await fetch(url,{signal:controller.signal});
-    if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
-    return await response.json();
-  } finally {clearTimeout(timeout);}
+
+/** A failed backend call, including the stable code from the error envelope. */
+export class ApiError extends Error {
+  constructor(message,{status=0,code='request_failed',details=[]}={}) {
+    super(message);this.name='ApiError';this.status=status;this.code=code;this.details=details;
+  }
 }
+
+/** JSON or multipart request with a timeout; never substitutes demo data. */
+export async function requestJSON(url,{method='GET',json,form,timeout=10000}={}) {
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),timeout);
+  const options={method,signal:controller.signal};
+  if(json!==undefined){options.headers={'Content-Type':'application/json'};options.body=JSON.stringify(json);}
+  if(form!==undefined)options.body=form;
+  try {
+    const response=await fetch(url,options);
+    if(!response.ok){
+      let payload=null;
+      try{payload=await response.json();}catch{}
+      const detail=payload?.error||{};
+      throw new ApiError(detail.message||`${url}: HTTP ${response.status}`,{status:response.status,code:detail.code||'request_failed',details:Array.isArray(detail.details)?detail.details:[]});
+    }
+    if(response.status===204)return null;
+    return await response.json();
+  } catch(error){
+    if(error instanceof ApiError)throw error;
+    if(error?.name==='AbortError')throw new ApiError(`Request timed out after ${Math.round(timeout/1000)} seconds.`,{code:'timeout'});
+    throw error;
+  } finally {clearTimeout(timer);}
+}
+
+export async function getJSON(url) {return requestJSON(url);}
 export class DemoRepository {
   constructor(cities, seed, storage=globalThis.localStorage) {this.cities=cities;this.seed=structuredClone(seed);this.storage=storage;}
   async list() {
@@ -34,9 +58,38 @@ export class DemoRepository {
 export class ApiRepository {
   constructor(cities){this.cities=cities;}
   async list(){
-    const rows=await getJSON('/api/trips');
+    const rows=await requestJSON('/api/trips');
     if (!Array.isArray(rows)) throw new Error('The backend must return a trip array.');
     return uniqueTrips(rows.map(row=>validateTrip(row,this.cities)));
+  }
+  async read(id){
+    const row=await requestJSON(`/api/trips/${encodeURIComponent(id)}`);
+    return validateTrip(row,this.cities);
+  }
+  async create({city_id,trip_date=null,title='',notes=''}={}){
+    const row=await requestJSON('/api/trips',{method:'POST',json:{city_id,trip_date,title,notes}});
+    return validateTrip(row,this.cities);
+  }
+  async edit(id,patch){
+    const row=await requestJSON(`/api/trips/${encodeURIComponent(id)}`,{method:'PATCH',json:patch});
+    return validateTrip(row,this.cities);
+  }
+  async remove(id){
+    await requestJSON(`/api/trips/${encodeURIComponent(id)}`,{method:'DELETE'});
+    return null;
+  }
+  async uploadPhoto(id,file,{alt=''}={}){
+    const form=new FormData();
+    form.append('file',file,file?.name||'photo.jpg');
+    form.append('alt',alt);
+    return requestJSON(`/api/trips/${encodeURIComponent(id)}/photos`,{method:'POST',form,timeout:60000});
+  }
+  async deletePhoto(id,photoId){
+    await requestJSON(`/api/trips/${encodeURIComponent(id)}/photos/${encodeURIComponent(photoId)}`,{method:'DELETE'});
+    return null;
+  }
+  async requestMemory(id,{confirmed=true}={}){
+    return requestJSON(`/api/trips/${encodeURIComponent(id)}/memory`,{method:'POST',json:{confirmed},timeout:25000});
   }
 }
 
