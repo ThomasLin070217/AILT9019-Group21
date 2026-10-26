@@ -1,0 +1,47 @@
+{
+  "id": "T03",
+  "owner": "Angel",
+  "status": "prepared_pending_sanitised_asset_and_ai_run",
+  "kind": "real_photo_with_brief_fictional_notes",
+  "input": {
+    "city_id": "cn-hangzhou",
+    "city": "Hangzhou",
+    "photos": [
+      "hangzhou-01.jpg"
+    ],
+    "notes": "Fictional test record: I spent an afternoon in Hangzhou and took this photo."
+  },
+  "known_facts": [
+    "The user-specified city is Hangzhou.",
+    "The user says the visit lasted one afternoon.",
+    "The user took the supplied photograph.",
+    "The image may be described only for details that are visibly supported."
+  ],
+  "required_memory_facts": [
+    "Hangzhou",
+    "an afternoon visit"
+  ],
+  "permitted_optional_details": [
+    "Visible, objectively supported details from the sanitised photograph."
+  ],
+  "forbidden_inferences": [
+    "Any companion, relationship, meal, specific landmark, transport method, weather, emotion or date not supplied in the notes or visibly certain in the photograph.",
+    "Claims that a visible place proves the city without a reliable, visible identifying feature.",
+    "Personal information, precise location, or metadata that is not present in the sanitised input."
+  ],
+  "pass_rule": "An editable title and short memory preserve Hangzhou and the afternoon visit, add no unsupported experiences, and request clarification rather than guess when the photograph cannot safely support a meaningful detail.",
+  "source": {
+    "creator": "Angel's original travel photograph",
+    "licence": "Permission granted by the creator for limited private course-repository evaluation use only.",
+    "permission": "Pending confirmation after the sanitised image is selected; no recognisable people or sensitive/private information may be included.",
+    "sha256": {
+      "hangzhou-01.jpg": "PENDING_AFTER_SANITISED_FILE_IS_ADDED"
+    }
+  },
+  "limitations": [
+    "The image asset and checksum have not yet been committed.",
+    "The notes are fictional to avoid making a test claim about Angel's real trip.",
+    "No cloud model has been called; raw output, reviewer verdicts and results remain blank."
+  ],
+  "results": []
+}
