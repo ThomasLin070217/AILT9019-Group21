@@ -6,4 +6,4 @@ This case tests whether the AI can describe **visible content with no user notes
 
 Generation prompt: “Create one realistic candid travel photo of an ordinary park path in an unidentifiable East Asian city: a wooden bench beside a small pond, several green trees, stone paving, soft overcast daylight. No people, signs, text, recognizable landmark or watermark.”
 
-The image contains no real people or personal travel data. It is a synthetic test image, not proof of an actual trip. The committed checksum is in `case.json`; no cloud AI output or human score has been recorded. Any public redistribution should be checked against the image service's applicable terms first.
+The image contains no real people or personal travel data. It is a synthetic test image, not proof of an actual trip. The committed checksum is in `case.json`; no cloud AI output or human score has been recorded. OpenAI's terms state that, as between OpenAI and the user and to the extent permitted by law, the user owns generated output. This fixture is published for course-project review; it is not separately licensed for unrelated reuse. See https://openai.com/policies/row-terms-of-use/.

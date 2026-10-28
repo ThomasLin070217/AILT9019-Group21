@@ -52,7 +52,7 @@ This is the current input → local processing → output path. Use only the syn
 | Qingyang Lin | u3659001@connect.hku.hk | — |
 | Ho Yeung Seto (Owen) | hiowenseto@gmail.com | [Owen-Seto](https://github.com/Owen-Seto) |
 
-This directory is for private repository coordination only. Do not copy these details into the anonymous Moodle proposal or peer-review forms.
+The four members have agreed to publish these contact details in this repository. Do not copy names, student IDs or email addresses into the anonymous Moodle proposal or peer-review forms.
 
 ## Start here
 

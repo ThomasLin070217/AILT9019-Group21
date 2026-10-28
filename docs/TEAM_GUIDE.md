@@ -6,7 +6,7 @@ original work plan and earlier status notes for context.
 
 ## Where we are now
 
-Our private repository is ready: [AILT9019-Group21](https://github.com/ThomasLin070217/AILT9019-Group21). The `main` branch contains the project structure, course plan, proposal worksheet, testing template, AI-use log, Friday standup log, milestones, labels, and pull-request template.
+Our team repository is available at [AILT9019-Group21](https://github.com/ThomasLin070217/AILT9019-Group21). The `main` branch contains the project structure, course plan, proposal worksheet, testing template, AI-use log, Friday standup log, milestones, labels, and pull-request template.
 
 The topic is **Travel Memory Map**. Thomas reports that the proposal has been submitted. See the [proposal baseline](../proposal/Travel_Memory_Map_Proposal.docx) and [work allocation](WORK_ALLOCATION.md). Thomas’s [map module](THOMAS_HANDOFF.md) is runnable with labelled fictional data and map test evidence. Owen’s [local backend](BACKEND.md) implements trip storage in SQLite, sanitised photo uploads and the AI proxy, and the API-mode album now provides browser controls for create, upload, edit, AI draft and delete. No cloud AI provider is configured yet, so there are still no AI evaluation results; Angel should review the new interface states.
 
@@ -18,7 +18,7 @@ The latest course overview says the proposal draft is due on **30 September 2026
 
 ## What every member should do now
 
-1. Accept your invitation if needed and clone the repository.
+1. Clone the repository; contributors need their own GitHub access to push.
 2. Read the proposal and `docs/WORK_ALLOCATION.md`.
 3. Check your module, first deliverable and reviewer; raise availability conflicts before 2 October.
 4. Agree shared interfaces before integration and use matching sample inputs.
@@ -48,4 +48,4 @@ During Weeks 5–10, we post a three-line Ed standup every Friday. We also need 
 
 ## Course account access
 
-Checked on 30 September: the repository is private and a Write invitation for `AILT9019` is pending. Thomas previously authorised Write because the personal repository did not support the requested Read collaborator role. This records the actual setting, not course approval of the difference. See [access status](COURSE_ACCOUNT_ACCESS.md). No permissions were changed when publishing this plan.
+The 30 September private-repository invitation status was superseded by the teaching team's 28 October access notice, which allowed a public repository as an alternative. See [access status](COURSE_ACCOUNT_ACCESS.md) for the dated checks.

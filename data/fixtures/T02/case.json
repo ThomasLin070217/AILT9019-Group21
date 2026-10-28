@@ -30,8 +30,8 @@
   "pass_rule": "With no notes, produce an impersonal, editable short description grounded in visible details and the user-selected Osaka label; do not invent a first-person experience or identify a specific place. A clarification is acceptable only if the model cannot safely describe any visible feature.",
   "source": {
     "creator": "OpenAI imagegen, prompted by Thomas on 26 October 2026",
-    "licence": "Original AI-generated synthetic test asset; intended for limited private course-repository evaluation",
-    "permission": "No people, private records or external source photograph were supplied. Confirm redistribution terms before any public release.",
+    "licence": "Original AI-generated synthetic test asset, published for course-project review; no separate reuse licence is granted.",
+    "permission": "No people, private records or external source photograph were supplied. OpenAI's terms assign output rights to the user as between OpenAI and the user, to the extent permitted by law.",
     "sha256": {
       "park-bench.png": "f356f30db39ddb71379f950895671510f36669196831e56740bc2bffa09a4ee3"
     }

@@ -14,7 +14,7 @@ For any future replacement image:
 2. Create a copy with EXIF/GPS metadata removed. Keep the original outside this repository.
 3. Save the sanitised copy as `hangzhou-01.jpg` in this folder.
 4. Record its SHA-256 checksum and replace the placeholder in `case.json`.
-5. Confirm that Angel owns the image and gives permission for this limited private course-repository use.
+5. Confirm that Angel owns the image and gives permission for the intended repository visibility. Thomas reported on 28 October that Angel explicitly agreed to public release of the current `hangzhou-01.jpg` copy; this does not automatically cover a replacement photo or sending it to an AI provider.
 
 The backend now has an OpenAI-compatible Responses adapter and a pre-send notice.
 Before sending this image, the team must still check the chosen provider's
