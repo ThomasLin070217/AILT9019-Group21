@@ -1,38 +1,26 @@
-# Travel Memory Map delivery checklist
+# Travel Memory Map release checklist
 
-Status as of 30 September 2026. Thomas coordinates delivery; module owners supply their own implementation and evidence. Check an item only when verified, not merely planned.
+Status reviewed on 2 November 2026. Check an item only when evidence exists for the integrated `main` build. Internal targets below are not course deadlines; Moodle controls submission requirements.
 
-## Map module ready for review
+## Product and integration
 
-- [x] City catalogue and map provenance recorded.
-- [x] Search/list/marker selection and separate trip previews implemented.
-- [x] Trip identity, visit count, brightness and demo reload behaviour tested.
-- [x] Desktop/mobile captures and a working map-demo recording saved.
-- [x] Proposed interface contract and setup guide written.
-- [ ] Angel/Owen review and acceptance of interfaces.
+- [x] FastAPI/SQLite trip creation, read, edit, deletion and sanitised photo upload are integrated with the browser UI.
+- [x] Nineteen city outlines, search/list selection, saved-area highlights and repeat-visit tiers are present.
+- [x] User-triggered AI route, pre-send disclosure, draft review, clarification/refusal and unchanged-trip error handling are implemented with simulated provider tests.
+- [x] Repository is public and anonymously readable; the expired private collaborator invitation is no longer needed for read access.
+- [x] 2 November isolated-browser smoke check covers one and two visits, photo, edit, reload and missing-provider failure; see [evidence](../tests/evidence/2026-11-02-thomas/RESULTS.md).
+- [ ] Record one authorised live model call through the integrated route; identify model, prompt version, raw output and provider terms. Owner: Qingyang, with Thomas for access.
+- [ ] Freeze T02 after Owen review and complete T01–T05 live runs and two independent human verdicts per case. Owners: Owen/Qingyang.
+- [ ] Fresh installation, restart, backup/restore and failure checks on another member's computer. Owner: Owen.
+- [ ] Current-build first-use, mobile and keyboard check with evidence. Owner: Angel.
 
-## Real application integration
+## Final deliverables · official date 20 November
 
-- [ ] Owen's SQLite/photo storage and actual read/write APIs integrated.
-- [ ] Angel's upload, saved-trip and draft-review interface integrated.
-- [ ] Qingyang's live vision-language API and fail-safe behaviour integrated.
-- [ ] Verify notice and current-trip-only outgoing payload with actual images.
-- [ ] Repeat map tests against real saved trip IDs and real backend responses.
-- [ ] Fresh install on another member's computer, with documented key configuration and cost.
+- [x] Public repository link and a static project webpage source with a genuine local workflow recording.
+- [ ] Confirm webpage hosting or include its accessible URL in the final package. Owner: Thomas.
+- [ ] Three-minute presentation plus genuine demo recording, showing success, one limitation/failure and what was learned. Owners: all; Thomas coordinates.
+- [ ] Report within five pages plus appendix, including Ethics & AI-use disclosure and actual—not proposed—evaluation results. Owners: all; Thomas assembles.
+- [ ] Confirm consultation and standup record from course systems. Owner: Thomas.
+- [ ] All four review the final artifacts against Moodle's final instructions and retain submission receipt. Owner: all.
 
-## Revised proposal and mid-term
-
-- [ ] Incorporate actual peer/consultation feedback for 10 October.
-- [ ] Record module owners' actual work and AI-use checks.
-- [ ] Freeze all five cases and collect real raw outputs and two-reviewer verdicts.
-- [ ] Demonstrate success and a meaningful failure using the actual application.
-- [ ] Prepare mid-term evidence by 26 October.
-
-## Final package by 20 November
-
-- [ ] Working local application and reproducible setup.
-- [ ] Project webpage accurately describes the integrated implementation.
-- [ ] Three-minute presentation plus genuine demonstration recording.
-- [ ] Report within five pages plus appendix, Ethics and AI-use disclosure.
-- [ ] Confirm course-account access and required consultation/standup records.
-- [ ] All members review final submission and retain the submission receipt.
+Internal target: freeze a tested version by 17 November and complete a team review by 19 November.

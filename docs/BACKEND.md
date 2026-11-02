@@ -1,6 +1,6 @@
 # Local backend guide
 
-Status: Owen's local backend and Thomas's Responses adapter are integrated.
+Status: Owen's local backend and the Chat Completions-compatible adapter are integrated.
 The adapter has simulated HTTP tests; a live provider call on this combined
 build still needs to be recorded. Without a key/model, the proxy returns `503`.
 
@@ -62,7 +62,7 @@ you need to change them; `.env` is Git-ignored.
 | `TMM_MAX_PHOTOS` | `8` | Per-trip photo limit. |
 | `TMM_MAX_UPLOAD_BYTES` | `10485760` | 10 MiB per upload. |
 | `TMM_STORED_MAX_EDGE` | `2400` | Longest stored edge. |
-| `AI_PROVIDER` | empty | Set `responses` for the OpenAI-compatible adapter; empty means no AI. |
+| `AI_PROVIDER` | empty | Set `responses` for the current Chat Completions adapter; the name is retained for configuration compatibility. Empty means no AI. |
 | `AI_API_KEY` | empty | Server-side only; never returned or logged. |
 | `AI_MODEL` | empty | Provider model identifier. |
 | `AI_BASE_URL` | empty | Optional provider endpoint. |
@@ -73,13 +73,16 @@ Put real AI settings in Git-ignored `.env.ai.local` or server environment:
 ```text
 AI_PROVIDER=responses
 AI_API_KEY=<your provider key>
-AI_MODEL=<a vision-capable Responses model>
-AI_BASE_URL=https://api.openai.com/v1
+AI_MODEL=<a vision-capable model supported by your provider>
+AI_BASE_URL=<your provider's OpenAI-compatible /v1 base URL>
 ```
 
-For the course Bailian gateway, use its OpenAI-compatible base URL and assigned
-model. The adapter uses JSON-object mode and explicit system instructions that
-Thomas tested with `qwen3.8-flash` in his earlier standalone workflow. Existing
+The adapter appends `/chat/completions` to the base URL and asks for a JSON
+object in its system prompt. It validates the returned fields before showing
+anything to the user. It does not set a provider-specific JSON response-format
+parameter. For the course Bailian gateway, use its assigned base URL and a
+vision-capable model. The integrated build has simulated transport tests, but
+no recorded live provider call. Existing
 `.env.ai.local` files using `TRAVEL_AI_API_KEY`, `TRAVEL_AI_MODEL` and
 `TRAVEL_AI_BASE_URL` are also read. Never commit credentials. Check the chosen
 provider's retention policy before sending personal photos.
@@ -119,7 +122,7 @@ photos(id TEXT PRIMARY KEY, trip_id REFERENCES trips(id) ON DELETE CASCADE,
 | `POST /api/trips/{id}/photos` | Multipart `file` + optional `alt`; `201` photo object. |
 | `DELETE /api/trips/{id}/photos/{photo_id}` | `204`; removes row and file. |
 | `GET /media/{filename}` | Same-origin sanitised image only. |
-| `POST /api/trips/{id}/memory` | `{"confirmed": true}` → draft or clarification. |
+| `POST /api/trips/{id}/memory` | `{"confirmed": true}` → draft, clarification or refusal. |
 | `GET /api/map-config` | Local-origin-only Maps settings. |
 
 Every non-2xx API response uses:
@@ -152,7 +155,7 @@ profiles and metadata are deliberately not preserved.
 
 ## AI adapter contract
 
-`backend/ai/base.py` defines the boundary. Thomas's `responses` module is now
+`backend/ai/base.py` defines the boundary. The `responses` module is now
 one implementation. Other modules may be named by `AI_PROVIDER`
 (for example `AI_PROVIDER=example` → `backend/ai/example.py`)
 with a `create_generator(settings)` factory. The object must provide `name`,
@@ -168,7 +171,7 @@ class MemoryRequest:
     photo_paths: tuple[Path, ...]   # sanitised 1,280 px JPEG copies
 
 class MemoryResult(BaseModel):
-    status: Literal["draft", "clarification"]
+    status: Literal["draft", "clarification", "refusal"]
     title: str = ""
     text: str = ""
     question: str | None = None
@@ -206,7 +209,7 @@ warning and keeps the honest `503` rather than pretending to generate.
 
 ```bash
 npm test                                             # domain + API client
-.venv/bin/python -m pytest                           # backend, 51 cases
+.venv/bin/python -m pytest                           # backend and configuration tests
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py'   # legacy config
 ```
 
@@ -252,7 +255,7 @@ together; copying only one leaves rows without files or files without rows.
   busy state, but a scripted duplicate create would produce two visits.
 - No automatic cleanup of a database row whose file was deleted outside the app;
   the startup sweep only removes unreferenced files older than one hour.
-- The Responses adapter is integrated and has simulated HTTP tests. Its live
+- The Chat Completions adapter is integrated and has simulated HTTP tests. Its live
   call on this combined build, provider retention check, and independent
   five-fixture review remain outstanding.
 - The focused API-mode workflow was checked in headless Chrome on 22 October

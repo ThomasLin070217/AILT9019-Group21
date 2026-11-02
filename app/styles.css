@@ -65,6 +65,8 @@ main{margin:0}.workspace{display:grid;grid-template-columns:264px minmax(0,1fr) 
 .photo-remove{font-size:10px;min-height:30px;padding:2px 0}
 .ai-notice{margin:14px 0 0;padding:14px;background:#fbf3ea;border:1px solid #e0c9b8;border-radius:8px}
 .ai-notice p{font-size:12px;line-height:1.65;color:var(--ink);margin:0 0 10px}
+.ai-disclosure{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 10px;margin:4px 0 12px;padding:10px;background:#fff9f3;border:1px solid #ead5c3;border-radius:6px;font-size:12px;line-height:1.5}
+.ai-disclosure dt{font-weight:650;color:var(--muted)}.ai-disclosure dd{margin:0;min-width:0;max-height:95px;overflow:auto;overflow-wrap:anywhere;white-space:pre-wrap}
 .form-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 @media(max-width:540px){.api-composer,.memory-editor{padding:16px}.photo-strip{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}}
 

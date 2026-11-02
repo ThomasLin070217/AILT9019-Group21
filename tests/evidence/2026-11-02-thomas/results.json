@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "checks": [
+    "First saved trip creates one card and lights the city area",
+    "Synthetic photo is uploaded and displayed from local storage",
+    "Editing a card does not add a visit",
+    "Second trip creates a separate card and brighter visit tier",
+    "Cards, photo, edit and visit tier survive reload",
+    "AI disclosure appears; missing provider fails without changing saved text",
+    "Mobile view has no horizontal overflow"
+  ],
+  "errors": [],
+  "base": "http://127.0.0.1:8042",
+  "fixture": "T02 synthetic park-bench.png"
+}

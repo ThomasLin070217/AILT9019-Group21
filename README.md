@@ -1,98 +1,50 @@
-# AILT9019 — Group 21
+# Travel Memory Map · AILT9019 Group 21
 
-## Project status
+Travel Memory Map is a local travel album. A person selects one of 19 supported cities, saves a trip and optional photos/notes, and sees that city light up on the map. A return visit creates a separate card; the city highlight has distinct tiers for 1, 2–3 and 4+ saved trips. The map is a visual record of user-entered trips, not proof of travel.
 
-We are building **Travel Memory Map**: a local travel album where saving a trip lights the city area on the map, repeat visits create separate cards and brighter visit tiers, and user-triggered AI can draft a memory from the current trip’s photos and notes.
+The integrated product is on `main`. It uses FastAPI, SQLite and a browser interface. Photos are re-encoded before local storage to remove location/camera metadata. **Write with AI** is optional and user-triggered: the interface shows the selected trip fields before requesting a draft, and the draft must be reviewed and saved separately. The provider setting is named `AI_PROVIDER=responses` for compatibility, but the current adapter uses an OpenAI-compatible **Chat Completions** endpoint. No live provider result or five-case score on this integrated build is claimed yet.
 
-Thomas reported on 30 September 2026 that the proposal was submitted. The [proposal baseline](proposal/Travel_Memory_Map_Proposal.docx) is preserved for the 10 October revision; the Moodle receipt has not been independently checked here. Thomas’s city-map module is runnable with fictional demo data. Owen’s local backend provides SQLite trip storage, sanitised photo uploads and the AI proxy route, and the API-mode album now has browser controls for creating, uploading, editing, requesting an AI draft and deleting. Thomas's OpenAI-compatible Responses adapter is integrated; its live call on this combined build has not yet been verified.
+## Run the working local product
 
-**Start with the [four-person work allocation](docs/WORK_ALLOCATION.md)** for owners, deliverables, review partners and deadlines. Thomas owns map/integration, Angel owns the interface, Owen owns backend/storage, and Qingyang owns AI/evaluation.
-
-## Run the city map
-
-```bash
-python3 serve.py
-```
-
-Open **http://127.0.0.1:8019/app/**. Python 3.10+ is sufficient; no API key or npm installation is needed. The default map uses OpenFreeMap online tiles, a locally bundled MapLibre renderer, and the repository's 19 OpenStreetMap city boundaries. All supported city outlines remain visible; a saved visit fills its city area and repeat visits increase its colour tier. Use **View area** to inspect a city's shape. `?map=local` uses the bundled coast-and-city map without any online tiles. Google Maps remains an opt-in alternative with `?map=google` and a configured key; see [Google setup](docs/GOOGLE_MAPS_SETUP.md).
-
-Switch between **Map** and **Album** to explore a place or see its photo cards side by side. Select a city, search by English/Chinese name, and open **Try visit counting** to add/edit fictional demo visits. The first two Osaka cards show credited example photos; click a cover to view it. Unsaved sample drafts survive city changes and reloads within the tab. Browser demo storage is not the planned real backend. Map tile requests contain the current viewed area, while our app does not send trip photos or notes to the map provider. If the online map is unavailable, the bundled map remains usable.
-
-Run `npm test` with Node.js 20+ for the map logic/storage checks. See [Thomas handoff](docs/THOMAS_HANDOFF.md) for browser checks and [API contract](docs/API_CONTRACT.md) for teammate integration. API mode (`/app/?mode=api`) requires Owen’s backend and never substitutes demo data when it fails.
-
-## Run the local backend
-
-The real backend serves the app and API from one origin and stores trips and photographs locally:
+Python 3.10+ is required. From a clone of this repository:
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements-dev.txt
+source .venv/bin/activate                 # Windows PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 python3 -m backend
 ```
 
-Open **http://127.0.0.1:8019/app/?mode=api**. Trips, edits and sanitised photos persist in `var/travel.db` and `var/media/`; `var/` is Git-ignored, so back it up to keep the album. The API-mode album includes an **Add a memory** form plus per-card **Add photo**, **Edit memory**, **Write with AI** and **Delete trip** controls. Unsaved composer and editor text stays in the tab. `python3 serve.py` remains the zero-install demo-only server; do not run both on port 8019 at once. See the [backend guide](docs/BACKEND.md) for configuration, endpoints, limits, the AI adapter contract and backup steps.
+Open **http://127.0.0.1:8019/app/?mode=api&map=local**. The bundled map needs no tile or AI key. The default `/app/?mode=api` view uses online OpenFreeMap tiles with an automatic local fallback. Google Maps is an optional third view with a separately configured key.
 
-Run `.venv/bin/python -m pytest` for the 54 backend and configuration tests, and `.venv/bin/python -m unittest discover -s tests -p 'test_*.py'` for the legacy config check.
+1. Choose a city and select **Add a memory**. Save a fictional title/notes.
+2. Use **Add photo** on the saved card. For a non-personal sample, use `data/fixtures/T02/park-bench.png`.
+3. Use **Edit memory**, save, then reload. The card, photo and text persist in local SQLite storage.
+4. Save another trip in the same city. There are now two cards and a brighter map tier.
+5. **Write with AI** shows the fields that would be sent. With no configured provider, it reports an error without changing the saved card.
 
-### Mid-term check: reproduce the working backend path
+Runtime data lives in Git-ignored `var/travel.db` and `var/media/`; back up both together. For configuration and limits see the [backend guide](docs/BACKEND.md). For a shorter walkthrough see [Quick start](docs/QUICK_START.md).
 
-1. Start `python3 -m backend` after installing `requirements-dev.txt`; open **http://127.0.0.1:8019/app/?mode=api&map=local**.
-2. Select Tokyo and save a fictional trip with a short note. The map lights up and a new trip card appears. Add `data/fixtures/T04/blur_sample.png` to that card; the backend validates and re-encodes the image before storing it with the trip in SQLite.
-3. Edit and save the card, then reload the page. The card, photo and text remain. Save a second Tokyo trip to check that the city shows two independent visits.
+## Project webpage and evidence
 
-This is the current input → local processing → output path. Use only the synthetic fixture and fictional text when recording the screen. AI writing is **not** part of this verified combined-build path: without provider configuration its route returns `503` and does not change the saved card. Thomas's earlier standalone branch has [live Bailian evidence](https://github.com/ThomasLin070217/AILT9019-Group21/blob/ThomasLin070217/thomaslin070217/explore-local-files/tests/evidence/product/bailian/RESULTS.md), but the ported adapter still needs a live check here. The [20 October test record](tests/evidence/2026-10-20-midterm/RESULTS.md) documents the older demo-only path; see the [26 October integration review](docs/INTEGRATION_REVIEW_2026-10-26.md) for the combined build.
+- [Project webpage source](docs/index.html): problem, workflow, recorded local demonstration, setup, evidence and limits. It is a static page; the application itself still runs locally.
+- [2 November integrated smoke check](tests/evidence/2026-11-02-thomas/RESULTS.md): browser workflow against an isolated backend and synthetic photo.
+- [Evaluation plan](tests/EVALUATION_PLAN.md): T01–T05 and the human-review rules. The five live outputs and independent scores are still pending.
+- [Current team handoff](docs/TEAM_SYNC_2026-11-02.md) and [release checklist](docs/RELEASE_CHECKLIST.md): completed work and remaining gates.
 
-## Team 21
+Developers can run `npm test` and, after `pip install -r requirements-dev.txt`, `.venv/bin/python -m pytest -q`. The browser smoke script is `tests/final-workflow.e2e.mjs`; it requires Playwright and a running isolated backend. Test counts and limitations are recorded in the linked evidence, not inferred from this README.
 
-| Name | Contact email | GitHub |
+## Data, privacy and limitations
+
+The city footprints derive from OpenStreetMap, the bundled coastline from Natural Earth, and the default online tiles from OpenFreeMap. See [data sources](data/README.md) and [map basemap](docs/MAP_BASEMAP.md). The app is for one local user; it has no account system or cloud album sync. The 19 city areas are approximate display footprints. A cloud AI call sends only the selected trip's city, date, title, notes and sanitised photos after the user's confirmation. Photos stay local unless that optional call is made; provider retention and permission must be checked before using personal material. A failed AI call leaves the saved trip unchanged.
+
+## Team and course
+
+| Member | Role | Contact |
 | --- | --- | --- |
-| Yunian Lin (Thomas) | u3660124@connect.hku.hk | [ThomasLin070217](https://github.com/ThomasLin070217) |
-| Xinyue Li (Angel) | 06.xinyue@gmail.com | [Tiramuffin](https://github.com/Tiramuffin) |
-| Qingyang Lin | u3659001@connect.hku.hk | — |
-| Ho Yeung Seto (Owen) | hiowenseto@gmail.com | [Owen-Seto](https://github.com/Owen-Seto) |
+| Yunian Lin (Thomas) | Map, integration and delivery | u3660124@connect.hku.hk |
+| Xinyue Li (Angel) | Interface and first-use testing | 06.xinyue@gmail.com |
+| Ho Yeung Seto (Owen) | Backend and local storage | hiowenseto@gmail.com |
+| Qingyang Lin | AI evaluation | u3659001@connect.hku.hk |
 
-The four members have agreed to publish these contact details in this repository. Do not copy names, student IDs or email addresses into the anonymous Moodle proposal or peer-review forms.
-
-## Start here
-
-- [Course plan](docs/COURSE_PLAN.md): dates, deliverables, grading, and non-negotiable rules.
-- [Work allocation](docs/WORK_ALLOCATION.md): concrete responsibilities, handoffs and milestones.
-- [Backend guide](docs/BACKEND.md): local setup, schema, routes, limits, AI adapter contract and backup.
-- [Team guide](docs/TEAM_GUIDE.md): current scope and collaboration workflow.
-- [Proposal baseline and revision notes](proposal/README.md): the submitted draft and next revision.
-- [Evaluation plan](tests/EVALUATION_PLAN.md): how we will define a real pass, failure, and safe refusal.
-- [AI-use log](docs/AI_USE_LOG.md): record prompts, changes, and verification as we work.
-- [Friday standup](docs/FRIDAY_STANDUP.md): the required three-line weekly update format.
-
-## Repository structure
-
-```text
-proposal/     Proposal drafts, diagrams, and peer-review notes
-app/          Application source code
-backend/      Local FastAPI + SQLite service (Owen)
-data/         Public, synthetic, or self-curated project data only
-tests/        Test cases and evaluation evidence
-docs/         Project webpage and supporting documentation
-var/          Git-ignored runtime database, uploads, and temp files
-```
-
-## Working agreement
-
-- Create a branch for substantial work and open a pull request before merging.
-- Keep commits small and describe what changed.
-- Never upload personal, confidential, or API-key data.
-- Add setup and run instructions as soon as the application has a first working version.
-
-## Key dates
-
-| Date | Milestone |
-| --- | --- |
-| 30 Sep 2026 | Proposal draft |
-| 10 Oct 2026 | Revised proposal |
-| 26 Oct 2026 | Mid-term check |
-| 20 Nov 2026 | Final deliverables |
-
-## Next integration step
-
-The album controls already work in `?mode=api`. The Responses adapter sends the selected trip's city, date, title, notes and sanitised photos, matching the pre-send notice. The next step is a live call on this combined build, then five-fixture evaluation and independent human reviews. Demo-only map controls remain prototype material. Start with the updated [quick start](docs/QUICK_START.md) and [team sync](docs/TEAM_SYNC_2026-10-26.md).
+All four members agreed to publish these contacts in the repository. The official final-deliverables date in the course overview is **20 November 2026**; Moodle controls the final submission instructions. Contributions and AI assistance must be reported accurately. [Course plan](docs/COURSE_PLAN.md) · [AI-use log](docs/AI_USE_LOG.md).

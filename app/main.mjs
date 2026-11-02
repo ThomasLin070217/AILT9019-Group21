@@ -245,7 +245,17 @@ function openApiEditor(card,trip,initial={}){
 function openAiNotice(card,trip){
  const existing=card.querySelector('.ai-notice');if(existing){existing.remove();return;}
  const notice=node('div',undefined,'ai-notice');
- notice.append(node('p','This sends this trip’s city, date, title, notes and sanitised photos to the configured AI provider. Other trips are not included. The result is an editable draft and is not saved until you press Save. If no provider is configured, the backend will say so and your trip stays unchanged.'));
+ const city=cities.find(item=>item.id===trip.city_id);
+ notice.append(node('p','Review the current trip data before sending it to the configured AI provider. No other trips are included.'));
+ const details=node('dl',undefined,'ai-disclosure');
+ for(const [label,value] of [
+  ['City',city?.name||trip.city_id],
+  ['Date',trip.trip_date||'Not set'],
+  ['Title',trip.title||'Not set'],
+  ['Notes',trip.notes||'Not set'],
+  ['Photos',`${trip.photos?.length||0} sanitised ${trip.photos?.length===1?'photo':'photos'}`],
+ ]){details.append(node('dt',label),node('dd',value));}
+ notice.append(details,node('p','The result is an editable draft and is not saved until you press Save. If no provider is configured, the backend will say so and your trip stays unchanged.'));
  const row=node('div',undefined,'form-row');
  const send=node('button','Send this trip','primary');send.type='button';
  const cancel=node('button','Cancel');cancel.type='button';
