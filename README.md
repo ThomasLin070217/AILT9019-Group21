@@ -27,7 +27,7 @@ Runtime data lives in Git-ignored `var/travel.db` and `var/media/`; back up both
 
 ## Project webpage and evidence
 
-- [Project webpage source](docs/index.html): problem, workflow, recorded local demonstration, setup, evidence and limits. It is a static page; the application itself still runs locally.
+- [Live project webpage](https://thomaslin070217.github.io/AILT9019-Group21/) ([source](docs/index.html)): problem, workflow, recorded local demonstration, setup, evidence and limits. The application itself still runs locally.
 - [2 November integrated smoke check](tests/evidence/2026-11-02-thomas/RESULTS.md): browser workflow against an isolated backend and synthetic photo.
 - [Evaluation plan](tests/EVALUATION_PLAN.md): T01–T05 and the human-review rules. The five live outputs and independent scores are still pending.
 - [Current team handoff](docs/TEAM_SYNC_2026-11-02.md) and [release checklist](docs/RELEASE_CHECKLIST.md): completed work and remaining gates.
