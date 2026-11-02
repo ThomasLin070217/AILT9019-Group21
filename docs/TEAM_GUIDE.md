@@ -1,7 +1,7 @@
 # AILT9019 Group 21 Team Guide
 
 For the current integrated status and each member's next step, read
-[the 26 October team sync](TEAM_SYNC_2026-10-26.md). This guide retains the
+[the 2 November team sync](TEAM_SYNC_2026-11-02.md). This guide retains the
 original work plan and earlier status notes for context.
 
 ## Where we are now

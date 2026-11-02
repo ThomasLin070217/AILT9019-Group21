@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Travel Memory Map is a local travel album that turns saved city visits into a map of editable memories. AILT9019 Group 21 project and demonstration.">
+  <title>Travel Memory Map · AILT9019 Group 21</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23b45536' d='M32 59S9 39 9 25a23 23 0 1 1 46 0C55 39 32 59 32 59Z'/%3E%3Ccircle cx='32' cy='25' r='9' fill='%23fffaf3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top" aria-label="Travel Memory Map, back to top"><span class="pin" aria-hidden="true">✦</span><span>Travel Memory <em>Map</em></span></a>
+      <nav aria-label="Main navigation">
+        <a href="#experience">Experience</a>
+        <a href="#demo">Demo</a>
+        <a href="#run">Run it</a>
+        <a class="nav-repo" href="https://github.com/ThomasLin070217/AILT9019-Group21">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> AILT9019 · GROUP 21 · WORKING PROJECT</p>
+        <h1>Let the places<br>you've been <i>stay.</i></h1>
+        <p class="hero-lead">A travel album that lights a city when you save a trip. Return to the same place, add another card, and watch your map grow with your memories.</p>
+        <div class="hero-actions"><a class="button solid" href="#demo">Watch the real workflow <span aria-hidden="true">↘</span></a><a class="button outline" href="#run">Run it locally</a></div>
+        <p class="hero-fact">19 supported cities across Mainland China, Hong Kong, Macau, Taiwan and Japan · Local storage by default</p>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-frame"><img src="./assets/map-workflow.png" alt="Real Travel Memory Map interface: two saved Nanjing visits make its city area brighter on the map" width="1440" height="900"></div>
+        <div class="visual-note"><strong>2 visits, one city</strong><span>Two separate cards. A brighter area.</span></div>
+      </div>
+    </section>
+
+    <section class="problem-band" id="experience">
+      <div class="wrap problem-layout"><p class="eyebrow">THE IDEA</p><p>Photos are easy to collect. <strong>Places are harder to remember.</strong> Travel Memory Map gives each completed trip its own card and connects it to a city you can return to on the map.</p></div>
+    </section>
+
+    <section class="section wrap workflow" aria-labelledby="workflow-title">
+      <div class="section-head"><p class="eyebrow">HOW IT WORKS</p><h2 id="workflow-title">Three small actions. A map full of stories.</h2></div>
+      <div class="step-grid">
+        <article class="step"><span class="step-number">01</span><h3>Choose a city</h3><p>Search or select from the map and city list. The first release focuses on 19 cities, with approximate display boundaries.</p></article>
+        <article class="step"><span class="step-number">02</span><h3>Save a trip</h3><p>Add a title, optional notes and photos. Each saved trip becomes its own editable card in the local album.</p></article>
+        <article class="step"><span class="step-number">03</span><h3>See it light up</h3><p>The city area changes at one, two to three, and four or more visits. Another trip adds a card; editing an existing one does not add a visit.</p></article>
+      </div>
+    </section>
+
+    <section class="album-section" aria-labelledby="album-title">
+      <div class="wrap album-layout"><div class="album-copy"><p class="eyebrow">A PLACE TO RETURN TO</p><h2 id="album-title">A memory for<br><i>every return.</i></h2><p>Trips to the same city stay separate. Reopen a card, change its text, and keep the photograph beside the memory. The screenshot shows two fictional Nanjing trips created in the integrated app for this demonstration.</p><p class="small-note">Actual application capture · synthetic photo · fictional notes</p></div><figure class="album-frame"><picture><source media="(max-width: 700px)" srcset="./assets/album-mobile.png"><img src="./assets/album-workflow.png" alt="Actual album view showing two separate Nanjing trip cards, one with a synthetic park-bench image" width="1440" height="900"></picture><figcaption>Local album on the integrated FastAPI and SQLite build.</figcaption></figure></div>
+    </section>
+
+    <section class="section wrap ai-section" aria-labelledby="ai-title">
+      <div class="section-head"><p class="eyebrow">OPTIONAL AI</p><h2 id="ai-title">Your facts first. A draft second.</h2></div>
+      <div class="ai-layout"><div><p>The <strong>Write with AI</strong> action shows the selected trip's city, date, title, notes and sanitised photo count before sending. Only that trip is included. The returned title and memory text are editable, and nothing is saved until the user chooses Save.</p><p>The app can also ask for clarification or refuse an inappropriate request. Without a configured provider it reports an error and leaves the saved card alone.</p></div><aside class="status-card"><span class="status-label">CURRENT EVIDENCE</span><strong>Local flow verified</strong><p>The integrated build has transport-level AI tests and a recorded no-provider failure. A live cloud result and five-case human evaluation are still pending; they are not claimed as successes here.</p><a href="https://github.com/ThomasLin070217/AILT9019-Group21/blob/main/tests/EVALUATION_PLAN.md">Read the evaluation plan <span aria-hidden="true">↗</span></a></aside></div>
+    </section>
+
+    <section class="demo-section" id="demo" aria-labelledby="demo-title">
+      <div class="wrap"><div class="section-head inverted"><p class="eyebrow">REAL SYSTEM DEMONSTRATION</p><h2 id="demo-title">From a city to two saved memories.</h2><p>Recorded on 2 November 2026 from an isolated copy of the integrated local backend. The run uses fictional notes and a synthetic photo, then shows the honest failure when no AI provider is configured.</p></div><div class="demo-grid"><div class="video-frame"><video controls playsinline preload="metadata" poster="./assets/map-workflow.png" aria-label="Recorded local Travel Memory Map workflow"><source src="./assets/workflow.webm" type="video/webm">Your browser cannot play WebM. <a href="./assets/workflow.webm">Download the recording</a>.</video></div><ol class="demo-steps"><li><span>01</span>Choose Nanjing and save one fictional trip.</li><li><span>02</span>Upload a synthetic image and edit the card.</li><li><span>03</span>Add a second trip; the area brightens.</li><li><span>04</span>Reload to check local persistence.</li><li><span>05</span>Open the AI disclosure; without a key, the saved text is unchanged.</li></ol></div><p class="video-note">This is an unedited browser recording of a test run, without narration. The steps at right explain the visible actions. <a href="https://github.com/ThomasLin070217/AILT9019-Group21/blob/main/tests/evidence/2026-11-02-thomas/RESULTS.md">See exact checks and limits ↗</a></p></div>
+    </section>
+
+    <section class="section wrap run-section" id="run" aria-labelledby="run-title"><div class="run-copy"><p class="eyebrow">TRY IT YOURSELF</p><h2 id="run-title">Run the album<br>on your computer.</h2><p>Python 3.10+ is the only runtime requirement for the core app. The bundled map works without a map key, AI key or account.</p><a class="text-link" href="https://github.com/ThomasLin070217/AILT9019-Group21/blob/main/docs/QUICK_START.md">Full quick start and Windows notes <span aria-hidden="true">↗</span></a></div><div class="terminal" role="region" aria-label="Local setup commands"><div class="terminal-bar"><span></span><span></span><span></span><small>terminal · repository root</small></div><pre><code>git clone https://github.com/ThomasLin070217/AILT9019-Group21.git
+cd AILT9019-Group21
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 -m backend</code></pre><p>Then open <code>http://127.0.0.1:8019/app/?mode=api&amp;map=local</code></p></div></section>
+
+    <section class="evidence-section"><div class="wrap evidence-layout"><div><p class="eyebrow">WHAT THE EVIDENCE SAYS</p><h2>Working core.<br><i>Clear limits.</i></h2></div><div class="evidence-list"><div><span>63</span><p>Python checks passed in the 2 November local review.</p></div><div><span>22</span><p>Node checks passed in the 2 November local review.</p></div><div><span>7</span><p>Integrated browser checks passed on an isolated backend.</p></div><div class="limit"><span>Next</span><p>A fresh-computer install, live AI cases, independent human scoring, and physical-device checks remain to be recorded.</p></div></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap footer-inner"><div><a class="wordmark" href="#top"><span class="pin" aria-hidden="true">✦</span><span>Travel Memory <em>Map</em></span></a><p>AILT9019 Group 21 · A local-first travel album.</p></div><div class="footer-links"><a href="https://github.com/ThomasLin070217/AILT9019-Group21">Source repository ↗</a><a href="https://github.com/ThomasLin070217/AILT9019-Group21/blob/main/docs/BACKEND.md">Architecture and privacy ↗</a><a href="https://github.com/ThomasLin070217/AILT9019-Group21/blob/main/data/README.md">Data credits ↗</a></div></div><div class="wrap footer-bottom">City outlines: © OpenStreetMap contributors · Local coastline: Natural Earth · Demo image: synthetic T02 fixture. Areas are approximate display footprints, not evidence of a visit.</div></footer>
+</body>
+</html>

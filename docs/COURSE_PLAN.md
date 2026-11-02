@@ -34,7 +34,7 @@ The six required sections are Background, Project pipeline, Evaluation and test,
 
 - Moodle is authoritative for releases and submissions.
 - Ed is for questions and the required three-line Friday standup during Weeks 5–10.
-- GitHub is the private project record. Commit working changes as we go.
+- GitHub is the public project record as of 28 October. Commit working changes as we go.
 - One team consultation is mandatory in Weeks 4–6 or Week 8, ideally before the revised proposal.
 - Record AI assistance and verify every generated change by running and testing it ourselves.
 

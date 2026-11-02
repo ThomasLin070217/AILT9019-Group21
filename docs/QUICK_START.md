@@ -1,6 +1,6 @@
 # Travel Memory Map quick start
 
-This guide covers the current integrated branch. Use fictional notes and a
+This guide covers the integrated `main` application. Use fictional notes and a
 permission-cleared photo for testing; the local album persists its records.
 
 ## Run the complete local album
@@ -25,10 +25,11 @@ is needed for this core workflow.
 4. Add another trip in the same city. It becomes a separate card and the city's
    highlighted area changes visit tier.
 
-The browser's **Write with AI** action displays exactly what will be sent and
+The browser's **Write with AI** action displays what will be sent and
 requires a second click. With no provider configured it returns an honest error
-and leaves the trip unchanged. To enable Thomas's OpenAI-compatible Responses
-adapter, use the server-side settings in [the backend guide](BACKEND.md). A
+and leaves the trip unchanged. To enable the OpenAI-compatible **Chat Completions** adapter (whose
+configuration name remains `AI_PROVIDER=responses`), use the server-side
+settings in [the backend guide](BACKEND.md). A
 generated draft must be reviewed and saved separately.
 
 ## Fictional no-install demo
