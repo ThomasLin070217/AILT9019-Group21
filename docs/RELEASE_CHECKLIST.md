@@ -17,7 +17,7 @@ Status reviewed on 2 November 2026. Check an item only when evidence exists for 
 ## Final deliverables · official date 20 November
 
 - [x] Public repository link and a static project webpage source with a genuine local workflow recording.
-- [ ] Confirm webpage hosting or include its accessible URL in the final package. Owner: Thomas.
+- [x] GitHub Pages serves `main:/docs` at https://thomaslin070217.github.io/AILT9019-Group21/; include this URL in the final package.
 - [ ] Three-minute presentation plus genuine demo recording, showing success, one limitation/failure and what was learned. Owners: all; Thomas coordinates.
 - [ ] Report within five pages plus appendix, including Ethics & AI-use disclosure and actual—not proposed—evaluation results. Owners: all; Thomas assembles.
 - [ ] Confirm consultation and standup record from course systems. Owner: Thomas.

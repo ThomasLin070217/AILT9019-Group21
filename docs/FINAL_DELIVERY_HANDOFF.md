@@ -5,7 +5,7 @@ This is a coordination draft for the four-person team, not a claim that final ar
 ## Thomas's prepared material
 
 - Public-repository README, quick start, backend, release and current handoff documentation have been aligned to the integrated build.
-- The project webpage source is `docs/index.html`. It presents the problem, actual app screenshots, a recorded synthetic local workflow, setup, evidence and explicit limits. Hosting/accessible URL still needs a final check.
+- The project webpage source is `docs/index.html`. It presents the problem, actual app screenshots, a recorded synthetic local workflow, setup, evidence and explicit limits. GitHub Pages serves it at https://thomaslin070217.github.io/AILT9019-Group21/ (verified 2 Nov).
 - The browser smoke script and retained evidence are in `tests/final-workflow.e2e.mjs` and `tests/evidence/2026-11-02-thomas/RESULTS.md`. The integrated run passed seven browser checks; 63 Python and 22 Node checks also passed locally.
 
 ## Three-minute presentation structure
