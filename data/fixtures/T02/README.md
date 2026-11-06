@@ -2,7 +2,7 @@
 
 This case tests whether the AI can describe **visible content with no user notes** without inventing a trip story. The city is set to Osaka by the user; the image itself does not identify Osaka.
 
-`park-bench.png` was generated with OpenAI's built-in imagegen tool on 26 October 2026. Thomas prepared this **provisional** fixture so the five-case suite is structurally complete. Owen remains the assigned T02 owner and should review or replace it before the team freezes evaluation inputs. Do not attribute the image or case to Owen as completed work.
+`park-bench.png` was generated with OpenAI's built-in imagegen tool on 26 October 2026. Thomas prepared it so the five-case suite is structurally complete. Owen reviewed the fixture on 6 November 2026 and accepted it as the final T02 input: the SHA-256 matches `case.json`, the PNG carries no EXIF or metadata chunks, and the image shows no people, readable text, watermark or identifiable landmark. The case is frozen for evaluation; authorship of the image remains Thomas's, per `source.creator` in `case.json`.
 
 Generation prompt: “Create one realistic candid travel photo of an ordinary park path in an unidentifiable East Asian city: a wooden bench beside a small pond, several green trees, stone paving, soft overcast daylight. No people, signs, text, recognizable landmark or watermark.”
 
