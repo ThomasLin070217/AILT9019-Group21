@@ -1,0 +1,20 @@
+{
+  "case_id": "T01",
+  "run_at_utc": "2026-11-06T10:18:39.053457+00:00",
+  "model": "local-fake-vision",
+  "prompt_version": "chat-completions-v1",
+  "prompt_sha256": "36246027fbb09c3f52d81747bb6cbb3b31e0c9a8b7cbbe4e6f0fbd4acc0c2c85",
+  "ai_timeout_seconds": 60.0,
+  "http_status": 200,
+  "unedited_app_response": {
+    "status": "draft",
+    "title": "Two days in Osaka",
+    "text": "I visited Osaka for two days. It rained on the first day. I made colour cards during the trip.",
+    "question": null,
+    "warning": null,
+    "model": "local-fake-vision"
+  },
+  "saved_trip_unchanged": true,
+  "human_reviews": [],
+  "note": "The integrated API response is unedited. Human factual scoring and provider usage/cost are not supplied by this script."
+}

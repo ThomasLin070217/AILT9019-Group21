@@ -6,6 +6,7 @@ var/evaluation/ until the team checks permissions and decides what to publish.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import tempfile
@@ -16,7 +17,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from backend.ai import build_generator, generator_configured
-from backend.ai.responses import PROMPT_VERSION
+from backend.ai.responses import PROMPT_VERSION, SYSTEM_PROMPT
 from backend.app import create_app
 from backend.config import REPO_ROOT, Settings
 
@@ -65,6 +66,7 @@ def main() -> int:
         "run_at_utc": datetime.now(timezone.utc).isoformat(),
         "model": source_settings.ai_model,
         "prompt_version": PROMPT_VERSION,
+        "prompt_sha256": hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest(),
         "ai_timeout_seconds": source_settings.ai_timeout_seconds,
         "http_status": reply.status_code,
         "unedited_app_response": reply.json(),

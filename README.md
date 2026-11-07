@@ -29,8 +29,9 @@ Runtime data lives in Git-ignored `var/travel.db` and `var/media/`; back up both
 
 - [Live project webpage](https://thomaslin070217.github.io/AILT9019-Group21/) ([source](docs/index.html)): problem, workflow, recorded local demonstration, setup, evidence and limits. The application itself still runs locally.
 - [2 November integrated smoke check](tests/evidence/2026-11-02-thomas/RESULTS.md): browser workflow against an isolated backend and synthetic photo.
+- [6 November AI integration check](tests/evidence/2026-11-06-ai-mock/RESULTS.md): browser and fixture path against a local fake model, including consent, selected-trip privacy, editable draft and save. This is not a live-model quality result.
 - [Evaluation plan](tests/EVALUATION_PLAN.md): T01–T05 and the human-review rules. The five live outputs and independent scores are still pending.
-- [Team and agent handoff](HANDOFF.md) and [release checklist](docs/RELEASE_CHECKLIST.md): current owner tasks, acceptance evidence and remaining gates.
+- [Team and agent handoff](HANDOFF.md), [dated AI milestones](docs/AI_CHECKPOINTS_2026-11-06.md) and [release checklist](docs/RELEASE_CHECKLIST.md): current owner tasks, acceptance evidence and remaining gates.
 
 Developers can run `npm test` and, after `pip install -r requirements-dev.txt`, `.venv/bin/python -m pytest -q`. The browser smoke script is `tests/final-workflow.e2e.mjs`; it requires Playwright and a running isolated backend. Test counts and limitations are recorded in the linked evidence, not inferred from this README.
 

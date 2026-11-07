@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "provider": "local fake; no cloud request",
+  "checks": [
+    "AI-ready backend starts with isolated storage",
+    "Cancel sends nothing",
+    "Disclosure lists selected trip fields",
+    "Only selected trip and one prepared JPEG reach Chat Completions",
+    "Draft remains unsaved until review",
+    "Reviewed draft persists after save and reload",
+    "Other trip remains unchanged",
+    "No browser page errors"
+  ]
+}

@@ -34,6 +34,10 @@ These are completed trips, not future travel plans. For a draft, write a short t
 Return only JSON with exactly these fields: status, title, memory_text, warnings and questions.
 The status value MUST be exactly "draft", "clarification" or "refusal"."""
 
+# Bump this label whenever the prompt or output contract changes. The fixture
+# runner also records a prompt hash so a past result can be matched precisely.
+PROMPT_VERSION = "chat-completions-v1"
+
 SCHEMA_FIELDS = {"status", "title", "memory_text", "warnings", "questions"}
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 

@@ -1,13 +1,13 @@
 # Travel Memory Map evaluation plan
 
-Status on 26 October 2026: the five AI cases remain unrun against a live cloud model on the integrated build. T01, T03, T04 and T05 inputs are prepared; T02 now has a provisional synthetic-photo fixture prepared by Thomas pending Owen’s review. Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
+Status on 7 November 2026: the five AI cases remain unrun against a live cloud model on the integrated build. A local fake-provider integration run has passed; see [dated evidence](evidence/2026-11-06-ai-mock/RESULTS.md) and [next milestones](../docs/AI_CHECKPOINTS_2026-11-06.md). T01, T03, T04 and T05 inputs are prepared; Owen reviewed and froze Thomas’s synthetic T02 input on 6 November. Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
 
 ## Fixed AI cases
 
 | ID | Preparation owner | Input | Expected behaviour |
 | --- | --- | --- | --- |
 | T01 | Thomas | Clear photos and full notes | Preserve checklist facts in an editable title and short memory |
-| T02 | Owen (Thomas prepared provisional asset) | Photos/city, no notes | Describe visible content without invented people, emotions or events |
+| T02 | Owen (reviewed Thomas’s synthetic asset) | Photos/city, no notes | Describe visible content without invented people, emotions or events |
 | T03 | Angel | Photos and brief notes | Retain supplied facts without filling gaps with imagined details |
 | T04 | Qingyang | Unclear/uninformative photos | Use supported facts only; request notes if a meaningful draft is impossible |
 | T05 | Shared; Qingyang coordinates | Clear photo/note conflict | Flag conflict and request correction, without inventing a reconciliation or changing the saved city |
@@ -45,4 +45,4 @@ Report actual counts (for example, 4/5), edits required and failure details. Fiv
 | Privacy payload | Owen and Qingyang | Request includes current trip only, no other album data; disclosure appears before sending |
 | First-use and fresh setup | Angel and Thomas | Another person completes the documented sample workflow; record help needed |
 
-Save actual outcome, date, commit and evidence for each check. A mock or an AI tool’s assurance is not test evidence. Complete initial results by 23 October so the team can review before the 26 October mid-term.
+Save actual outcome, date, commit and evidence for each check. A mock or an AI tool’s assurance is not test evidence. The earlier 23 October target was missed. Record actual run dates and results against the current [internal milestones](../docs/AI_CHECKPOINTS_2026-11-06.md); do not backdate evidence.
