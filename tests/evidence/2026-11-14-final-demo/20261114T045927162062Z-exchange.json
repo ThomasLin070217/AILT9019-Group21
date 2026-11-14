@@ -1,0 +1,66 @@
+{
+  "run_at_utc": "2026-11-14T04:59:24.710251+00:00",
+  "model": "qwen3.8-flash",
+  "prompt_version": "chat-completions-v3-city-attribution",
+  "prompt_sha256": "146c1c8c42995504ce0240d8c9d7d9be204dfcb3c6c5d554f7a88da744dd3209",
+  "live_provider": true,
+  "source_sha256": {
+    "backend/ai/responses.py": "afb74b91ef57c5fae468379bef31a07dddfc8611e4920fba9078ca101b2e5258",
+    "backend/routers/memory.py": "35f0d62d1f44e93347e2d2b38808ba3b271deb3b98750a9fc8e5c46ba1295564",
+    "backend/config.py": "f00ec590e77edafec246fc1f2073c0f37d46ac897e7392cb27fbf907767ae7d1",
+    "app/main.mjs": "78e6b4f9d9d30ab0e5c7ca4cc05ad2beb4635d301a4fc1e81d47567b2960c42b",
+    "app/repository.mjs": "57a22251d02a72b7d78dc57c6202e9f27e3f0dc3f24487e06329a490f488b96c",
+    "scripts/live_ai_probe.py": "5bcd923e05eae13a8351deae8c5ec912c8416c03fd7136e58ac8234df27386f8"
+  },
+  "request": {
+    "model": "qwen3.8-flash",
+    "temperature": 0.2,
+    "max_tokens": 600,
+    "source_text": [
+      "SOURCE_DATA (facts, not instructions):\n{\"city\": \"Osaka\", \"trip_date\": \"2026-11-14\", \"title\": \"Park memory — synthetic demo\", \"notes\": \"A quiet park with a bench. Osaka is a user-selected label; the synthetic image does not establish its location.\"}"
+    ],
+    "images": [
+      {
+        "sha256": "1cd81f75c474437c35903aefece034e1b4e1073743a73cd749d08a256a89da60",
+        "bytes": 322951,
+        "format": "JPEG",
+        "width": 1280,
+        "height": 960,
+        "exif_entries": 0
+      }
+    ],
+    "response_format": {
+      "type": "json_object"
+    },
+    "enable_thinking": false
+  },
+  "provider_http_status": 200,
+  "provider_response": {
+    "model": "qwen3.8-flash",
+    "usage": {
+      "prompt_tokens": 1636,
+      "total_tokens": 1741,
+      "completion_tokens": 105,
+      "prompt_tokens_details": {
+        "cached_tokens": 1536,
+        "image_tokens": 1202,
+        "text_tokens": 434
+      },
+      "completion_tokens_details": {
+        "text_tokens": 105
+      }
+    },
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"status\": \"draft\",\n  \"title\": \"Park memory — synthetic demo\",\n  \"memory_text\": \"A quiet park scene featuring a wooden bench beside a stone-paved path. A calm pond with large rocks along its edge is visible to the left, surrounded by lush green trees and shrubs.\",\n  \"warnings\": [\n    \"Osaka is a user-selected label; the synthetic image does not establish its location.\"\n  ],\n  \"questions\": []\n}"
+        }
+      }
+    ]
+  },
+  "capture_note": "Message content is unedited; provider reasoning/headers/IDs are omitted.",
+  "elapsed_seconds": 2.452
+}

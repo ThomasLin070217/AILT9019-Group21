@@ -1,0 +1,534 @@
+{
+  "started": "2026-11-14T04:59:06.422Z",
+  "duration": 71.208,
+  "frames": [
+    {
+      "file": "00000.jpg",
+      "seconds": 0.053
+    },
+    {
+      "file": "00001.jpg",
+      "seconds": 0.544
+    },
+    {
+      "file": "00002.jpg",
+      "seconds": 1.051
+    },
+    {
+      "file": "00003.jpg",
+      "seconds": 1.553
+    },
+    {
+      "file": "00004.jpg",
+      "seconds": 2.054
+    },
+    {
+      "file": "00005.jpg",
+      "seconds": 2.568
+    },
+    {
+      "file": "00006.jpg",
+      "seconds": 3.045
+    },
+    {
+      "file": "00007.jpg",
+      "seconds": 3.58
+    },
+    {
+      "file": "00008.jpg",
+      "seconds": 4.079
+    },
+    {
+      "file": "00009.jpg",
+      "seconds": 4.594
+    },
+    {
+      "file": "00010.jpg",
+      "seconds": 5.071
+    },
+    {
+      "file": "00011.jpg",
+      "seconds": 5.569
+    },
+    {
+      "file": "00012.jpg",
+      "seconds": 6.068
+    },
+    {
+      "file": "00013.jpg",
+      "seconds": 6.562
+    },
+    {
+      "file": "00014.jpg",
+      "seconds": 7.072
+    },
+    {
+      "file": "00015.jpg",
+      "seconds": 7.569
+    },
+    {
+      "file": "00016.jpg",
+      "seconds": 8.756
+    },
+    {
+      "file": "00017.jpg",
+      "seconds": 8.797
+    },
+    {
+      "file": "00018.jpg",
+      "seconds": 9.3
+    },
+    {
+      "file": "00019.jpg",
+      "seconds": 9.804
+    },
+    {
+      "file": "00020.jpg",
+      "seconds": 10.321
+    },
+    {
+      "file": "00021.jpg",
+      "seconds": 10.818
+    },
+    {
+      "file": "00022.jpg",
+      "seconds": 12.363
+    },
+    {
+      "file": "00023.jpg",
+      "seconds": 12.454
+    },
+    {
+      "file": "00024.jpg",
+      "seconds": 14.82
+    },
+    {
+      "file": "00025.jpg",
+      "seconds": 14.862
+    },
+    {
+      "file": "00026.jpg",
+      "seconds": 15.369
+    },
+    {
+      "file": "00027.jpg",
+      "seconds": 15.869
+    },
+    {
+      "file": "00028.jpg",
+      "seconds": 16.406
+    },
+    {
+      "file": "00029.jpg",
+      "seconds": 16.896
+    },
+    {
+      "file": "00030.jpg",
+      "seconds": 17.386
+    },
+    {
+      "file": "00031.jpg",
+      "seconds": 17.886
+    },
+    {
+      "file": "00032.jpg",
+      "seconds": 20.834
+    },
+    {
+      "file": "00033.jpg",
+      "seconds": 20.91
+    },
+    {
+      "file": "00034.jpg",
+      "seconds": 21.377
+    },
+    {
+      "file": "00035.jpg",
+      "seconds": 21.884
+    },
+    {
+      "file": "00036.jpg",
+      "seconds": 22.386
+    },
+    {
+      "file": "00037.jpg",
+      "seconds": 22.902
+    },
+    {
+      "file": "00038.jpg",
+      "seconds": 23.386
+    },
+    {
+      "file": "00039.jpg",
+      "seconds": 23.889
+    },
+    {
+      "file": "00040.jpg",
+      "seconds": 24.386
+    },
+    {
+      "file": "00041.jpg",
+      "seconds": 24.903
+    },
+    {
+      "file": "00042.jpg",
+      "seconds": 25.402
+    },
+    {
+      "file": "00043.jpg",
+      "seconds": 25.894
+    },
+    {
+      "file": "00044.jpg",
+      "seconds": 26.396
+    },
+    {
+      "file": "00045.jpg",
+      "seconds": 26.9
+    },
+    {
+      "file": "00046.jpg",
+      "seconds": 27.404
+    },
+    {
+      "file": "00047.jpg",
+      "seconds": 27.905
+    },
+    {
+      "file": "00048.jpg",
+      "seconds": 29.068
+    },
+    {
+      "file": "00049.jpg",
+      "seconds": 29.117
+    },
+    {
+      "file": "00050.jpg",
+      "seconds": 29.628
+    },
+    {
+      "file": "00051.jpg",
+      "seconds": 30.128
+    },
+    {
+      "file": "00052.jpg",
+      "seconds": 31.621
+    },
+    {
+      "file": "00053.jpg",
+      "seconds": 31.86
+    },
+    {
+      "file": "00054.jpg",
+      "seconds": 33.217
+    },
+    {
+      "file": "00055.jpg",
+      "seconds": 34.718
+    },
+    {
+      "file": "00056.jpg",
+      "seconds": 34.778
+    },
+    {
+      "file": "00057.jpg",
+      "seconds": 35.271
+    },
+    {
+      "file": "00058.jpg",
+      "seconds": 35.767
+    },
+    {
+      "file": "00059.jpg",
+      "seconds": 36.262
+    },
+    {
+      "file": "00060.jpg",
+      "seconds": 36.78
+    },
+    {
+      "file": "00061.jpg",
+      "seconds": 37.266
+    },
+    {
+      "file": "00062.jpg",
+      "seconds": 37.773
+    },
+    {
+      "file": "00063.jpg",
+      "seconds": 38.283
+    },
+    {
+      "file": "00064.jpg",
+      "seconds": 38.787
+    },
+    {
+      "file": "00065.jpg",
+      "seconds": 39.287
+    },
+    {
+      "file": "00066.jpg",
+      "seconds": 40.789
+    },
+    {
+      "file": "00067.jpg",
+      "seconds": 42.067
+    },
+    {
+      "file": "00068.jpg",
+      "seconds": 42.12
+    },
+    {
+      "file": "00069.jpg",
+      "seconds": 42.618
+    },
+    {
+      "file": "00070.jpg",
+      "seconds": 43.117
+    },
+    {
+      "file": "00071.jpg",
+      "seconds": 43.62
+    },
+    {
+      "file": "00072.jpg",
+      "seconds": 44.12
+    },
+    {
+      "file": "00073.jpg",
+      "seconds": 44.612
+    },
+    {
+      "file": "00074.jpg",
+      "seconds": 45.174
+    },
+    {
+      "file": "00075.jpg",
+      "seconds": 45.967
+    },
+    {
+      "file": "00076.jpg",
+      "seconds": 47.369
+    },
+    {
+      "file": "00077.jpg",
+      "seconds": 47.443
+    },
+    {
+      "file": "00078.jpg",
+      "seconds": 47.911
+    },
+    {
+      "file": "00079.jpg",
+      "seconds": 48.435
+    },
+    {
+      "file": "00080.jpg",
+      "seconds": 48.92
+    },
+    {
+      "file": "00081.jpg",
+      "seconds": 49.412
+    },
+    {
+      "file": "00082.jpg",
+      "seconds": 49.927
+    },
+    {
+      "file": "00083.jpg",
+      "seconds": 50.435
+    },
+    {
+      "file": "00084.jpg",
+      "seconds": 50.937
+    },
+    {
+      "file": "00085.jpg",
+      "seconds": 54.123
+    },
+    {
+      "file": "00086.jpg",
+      "seconds": 54.177
+    },
+    {
+      "file": "00087.jpg",
+      "seconds": 55.671
+    },
+    {
+      "file": "00088.jpg",
+      "seconds": 55.718
+    },
+    {
+      "file": "00089.jpg",
+      "seconds": 56.219
+    },
+    {
+      "file": "00090.jpg",
+      "seconds": 56.718
+    },
+    {
+      "file": "00091.jpg",
+      "seconds": 57.223
+    },
+    {
+      "file": "00092.jpg",
+      "seconds": 57.713
+    },
+    {
+      "file": "00093.jpg",
+      "seconds": 58.237
+    },
+    {
+      "file": "00094.jpg",
+      "seconds": 58.751
+    },
+    {
+      "file": "00095.jpg",
+      "seconds": 59.246
+    },
+    {
+      "file": "00096.jpg",
+      "seconds": 59.746
+    },
+    {
+      "file": "00097.jpg",
+      "seconds": 60.238
+    },
+    {
+      "file": "00098.jpg",
+      "seconds": 60.736
+    },
+    {
+      "file": "00099.jpg",
+      "seconds": 61.233
+    },
+    {
+      "file": "00100.jpg",
+      "seconds": 61.748
+    },
+    {
+      "file": "00101.jpg",
+      "seconds": 62.233
+    },
+    {
+      "file": "00102.jpg",
+      "seconds": 62.738
+    },
+    {
+      "file": "00103.jpg",
+      "seconds": 63.252
+    },
+    {
+      "file": "00104.jpg",
+      "seconds": 63.736
+    },
+    {
+      "file": "00105.jpg",
+      "seconds": 64.36
+    },
+    {
+      "file": "00106.jpg",
+      "seconds": 64.738
+    },
+    {
+      "file": "00107.jpg",
+      "seconds": 65.243
+    },
+    {
+      "file": "00108.jpg",
+      "seconds": 65.763
+    },
+    {
+      "file": "00109.jpg",
+      "seconds": 66.257
+    },
+    {
+      "file": "00110.jpg",
+      "seconds": 66.763
+    },
+    {
+      "file": "00111.jpg",
+      "seconds": 67.242
+    },
+    {
+      "file": "00112.jpg",
+      "seconds": 67.767
+    },
+    {
+      "file": "00113.jpg",
+      "seconds": 68.27
+    },
+    {
+      "file": "00114.jpg",
+      "seconds": 68.774
+    },
+    {
+      "file": "00115.jpg",
+      "seconds": 69.255
+    },
+    {
+      "file": "00116.jpg",
+      "seconds": 69.756
+    },
+    {
+      "file": "00117.jpg",
+      "seconds": 70.268
+    },
+    {
+      "file": "00118.jpg",
+      "seconds": 70.749
+    }
+  ],
+  "events": [
+    {
+      "seconds": 0,
+      "caption": "Travel Memory Map — Group 21. Real cloud Qwen; synthetic data; assistant-operated demo."
+    },
+    {
+      "seconds": 4.601,
+      "caption": "Input: select Osaka and enter notes. The image is synthetic; city is a user label."
+    },
+    {
+      "seconds": 7.783,
+      "caption": "Saving a trip lights the city and creates a separate local record."
+    },
+    {
+      "seconds": 12.669,
+      "caption": "Before upload, the app discloses this trip only: city, date, title, notes and one photo."
+    },
+    {
+      "seconds": 18.217,
+      "caption": "Processing: one real cloud request to qwen3.8-flash. No stored trip is overwritten."
+    },
+    {
+      "seconds": 20.853,
+      "caption": "Output: an editable AI draft. It is not saved automatically."
+    },
+    {
+      "seconds": 27.984,
+      "caption": "Edit the draft, then explicitly save. This automated demo is not a human quality rating."
+    },
+    {
+      "seconds": 32.156,
+      "caption": "Reload verification: the edited memory persists; the visit count remains one."
+    },
+    {
+      "seconds": 42.072,
+      "caption": "Boundary case: a second trip says the sign reads OPEN, but its image says CLOSED."
+    },
+    {
+      "seconds": 50.983,
+      "caption": "Real cloud boundary test: the model must not silently choose between conflicting facts."
+    },
+    {
+      "seconds": 55.615,
+      "caption": "The model asks for clarification. The saved trip remains unchanged; no invented memory is saved."
+    },
+    {
+      "seconds": 64.361,
+      "caption": "Two saved trips, one city. Reload preserves both records. Human quality review is still pending."
+    }
+  ],
+  "captureError": null,
+  "format": "Continuous timestamped browser screenshots; no omitted intervals; subtitles added"
+}

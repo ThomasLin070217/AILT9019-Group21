@@ -37,3 +37,7 @@ The report must not present assistant preliminary observations as completed inde
 ## Remaining delivery blockers
 
 The required four-member Zoom recording and the two actual YouTube links are not yet verified. The prepared local ZIP is a **review bundle**, not a ready-to-upload final package. Human scoring, T03 permission/run and member sign-off are still pending; report them honestly if not resolved. Do not mark a future milestone complete merely because a document exists.
+
+## Update after DeepSeek review
+
+A real 71-second cloud-Qwen demo with captions is now prepared, including draft/edit/save/reload and conflict clarification. See [demo evidence](../tests/evidence/2026-11-14-final-demo/RESULTS.md). The four-member Zoom presentation and both actual YouTube URLs are still pending. The initial 42/56 text-only AI score is not a teacher grade. The human-output worksheet reduces review preparation work; its verdicts are deliberately not pre-filled.
