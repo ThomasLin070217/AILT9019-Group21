@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import sqlite3
 import uuid
+import hashlib
+import json
 from datetime import datetime, timezone
 from typing import Any
 
@@ -74,10 +76,26 @@ def create_trip(
     trip_date: str | None,
     title: str,
     notes: str,
+    request_key: str | None = None,
 ) -> dict[str, Any]:
     trip_id = str(uuid.uuid4())
     timestamp = now_iso()
     with connection:
+        if request_key is not None:
+            # Serialise check-and-insert across request-scoped connections.
+            connection.execute("BEGIN IMMEDIATE")
+            payload_hash = hashlib.sha256(json.dumps(
+                [city_id, trip_date, title, notes], ensure_ascii=False, separators=(",", ":")
+            ).encode("utf-8")).hexdigest()
+            previous = connection.execute(
+                "SELECT payload_hash, trip_id FROM trip_create_requests WHERE request_key = ?", (request_key,)
+            ).fetchone()
+            if previous:
+                if previous["payload_hash"] != payload_hash:
+                    raise ApiError("This request key was already used for different trip details.", status_code=409, code="idempotency_conflict")
+                if not trip_exists(connection, previous["trip_id"]):
+                    raise ApiError("The trip from this request was deleted. Start a new save to create another visit.", status_code=410, code="idempotency_trip_deleted")
+                return get_snapshot(connection, previous["trip_id"])
         connection.execute(
             """
             INSERT INTO trips
@@ -86,6 +104,11 @@ def create_trip(
             """,
             (trip_id, city_id, trip_date, title, notes, timestamp, timestamp),
         )
+        if request_key is not None:
+            connection.execute(
+                "INSERT INTO trip_create_requests (request_key, payload_hash, trip_id) VALUES (?, ?, ?)",
+                (request_key, payload_hash, trip_id),
+            )
     return get_snapshot(connection, trip_id)
 
 

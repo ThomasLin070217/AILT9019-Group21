@@ -24,15 +24,7 @@ The final rubric splits the 60 project marks into Report 11, Weekly reports 4, C
 
 ## Weekend closing tasks
 
-| Owner | Due on 15 November HKT | Concrete acceptance |
-| --- | --- | --- |
-| Owen | 12:00; output reviews 16:00 | Fresh installation on his computer, restart/restore/failure record with commands and hashes; independent assigned-case ratings |
-| Angel | 12:00; recordings 21:00 | Current-build phone/desktop/keyboard record; explicit T03 provider-transfer decision; coordinate Zoom and genuine demo recording, captions and two YouTube links |
-| Qingyang | 16:00 | Two independent raw-output verdicts per case; clearly mark missing T03 if permission/run unavailable; retain failures and disagreements |
-| Thomas | 18:00 integration; 22:00 package | Integrate accepted evidence, update report/page, replace pending video links, verify PDF/page limit, links and ZIP |
-| All four | 23:00 | Read the report, confirm actual section-by-section contributions and inspect the two final videos |
-
-The report must not present assistant preliminary observations as completed independent human ratings. Public-photo consent does not automatically cover cloud transfer. The school key batch expires on 19 November; make permitted live recordings before expiry or obtain renewed access.
+Use the [current named tasks and acceptance criteria](FINAL_HUMAN_TODO.md): individual items by 15 November 21:00 HKT, final team review by 23:00 HKT. Human scores, contribution confirmation, T03 cloud permission and all-member Zoom participation cannot be completed by an assistant.
 
 ## Remaining delivery blockers
 
@@ -41,3 +33,7 @@ The required four-member Zoom recording and the two actual YouTube links are not
 ## Update after DeepSeek review
 
 A real 71-second cloud-Qwen demo with captions is now prepared, including draft/edit/save/reload and conflict clarification. See [demo evidence](../tests/evidence/2026-11-14-final-demo/RESULTS.md). The four-member Zoom presentation and both actual YouTube URLs are still pending. The initial 42/56 text-only AI score is not a teacher grade. The human-output worksheet reduces review preparation work; its verdicts are deliberately not pre-filled.
+
+## Release readiness update
+
+Safe keyed create retries and a portable 16-check real-server verifier are now available. The latest suite passes 89 Python and 25 Node tests; see [release evidence](../tests/evidence/2026-11-14-release-readiness/RESULTS.md). The local submission checker rejects pending links and two aliases of the same YouTube video. Historical evidence above retains its original counts. The independent text-only DeepSeek reassessment was 44/56 excluding weekly marks, not a teacher grade; it did not watch the videos or execute code.

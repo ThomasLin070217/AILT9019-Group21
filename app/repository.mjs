@@ -9,11 +9,12 @@ export class ApiError extends Error {
 }
 
 /** JSON or multipart request with a timeout; never substitutes demo data. */
-export async function requestJSON(url,{method='GET',json,form,timeout=10000}={}) {
+export async function requestJSON(url,{method='GET',json,form,headers,timeout=10000}={}) {
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),timeout);
   const options={method,signal:controller.signal};
-  if(json!==undefined){options.headers={'Content-Type':'application/json'};options.body=JSON.stringify(json);}
+  if(headers)options.headers={...headers};
+  if(json!==undefined){options.headers={...options.headers,'Content-Type':'application/json'};options.body=JSON.stringify(json);}
   if(form!==undefined)options.body=form;
   try {
     const response=await fetch(url,options);
@@ -56,7 +57,14 @@ export class DemoRepository {
   async reset() {return this.save(structuredClone(this.seed));}
 }
 export class ApiRepository {
-  constructor(cities){this.cities=cities;}
+  constructor(cities,storage){
+    this.cities=cities;this.pendingCreates=new Map();this.pendingKey='travel-memory-map.pending-creates.v1';
+    try{this.storage=storage===undefined?globalThis.sessionStorage:storage;
+      const rows=JSON.parse(this.storage?.getItem(this.pendingKey)||'[]');
+      if(Array.isArray(rows))for(const row of rows){if(Array.isArray(row)&&row.length===2&&typeof row[0]==='string'&&typeof row[1]==='string'&&/^[A-Za-z0-9._:-]{8,128}$/.test(row[1]))this.pendingCreates.set(...row);}
+    }catch{/* Retry protection remains in memory if tab storage is unavailable. */}
+  }
+  rememberCreates(){try{this.storage?.setItem(this.pendingKey,JSON.stringify([...this.pendingCreates]));}catch{}}
   async list(){
     const rows=await requestJSON('/api/trips');
     if (!Array.isArray(rows)) throw new Error('The backend must return a trip array.');
@@ -67,8 +75,17 @@ export class ApiRepository {
     return validateTrip(row,this.cities);
   }
   async create({city_id,trip_date=null,title='',notes=''}={}){
-    const row=await requestJSON('/api/trips',{method:'POST',json:{city_id,trip_date,title,notes}});
-    return validateTrip(row,this.cities);
+    const payload={city_id,trip_date,title,notes},signature=JSON.stringify(payload);
+    if(!this.pendingCreates.has(signature)){this.pendingCreates.set(signature,crypto.randomUUID());this.rememberCreates();}
+    try{
+      const row=await requestJSON('/api/trips',{method:'POST',json:payload,headers:{'Idempotency-Key':this.pendingCreates.get(signature)}});
+      const validated=validateTrip(row,this.cities);
+      this.pendingCreates.delete(signature);this.rememberCreates();return validated;
+    }catch(error){
+      // A lost response/timeout may hide a successful commit. Keep its key for a retry.
+      if(error instanceof ApiError&&error.status>=400&&error.status<500&&error.status!==408){this.pendingCreates.delete(signature);this.rememberCreates();}
+      throw error;
+    }
   }
   async edit(id,patch){
     const row=await requestJSON(`/api/trips/${encodeURIComponent(id)}`,{method:'PATCH',json:patch});

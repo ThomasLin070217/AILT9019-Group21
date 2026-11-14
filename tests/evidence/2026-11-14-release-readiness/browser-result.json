@@ -1,0 +1,23 @@
+{
+  "scenario": "Deliberately drop a real 201 response after server commit, reload and retry, then intentionally create another identical trip",
+  "beforeRetry": {
+    "cards": 1,
+    "title": "Retry protection test"
+  },
+  "recovered": {
+    "cards": 1,
+    "count": "1 visit · Each trip, its own memory.",
+    "message": "Saved trip recovered. Visit count unchanged."
+  },
+  "final": {
+    "cards": 2,
+    "count": "2 visits · Each trip, its own memory."
+  },
+  "request_keys": [
+    "0b40e28c-9538-4a5e-ab85-8be37983bf62",
+    "0b40e28c-9538-4a5e-ab85-8be37983bf62",
+    "b790b2cb-b606-4bb9-832b-30207046b8f3"
+  ],
+  "cloud_calls": 0,
+  "operator": "Codex; not independent human acceptance"
+}

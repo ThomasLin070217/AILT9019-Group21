@@ -94,3 +94,40 @@ test('an aborted request is reported as a timeout',async ()=>{
     await assert.rejects(()=>requestJSON('/api/trips'),error=>error instanceof ApiError && error.code==='timeout');
   } finally {stub.restore();}
 });
+
+function tabStorage(){const data=new Map();return {getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,v)};}
+
+test('lost create response reuses its key after reload; intentional next visit uses a new key',async()=>{
+  const storage=tabStorage(),payload={city_id:'jp-osaka',title:'Same visit'};
+  let lost=true;
+  const stub=stubFetch(async()=>{if(lost){lost=false;throw new TypeError('connection lost after commit');}return {ok:true,status:201,json:async()=>trip};});
+  try{
+    await assert.rejects(()=>new ApiRepository(cities,storage).create(payload));
+    const reloaded=new ApiRepository(cities,storage);
+    await reloaded.create(payload);
+    await reloaded.create(payload);
+    const keys=stub.calls.map(c=>c.options.headers['Idempotency-Key']);
+    assert.ok(keys[0]);assert.equal(keys[0],keys[1]);assert.notEqual(keys[1],keys[2]);
+  }finally{stub.restore();}
+});
+
+test('simultaneous create attempts share a key while different payloads remain separate',async()=>{
+  const stub=stubFetch(async()=>({ok:true,status:201,json:async()=>trip}));
+  try{
+    const repo=new ApiRepository(cities,tabStorage());
+    await Promise.all([repo.create({city_id:'jp-osaka'}),repo.create({city_id:'jp-osaka'}),repo.create({city_id:'cn-beijing'})]);
+    const keys=stub.calls.map(c=>c.options.headers['Idempotency-Key']);
+    assert.equal(keys[0],keys[1]);assert.notEqual(keys[0],keys[2]);
+  }finally{stub.restore();}
+});
+
+test('a deleted retry identity surfaces 410 and the next explicit save receives a fresh key',async()=>{
+  let deleted=true;
+  const stub=stubFetch(async()=>{if(deleted){deleted=false;return {ok:false,status:410,json:async()=>({error:{code:'idempotency_trip_deleted',message:'Deleted'}})};}return {ok:true,status:201,json:async()=>trip};});
+  try{
+    const repo=new ApiRepository(cities,tabStorage()),payload={city_id:'jp-osaka'};
+    await assert.rejects(()=>repo.create(payload),e=>e.status===410);
+    await repo.create(payload);
+    assert.notEqual(stub.calls[0].options.headers['Idempotency-Key'],stub.calls[1].options.headers['Idempotency-Key']);
+  }finally{stub.restore();}
+});

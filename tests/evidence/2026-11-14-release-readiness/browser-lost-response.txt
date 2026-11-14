@@ -1,0 +1,229 @@
+[p1 "Travel Memory Map" | space "AILT release readiness verification"(23): 1 managed, 0 untracked — p1* "Travel Memory Map"]
+root
+  anchor [ref=23, loc=href:/app/?mode=api&map=local#cities, url=http://127.0.0.1:8057/app/?mode=api&map=local#cities]
+    text "Skip to city list"
+  container
+    anchor [ref=1, loc=href:/app/, url=http://127.0.0.1:8057/app/]
+      svg_root
+      text "Travel Memory"
+    container "Album view"
+      button [ref=2]
+        svg_root
+        text "Map"
+      button [ref=3]
+        svg_root
+        text "Album"
+    anchor [ref=4, loc=href:/app/about.html, url=http://127.0.0.1:8057/app/about.html]
+      text "About this project"
+      svg_root
+  container
+    alert
+      paragraph
+        text "Could not complete this change. Failed to fetch"
+    container
+      container "City catalogue"
+        container
+          heading
+            text "Your places."
+          paragraph
+            text "A little closer to being there again."
+          paragraph
+            text "0 cities visited"
+            text "of 19 supported · 0 trips"
+        container
+          container
+            text "Find a city"
+            svg_root
+            searchbox [ref=5, loc=css:input[placeholder="Find a city / 中文"]]
+              text "Find a city / 中文"
+          container
+            text "Explore"
+            combobox [ref=6]
+              text "All 19 cities"
+          container
+            checkbox [ref=7]
+            text "Visited cities only"
+        container
+          heading
+            text "Cities"
+          paragraph
+            text "19 of 19 cities"
+        container [ref=8]
+          button "Beijing, 0 visits" [ref=9, loc=css:button[aria-label="Beijing, 0 visits"]]
+            container
+              text "Beijing"
+              text "北京"
+            text "—"
+          button "Chengdu, 0 visits" [ref=10, loc=css:button[aria-label="Chengdu, 0 visits"]]
+            container
+              text "Chengdu"
+              text "成都"
+            text "—"
+          button "Chongqing, 0 visits" [ref=11, loc=css:button[aria-label="Chongqing, 0 visits"]]
+            container
+              text "Chongqing"
+              text "重庆"
+            text "—"
+          button "Fukuoka, 0 visits" [ref=24, loc=css:button[aria-label="Fukuoka, 0 visits"]]
+            container
+              text "Fukuoka"
+              text "福岡"
+            text "—"
+          button "Guangzhou, 0 visits" [ref=25, loc=css:button[aria-label="Guangzhou, 0 visits"]]
+            container
+              text "Guangzhou"
+              text "广州"
+            text "—"
+          button "Hangzhou, 0 visits" [ref=26, loc=css:button[aria-label="Hangzhou, 0 visits"]]
+            container
+              text "Hangzhou"
+              text "杭州"
+            text "—"
+          button "Hong Kong, 0 visits" [ref=27, loc=css:button[aria-label="Hong Kong, 0 visits"]]
+            container
+              text "Hong Kong"
+              text "香港"
+            text "—"
+          button "Kaohsiung, 0 visits" [ref=28, loc=css:button[aria-label="Kaohsiung, 0 visits"]]
+            text "Kaohsiung"
+            text "高雄"
+            text "—"
+          button "Kyoto, 0 visits" [ref=29, loc=css:button[aria-label="Kyoto, 0 visits"]]
+            text "Kyoto"
+            text "京都"
+            text "—"
+          button "Macau, 0 visits" [ref=30, loc=css:button[aria-label="Macau, 0 visits"]]
+            text "Macau"
+            text "澳门"
+            text "—"
+          button "Naha, 0 visits" [ref=31, loc=css:button[aria-label="Naha, 0 visits"]]
+            text "Naha"
+            text "那覇"
+            text "—"
+          button "Nanjing, 0 visits" [ref=32, loc=css:button[aria-label="Nanjing, 0 visits"]]
+            text "Nanjing"
+            text "南京"
+            text "—"
+          button "Osaka, 0 visits" [ref=33, loc=css:button[aria-label="Osaka, 0 visits"]]
+            text "Osaka"
+            text "大阪"
+            text "—"
+          button "Sapporo, 0 visits" [ref=34, loc=css:button[aria-label="Sapporo, 0 visits"]]
+            text "Sapporo"
+            text "札幌"
+            text "—"
+          button "Shanghai, 0 visits" [ref=35, loc=css:button[aria-label="Shanghai, 0 visits"]]
+            text "Shanghai"
+            text "上海"
+            text "—"
+          button "Shenzhen, 0 visits" [ref=36, loc=css:button[aria-label="Shenzhen, 0 visits"]]
+            text "Shenzhen"
+            text "深圳"
+            text "—"
+          button "Taipei, 0 visits" [ref=37, loc=css:button[aria-label="Taipei, 0 visits"]]
+            text "Taipei"
+            text "台北"
+            text "—"
+          button "Tokyo, 0 visits" [ref=38, loc=css:button[aria-label="Tokyo, 0 visits"]]
+            text "Tokyo"
+            text "東京"
+            text "—"
+          button "Xi’an, 0 visits" [ref=39, loc=css:button[aria-label="Xi’an, 0 visits"]]
+            text "Xi’an"
+            text "西安"
+            text "—"
+        paragraph
+          text "Every return is a new memory."
+      container "Interactive city map"
+        container
+          heading
+            text "Your memory map"
+          text "East Asia · local map"
+        container
+          group "Beijing Shanghai Chengdu Hong Kong Taipei Tokyo Sapporo Osaka"
+            text "Beijing"
+            text "Shanghai"
+            text "Chengdu"
+            text "Hong Kong"
+            text "Taipei"
+            text "Tokyo"
+            text "Sapporo"
+            text "Osaka"
+          container
+            button "Focus on selected city" [ref=12, loc=css:button[aria-label="Focus on selected city"]]
+              svg_root
+            button "Zoom in" [ref=13, loc=css:button[aria-label="Zoom in"]]
+              text "+"
+            button "Zoom out" [ref=14, loc=css:button[aria-label="Zoom out"]]
+              text "−"
+            button "Show all cities" [ref=15, loc=css:button[aria-label="Show all cities"]]
+              svg_root
+        container
+          container
+            text "Osaka · No saved trips yet · area unlit"
+            button [ref=40]
+              text "View area →"
+          paragraph
+            text "Keyboard: Tab to a city marker, then press Enter or Space to select it."
+          container "Visit count legend"
+            text "Not yet"
+            text "1 visit"
+            text "2–3"
+            text "4+"
+          paragraph
+            text "Land:"
+            anchor [ref=41, loc=href:https://www.naturalearthdata.com/about/terms-of-use/, url=https://www.naturalearthdata.com/about/terms-of-use/]
+              text "Natural Earth"
+            text "· City areas:"
+            anchor [ref=42, url=https://www.openstreetmap.org/copyright]
+              text "© OpenStreetMap contributors"
+            text "·"
+            text "Areas are approximate display footprints, not proof of a visit."
+      container "Selected city memories" [ref=16]
+        container
+          container
+            heading
+              text "Osaka"
+            paragraph
+              text "大阪"
+          paragraph
+            text "Japan"
+          paragraph
+            text "0 visits · A story still to come."
+        container
+          form "Add a memory for Osaka"
+            heading
+              text "Add a memory to Osaka"
+            container
+              text "Date"
+              textbox [ref=17]
+                spinbutton "Day" [ref=18]
+                  text "14"
+                text "/"
+                spinbutton "Month" [ref=19]
+                  text "11"
+                text "/"
+                spinbutton "Year" [ref=20]
+                  text "2026"
+            container
+              text "Title"
+              textbox [ref=21, loc=css:input[placeholder="A rainy weekend"]]
+                text "Retry protection test"
+            container
+              text "Notes"
+              textbox [ref=22, loc=css:textarea[placeholder="What do you want to remember?"]]
+                text "Synthetic browser test; safe to repeat."
+            button [ref=43]
+              text "Save this trip"
+            paragraph
+              text "Saved to the local backend on this computer. Add photos after saving. Your unsaved text stays in this tab."
+          container
+            text "Your first memory belongs here."
+            paragraph
+              text "No saved trips for this city yet. Add one above."
+        paragraph
+          text "Trip details and photos are stored on this computer by the local backend. Uploaded photos are re-encoded to remove location and camera metadata before they are saved or sent to an AI provider."
+    container
+      text "Backend mode · showing records from the local API"
+      button [ref=44]
+        text "Refresh from backend"
