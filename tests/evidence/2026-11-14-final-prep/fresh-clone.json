@@ -1,0 +1,35 @@
+{
+  "date_hkt": "2026-11-14",
+  "commit": "0115b19fc67006825c795c4b32c6e1aaf21c9a56",
+  "python": "3.13.7",
+  "node": "v24.11.1",
+  "os": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+  "environment": "new public HTTPS clone and new venv on same development Mac; not another computer or human acceptance",
+  "cloud_requests": 0,
+  "checks": [
+    "Fresh clone install, real server, trip create/upload/edit: pass",
+    "No-key AI returns 503; album unchanged: pass",
+    "Invalid image rejected without changing saved trip: pass",
+    "Restart preserves trip, text and photo hash: pass",
+    "Stopped-server database plus media backup restored to a different directory: pass"
+  ],
+  "trip_snapshot": [
+    {
+      "id": "d74a85df-c0f4-4b23-a5df-5683a32cdfad",
+      "city_id": "jp-osaka",
+      "trip_date": null,
+      "title": "Edited and restored",
+      "notes": "Fictional test, no AI call.",
+      "memory_text": "Manually reviewed fictional text.",
+      "photos": [
+        {
+          "id": "797e78c4-3e4e-4dfa-8814-454c6b8451e1",
+          "url": "/media/cfdc0279-d0fd-408f-8c6b-295fed6247aa.jpg",
+          "alt": ""
+        }
+      ],
+      "source": "user"
+    }
+  ],
+  "photo_sha256": "be1e4dd3882817fa088df1d44b2db57399d9cecf42efc6fddffeae4f1bf98db8"
+}

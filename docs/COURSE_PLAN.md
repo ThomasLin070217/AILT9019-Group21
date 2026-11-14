@@ -2,6 +2,8 @@
 
 ## Current deadlines
 
+Final requirements verified on Moodle on 14 November: **20 November 2026, 23:59 HKT**, one team ZIP up to 100 MB with `report.pdf` and `submission_links.txt`. See [final delivery handoff](FINAL_DELIVERY_HANDOFF.md) for the authoritative format, recording rules and links.
+
 The newer `00_Course_Overview.pdf` supersedes the older dates left in the original proposal template.
 
 | Date | Course milestone | Team output |
@@ -20,7 +22,7 @@ Use public, licensed, synthetic, or self-curated data only. Do not commit privat
 ## Final package
 
 1. A project webpage that explains the problem, system, local setup, successful run, and repository link.
-2. A three-minute presentation and a genuine demo recording. Show one successful run, one limitation or failure case, and what we learned.
+2. A Zoom presentation of at most three minutes, with every member speaking and each speaker’s full name visible, and a separate genuine demo recording with no time limit. Show one successful run, one limitation or failure case, and what we learned.
 3. A report of at most five pages, plus an unrestricted appendix, including Ethics and AI-use disclosure.
 4. Participation in the Week 13 cross-team review and gallery.
 
@@ -40,6 +42,6 @@ The six required sections are Background, Project pipeline, Evaluation and test,
 
 ## Assessment
 
-The project is 60% of the course: report 15%, code and reproducibility 20%, webpage and demonstrations 25%. Participation is the other 40%, including self-paced work, tutorials, the consultation, mid-term check, proposal review, and final cross-team review.
+The latest final rubric allocates the project’s 60 marks to report 11, weekly reports 4, code and reproducibility 20, and webpage/demonstrations 25. This refines the older overview’s combined report-15 allocation. Participation is the other 40%, including self-paced work, tutorials, the consultation, mid-term check, proposal review, and final cross-team review.
 
 A pass needs a working project, one genuine domain customisation, and complete deliverables. A distinction requires meaningful work beyond that baseline.
