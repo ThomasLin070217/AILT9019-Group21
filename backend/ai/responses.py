@@ -73,6 +73,8 @@ def _strip_code_fence(value: str) -> str:
 def _parse_result(envelope: object, model: str) -> MemoryResult:
     try:
         choice = envelope["choices"][0]  # type: ignore[index]
+        if not isinstance(choice, dict):
+            raise ProviderError("The model returned an invalid choice.")
         if choice.get("finish_reason") in {"length", "content_filter", "tool_calls"}:
             raise ProviderError("The model did not complete a memory response.")
         raw = choice["message"]["content"]

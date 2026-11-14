@@ -120,6 +120,14 @@ def test_prose_and_truncated_json_are_never_accepted_as_drafts(tmp_path):
             run(generator(tmp_path, handler).generate(request(tmp_path)))
 
 
+def test_invalid_choice_types_raise_provider_error(tmp_path):
+    for choice in (None, 'not an object', []):
+        def handler(req):
+            return httpx.Response(200, json={'choices': [choice]})
+        with pytest.raises(ProviderError):
+            run(generator(tmp_path, handler).generate(request(tmp_path)))
+
+
 def test_invalid_model_output_and_redirect_are_rejected(tmp_path):
     def bad_output(req):
         return httpx.Response(200, json=completion({"status": "draft", "title": "Invented", "memory_text": "X"}))
