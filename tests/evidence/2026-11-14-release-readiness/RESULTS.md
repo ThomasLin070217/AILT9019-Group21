@@ -11,3 +11,7 @@ Codex-operated on the development Mac; not independent human acceptance. No clou
 ## Limits
 
 Single local user, no authentication/load-test claim. Session-storage denial limits retry persistence to memory. Request mappings have no expiry. Existing live-Qwen evidence remains separately dated; this test is not an additional AI quality evaluation. The historical absolute-path verifier remains archived unchanged; use the new portable module for future runs. Human output ratings, T03 permission/run, four-member Zoom presentation and real YouTube URLs are still outstanding.
+
+## Clean public clone confirmation
+
+A fresh HTTPS clone of `a6d4e44f7cd866c848b09f21f6dd2bf3026bdc38`, with a new Python 3.13.7 virtual environment and pinned requirements-dev.txt, passed all 89 Python and 25 Node tests plus all 16 portable workflow checks. See `fresh-pytest.txt`, `fresh-node.txt` and `fresh-reproduction/result.json`. Run by Codex on the same development Mac, not by Owen. No cloud calls. Subsequent changes in this branch are documentation/evidence only.
