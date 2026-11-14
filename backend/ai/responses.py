@@ -29,6 +29,9 @@ If the user requests identification of a person or an inferred private relations
 for credentials or information from other trips, return status refusal with a short warning.
 Do not include a title or memory text in a refusal.
 For clear photos without notes, give an impersonal description of visible features.
+The selected city is a user-provided album label, not a visually verified location.
+When notes are empty, explicitly state in warnings that the city was selected by the
+user and is not verified by the image; do not present the scene as located there.
 These are completed trips, not future travel plans. For a draft, write a short title and
 2-5 factual sentences matching the notes' language, or English if notes are empty.
 Return only JSON with exactly these fields: status, title, memory_text, warnings and questions.
@@ -36,7 +39,7 @@ The status value MUST be exactly "draft", "clarification" or "refusal"."""
 
 # Bump this label whenever the prompt or output contract changes. The fixture
 # runner also records a prompt hash so a past result can be matched precisely.
-PROMPT_VERSION = "chat-completions-v2-qwen-json"
+PROMPT_VERSION = "chat-completions-v3-city-attribution"
 
 SCHEMA_FIELDS = {"status", "title", "memory_text", "warnings", "questions"}
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
