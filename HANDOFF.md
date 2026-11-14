@@ -27,7 +27,7 @@ Open `http://127.0.0.1:8019/app/?mode=api&map=local`. Use fictional notes and th
 - **68 Python tests** and **22 Node tests** passed on the 14 November code. These are software checks, not human ratings of AI writing.
 - The published webpage loaded on desktop and a 390px mobile viewport; its HTML, CSS, images and recording were reachable. The page is a project presentation, not a hosted multi-user album.
 - The five evaluation inputs T01–T05 exist; **Owen reviewed and froze T02 on 6 November**. Live outputs now exist for four original cases and two safety cases; independent verdicts remain missing. Public consent for T03's photo does **not** establish permission to send it to a cloud model.
-- The map areas are approximate display footprints, not exact administrative boundaries or proof that a trip occurred. Fresh-computer setup, physical-device usability and backup/restore have not yet been independently recorded.
+- The map areas are approximate display footprints, not exact administrative boundaries or proof that a trip occurred. A [fresh public clone, new environment and backup/restore](tests/evidence/2026-11-14-final-prep/RESULTS.md) passed on the same Mac. Independent-computer and physical-device acceptance remain pending.
 
 ## Who does what next
 
@@ -42,8 +42,7 @@ Moodle deadline). Do not add new features while closing these evidence gaps.
 | Thomas | Integrate verified fixes and evidence, check final Moodle requirements, assemble report/page/recording script | Code freeze and report draft by 15 Nov 18:00; complete package by 22:00 |
 | All four | Review actual contributions, results, report and recording | 15 Nov 23:00: final internal sign-off |
 
-The course overview lists **20 November 2026** for final deliverables; Moodle
-controls the actual format/time. This work did not submit anything to Moodle.
+Moodle was checked on 14 November: **20 November 2026, 23:59 HKT**. Submit `report.pdf` plus `submission_links.txt` in one ZIP up to 100 MB. The ≤3-minute Zoom presentation requires all four voices and visible full names; a separate demo has no time limit. Both require separate YouTube links. See [final handoff](docs/FINAL_DELIVERY_HANDOFF.md) and [recording kit](docs/FINAL_RECORDING_KIT.md). This work did not submit anything to Moodle.
 School-key expiry in the supplied email is 19 November. Keep it private.
 
 ## Working rules for the next change

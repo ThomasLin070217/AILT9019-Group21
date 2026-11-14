@@ -1,0 +1,62 @@
+2026-11-14 12:27:28,572 INFO travel_memory_map.backend Backend ready: 19 cities, database /private/tmp/ailt-final-fresh-20261114/var-final-check/travel.db, media /private/tmp/ailt-final-fresh-20261114/var-final-check/media, AI not configured
+Travel Memory Map backend: http://127.0.0.1:8052/app/?mode=api (Ctrl+C to stop)
+INFO:     Started server process [43163]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8052 (Press CTRL+C to quit)
+2026-11-14 12:27:28,664 INFO travel_memory_map.backend GET /api/cities -> 200 (1.5 ms)
+INFO:     127.0.0.1:55460 - "GET /api/cities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55460 - "GET /app/?mode=api&map=local HTTP/1.1" 200 OK
+2026-11-14 12:27:28,673 INFO travel_memory_map.backend POST /api/trips -> 201 (1.5 ms)
+INFO:     127.0.0.1:55460 - "POST /api/trips HTTP/1.1" 201 Created
+2026-11-14 12:27:28,744 INFO travel_memory_map.backend POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/photos -> 201 (70.0 ms)
+INFO:     127.0.0.1:55460 - "POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/photos HTTP/1.1" 201 Created
+INFO:     127.0.0.1:55460 - "GET /media/cfdc0279-d0fd-408f-8c6b-295fed6247aa.jpg HTTP/1.1" 200 OK
+2026-11-14 12:27:28,750 INFO travel_memory_map.backend PATCH /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad -> 200 (1.0 ms)
+INFO:     127.0.0.1:55460 - "PATCH /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad HTTP/1.1" 200 OK
+2026-11-14 12:27:28,752 INFO travel_memory_map.backend GET /api/trips -> 200 (0.6 ms)
+INFO:     127.0.0.1:55460 - "GET /api/trips HTTP/1.1" 200 OK
+2026-11-14 12:27:28,754 ERROR travel_memory_map.backend POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/memory failed: ai_not_configured
+2026-11-14 12:27:28,754 INFO travel_memory_map.backend POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/memory -> 503 (1.6 ms)
+INFO:     127.0.0.1:55460 - "POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/memory HTTP/1.1" 503 Service Unavailable
+2026-11-14 12:27:28,755 INFO travel_memory_map.backend GET /api/trips -> 200 (0.6 ms)
+INFO:     127.0.0.1:55460 - "GET /api/trips HTTP/1.1" 200 OK
+2026-11-14 12:27:28,779 WARNING travel_memory_map.backend POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/photos returned 415: unsupported_media
+2026-11-14 12:27:28,779 INFO travel_memory_map.backend POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/photos -> 415 (23.4 ms)
+INFO:     127.0.0.1:55460 - "POST /api/trips/d74a85df-c0f4-4b23-a5df-5683a32cdfad/photos HTTP/1.1" 415 Unsupported Media Type
+2026-11-14 12:27:28,781 INFO travel_memory_map.backend GET /api/trips -> 200 (0.7 ms)
+INFO:     127.0.0.1:55460 - "GET /api/trips HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [43163]
+2026-11-14 12:27:29,136 INFO travel_memory_map.backend Backend ready: 19 cities, database /private/tmp/ailt-final-fresh-20261114/var-final-check/travel.db, media /private/tmp/ailt-final-fresh-20261114/var-final-check/media, AI not configured
+Travel Memory Map backend: http://127.0.0.1:8052/app/?mode=api (Ctrl+C to stop)
+INFO:     Started server process [43164]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8052 (Press CTRL+C to quit)
+2026-11-14 12:27:29,177 INFO travel_memory_map.backend GET /api/cities -> 200 (1.3 ms)
+INFO:     127.0.0.1:55463 - "GET /api/cities HTTP/1.1" 200 OK
+2026-11-14 12:27:29,180 INFO travel_memory_map.backend GET /api/trips -> 200 (2.0 ms)
+INFO:     127.0.0.1:55463 - "GET /api/trips HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55463 - "GET /media/cfdc0279-d0fd-408f-8c6b-295fed6247aa.jpg HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [43164]
+2026-11-14 12:27:29,538 INFO travel_memory_map.backend Backend ready: 19 cities, database /private/tmp/ailt-final-fresh-20261114/var-restored-check/travel.db, media /private/tmp/ailt-final-fresh-20261114/var-restored-check/media, AI not configured
+Travel Memory Map backend: http://127.0.0.1:8052/app/?mode=api (Ctrl+C to stop)
+INFO:     Started server process [43173]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8052 (Press CTRL+C to quit)
+2026-11-14 12:27:29,584 INFO travel_memory_map.backend GET /api/cities -> 200 (1.1 ms)
+INFO:     127.0.0.1:55468 - "GET /api/cities HTTP/1.1" 200 OK
+2026-11-14 12:27:29,587 INFO travel_memory_map.backend GET /api/trips -> 200 (2.0 ms)
+INFO:     127.0.0.1:55468 - "GET /api/trips HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55468 - "GET /media/cfdc0279-d0fd-408f-8c6b-295fed6247aa.jpg HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [43173]

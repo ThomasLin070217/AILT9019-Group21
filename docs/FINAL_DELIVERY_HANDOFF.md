@@ -1,36 +1,39 @@
-# Final delivery working outline · 2 November 2026
+# Final delivery handoff — 14 November 2026
 
-This is a coordination draft for the four-person team, not a claim that final artifacts are already complete. The course overview lists **20 November 2026** for final deliverables; verify the Moodle submission page before packaging. Internal freeze: **17 November**; four-person review: **19 November**.
+The official Moodle final assignment and template were checked on 14 November. They supersede older coordination drafts. **Deadline: 20 November 2026, 23:59 Hong Kong time (UTC+8).** Internal completion target: **15 November, 23:00 HKT**. Nothing has been submitted to Moodle by this preparation work.
 
-## Thomas's prepared material
+## Exact submission requirements
 
-- Public-repository README, quick start, backend, release and current handoff documentation have been aligned to the integrated build.
-- The project webpage source is `docs/index.html`. It presents the problem, actual app screenshots, a recorded synthetic local workflow, setup, evidence and explicit limits. GitHub Pages serves it at https://thomaslin070217.github.io/AILT9019-Group21/ (verified 2 Nov).
-- The browser smoke script and retained evidence are in `tests/final-workflow.e2e.mjs` and `tests/evidence/2026-11-02-thomas/RESULTS.md`. The integrated run passed seven browser checks; 63 Python and 22 Node checks also passed locally.
+Submit one ZIP per team, at most 100 MB, containing:
 
-## Three-minute presentation structure
+- `report.pdf`: main body at most five pages, including disclosure, contributions and references; appendices excluded. Use the official seven-section template, retain its grey requirements and navy titles, and remove its examples/instruction block.
+- `submission_links.txt`: Group 21, public project webpage, staff-accessible GitHub repository, and **separate YouTube links** for presentation and demo.
 
-| Time | Content | Evidence to show |
+**Presentation:** record in Zoom, at most three minutes; every member must speak and their full name must be visible while speaking. Faces are optional. **Demo:** separate genuine input → processing → output recording, including evaluation evidence and a real failure/boundary/refusal case; no time limit. Upload both to YouTube, preferably Unlisted. Neither video file needs to be inside the Moodle ZIP. Verify signed-out playback.
+
+Sources: [final assignment](https://moodle.hku.hk/mod/assign/view.php?id=4354151), [report template](https://moodle.hku.hk/mod/resource/view.php?id=4355806), [rubric](https://moodle.hku.hk/mod/resource/view.php?id=4356067).
+The final rubric splits the 60 project marks into Report 11, Weekly reports 4, Code and reproducibility 20, Webpage and demonstrations 25. Do not use the older overview's report-15 label as the latest rubric breakdown.
+
+## Prepared and evidenced
+
+- Integrated main: local map/album plus [real Qwen generation, edited save and restart evidence](../tests/evidence/2026-11-14-live-ai/RESULTS.md).
+- [Fresh HTTPS clone, clean environment and backup/restore](../tests/evidence/2026-11-14-final-prep/RESULTS.md), with 68 Python and 22 Node checks. Same Mac, not independent-device acceptance.
+- Public [project webpage](https://thomaslin070217.github.io/AILT9019-Group21/) and [repository](https://github.com/ThomasLin070217/AILT9019-Group21).
+- Thomas's local report follows the official template and states actual evidence gaps. Detailed individual-contribution statements stay in the team review/submission copy, not on the public project webpage.
+- [Recording script and checklist](FINAL_RECORDING_KIT.md) are ready for all four members.
+
+## Weekend closing tasks
+
+| Owner | Due on 15 November HKT | Concrete acceptance |
 | --- | --- | --- |
-| 0:00–0:25 | User problem and single task | One city visit becomes a retrievable trip memory; no claim of verified travel |
-| 0:25–1:35 | Genuine system workflow | Select city → save card → add synthetic photo → edit → second card and brighter area → reload |
-| 1:35–2:10 | Optional AI and boundary | Show explicit current-trip disclosure and editable result **only if a permitted live call is evidenced**; otherwise show the honest no-provider state |
-| 2:10–2:40 | Evaluation | Present actual T01–T05 outcomes only after raw outputs and independent verdicts exist; otherwise state tested local workflow and outstanding AI evaluation |
-| 2:40–3:00 | Limits and next step | Approximate city areas, local storage, provider/data permission and an evidence-backed next step |
+| Owen | 12:00; output reviews 16:00 | Fresh installation on his computer, restart/restore/failure record with commands and hashes; independent assigned-case ratings |
+| Angel | 12:00; recordings 21:00 | Current-build phone/desktop/keyboard record; explicit T03 provider-transfer decision; coordinate Zoom and genuine demo recording, captions and two YouTube links |
+| Qingyang | 16:00 | Two independent raw-output verdicts per case; clearly mark missing T03 if permission/run unavailable; retain failures and disagreements |
+| Thomas | 18:00 integration; 22:00 package | Integrate accepted evidence, update report/page, replace pending video links, verify PDF/page limit, links and ZIP |
+| All four | 23:00 | Read the report, confirm actual section-by-section contributions and inspect the two final videos |
 
-Record an actual application window and keep private data, notifications and credentials out of frame. A final three-minute recording still needs to be made; the webpage's 13-second smoke recording is source footage, not the final presentation.
+The report must not present assistant preliminary observations as completed independent human ratings. Public-photo consent does not automatically cover cloud transfer. The school key batch expires on 19 November; make permitted live recordings before expiry or obtain renewed access.
 
-## Report structure (five pages maximum before appendix)
+## Remaining delivery blockers
 
-1. Background: named user, one task, pain point and a modest value hypothesis.
-2. Pipeline: input, local trip/photo storage, map rendering, current-trip AI confirmation, Chat Completions adapter, editable draft and failure path.
-3. Evaluation: method, T01–T05 raw model results and two independent reviews per case when available; distinguish software checks from AI quality judgments.
-4. Distribution/accessibility: public repository and webpage URL, fresh setup on another computer, keyboard/mobile findings and known limitations.
-5. Ethics and AI-use disclosure: photo permission and metadata stripping, cloud transfer/retention, hallucinated memories, injection handling, and the actual team use of coding assistants.
-
-## Inputs needed before Thomas can assemble final artifacts
-
-- **Owen, by 9 Nov:** review T02 and provide fresh-machine, restart and backup/restore records with exact commands/results.
-- **Angel, by 11 Nov:** current-build desktop/mobile first-use and keyboard evidence; separate permission if the T03 photo is ever sent to a cloud model.
-- **Qingyang, by 14 Nov:** permitted model/provider details, one authorised live integrated call, raw T01–T05 outputs and two independent verdicts for each case. Report any cases not run as pending.
-- **All four, by 19 Nov:** review the report and presentation against Moodle, verify contributions, and approve exact claims. Thomas packages the repository/page links and final files after that review.
+The required four-member Zoom recording and the two actual YouTube links are not yet verified. The prepared local ZIP is a **review bundle**, not a ready-to-upload final package. Human scoring, T03 permission/run and member sign-off are still pending; report them honestly if not resolved. Do not mark a future milestone complete merely because a document exists.
