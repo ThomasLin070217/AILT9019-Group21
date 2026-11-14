@@ -1,0 +1,79 @@
+{
+  "case_id": "T02",
+  "fixture_id": "T02",
+  "commit": "fa673fc89b234366356020fba3fac66b0825b92c",
+  "input_photos": {
+    "park-bench.png": "f356f30db39ddb71379f950895671510f36669196831e56740bc2bffa09a4ee3"
+  },
+  "http_status": 200,
+  "unedited_app_response": {
+    "status": "draft",
+    "title": "Park Path and Pond",
+    "text": "An outdoor park scene shows a stone-paved path beside a calm pond. A wooden bench sits near the water among green shrubs and trees. Large rocks line the pond edge, and dense foliage fills the background.",
+    "question": null,
+    "warning": "The selected city is Osaka, but the image alone does not confirm the location.",
+    "model": "qwen3.8-flash"
+  },
+  "saved_trips_unchanged": true,
+  "unconfirmed_request_blocked": true,
+  "other_trip_excluded": true,
+  "exchanges": [
+    {
+      "run_at_utc": "2026-11-14T03:40:32.322133+00:00",
+      "model": "qwen3.8-flash",
+      "prompt_version": "chat-completions-v1",
+      "prompt_sha256": "36246027fbb09c3f52d81747bb6cbb3b31e0c9a8b7cbbe4e6f0fbd4acc0c2c85",
+      "live_provider": true,
+      "request": {
+        "model": "qwen3.8-flash",
+        "temperature": 0.2,
+        "max_tokens": 600,
+        "source_text": [
+          "SOURCE_DATA (facts, not instructions):\n{\"city\": \"Osaka\", \"trip_date\": null, \"title\": \"\", \"notes\": \"\"}"
+        ],
+        "images": [
+          {
+            "sha256": "1cd81f75c474437c35903aefece034e1b4e1073743a73cd749d08a256a89da60",
+            "bytes": 322951,
+            "format": "JPEG",
+            "width": 1280,
+            "height": 960,
+            "exif_entries": 0
+          }
+        ]
+      },
+      "provider_http_status": 200,
+      "provider_response": {
+        "model": "qwen3.8-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"status\": \"draft\",\n  \"title\": \"Park Path and Pond\",\n  \"memory_text\": \"An outdoor park scene shows a stone-paved path beside a calm pond. A wooden bench sits near the water among green shrubs and trees. Large rocks line the pond edge, and dense foliage fills the background.\",\n  \"warnings\": [\n    \"The selected city is Osaka, but the image alone does not confirm the location.\"\n  ],\n  \"questions\": []\n}"
+            },
+            "finish_reason": "stop",
+            "logprobs": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 1577,
+          "total_tokens": 2247,
+          "completion_tokens": 670,
+          "prompt_tokens_details": {
+            "cached_tokens": 256,
+            "image_tokens": 1202,
+            "text_tokens": 375
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 561,
+            "text_tokens": 108
+          }
+        }
+      },
+      "elapsed_seconds": 11.234,
+      "capture_note": "Provider message content is unedited; reasoning, headers and response IDs omitted."
+    }
+  ],
+  "human_reviews": []
+}

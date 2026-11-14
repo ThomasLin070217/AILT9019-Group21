@@ -1,3 +1,5 @@
+> **Current update · 14 November 2026:** The mid-term notes below are historical. [Live evidence](evidence/2026-11-14-live-ai/RESULTS.md) now records real Qwen T01/T02/T04/T05/S01/S02 outputs, the JSON-formatting fix and browser save/restart checks. T02 was frozen on 6 November. T03 cloud permission/run and two independent human verdicts remain pending. Do not treat the old “all runs pending” entries below as current status.
+
 # System Evaluation & Known Limitations
 Owner: Qingyang; 26 Oct integration status updated by Thomas
 Mid‑term date: 26 Oct 2026

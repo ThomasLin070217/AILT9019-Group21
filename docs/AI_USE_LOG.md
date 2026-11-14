@@ -22,3 +22,8 @@ Record substantive AI assistance while it happens. This supports the final Ethic
 | 6–7 Nov 2026 | Codex (GPT-6) | Integrated AI verification and milestones | Reproduce and fix the fixture runner import failure; add prompt hash; verify consent, selected-trip request, editable draft and save using an isolated fake provider; set dated acceptance gates | `backend/ai/responses.py`, `scripts/run_ai_fixture.py`, `tests/integrated-ai.e2e.mjs`, `tests/evidence/2026-11-06-ai-mock/`, `docs/AI_CHECKPOINTS_2026-11-06.md`, evaluation and handoff docs | 63 Python tests, 22 Node tests, fake-provider browser flow and T01 fixture run passed; screenshots and result record inspected | Local integration path verified. No real provider call or five-case human score claimed; member review remains pending |
 
 Do not paste API keys, private data, or sensitive prompts into this log.
+
+
+## 14 November 2026 · Live AI verification
+
+Thomas authorised Codex to use the school API, test latest main, fix observed defects and publish evidence. Codex ran real qwen3.8-flash requests sequentially on synthetic fixtures, found and fixed T04 prose/JSON incompatibility, tightened city attribution, added a private opt-in evidence runner, and tested browser review/save/restart and safe missing-key behaviour. Final code checks: 68 Python and 22 Node tests. Original failures and reruns are retained in [live evidence](../tests/evidence/2026-11-14-live-ai/RESULTS.md). Preliminary content observations are assistant-authored, not independent human scores; no teammate approval or contribution is fabricated. T03 was not sent and no Moodle submission was made.

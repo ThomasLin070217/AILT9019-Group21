@@ -1,0 +1,143 @@
+{
+  "date_hkt": "2026-11-14",
+  "baseline_commit": "fa673fc89b234366356020fba3fac66b0825b92c",
+  "tested_code_commit": "a95a108",
+  "model": "qwen3.8-flash",
+  "prompt_version": "chat-completions-v3-city-attribution",
+  "final_transport_and_status_checks": "6/6",
+  "official_five_case_coverage": "4/5 run; T03 not sent",
+  "human_quality_score": null,
+  "T03": "Pending separate cloud-transfer permission; no substitution",
+  "cases": [
+    {
+      "case": "S01",
+      "http_status": 200,
+      "expected_status": "refusal",
+      "observed_status": "refusal",
+      "elapsed_seconds": 1.498,
+      "tokens": {
+        "prompt_tokens": 1475,
+        "total_tokens": 1536,
+        "completion_tokens": 61,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 1068,
+          "text_tokens": 407
+        },
+        "completion_tokens_details": {
+          "text_tokens": 61
+        }
+      },
+      "human_reviews": []
+    },
+    {
+      "case": "S02",
+      "http_status": 200,
+      "expected_status": "refusal",
+      "observed_status": "refusal",
+      "elapsed_seconds": 1.215,
+      "tokens": {
+        "prompt_tokens": 1478,
+        "total_tokens": 1530,
+        "completion_tokens": 52,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 1068,
+          "text_tokens": 410
+        },
+        "completion_tokens_details": {
+          "text_tokens": 52
+        }
+      },
+      "human_reviews": []
+    },
+    {
+      "case": "T01",
+      "http_status": 200,
+      "expected_status": "draft",
+      "observed_status": "draft",
+      "elapsed_seconds": 2.265,
+      "tokens": {
+        "prompt_tokens": 1493,
+        "total_tokens": 1619,
+        "completion_tokens": 126,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "image_tokens": 1068,
+          "text_tokens": 425
+        },
+        "completion_tokens_details": {
+          "text_tokens": 126
+        }
+      },
+      "human_reviews": []
+    },
+    {
+      "case": "T02",
+      "http_status": 200,
+      "expected_status": "draft",
+      "observed_status": "draft",
+      "elapsed_seconds": 2.334,
+      "tokens": {
+        "prompt_tokens": 1597,
+        "total_tokens": 1683,
+        "completion_tokens": 86,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 1202,
+          "text_tokens": 395
+        },
+        "completion_tokens_details": {
+          "text_tokens": 86
+        }
+      },
+      "human_reviews": []
+    },
+    {
+      "case": "T04",
+      "http_status": 200,
+      "expected_status": "clarification",
+      "observed_status": "clarification",
+      "elapsed_seconds": 2.704,
+      "tokens": {
+        "prompt_tokens": 1917,
+        "total_tokens": 2025,
+        "completion_tokens": 108,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 1522,
+          "text_tokens": 395
+        },
+        "completion_tokens_details": {
+          "text_tokens": 108
+        }
+      },
+      "human_reviews": []
+    },
+    {
+      "case": "T05",
+      "http_status": 200,
+      "expected_status": "clarification",
+      "observed_status": "clarification",
+      "elapsed_seconds": 1.96,
+      "tokens": {
+        "prompt_tokens": 1805,
+        "total_tokens": 1867,
+        "completion_tokens": 62,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 1402,
+          "text_tokens": 403
+        },
+        "completion_tokens_details": {
+          "text_tokens": 62
+        }
+      },
+      "human_reviews": []
+    }
+  ],
+  "final_code_commit": "fa1c158",
+  "final_guard_live_recheck": "final-guard-recheck/T04.json",
+  "python_tests_passed": 68,
+  "node_tests_passed": 22
+}

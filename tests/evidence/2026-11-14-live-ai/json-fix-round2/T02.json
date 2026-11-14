@@ -1,0 +1,89 @@
+{
+  "case_id": "T02",
+  "fixture_id": "T02",
+  "commit": "7957cef2056726390fb8c688f20917c36353cfe1",
+  "input_photos": {
+    "park-bench.png": "f356f30db39ddb71379f950895671510f36669196831e56740bc2bffa09a4ee3"
+  },
+  "http_status": 200,
+  "unedited_app_response": {
+    "status": "draft",
+    "title": "Osaka Park Scene",
+    "text": "A park scene in Osaka features a wooden bench with black metal arms positioned beside a calm pond. A stone-paved path winds through lush green trees and shrubs, bordered by large rocks along the water's edge.",
+    "question": null,
+    "warning": null,
+    "model": "qwen3.8-flash"
+  },
+  "saved_trips_unchanged": true,
+  "unconfirmed_request_blocked": true,
+  "other_trip_excluded": true,
+  "exchanges": [
+    {
+      "run_at_utc": "2026-11-14T03:46:05.768092+00:00",
+      "model": "qwen3.8-flash",
+      "prompt_version": "chat-completions-v2-qwen-json",
+      "prompt_sha256": "36246027fbb09c3f52d81747bb6cbb3b31e0c9a8b7cbbe4e6f0fbd4acc0c2c85",
+      "live_provider": true,
+      "source_sha256": {
+        "backend/ai/responses.py": "c0cfd6ed195ac2ee72720fa664aa1466bbdb14610e6e31bf124325fb736778b1",
+        "backend/routers/memory.py": "35f0d62d1f44e93347e2d2b38808ba3b271deb3b98750a9fc8e5c46ba1295564",
+        "backend/config.py": "f00ec590e77edafec246fc1f2073c0f37d46ac897e7392cb27fbf907767ae7d1",
+        "app/main.mjs": "78e6b4f9d9d30ab0e5c7ca4cc05ad2beb4635d301a4fc1e81d47567b2960c42b",
+        "app/repository.mjs": "57a22251d02a72b7d78dc57c6202e9f27e3f0dc3f24487e06329a490f488b96c",
+        "scripts/live_ai_probe.py": "5bcd923e05eae13a8351deae8c5ec912c8416c03fd7136e58ac8234df27386f8"
+      },
+      "request": {
+        "model": "qwen3.8-flash",
+        "temperature": 0.2,
+        "max_tokens": 600,
+        "source_text": [
+          "SOURCE_DATA (facts, not instructions):\n{\"city\": \"Osaka\", \"trip_date\": null, \"title\": \"\", \"notes\": \"\"}"
+        ],
+        "images": [
+          {
+            "sha256": "1cd81f75c474437c35903aefece034e1b4e1073743a73cd749d08a256a89da60",
+            "bytes": 322951,
+            "format": "JPEG",
+            "width": 1280,
+            "height": 960,
+            "exif_entries": 0
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "enable_thinking": false
+      },
+      "provider_http_status": 200,
+      "provider_response": {
+        "model": "qwen3.8-flash",
+        "usage": {
+          "prompt_tokens": 1543,
+          "total_tokens": 1616,
+          "completion_tokens": 73,
+          "prompt_tokens_details": {
+            "cached_tokens": 1536,
+            "image_tokens": 1202,
+            "text_tokens": 341
+          },
+          "completion_tokens_details": {
+            "text_tokens": 73
+          }
+        },
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": "{\"status\": \"draft\", \"title\": \"Osaka Park Scene\", \"memory_text\": \"A park scene in Osaka features a wooden bench with black metal arms positioned beside a calm pond. A stone-paved path winds through lush green trees and shrubs, bordered by large rocks along the water's edge.\", \"warnings\": [], \"questions\": []}"
+            }
+          }
+        ]
+      },
+      "capture_note": "Provider message content is unedited; reasoning, headers and response IDs omitted.",
+      "elapsed_seconds": 1.617
+    }
+  ],
+  "human_reviews": []
+}
