@@ -1,0 +1,49 @@
+1
+00:00:00,000 --> 00:00:04,601
+Travel Memory Map — Group 21. Real cloud Qwen; synthetic data; assistant-operated demo.
+
+2
+00:00:04,601 --> 00:00:07,783
+Input: select Osaka and enter notes. The image is synthetic; city is a user label.
+
+3
+00:00:07,783 --> 00:00:12,669
+Saving a trip lights the city and creates a separate local record.
+
+4
+00:00:12,669 --> 00:00:18,217
+Before upload, the app discloses this trip only: city, date, title, notes and one photo.
+
+5
+00:00:18,217 --> 00:00:20,853
+Processing: one real cloud request to qwen3.8-flash. No stored trip is overwritten.
+
+6
+00:00:20,853 --> 00:00:27,984
+Output: an editable AI draft. It is not saved automatically.
+
+7
+00:00:27,984 --> 00:00:32,156
+Edit the draft, then explicitly save. This automated demo is not a human quality rating.
+
+8
+00:00:32,156 --> 00:00:42,072
+Reload verification: the edited memory persists; the visit count remains one.
+
+9
+00:00:42,072 --> 00:00:50,983
+Boundary case: a second trip says the sign reads OPEN, but its image says CLOSED.
+
+10
+00:00:50,983 --> 00:00:55,615
+Real cloud boundary test: the model must not silently choose between conflicting facts.
+
+11
+00:00:55,615 --> 00:01:04,361
+The model asks for clarification. The saved trip remains unchanged; no invented memory is
+saved.
+
+12
+00:01:04,361 --> 00:01:11,208
+Two saved trips, one city. Reload preserves both records. Human quality review is still
+pending.

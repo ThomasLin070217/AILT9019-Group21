@@ -47,3 +47,7 @@ The school key batch expires on **19 November**. Make any permitted live recordi
 ## Required final links
 
 Use actual accessible URLs, not placeholder text. Report and links file must agree. Do not copy the existing 13-second webpage clip into the final slot and call it the completed presentation: it has no four-member Zoom speaking record and predates the real AI run.
+
+## Actual demo now available
+
+The 14 November 71-second Qwen demo covers explicit consent, draft/edit/save/reload and a real OPEN/CLOSED clarification. Review the captioned MP4 before uploading. It uses chronological timestamped screenshots at original speed (low capture frame rate), and the operator is Codex. This does not replace your all-member Zoom presentation or the two required YouTube links.
