@@ -36,7 +36,7 @@ The status value MUST be exactly "draft", "clarification" or "refusal"."""
 
 # Bump this label whenever the prompt or output contract changes. The fixture
 # runner also records a prompt hash so a past result can be matched precisely.
-PROMPT_VERSION = "chat-completions-v1"
+PROMPT_VERSION = "chat-completions-v2-qwen-json"
 
 SCHEMA_FIELDS = {"status", "title", "memory_text", "warnings", "questions"}
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
@@ -69,7 +69,10 @@ def _strip_code_fence(value: str) -> str:
 
 def _parse_result(envelope: object, model: str) -> MemoryResult:
     try:
-        raw = envelope["choices"][0]["message"]["content"]  # type: ignore[index]
+        choice = envelope["choices"][0]  # type: ignore[index]
+        if choice.get("finish_reason") in {"length", "content_filter", "tool_calls"}:
+            raise ProviderError("The model did not complete a memory response.")
+        raw = choice["message"]["content"]
     except (KeyError, IndexError, TypeError) as exc:
         raise ProviderError("The model returned no message content.") from exc
     if isinstance(raw, list):
@@ -164,6 +167,14 @@ class ResponsesGenerator:
             "temperature": 0.2,
             "max_tokens": 600,
         }
+        # Live T04 returned prose instead of JSON with prompt-only formatting.
+        # Apply the verified provider options only to this course model; do not
+        # send Qwen-specific flags to arbitrary compatible providers/models.
+        if (urlsplit(_endpoint(self.settings.ai_base_url)).hostname ==
+                "token-plan.cn-beijing.maas.aliyuncs.com" and
+                self.settings.ai_model == "qwen3.8-flash"):
+            payload["response_format"] = {"type": "json_object"}
+            payload["enable_thinking"] = False
         try:
             async with httpx.AsyncClient(
                 transport=self.transport,
