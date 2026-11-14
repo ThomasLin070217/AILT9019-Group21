@@ -1,0 +1,33 @@
+✔ ApiRepository.create posts metadata and validates the response (6.948458ms)
+✔ ApiRepository.edit patches only the supplied fields and encodes the ID (0.135333ms)
+✔ ApiRepository.remove accepts an empty 204 response (0.090625ms)
+✔ ApiRepository.uploadPhoto sends multipart without a manual content type (12.658458ms)
+✔ ApiRepository.requestMemory sends the explicit confirmation (0.12575ms)
+✔ the error envelope becomes a typed ApiError without losing the status (0.246375ms)
+✔ a failed read still reports the status and never fabricates trips (0.141042ms)
+✔ an aborted request is reported as a timeout (0.094875ms)
+✔ lost create response reuses its key after reload; intentional next visit uses a new key (0.271542ms)
+✔ simultaneous create attempts share a key while different payloads remain separate (0.201917ms)
+✔ a deleted retry identity surfaces 410 and the next explicit save receives a fresh key (0.146833ms)
+✔ a saved trip ID, not photos or repeated snapshots, defines a visit (0.42875ms)
+✔ brightness changes only at 1, 2 and 4 visits (0.569875ms)
+✔ create, edit, reconstruct repository, and remove preserve the visit invariant (6.035083ms)
+✔ card edits cannot change identity; invalid dates and cities do not persist (0.28175ms)
+✔ corrupt and unavailable storage surface errors instead of overwriting or claiming a save (0.30175ms)
+✔ city filtering supports native names, regions and visited-only without altering counts (0.326584ms)
+✔ city cards are separate, newest-first and selected-city-only (10.567584ms)
+✔ all city IDs are unique, licensed points fit initial view, and fixtures validate (0.180459ms)
+✔ each supported city has a geographic footprint containing its marker centre (12.227333ms)
+✔ zoom/pan stays within catalogue bounds and zoom limits (0.171042ms)
+✔ API adapter reads backend data and never silently substitutes demo trips (0.562208ms)
+✔ drafts survive reconstruction but never enter saved visit records (0.158666ms)
+✔ draft storage failures retain in-tab text and warn (0.06625ms)
+✔ photo previews accept only same-origin media paths (0.183709ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.062875

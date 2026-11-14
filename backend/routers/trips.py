@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import sqlite3
 
-from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi import APIRouter, Depends, Header, Request, Response, status
 
 from backend.db import get_db
 from backend.models import TripCreate, TripPatch, TripSnapshot
@@ -27,6 +27,7 @@ def read_trip(trip_id: str, connection: sqlite3.Connection = Depends(get_db)) ->
 def create_trip(
     payload: TripCreate,
     request: Request,
+    idempotency_key: str | None = Header(default=None, min_length=8, max_length=128, pattern=r"^[A-Za-z0-9._:-]+$"),
     connection: sqlite3.Connection = Depends(get_db),
 ) -> dict:
     request.app.state.cities.require(payload.city_id)
@@ -36,6 +37,7 @@ def create_trip(
         trip_date=payload.trip_date,
         title=payload.title,
         notes=payload.notes,
+        request_key=idempotency_key,
     )
 
 

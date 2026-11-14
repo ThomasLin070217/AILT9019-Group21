@@ -31,7 +31,7 @@ function showError(error){$('error').hidden=false;$('retry').hidden=false;$('err
 function showActionError(error,prefix='Could not complete this change.'){$('error').hidden=false;$('retry').hidden=true;$('error-text').textContent=`${prefix} ${error.message}`;$('recover').hidden=true;}
 function clearError(){$('error').hidden=true;$('error-text').textContent='';}
 function setBusy(value){busy=value;for(const id of ['add-sample','reset','refresh','retry','recover'])$(id).disabled=value;$('workspace').setAttribute('aria-busy',String(value));}
-async function mutate(action,success,afterSave=()=>{}){if(busy)return;setBusy(true);clearError();try{trips=await action();afterSave();render();message(success);}catch(error){showActionError(error);}finally{setBusy(false);}}
+async function mutate(action,success,afterSave=()=>{}){if(busy)return;setBusy(true);clearError();try{trips=await action();afterSave();render();message(typeof success==='function'?success():success);}catch(error){showActionError(error);}finally{setBusy(false);}}
 function filters(){return {query:$('search').value,region:$('region').value,visitedOnly:$('visited').checked};}
 function choose(id,keyboard=false){
  const origin=document.activeElement?.classList.contains('google-city-marker')||document.activeElement?.classList.contains('online-city-marker')?'online':document.activeElement?.classList.contains('marker')?'markers':'cities';$('nearby-cities').hidden=true;selected=id;render();
@@ -191,7 +191,7 @@ function makeTripComposer(city){
  const remember=()=>saveComposerDraft(city.id,{date:date.value,title:title.value,notes:notes.value});
  date.addEventListener('change',remember);title.addEventListener('input',remember);notes.addEventListener('input',remember);
  form.append(node('h3',`Add a memory to ${city.name}`,'form-title'),formField('Date',date),formField('Title',title),formField('Notes',notes),save,node('p','Saved to the local backend on this computer. Add photos after saving. Your unsaved text stays in this tab.','form-hint'));
- form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;const hadVisit=Boolean(countVisits(trips).get(city.id));mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});return [...trips,created];},`${city.name} ${hadVisit?'brightened':'lit up'}. Add photos or write a memory.`,()=>{clearComposerDraft(city.id);queueMicrotask(()=>focusCity(city.id));});});
+ form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;const hadVisit=Boolean(countVisits(trips).get(city.id));let recovered=false;mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});recovered=trips.some(row=>row.id===created.id);return [...trips.filter(row=>row.id!==created.id),created];},()=>recovered?'Saved trip recovered. Visit count unchanged.':`${city.name} ${hadVisit?'brightened':'lit up'}. Add photos or write a memory.`,()=>{clearComposerDraft(city.id);queueMicrotask(()=>focusCity(city.id));});});
  return form;
 }
 function makeApiActions(card,trip){

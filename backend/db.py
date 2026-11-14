@@ -7,7 +7,7 @@ from pathlib import Path
 
 from fastapi import Request
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS schema_meta (
@@ -43,6 +43,13 @@ CREATE TABLE IF NOT EXISTS photos (
 CREATE INDEX IF NOT EXISTS idx_trips_city ON trips(city_id);
 CREATE INDEX IF NOT EXISTS idx_trips_date ON trips(trip_date);
 CREATE INDEX IF NOT EXISTS idx_photos_trip ON photos(trip_id, position);
+
+-- Retain a tombstone after trip deletion so an old retry cannot resurrect it.
+CREATE TABLE IF NOT EXISTS trip_create_requests (
+  request_key TEXT PRIMARY KEY,
+  payload_hash TEXT NOT NULL,
+  trip_id TEXT NOT NULL
+);
 """
 
 
@@ -61,18 +68,21 @@ def init_db(path: Path | str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     connection = connect(path)
     try:
+        has_meta = connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='schema_meta'"
+        ).fetchone()
+        row = connection.execute("SELECT value FROM schema_meta WHERE key = 'version'").fetchone() if has_meta else None
+        if row is not None and int(row["value"]) not in (1, SCHEMA_VERSION):
+            raise RuntimeError(f"Unsupported database schema version {row['value']}; back up the album before changing it.")
+        # Version 1 -> 2 is additive; existing trips/photos are left untouched.
         connection.executescript(SCHEMA)
-        row = connection.execute("SELECT value FROM schema_meta WHERE key = 'version'").fetchone()
         if row is None:
             connection.execute(
                 "INSERT INTO schema_meta (key, value) VALUES ('version', ?)",
                 (str(SCHEMA_VERSION),),
             )
-        elif int(row["value"]) != SCHEMA_VERSION:
-            raise RuntimeError(
-                f"Database schema version {row['value']} does not match the backend version {SCHEMA_VERSION}. "
-                "Back up var/travel.db before changing it."
-            )
+        elif int(row["value"]) == 1:
+            connection.execute("UPDATE schema_meta SET value = ? WHERE key = 'version'", (str(SCHEMA_VERSION),))
         connection.commit()
     finally:
         connection.close()

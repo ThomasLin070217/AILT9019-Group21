@@ -1,6 +1,6 @@
 # Map and backend integration contract
 
-Version 0.4, 22 October 2026. The trip, photo and AI-proxy routes are implemented
+Version 0.5, 14 November 2026. The trip, photo and AI-proxy routes are implemented
 by Owen's local backend (`python3 -m backend`), and the API-mode album now uses
 them for the create, upload, edit, AI-draft and delete controls. Demo mode is
 unchanged. Angel, Qingyang and Thomas should still review and extend their
@@ -77,10 +77,24 @@ never uses the number of photos or generation calls as a visit count.
 | `PATCH /api/trips/{id}` | any of `title`, `notes`, `memory_text`, `trip_date` | `200` snapshot. `id` and `city_id` return `422`. An empty patch returns `422`. |
 | `DELETE /api/trips/{id}` | none | `204`; removes photo rows and their files. |
 
-Editing must use `PATCH`; only `POST` creates a visit. The frontend must disable
-its submit control while a create request is in flight, because a deliberate
-second create is a legitimate second visit and the backend has no idempotency
-key.
+Editing must use `PATCH`; only `POST` creates a visit. A deliberate second create
+is a legitimate second visit. `POST /api/trips` accepts an optional
+`Idempotency-Key` header (8–128 letters, digits, `.`, `_`, `:`, or `-`).
+Replaying the same normalised payload with the same key returns `201` with the
+existing trip's current snapshot, including subsequent edits, without adding a
+visit. A different payload with that key returns `409 idempotency_conflict`.
+If the original trip was deleted, replay returns `410 idempotency_trip_deleted`;
+it does not resurrect the trip. New keys and unkeyed requests create new visits.
+
+The frontend keeps an outstanding key across ambiguous failures and tab reloads
+using session storage. Success or a definitive 4xx response clears it (except
+408). If session storage is unavailable, this protection lasts only for the
+current in-memory repository instance. The submit button remains disabled while
+a request is in flight. Simultaneous keyed creates are serialised in SQLite.
+Schema version 2 adds a request-key table without changing existing trip/photo
+rows. Request mappings, including deleted-trip tombstones, have no expiry; back
+up the database and media together before upgrading. This is a local single-user
+service, not an authenticated multi-user service.
 
 ## Photo upload (implemented)
 

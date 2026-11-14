@@ -1,0 +1,2 @@
+# Optional local PDF/ZIP checks; not needed to run the album.
+pypdf==6.21.4

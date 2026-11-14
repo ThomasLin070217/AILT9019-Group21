@@ -50,3 +50,10 @@ The city footprints derive from OpenStreetMap, the bundled coastline from Natura
 | Qingyang Lin | AI evaluation | u3659001@connect.hku.hk |
 
 All four members agreed to publish these contacts in the repository. The official final-deliverables date in the course overview is **20 November 2026**; Moodle controls the final submission instructions. Contributions and AI assistance must be reported accurately. [Course plan](docs/COURSE_PLAN.md) · [AI-use log](docs/AI_USE_LOG.md).
+
+## Final verification and team handoff
+
+- [Current weekend tasks and acceptance criteria](docs/FINAL_HUMAN_TODO.md).
+- [14 November retry/release evidence](tests/evidence/2026-11-14-release-readiness/RESULTS.md).
+- After installing `requirements-dev.txt`, run `python -m scripts.verify_local_workflow --output var/reproduction/my-check` (choose a new output directory). It starts an isolated local server with AI disabled, checks 16 real HTTP/storage/restart/restore scenarios, and leaves your existing album alone. Keep `result.json` and `server.txt`; record who actually ran it.
+- To check local final files: install `requirements-submission.txt`, then run `python -m scripts.check_submission /path/to/final-files`. Add `--output /path/to/AILT9019_Group21.zip` only after the checks pass. It does not upload anything or verify YouTube playback/team participation.

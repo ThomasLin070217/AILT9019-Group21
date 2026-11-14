@@ -252,9 +252,10 @@ together; copying only one leaves rows without files or files without rows.
 
 ## Known limitations
 
-- Single local user only; no authentication, concurrency testing or deployment.
-- No server-side idempotency key: the interface guards double submission with a
-  busy state, but a scripted duplicate create would produce two visits.
+- Single local user only; no authentication or multi-user deployment. Concurrent
+  keyed-create retries have focused tests; this is not a general load test.
+- Create retries use an optional `Idempotency-Key`; see [API contract](API_CONTRACT.md).
+  Distinct keys and unkeyed requests intentionally create separate visits.
 - No automatic cleanup of a database row whose file was deleted outside the app;
   the startup sweep only removes unreferenced files older than one hour.
 - Live Qwen transport and browser save/restart are verified on 14 November.

@@ -1,0 +1,83 @@
+{
+  "run_at_utc": "2026-11-14T06:25:02.604030+00:00",
+  "python": "3.13.7",
+  "os": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+  "cloud_requests": 0,
+  "checks": [
+    {
+      "check": "Cloud AI disabled for this check",
+      "passed": true
+    },
+    {
+      "check": "Isolated album starts empty",
+      "passed": true
+    },
+    {
+      "check": "API-mode app is served",
+      "passed": true
+    },
+    {
+      "check": "Create trip",
+      "passed": true
+    },
+    {
+      "check": "Retry creates no extra visit",
+      "passed": true
+    },
+    {
+      "check": "Changed payload with reused key is rejected",
+      "passed": true
+    },
+    {
+      "check": "Upload synthetic photo",
+      "passed": true
+    },
+    {
+      "check": "Edit memory",
+      "passed": true
+    },
+    {
+      "check": "Missing AI configuration preserves album",
+      "passed": true
+    },
+    {
+      "check": "Invalid image is rejected without changing album",
+      "passed": true
+    },
+    {
+      "check": "Restart preserves text and photo bytes",
+      "passed": true
+    },
+    {
+      "check": "Retry key survives restart",
+      "passed": true
+    },
+    {
+      "check": "Stopped-server DB and media backup restores correctly",
+      "passed": true
+    },
+    {
+      "check": "New key permits intentional same-city return visit",
+      "passed": true
+    },
+    {
+      "check": "Delete trip",
+      "passed": true
+    },
+    {
+      "check": "Old retry cannot resurrect deleted trip",
+      "passed": true
+    }
+  ],
+  "operator": "Not inferred; the person running this must add their name separately.",
+  "commit": "4a16c5605795d042d4b3b17307b1ea6c0608abc8",
+  "source_sha256": {
+    "backend/db.py": "9090b85b0707f959eeb5099362006ecfdd1fb5b8bb3bb86ff4e290bb05649ad3",
+    "backend/storage/trips.py": "11480463bfb564be0d342805efbd3266f540585fbe3a70d17adf2478678b448a",
+    "backend/routers/trips.py": "7c699e43cb9dd14ef03a9a0428dd19dcfcca57e49a8450ae8c800c37c348c404",
+    "app/repository.mjs": "ae69e94d76f0c77c33921f75df71d014755777eda38718d218eb96f22633ebdb",
+    "scripts/verify_local_workflow.py": "f1008d6609d86a8978dbdc80df2afed57828cbbcceb34d4b4d5f951e8c04700c"
+  },
+  "status": "passed",
+  "photo_sha256": "be1e4dd3882817fa088df1d44b2db57399d9cecf42efc6fddffeae4f1bf98db8"
+}
