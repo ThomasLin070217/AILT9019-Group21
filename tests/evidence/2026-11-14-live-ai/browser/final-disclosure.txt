@@ -1,0 +1,17 @@
+Review the current trip data before sending it to the configured AI provider. No other trips are included.
+
+City
+Osaka
+Date
+2026-11-14
+Title
+Second synthetic visit
+Notes
+Not set
+Photos
+1 sanitised photo
+
+The result is an editable draft and is not saved until you press Save. If no provider is configured, the backend will say so and your trip stays unchanged.
+
+Send this trip
+Cancel

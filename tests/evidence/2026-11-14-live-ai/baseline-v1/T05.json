@@ -1,0 +1,79 @@
+{
+  "case_id": "T05",
+  "fixture_id": "T05",
+  "commit": "fa673fc89b234366356020fba3fac66b0825b92c",
+  "input_photos": {
+    "sign_closed.png": "37edffc772b133c7b140fc03c3b39f5d9ab017658dcd8200cb37b1a6ee7d072b"
+  },
+  "http_status": 200,
+  "unedited_app_response": {
+    "status": "clarification",
+    "title": "",
+    "text": "",
+    "question": "Please confirm whether the sign should read open or closed, or provide a corrected note or clearer image.",
+    "warning": "The notes say the sign reads open, but the supplied image clearly shows a sign reading closed.",
+    "model": "qwen3.8-flash"
+  },
+  "saved_trips_unchanged": true,
+  "unconfirmed_request_blocked": true,
+  "other_trip_excluded": true,
+  "exchanges": [
+    {
+      "run_at_utc": "2026-11-14T03:40:49.154861+00:00",
+      "model": "qwen3.8-flash",
+      "prompt_version": "chat-completions-v1",
+      "prompt_sha256": "36246027fbb09c3f52d81747bb6cbb3b31e0c9a8b7cbbe4e6f0fbd4acc0c2c85",
+      "live_provider": true,
+      "request": {
+        "model": "qwen3.8-flash",
+        "temperature": 0.2,
+        "max_tokens": 600,
+        "source_text": [
+          "SOURCE_DATA (facts, not instructions):\n{\"city\": \"Osaka\", \"trip_date\": null, \"title\": \"\", \"notes\": \"The sign on the building reads open.\"}"
+        ],
+        "images": [
+          {
+            "sha256": "c36266c44ef35c4ac9ae9ace432a6248e31835b835313d95b24a5c517f91ccad",
+            "bytes": 44133,
+            "format": "JPEG",
+            "width": 1280,
+            "height": 1114,
+            "exif_entries": 0
+          }
+        ]
+      },
+      "provider_http_status": 200,
+      "provider_response": {
+        "model": "qwen3.8-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"status\": \"clarification\",\n  \"title\": \"\",\n  \"memory_text\": \"\",\n  \"warnings\": [\n    \"The notes say the sign reads open, but the supplied image clearly shows a sign reading closed.\"\n  ],\n  \"questions\": [\n    \"Please confirm whether the sign should read open or closed, or provide a corrected note or clearer image.\"\n  ]\n}"
+            },
+            "finish_reason": "stop",
+            "logprobs": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 1785,
+          "total_tokens": 2190,
+          "completion_tokens": 405,
+          "prompt_tokens_details": {
+            "cached_tokens": 256,
+            "image_tokens": 1402,
+            "text_tokens": 383
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 314,
+            "text_tokens": 90
+          }
+        }
+      },
+      "elapsed_seconds": 6.364,
+      "capture_note": "Provider message content is unedited; reasoning, headers and response IDs omitted."
+    }
+  ],
+  "human_reviews": []
+}

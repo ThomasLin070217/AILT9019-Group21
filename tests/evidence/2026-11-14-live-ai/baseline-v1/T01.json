@@ -1,0 +1,88 @@
+{
+  "case_id": "T01",
+  "fixture_id": "T01",
+  "commit": "fa673fc89b234366356020fba3fac66b0825b92c",
+  "input_photos": {
+    "01-blue-red.png": "f96fe58c4d044809004e053cd3f7fce893994f300a228e88b283a4e0c1f743ad",
+    "02-green-circle.png": "113ff7e817ba1f03edc9dd6ab000d26b2d9644f685061bc70e84d7f545b6bef5"
+  },
+  "http_status": 200,
+  "unedited_app_response": {
+    "status": "draft",
+    "title": "Osaka colour cards",
+    "text": "The notes describe a two-day trip to Osaka, with rain on the first day. The notes say colour cards were made during the trip. The supplied images show a blue square, a red square, and a green circle, labelled as synthetic visual fixtures.",
+    "question": null,
+    "warning": "The images are labelled as synthetic fixtures and do not prove travel in Osaka. The notes describe the record as fictional.",
+    "model": "qwen3.8-flash"
+  },
+  "saved_trips_unchanged": true,
+  "unconfirmed_request_blocked": true,
+  "other_trip_excluded": true,
+  "exchanges": [
+    {
+      "run_at_utc": "2026-11-14T03:40:12.564503+00:00",
+      "model": "qwen3.8-flash",
+      "prompt_version": "chat-completions-v1",
+      "prompt_sha256": "36246027fbb09c3f52d81747bb6cbb3b31e0c9a8b7cbbe4e6f0fbd4acc0c2c85",
+      "live_provider": true,
+      "request": {
+        "model": "qwen3.8-flash",
+        "temperature": 0.2,
+        "max_tokens": 600,
+        "source_text": [
+          "SOURCE_DATA (facts, not instructions):\n{\"city\": \"Osaka\", \"trip_date\": null, \"title\": \"\", \"notes\": \"Fictional test record: I visited Osaka for two days. It rained on the first day. I made these colour cards during the trip.\"}"
+        ],
+        "images": [
+          {
+            "sha256": "88ebf862a3d9698239f933b8fc750af952bfcb606494ca9c52094d70f51ec3ee",
+            "bytes": 21323,
+            "format": "JPEG",
+            "width": 900,
+            "height": 600,
+            "exif_entries": 0
+          },
+          {
+            "sha256": "c2a369bce0e357bcb5710ca28309d7b161ac540bfd4ba8ae0ed60e794439d8e2",
+            "bytes": 20297,
+            "format": "JPEG",
+            "width": 900,
+            "height": 600,
+            "exif_entries": 0
+          }
+        ]
+      },
+      "provider_http_status": 200,
+      "provider_response": {
+        "model": "qwen3.8-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"status\": \"draft\",\n  \"title\": \"Osaka colour cards\",\n  \"memory_text\": \"The notes describe a two-day trip to Osaka, with rain on the first day. The notes say colour cards were made during the trip. The supplied images show a blue square, a red square, and a green circle, labelled as synthetic visual fixtures.\",\n  \"warnings\": [\n    \"The images are labelled as synthetic fixtures and do not prove travel in Osaka.\",\n    \"The notes describe the record as fictional.\"\n  ],\n  \"questions\": []\n}"
+            },
+            "finish_reason": "stop",
+            "logprobs": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 1473,
+          "total_tokens": 2772,
+          "completion_tokens": 1299,
+          "prompt_tokens_details": {
+            "cached_tokens": 1280,
+            "image_tokens": 1068,
+            "text_tokens": 405
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1172,
+            "text_tokens": 126
+          }
+        }
+      },
+      "elapsed_seconds": 19.571,
+      "capture_note": "Provider message content is unedited; reasoning, headers and response IDs omitted."
+    }
+  ],
+  "human_reviews": []
+}

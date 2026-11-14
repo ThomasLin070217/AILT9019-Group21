@@ -1,12 +1,34 @@
-# AI integration and final check milestones · 6 November 2026
+# AI integration and final check milestones
+
+## Current update · 14 November 2026
+
+The live-cloud gate is complete: school qwen3.8-flash, retained raw outputs,
+request/privacy evidence, browser draft/review/save/restart and a safe missing-key
+failure. See [live results](../tests/evidence/2026-11-14-live-ai/RESULTS.md).
+The original T04 JSON failure was fixed and retained. Final automatic response
+checks are 6/6; the original-case coverage is 4/5 and human scores are pending.
+T03 has not been sent without separate cloud-transfer permission.
+
+**Revised internal finish: Sunday 15 November, 23:00 HKT.**
+- By 12:00: Owen supplies fresh-machine/restore evidence; Angel supplies usability evidence and the T03 permission decision.
+- By 16:00: Qingyang coordinates the remaining permitted run and two independent reviews per case; all four provide their assigned verdicts.
+- By 18:00: Thomas freezes tested code and prepares the report draft.
+- By 21:00: Angel and Thomas finish the genuine three-minute recording.
+- By 22:00: Thomas assembles the final package; all four review by 23:00.
+
+These are internal targets. Moodle remains authoritative for submission. The
+old 17/19 November internal targets below are retained as history, not current
+instructions. No teammate completion is inferred from an elapsed deadline.
+
+## Original planning context
 
 The mid-term feedback says the demo already joins the travel map, trip records and photo uploads, and asks us to verify the integrated AI path and set short-term milestones. This page tracks that next stage; status was refreshed on **7 November** after Owen’s T02 review. Dates below are **proposed internal targets in Hong Kong time (UTC+8)**, not Moodle deadlines; the team should record any change to an owner or date. The course overview lists **20 November 2026** for final deliverables; verify the live Moodle instructions before packaging.
 
-## Current evidence
+## Historical evidence at 7 November
 
-The local app uses FastAPI, SQLite and an optional Chat Completions adapter (`AI_PROVIDER=responses`). On 6 November, the documented fixture runner's missing prompt-version import was fixed. A fake-provider browser run verified disclosure → explicit confirmation → current-trip request → editable unsaved draft → user save → reload. A fake-provider T01 fixture run also produced an unedited response with the prompt hash. [Exact evidence](../tests/evidence/2026-11-06-ai-mock/RESULTS.md). **No authorised live cloud call or human-rated five-case result exists yet.** The app works without AI, but this does not satisfy the remaining AI evaluation task.
+The local app uses FastAPI, SQLite and an optional Chat Completions adapter (`AI_PROVIDER=responses`). On 6 November, the documented fixture runner's missing prompt-version import was fixed. A fake-provider browser run verified disclosure → explicit confirmation → current-trip request → editable unsaved draft → user save → reload. A fake-provider T01 fixture run also produced an unedited response with the prompt hash. [Exact evidence](../tests/evidence/2026-11-06-ai-mock/RESULTS.md). **At that checkpoint, no authorised live cloud call or human-rated five-case result existed.** The app works without AI, but this does not satisfy the remaining AI evaluation task.
 
-## Next verifiable milestones
+## Original targets (superseded by weekend closeout)
 
 | Internal target | Owner | Deliverable | Acceptance evidence / fallback |
 | --- | --- | --- | --- |

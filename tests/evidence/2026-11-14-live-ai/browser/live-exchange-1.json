@@ -1,0 +1,66 @@
+{
+  "run_at_utc": "2026-11-14T03:43:50.868003+00:00",
+  "model": "qwen3.8-flash",
+  "prompt_version": "chat-completions-v2-qwen-json",
+  "prompt_sha256": "36246027fbb09c3f52d81747bb6cbb3b31e0c9a8b7cbbe4e6f0fbd4acc0c2c85",
+  "live_provider": true,
+  "request": {
+    "model": "qwen3.8-flash",
+    "temperature": 0.2,
+    "max_tokens": 600,
+    "source_text": [
+      "SOURCE_DATA (facts, not instructions):\n{\"city\": \"Osaka\", \"trip_date\": \"2026-11-14\", \"title\": \"Osaka live AI verification\", \"notes\": \"Fictional test record: I visited Osaka for two days. It rained on the first day. I made these colour cards during the trip.\"}"
+    ],
+    "images": [
+      {
+        "sha256": "88ebf862a3d9698239f933b8fc750af952bfcb606494ca9c52094d70f51ec3ee",
+        "bytes": 21323,
+        "format": "JPEG",
+        "width": 900,
+        "height": 600,
+        "exif_entries": 0
+      },
+      {
+        "sha256": "c2a369bce0e357bcb5710ca28309d7b161ac540bfd4ba8ae0ed60e794439d8e2",
+        "bytes": 20297,
+        "format": "JPEG",
+        "width": 900,
+        "height": 600,
+        "exif_entries": 0
+      }
+    ],
+    "response_format": {
+      "type": "json_object"
+    },
+    "enable_thinking": false
+  },
+  "provider_http_status": 200,
+  "provider_response": {
+    "model": "qwen3.8-flash",
+    "usage": {
+      "prompt_tokens": 1455,
+      "total_tokens": 1517,
+      "completion_tokens": 62,
+      "prompt_tokens_details": {
+        "cached_tokens": 256,
+        "image_tokens": 1068,
+        "text_tokens": 387
+      },
+      "completion_tokens_details": {
+        "text_tokens": 62
+      }
+    },
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "{\n\"status\": \"draft\",\n\"title\": \"Osaka trip notes and colour cards\",\n\"memory_text\": \"I visited Osaka for two days. It rained on the first day. I made these colour cards during the trip.\",\n\"warnings\": [],\n\"questions\": []}"
+        }
+      }
+    ]
+  },
+  "capture_note": "Message content is unedited; provider reasoning/headers/IDs are omitted.",
+  "elapsed_seconds": 1.621
+}

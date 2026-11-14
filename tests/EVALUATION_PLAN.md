@@ -1,6 +1,6 @@
 # Travel Memory Map evaluation plan
 
-Status on 7 November 2026: the five AI cases remain unrun against a live cloud model on the integrated build. A local fake-provider integration run has passed; see [dated evidence](evidence/2026-11-06-ai-mock/RESULTS.md) and [next milestones](../docs/AI_CHECKPOINTS_2026-11-06.md). T01, T03, T04 and T05 inputs are prepared; Owen reviewed and froze Thomas’s synthetic T02 input on 6 November. Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
+Status on 14 November 2026: real Qwen outputs exist for T01/T02/T04/T05 and S01/S02; see [live results](evidence/2026-11-14-live-ai/RESULTS.md). T03 awaits cloud-transfer permission/run and all independent human scores remain pending. Final transport/status checks passed 6/6; this is not the proposal’s five-case quality score. A local fake-provider integration run has passed; see [dated evidence](evidence/2026-11-06-ai-mock/RESULTS.md) and [next milestones](../docs/AI_CHECKPOINTS_2026-11-06.md). T01, T03, T04 and T05 inputs are prepared; Owen reviewed and froze Thomas’s synthetic T02 input on 6 November. Thomas’s separate map-module tests are recorded in [map evidence](evidence/MAP_RESULTS.md). Preserve the submitted proposal’s five-case set and proposed **5/5** acceptance target. Four members prepare one case each; the conflict case is shared. Ownership and reviewers are in [Work allocation](../docs/WORK_ALLOCATION.md).
 
 ## Fixed AI cases
 
@@ -30,7 +30,8 @@ Each case must preserve its pre-labelled facts, introduce no unsupported factual
 
 | Case/run | Commit | Model/settings and prompt version | Raw-output evidence | Facts retained | No invention | Uncertainty handled | Reviewer verdicts | Final result |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Not yet run | — | — | — | — | — | — | — | — |
+| T01/T02/T04/T05/S01/S02 | `a95a108` | qwen3.8-flash; v3-city-attribution; settings/hashes in evidence | [Raw outputs](evidence/2026-11-14-live-ai/final-v3/) | Pending human review | Pending human review | Expected statuses observed | Pending two reviewers | Pending |
+| T03 | — | — | Not sent: cloud permission pending | — | — | — | — | Pending |
 
 Report actual counts (for example, 4/5), edits required and failure details. Five internal cases cannot establish general accuracy; repeated runs of the same fixtures are not new independent test cases.
 

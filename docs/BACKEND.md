@@ -1,8 +1,9 @@
 # Local backend guide
 
 Status: Owen's local backend and the Chat Completions-compatible adapter are integrated.
-The adapter has simulated HTTP tests; a live provider call on this combined
-build still needs to be recorded. Without a key/model, the proxy returns `503`.
+Real Qwen calls and the browser save/restart path were verified on 14 November;
+see [evidence](../tests/evidence/2026-11-14-live-ai/RESULTS.md). T03 and independent
+human evaluation remain pending. Without a key/model, the proxy returns `503`.
 
 ## What it does
 
@@ -79,10 +80,11 @@ AI_BASE_URL=<your provider's OpenAI-compatible /v1 base URL>
 
 The adapter appends `/chat/completions` to the base URL and asks for a JSON
 object in its system prompt. It validates the returned fields before showing
-anything to the user. It does not set a provider-specific JSON response-format
-parameter. For the course Bailian gateway, use its assigned base URL and a
-vision-capable model. The integrated build has simulated transport tests, but
-no recorded live provider call. Existing
+anything to the user. For the course token-plan gateway with exactly `qwen3.8-flash`, it now sets
+`response_format={"type":"json_object"}` and `enable_thinking=false` after a live
+prose/JSON failure. Other providers and models retain their previous options.
+Use `AI_MODEL=qwen3.8-flash` and the assigned OpenAI-compatible base URL; the
+14 November evidence records the tested image path. Existing
 `.env.ai.local` files using `TRAVEL_AI_API_KEY`, `TRAVEL_AI_MODEL` and
 `TRAVEL_AI_BASE_URL` are also read. Never commit credentials. Check the chosen
 provider's retention policy before sending personal photos.
@@ -255,9 +257,9 @@ together; copying only one leaves rows without files or files without rows.
   busy state, but a scripted duplicate create would produce two visits.
 - No automatic cleanup of a database row whose file was deleted outside the app;
   the startup sweep only removes unreferenced files older than one hour.
-- The Chat Completions adapter is integrated and has simulated HTTP tests. Its live
-  call on this combined build, provider retention check, and independent
-  five-fixture review remain outstanding.
+- Live Qwen transport and browser save/restart are verified on 14 November.
+  T03 cloud-transfer permission, two independent human reviews per case and
+  provider-specific zero-retention guarantees remain unverified.
 - The focused API-mode workflow was checked in headless Chrome on 22 October
   2026 (create, upload, edit, AI `503`, delete and 390px overflow). The full
   existing Playwright suites, Safari/Firefox, physical devices and a fresh

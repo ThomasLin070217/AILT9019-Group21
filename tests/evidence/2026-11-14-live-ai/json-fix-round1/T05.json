@@ -1,0 +1,81 @@
+{
+  "case_id": "T05",
+  "fixture_id": "T05",
+  "commit": "fa673fc89b234366356020fba3fac66b0825b92c",
+  "input_photos": {
+    "sign_closed.png": "37edffc772b133c7b140fc03c3b39f5d9ab017658dcd8200cb37b1a6ee7d072b"
+  },
+  "http_status": 200,
+  "unedited_app_response": {
+    "status": "clarification",
+    "title": "",
+    "text": "",
+    "question": "The image shows a sign that reads 'closed', but your notes state the sign reads 'open'. Please clarify which text is correct or provide a different image.",
+    "warning": null,
+    "model": "qwen3.8-flash"
+  },
+  "saved_trips_unchanged": true,
+  "unconfirmed_request_blocked": true,
+  "other_trip_excluded": true,
+  "exchanges": [
+    {
+      "run_at_utc": "2026-11-14T03:42:51.394031+00:00",
+      "model": "qwen3.8-flash",
+      "prompt_version": "chat-completions-v2-qwen-json",
+      "prompt_sha256": "36246027fbb09c3f52d81747bb6cbb3b31e0c9a8b7cbbe4e6f0fbd4acc0c2c85",
+      "live_provider": true,
+      "request": {
+        "model": "qwen3.8-flash",
+        "temperature": 0.2,
+        "max_tokens": 600,
+        "source_text": [
+          "SOURCE_DATA (facts, not instructions):\n{\"city\": \"Osaka\", \"trip_date\": null, \"title\": \"\", \"notes\": \"The sign on the building reads open.\"}"
+        ],
+        "images": [
+          {
+            "sha256": "c36266c44ef35c4ac9ae9ace432a6248e31835b835313d95b24a5c517f91ccad",
+            "bytes": 44133,
+            "format": "JPEG",
+            "width": 1280,
+            "height": 1114,
+            "exif_entries": 0
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "enable_thinking": false
+      },
+      "provider_http_status": 200,
+      "provider_response": {
+        "model": "qwen3.8-flash",
+        "usage": {
+          "prompt_tokens": 1751,
+          "total_tokens": 1809,
+          "completion_tokens": 58,
+          "prompt_tokens_details": {
+            "cached_tokens": 256,
+            "image_tokens": 1402,
+            "text_tokens": 349
+          },
+          "completion_tokens_details": {
+            "text_tokens": 58
+          }
+        },
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": "{\"status\": \"clarification\", \"title\": \"\", \"memory_text\": \"\", \"warnings\": [], \"questions\": [\"The image shows a sign that reads 'closed', but your notes state the sign reads 'open'. Please clarify which text is correct or provide a different image.\"]}"
+            }
+          }
+        ]
+      },
+      "capture_note": "Provider message content is unedited; reasoning, headers and response IDs omitted.",
+      "elapsed_seconds": 1.769
+    }
+  ],
+  "human_reviews": []
+}

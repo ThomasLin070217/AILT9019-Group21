@@ -93,6 +93,39 @@ def test_course_gateway_uses_chat_completions_and_fenced_json(tmp_path):
     payload = json.loads(seen[0].content)
     assert payload["max_tokens"] == 600
     assert payload["messages"][1]["role"] == "user"
+    assert payload["response_format"] == {"type": "json_object"}
+    assert payload["enable_thinking"] is False
+
+
+def test_qwen_json_options_do_not_leak_to_other_providers_or_models(tmp_path):
+    for base_url, model in [
+        ("https://example.com/v1", "qwen3.8-flash"),
+        ("https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1", "MiniMax-M2.5"),
+    ]:
+        seen = []
+        def handler(req):
+            seen.append(json.loads(req.content))
+            return httpx.Response(200, json=completion(valid_draft()))
+        run(generator(tmp_path, handler, base_url=base_url, model=model).generate(request(tmp_path)))
+        assert 'response_format' not in seen[0] and 'enable_thinking' not in seen[0]
+
+
+def test_prose_and_truncated_json_are_never_accepted_as_drafts(tmp_path):
+    for content, reason in [('A blurry landscape with a path.', 'stop'),
+                            (json.dumps(valid_draft()), 'length')]:
+        def handler(req):
+            return httpx.Response(200, json={'choices': [{'finish_reason': reason,
+                'message': {'content': content}}]})
+        with pytest.raises(ProviderError):
+            run(generator(tmp_path, handler).generate(request(tmp_path)))
+
+
+def test_invalid_choice_types_raise_provider_error(tmp_path):
+    for choice in (None, 'not an object', []):
+        def handler(req):
+            return httpx.Response(200, json={'choices': [choice]})
+        with pytest.raises(ProviderError):
+            run(generator(tmp_path, handler).generate(request(tmp_path)))
 
 
 def test_invalid_model_output_and_redirect_are_rejected(tmp_path):

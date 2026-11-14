@@ -29,6 +29,9 @@ If the user requests identification of a person or an inferred private relations
 for credentials or information from other trips, return status refusal with a short warning.
 Do not include a title or memory text in a refusal.
 For clear photos without notes, give an impersonal description of visible features.
+The selected city is a user-provided album label, not a visually verified location.
+When notes are empty, explicitly state in warnings that the city was selected by the
+user and is not verified by the image; do not present the scene as located there.
 These are completed trips, not future travel plans. For a draft, write a short title and
 2-5 factual sentences matching the notes' language, or English if notes are empty.
 Return only JSON with exactly these fields: status, title, memory_text, warnings and questions.
@@ -36,7 +39,7 @@ The status value MUST be exactly "draft", "clarification" or "refusal"."""
 
 # Bump this label whenever the prompt or output contract changes. The fixture
 # runner also records a prompt hash so a past result can be matched precisely.
-PROMPT_VERSION = "chat-completions-v1"
+PROMPT_VERSION = "chat-completions-v3-city-attribution"
 
 SCHEMA_FIELDS = {"status", "title", "memory_text", "warnings", "questions"}
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
@@ -69,7 +72,12 @@ def _strip_code_fence(value: str) -> str:
 
 def _parse_result(envelope: object, model: str) -> MemoryResult:
     try:
-        raw = envelope["choices"][0]["message"]["content"]  # type: ignore[index]
+        choice = envelope["choices"][0]  # type: ignore[index]
+        if not isinstance(choice, dict):
+            raise ProviderError("The model returned an invalid choice.")
+        if choice.get("finish_reason") in {"length", "content_filter", "tool_calls"}:
+            raise ProviderError("The model did not complete a memory response.")
+        raw = choice["message"]["content"]
     except (KeyError, IndexError, TypeError) as exc:
         raise ProviderError("The model returned no message content.") from exc
     if isinstance(raw, list):
@@ -164,6 +172,14 @@ class ResponsesGenerator:
             "temperature": 0.2,
             "max_tokens": 600,
         }
+        # Live T04 returned prose instead of JSON with prompt-only formatting.
+        # Apply the verified provider options only to this course model; do not
+        # send Qwen-specific flags to arbitrary compatible providers/models.
+        if (urlsplit(_endpoint(self.settings.ai_base_url)).hostname ==
+                "token-plan.cn-beijing.maas.aliyuncs.com" and
+                self.settings.ai_model == "qwen3.8-flash"):
+            payload["response_format"] = {"type": "json_object"}
+            payload["enable_thinking"] = False
         try:
             async with httpx.AsyncClient(
                 transport=self.transport,

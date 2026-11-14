@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "browser": "Ego Browser (Chromium), desktop; not a physical-phone check",
+  "final_prompt_version": "chat-completions-v3-city-attribution",
+  "checks": [
+    "Synthetic trip creation and photo upload through UI",
+    "Cancellation before send produced zero audited provider calls",
+    "Explicit confirmation sent only current-trip fields and prepared JPEGs",
+    "Live Qwen draft returned to editable form",
+    "Stored trips unchanged before Save",
+    "User edited title/text before saving",
+    "Saved text and photos survived reload and backend restart",
+    "Second trip remained separate and visit count stayed at two after AI save",
+    "First trip was not changed by generation/save on second trip",
+    "Restart without credentials preserved album and showed an honest no-provider error"
+  ],
+  "artifacts": {
+    "raw_model_responses": [
+      "live-exchange-1.json",
+      "live-exchange-2.json"
+    ],
+    "unsaved_comparison": [
+      "final-before.json",
+      "final-unsaved.json"
+    ],
+    "persisted_comparison": [
+      "final-saved.json",
+      "final-restarted.json",
+      "after-no-key.json"
+    ]
+  },
+  "limitations": [
+    "First browser draft used v2; second used final v3. Adapter and persistence behaviour were unchanged.",
+    "Automated keyboard/mouse interaction; no claim of independent human usability acceptance."
+  ]
+}
