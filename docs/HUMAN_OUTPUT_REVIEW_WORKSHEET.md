@@ -1,6 +1,6 @@
 # Human output review worksheet
 
-The six outputs below are exact app responses from the retained final-v3 run. They are not new samples. Read each source JSON and its fixture before judging. Human verdicts remain blank in `HUMAN_REVIEW.csv`; the assistant has not filled them. Two independent reviewers are our project plan, not an explicit course rule.
+The six outputs below are exact app responses from the retained final-v3 run. They are not new samples. Read each source JSON and its fixture before judging. Human verdicts remain blank in [the blank review CSV](../tests/human_review_template.csv); the assistant has not filled them. Two independent reviewers are our project plan, not an explicit course rule.
 
 ## Decision rule
 

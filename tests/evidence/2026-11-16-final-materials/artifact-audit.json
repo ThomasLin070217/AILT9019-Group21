@@ -1,0 +1,134 @@
+{
+  "checked_at_utc": "2026-11-16T06:15:33.971493+00:00",
+  "operator": "Codex at Thomas request; not human approval",
+  "source_main": "66ade5d7b8f2c3f6a43e9bcfc6c038714c0a03b7",
+  "checks": [
+    {
+      "check": "PDF has five pages",
+      "passed": true
+    },
+    {
+      "check": "Seven official report sections retained",
+      "passed": true
+    },
+    {
+      "check": "Latest test counts and source baseline recorded",
+      "passed": true
+    },
+    {
+      "check": "Current limitations are explicit",
+      "passed": true
+    },
+    {
+      "check": "All seven AI disclosure fields retained",
+      "passed": true
+    },
+    {
+      "check": "Fourteen assigned review rows; no fabricated verdicts",
+      "passed": true
+    },
+    {
+      "check": "All twelve assigned run references exist",
+      "passed": true
+    },
+    {
+      "check": "All six worksheet raw links work inside bundle",
+      "passed": true
+    },
+    {
+      "check": "live-ai retained hashes unchanged",
+      "passed": true
+    },
+    {
+      "check": "final-demo retained hashes unchanged",
+      "passed": true
+    },
+    {
+      "check": "release-readiness retained hashes unchanged",
+      "passed": true
+    },
+    {
+      "check": "Demo matches repository asset",
+      "passed": true
+    },
+    {
+      "check": "T01 offline input hashes",
+      "passed": true
+    },
+    {
+      "check": "T02 offline input hashes",
+      "passed": true
+    },
+    {
+      "check": "T04 offline input hashes",
+      "passed": true
+    },
+    {
+      "check": "T05 offline input hashes",
+      "passed": true
+    },
+    {
+      "check": "Public URL reachable: https://github.com/ThomasLin070217/AILT9019-Group21",
+      "passed": true
+    },
+    {
+      "check": "Public URL reachable: https://thomaslin070217.github.io/AILT9019-Group21/",
+      "passed": true
+    },
+    {
+      "check": "Published page reflects 89/25 evidence",
+      "passed": true
+    },
+    {
+      "check": "Public URL reachable: https://thomaslin070217.github.io/AILT9019-Group21/assets/real-ai-demo.mp4",
+      "passed": true
+    },
+    {
+      "check": "Final checker rejects pending video links",
+      "passed": true
+    },
+    {
+      "check": "No credential patterns in final text",
+      "passed": true
+    }
+  ],
+  "urls": [
+    {
+      "url": "https://github.com/ThomasLin070217/AILT9019-Group21",
+      "status": 200,
+      "authentication": "none",
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://thomaslin070217.github.io/AILT9019-Group21/",
+      "status": 200,
+      "authentication": "none",
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://thomaslin070217.github.io/AILT9019-Group21/assets/real-ai-demo.mp4",
+      "status": 200,
+      "authentication": "none",
+      "content_type": "video/mp4"
+    }
+  ],
+  "structural_blockers": [
+    "Presentation YouTube link: Use an HTTPS YouTube URL without credentials or a custom port",
+    "Demo YouTube link: Use an HTTPS YouTube URL without credentials or a custom port",
+    "The report identification block still says recording/upload pending"
+  ],
+  "human_verdicts_completed": 0,
+  "moodle_action": "none",
+  "cloud_ai_calls": 0,
+  "video_playback_checked_this_run": false,
+  "visual_qa": {
+    "pages": 5,
+    "all_page_images_inspected": true,
+    "clipping_or_overlap_observed": false
+  },
+  "report_sha256": {
+    "report.docx": "1a1e6e4807d87a8aae4cf24ff4a1dc58a4c36480d2f07e2dbeded8d85bddc9a5",
+    "report.pdf": "e3a08d838474aaadbb62fe70bcda19c132b4bfb98a047f8dbc14ee4c339a3219",
+    "report_source.md": "98607e72f19494ef63c4bd182af74adfe6485abbf7622af35254ab92e090a6a9"
+  }
+}

@@ -1,16 +1,16 @@
-# Weekend closing tasks
+# Final closing tasks
 
-Internal deadline: **Sunday, 15 November 2026, 21:00 HKT** for individual items; **23:00 HKT** for final team review. Official submission deadline: **20 November, 23:59 HKT**. Nothing is submitted automatically.
+Internal deadline: **Tuesday, 17 November 2026, 23:59 HKT** for all remaining items. Official submission deadline: **20 November, 23:59 HKT**. Nothing is submitted automatically.
 
 ## Copy to the group
 
-Please finish these by **Sunday, 15 Nov, 9 pm HKT**; final team check at **11 pm**.
+Please finish these by **Tuesday, 17 Nov, 11:59 pm HKT**.
 
 - **Thomas:** Review the final report and contribution claims, collect the completed reviews/video links, and approve the final package after checking the PDF and both videos.
 - **Angel:** Coordinate our ≤3-minute Zoom presentation (everyone speaks, full names visible); upload the presentation and prepared demo as two separate YouTube videos. Confirm whether T03 may be sent to the cloud provider.
 - **Owen:** Run the new reproduction checker on your computer and share its logs; complete your assigned raw AI-output reviews.
 - **Qingyang:** Finish and collect the human AI-output ratings, retain disagreements/failures, and summarise the actual results. Keep T03 marked untested unless permission and a real run are recorded.
-- **Everyone:** Record your Zoom speaking part, finish any assigned review, and check your own contribution statement before the 11 pm sign-off.
+- **Everyone:** Record your Zoom speaking part, finish any assigned review, and check your own contribution statement before the deadline.
 
 ## What is already prepared
 
