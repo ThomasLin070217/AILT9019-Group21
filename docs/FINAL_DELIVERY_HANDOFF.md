@@ -1,6 +1,6 @@
-# Final delivery handoff — 14 November 2026
+# Final delivery handoff — 16 November 2026
 
-The official Moodle final assignment and template were checked on 14 November. They supersede older coordination drafts. **Deadline: 20 November 2026, 23:59 Hong Kong time (UTC+8).** Internal completion target: **15 November, 23:00 HKT**. Nothing has been submitted to Moodle by this preparation work.
+The official Moodle final assignment and template were checked on 14 November. They supersede older coordination drafts. **Deadline: 20 November 2026, 23:59 Hong Kong time (UTC+8).** Internal completion target: **17 November, 23:59 HKT**. Nothing has been submitted to Moodle by this preparation work.
 
 ## Exact submission requirements
 
@@ -22,9 +22,9 @@ The final rubric splits the 60 project marks into Report 11, Weekly reports 4, C
 - Thomas's local report follows the official template and states actual evidence gaps. Detailed individual-contribution statements stay in the team review/submission copy, not on the public project webpage.
 - [Recording script and checklist](FINAL_RECORDING_KIT.md) are ready for all four members.
 
-## Weekend closing tasks
+## Final closing tasks
 
-Use the [current named tasks and acceptance criteria](FINAL_HUMAN_TODO.md): individual items by 15 November 21:00 HKT, final team review by 23:00 HKT. Human scores, contribution confirmation, T03 cloud permission and all-member Zoom participation cannot be completed by an assistant.
+Use the [current named tasks and acceptance criteria](FINAL_HUMAN_TODO.md): all remaining items by 17 November 23:59 HKT. Human scores, contribution confirmation, T03 cloud permission and all-member Zoom participation cannot be completed by an assistant.
 
 ## Remaining delivery blockers
 

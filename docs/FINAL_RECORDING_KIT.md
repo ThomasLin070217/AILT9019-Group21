@@ -1,10 +1,10 @@
 # Group 21 final recording kit
 
-Verified on Moodle on 14 November 2026. **Two separate YouTube links are required.** Use Unlisted. The presentation must be recorded in Zoom, at most 3 minutes, with all four members speaking and each speaker's full name visible. Faces are optional. The genuine system demo has no time limit. Neither video file belongs in the Moodle ZIP.
+Verified on Moodle on 14 November 2026. **Two separate YouTube links are required.** Unlisted is recommended. The presentation must be recorded in Zoom, at most 3 minutes, with all four members speaking and each speaker's full name visible. Faces are optional. The genuine system demo has no time limit. Neither video file belongs in the Moodle ZIP.
 
 ## Presentation script
 
-Rehearse at a natural pace. Target 2:40–2:50, leaving time for speaker handovers. Each person uses their own voice. Replace any changed results only after evidence is recorded. This script describes the verified 14 November state, not a claim that the remaining reviews are finished.
+Rehearse at a natural pace. Target 2:40–2:50, leaving time for speaker handovers. Each person uses their own voice. Replace any changed results only after evidence is recorded. This script describes the 14 November test evidence, rechecked against main on 16 November, not a claim that the remaining reviews are finished.
 
 **0:00–0:40 — Yunian Lin (Thomas)**
 
@@ -20,7 +20,7 @@ Rehearse at a natural pace. Target 2:40–2:50, leaving time for speaker handove
 
 **2:00–2:45 — Qingyang Lin**
 
-> I prepared unclear-photo and conflicting-input materials and evaluation documentation. The integrated Qwen run now has six live outputs with the expected response types, plus sixty-eight Python and twenty-two Node checks. Those six results are not a human accuracy score. One original case still awaits cloud permission, and independent content ratings remain pending. A real failure was prose returned instead of JSON; model-specific JSON mode fixed the reproduced case while validation remained strict. Our main lesson is to preserve evidence, acknowledge uncertainty and keep users in control of saved memories.
+> I prepared unclear-photo and conflicting-input materials and evaluation documentation. The integrated Qwen run now has six live outputs with the expected response types, plus eighty-nine Python and twenty-five Node checks. Those six results are not a human accuracy score. One original case still awaits cloud permission, and independent content ratings remain pending. A real failure was prose returned instead of JSON; model-specific JSON mode fixed the reproduced case while validation remained strict. Our main lesson is to preserve evidence, acknowledge uncertainty and keep users in control of saved memories.
 
 ## Zoom checklist
 
@@ -51,3 +51,7 @@ Use actual accessible URLs, not placeholder text. Report and links file must agr
 ## Actual demo now available
 
 The 14 November 71-second Qwen demo covers explicit consent, draft/edit/save/reload and a real OPEN/CLOSED clarification. Review the captioned MP4 before uploading. It uses chronological timestamped screenshots at original speed (low capture frame rate), and the operator is Codex. This does not replace your all-member Zoom presentation or the two required YouTube links.
+
+## Closing deadline
+
+Finish the recording, uploads, human reviews and contribution checks by **17 November 2026, 23:59 HKT**. The report and package are prepared for review; real YouTube links and human decisions remain required.
