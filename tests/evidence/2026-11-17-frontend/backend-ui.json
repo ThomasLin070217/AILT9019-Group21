@@ -1,0 +1,11 @@
+{
+  "isolatedBackend": true,
+  "cloudCalls": 0,
+  "create": true,
+  "syntheticUpload": true,
+  "photoSwipe": true,
+  "aiMissingProviderPreservedTrip": true,
+  "editReload": true,
+  "repeatVisitTier2": true,
+  "nativeGalleryFallback": true
+}

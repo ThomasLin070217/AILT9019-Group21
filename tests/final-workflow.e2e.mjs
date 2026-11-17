@@ -28,6 +28,7 @@ const selectNanjing = async () => {
   await page.waitForFunction(() => document.querySelector('#city-name')?.textContent === 'Nanjing');
 };
 const createTrip = async (title, notes) => {
+  if (!(await page.locator('.composer-disclosure').evaluate(el => el.open))) await page.locator('.composer-disclosure > summary').click();
   await page.locator('.api-composer input[type=text]').fill(title);
   await page.locator('.api-composer textarea').fill(notes);
   await page.locator('.api-composer button[type=submit]').click();
@@ -39,7 +40,7 @@ const createTrip = async (title, notes) => {
 };
 try {
   await page.goto(base + '/app/?mode=api&map=local', {waitUntil: 'networkidle'});
-  await page.locator('.api-composer').waitFor();
+  await page.locator('.composer-disclosure').waitFor();
   await selectNanjing();
   await page.waitForTimeout(900);
   const first = 'A fictional Nanjing afternoon';
@@ -78,7 +79,7 @@ try {
   await page.locator('#view-map').click();
 
   await page.reload({waitUntil: 'networkidle'});
-  await page.locator('.api-composer').waitFor();
+  await page.locator('.composer-disclosure').waitFor();
   await selectNanjing();
   assert.equal(await page.locator('.trip-card').count(), 2);
   assert.match(await cardFor(first).innerText(), /An edited fictional memory/);

@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "overflow": false,
+      "view": "map",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "view": "album",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "view": "map",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "view": "album",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "view": "map",
+      "width": 768
+    },
+    {
+      "overflow": false,
+      "view": "album",
+      "width": 768
+    },
+    {
+      "overflow": false,
+      "view": "map",
+      "width": 1024
+    },
+    {
+      "overflow": false,
+      "view": "album",
+      "width": 1024
+    },
+    {
+      "overflow": false,
+      "view": "map",
+      "width": 1440
+    },
+    {
+      "overflow": false,
+      "view": "album",
+      "width": 1440
+    }
+  ],
+  "galleryKeyboard": true,
+  "draftAcrossSort": true
+}
