@@ -1,0 +1,39 @@
+{
+  "demoFlow": [
+    "album and sorting",
+    "photo viewer close and focus return",
+    "native name search",
+    "no results and reset filter",
+    "add and remove one sample"
+  ],
+  "about": "About Travel Memory Map",
+  "backend": {
+    "flow": [
+      "saved trip",
+      "uploaded test photo",
+      "edited bilingual text",
+      "reloaded saved text",
+      "AI disclosure and no-key recovery"
+    ],
+    "aiError": "AI draft failed. No AI provider is configured on this local backend.",
+    "savedTripUnchanged": true
+  },
+  "mapControls": "Zoom and fit passed",
+  "desktop": {
+    "viewport": [
+      1440,
+      900
+    ],
+    "scrollWidth": 1440,
+    "secondTripTitleY": 731
+  },
+  "phone": {
+    "viewport": [
+      390,
+      844
+    ],
+    "scrollWidth": 390,
+    "selectedRowVisible": true,
+    "memoryLinkBottom": 688
+  }
+}

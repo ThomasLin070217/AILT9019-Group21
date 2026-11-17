@@ -14,9 +14,9 @@ colors:
   selected-city: "#f5e8dd"
   selected-city-ink: "#8c3c20"
   tier-0: "#829b9b"
-  tier-1: "#516442"
-  tier-2: "#9f502f"
-  tier-3: "#eea348"
+  tier-1: "#16643b"
+  tier-2: "#148347"
+  tier-3: "#75de36"
 typography:
   display:
     fontFamily: "Fraunces,Georgia,serif"
@@ -26,7 +26,7 @@ typography:
     letterSpacing: "-.035em"
   headline:
     fontFamily: "Fraunces,Georgia,serif"
-    fontSize: "32px"
+    fontSize: "28px"
     fontWeight: 480
     lineHeight: 1.12
     letterSpacing: "-.03em"
@@ -43,9 +43,9 @@ typography:
     lineHeight: 1.55
   memory-body:
     fontFamily: "system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
-    fontSize: "13px"
+    fontSize: "14px"
     fontWeight: 400
-    lineHeight: 1.75
+    lineHeight: 1.65
   label:
     fontFamily: "system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
     fontSize: "11px"
@@ -100,11 +100,10 @@ components:
     rounded: "{rounded.circle}"
     width: "26px"
     height: "26px"
-  trip-card:
-    backgroundColor: "{colors.surface}"
+  trip-entry:
+    backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.surface}"
-    padding: "0 20px 12px"
+    padding: "16px 0 12px"
 ---
 
 # Design System: Travel Memory Map
@@ -115,12 +114,12 @@ components:
 
 A compact city index and a working map sit beside an open album. Warm paper, pale water, white controls and rust selection keep the place legible while photographs and personal text carry the memory. This is the implemented direction recorded for team review, not a claim of a separate user-approved brand system.
 
-Fraunces gives city names and trip titles an album-like voice; system sans keeps navigation and metadata clear. The interface stays practical and quietly tactile: fine rules separate persistent regions, rounded cards hold individual trips, and small lifted controls sit above the map. The older green-led, Georgia-led catalogue treatment has been replaced.
+Fraunces gives city names and trip titles an album-like voice. System sans keeps navigation, dates and notes clear. Fine rules separate trips on a shared paper surface. Floating controls sit above the map.
 
 **Key Characteristics:**
 - A persistent city index coordinates map selection and the selected city’s memories.
 - Locally bundled Fraunces headings with compact system sans controls.
-- White cards and controls, warm paper albums, pale blue water and rust selection.
+- White controls, warm paper albums, pale blue water and rust selection.
 - Credited example photos and explicit fictional-trip labels remain visible.
 
 ## Colors
@@ -136,12 +135,12 @@ The palette places rust selection against white controls, warm paper and pale bl
 
 - **Pale water** (`sea`) establishes the map field and missing-photo fallback.
 - **Forest status** (`green`) is reserved for the small status message; it is not the dominant brand accent.
-- **Visit tiers** (`tier-0` through `tier-3`) move from slate through olive and rust to amber for no visits, one visit, two–three visits and four or more. They are data colours, not alternative button themes.
+- **Visit tiers** (`tier-0` through `tier-3`) move from slate through deep green and emerald to bright green for no visits, one visit, two–three visits and four or more. They are data colours, not alternative button themes.
 
 ### Neutral
 
 - **Charcoal** (`ink`) carries primary text; **quiet grey** (`muted`) carries supporting text.
-- **Warm paper** (`paper`) is the album background; **white** (`surface`) is the control and card surface.
+- **Warm paper** (`paper`) is the album background; **white** (`surface`) is the control surface.
 - **Fine rule** (`line`) divides panels and card actions; **land paper** (`land`) separates coastline geometry from water.
 
 **The Count Before Colour Rule.** Every visit tier has a written legend, and saved visit totals remain visible in the index and album; colour never carries the count alone.
@@ -156,24 +155,24 @@ The softly shaped display face makes cities and memories feel personal while com
 
 ### Hierarchy
 
-- **Display:** selected-city heading; on narrow desktop it becomes 38px, and at phone widths it becomes 42px.
-- **Headline:** catalogue heading; it becomes 27px below the stacked-layout breakpoint and 26px on phones.
-- **Title:** trip heading; it becomes 28px on phones.
-- **Body:** general interface copy. Trip prose uses the separate `memory-body` role and becomes 14px on phones.
+- **Display:** selected-city heading; on narrow desktop it becomes 38px. At phone widths it scales from 30px to 38px.
+- **Headline:** city index heading at 28px, reduced to 23px on phones.
+- **Title:** trip heading at 25px on both desktop and phone.
+- **Body:** general interface copy. Trip prose uses 14px type with 1.65 line height, up to 68 characters per line, and preserves user line breaks.
 - **Label:** rust trip dates. Other metadata uses 10–13px sans text; visit counts use tabular numerals. There is no imposed scale ratio or uppercase-label system.
-- **Brand:** Fraunces at 23px, weight 540, line height 1 and letter spacing −.035em; reduced to 21px, then 20px at smaller widths.
+- **Brand:** Fraunces at 23px, weight 540, line height 1 and letter spacing −.035em; reduced to 21px and then 19px at smaller widths. The sample or local album label sits beneath it in 11px system sans.
 
 **The Album Voice Rule.** Use Fraunces for the brand, city headings and memory titles; use system sans for controls, dates, counts and readable memory text.
 
 ## Layout
 
-The default desktop workspace is a three-column grid: city index (264px), fluid map, album (408px). It sits below a 76px top bar and above a footer of at least 48px. Workspace height is `calc(100dvh - 124px)` with a 680px minimum; the index and album scroll within their columns. At widths of at least 1700px the index and album expand to 288px and 460px. Between 851px and 1200px they narrow to 220px and 330px.
+The default desktop workspace is a three-column grid: city index (264px), fluid map, album (408px). It sits below a 76px top bar and above a footer of at least 48px. Workspace height is `calc(100dvh - 124px)` with a 560px minimum; the index and album scroll within their columns. At widths of at least 1700px the index and album expand to 288px and 460px. Between 851px and 1200px they narrow to 220px and 330px.
 
-At 850px and below, the workspace flows vertically: compact two-column search/filter controls, a horizontal city strip, a fixed-height map, then memories. City items are 138px wide with proximity scroll snapping. The map is 450px high, reducing to 405px at 540px and below. Memory cards form two columns until the 540px breakpoint, then one. Pointer city selection reveals the album on small screens; keyboard selection does not force page scrolling. A Back to map control appears in stacked Map view.
+At 850px and below, the workspace flows vertically: compact two-column search/filter controls, a horizontal city strip, a fixed-height map, then memories. City items scroll horizontally, and the selected city stays visible when its selection changes. The map canvas is 280px tall. On phones the map controls sit together along the bottom. The link below the map names the selected city and focuses the memory heading. Back to map returns focus to the fit control. Journal entries flow into two columns at tablet widths and one on phones.
 
-Album view hides the map and retains the city index. Its desktop card grid uses `repeat(auto-fit,minmax(280px,1fr))` with a 24px gap, so available cards occupy the width without an empty phantom column. Stacked breakpoints explicitly use two columns, then one. Switching views preserves selected records and drafts.
+Album view hides the map and retains the city index. Its desktop card grid uses `repeat(auto-fit,minmax(min(100%,300px),1fr))` with a 24px gap, so available cards occupy the width without an empty phantom column. Stacked breakpoints explicitly use two columns, then one. Switching views preserves selected records and drafts.
 
-Spacing is compact in the index and generous around photographs: desktop album padding is 28px, card side padding is 20px, and card separation is 22px. Expanded Album view uses 36px vertical and 40px horizontal padding. These are observed dimensions rather than a universal arithmetic spacing scale.
+The desktop journal uses 28px panel padding and entries sit flush to the prose column. A rule and 16px of top padding separate each entry. Use 4px between date and title, 12px between title, cover and prose, and 8px before actions. Phone journal padding is 16px and Album view has up to 40px on each side.
 
 ## Elevation & Depth
 
@@ -186,13 +185,13 @@ Persistent panels and cards are flat, separated by tonal fields and thin rules. 
 - **Selected view:** `0 2px 5px #26332a10`, used by the active Map/Album segment.
 - **Viewer backdrop:** `rgba(27,34,33,.85)`; this is an overlay, not a card shadow.
 
-**The Quiet Surface Rule.** Cards and persistent panels use borders and background tone. Reserve shadows for selected view controls, floating map controls and nearby-city choices.
+**The Quiet Surface Rule.** Entries share the paper surface and use top rules. Persistent panels are separated by background tone. Reserve shadows for selected view controls, floating map controls and nearby-city choices.
 
 ## Shapes
 
-Controls and city rows have gently rounded corners (`control`); the view-switch enclosure is slightly softer (`switch`). Trip cards, nearby-city choices and the photo dialog share the larger `surface` radius. Visit badges and legend dots are circular. Panels meet along straight one-pixel rules rather than floating as a collection of cards.
+Controls and city rows have gently rounded corners (`control`); the view-switch enclosure is slightly softer (`switch`). Nearby-city choices and the fallback photo dialog use the larger `surface` radius. The cover has a 4px radius. Visit badges and legend dots are circular. Panels meet along straight one-pixel rules rather than floating as a collection of cards.
 
-Photo covers bleed to the card edges, use a 4:3 crop and position the subject at centre/35% vertically. The image viewer contains the complete image. Map points remain round; a selected city with an available cover adds a small framed photo and stem. There are no decorative route lines.
+Photo covers align with the title and use a 16:10 crop with the subject centred horizontally and positioned at 35% vertically. The image viewer contains the complete image. Map points remain round; a selected city with an available cover adds a small framed photo and stem. There are no decorative route lines.
 
 ## Components
 
@@ -206,7 +205,7 @@ Search, select and textarea fields have one-pixel grey borders and rounded contr
 
 ### Navigation
 
-The Map/Album segmented control sits on a pale neutral enclosure; its active segment becomes white with a small shadow. `aria-pressed` communicates the current view. At phone widths its visible labels give way to the existing map and album icons. The city index pairs English and local names with a textual count, showing visited cities first. A warm selected row and filled rust count badge tie the index to the active map marker.
+The Map/Album segmented control sits on a pale neutral enclosure; its active segment becomes white with a small shadow. `aria-pressed` communicates the current view. At phone widths icons and labels are both visible. The city index pairs English and local names with a textual count, showing visited cities first. A warm selected row and filled rust count badge tie the index to the active map marker.
 
 ### Chips / Badges
 
@@ -214,19 +213,19 @@ The visit badge is a circular numerical count with a pale green neutral field; s
 
 ### Cards / Containers
 
-A trip card holds an optional cover, credit, date, wrapping title, memory text and provenance line. Demo cards expose edit/remove text actions below a fine divider. The preview snippets include the text-only variant, which is also valid when no photo exists. Missing media leaves the memory text and a plain fallback intact.
+Read each entry in order from date and sample provenance to title, optional cover and credit, then memory text and actions. Show sorting with two or more entries. In local mode the Add a memory disclosure uses the light rust treatment. Write with AI is a text action beside editing and photo controls. The text-only and missing-photo states retain the date, title and prose.
 
 ### Memory Map
 
 The offline map uses local Natural Earth SVG geometry and Mercator coordinates. With a configured key, Google Maps supplies the live base map, attribution and native map gestures; custom advanced markers inherit the same count/selection palette and link to the same album. The application preserves Google attribution, exposes provider/loading/fallback status and retains the local map on SDK failure. Marker brightness is derived from saved trip IDs; labels and the written legend supply the meaning. Markers support keyboard activation, retain focus through selection and have large invisible hit areas. Close marker groups offer explicit city choices. Zoom and fit controls are fixed-size white buttons. Panning is enabled only after zoom so the default map permits normal mobile page scrolling.
 
-The only animated state is marker fill (`180ms ease-out`); reduced-motion preference removes it. Card-cover hover uses a small brightness change without added animation.
+On successful save a city marker pulses once for 440ms. The fill uses green at three intensities and remains visible after the pulse. Reduced-motion preference skips the pulse. Card-cover hover uses a small brightness change without added animation.
 
 ### Photo Viewer and Feedback
 
-The native dialog shows the full photograph with a Close photo action, caption and focus returned to the trigger. Loading, no matching cities, empty memories, failed media, backend errors and damaged local records have explicit text states. Status uses a polite live region; errors use an alert. Demo controls and fictional content labels stay distinct from backend mode.
+PhotoSwipe shows the full photograph and returns focus on close. The native dialog provides the fallback. Loading, no matching cities, empty memories, failed media, backend errors and damaged local records have explicit text states. Status uses a polite live region; errors use an alert. Demo controls and fictional content labels stay distinct from backend mode.
 
-This is a local demonstration. Real uploads, cloud AI and SQLite are not integrated; the existing API-facing mode does not establish those capabilities.
+The sample album stores fictional edits in the browser. The local album uses FastAPI and SQLite for saved trips and photo uploads. Cloud AI drafts require provider configuration and explicit trip-level confirmation.
 
 ## Do's and Don'ts
 
@@ -240,5 +239,5 @@ This is a local demonstration. Real uploads, cloud AI and SQLite are not integra
 ### Don't:
 - Don't reintroduce the replaced green-led catalogue styling or use Georgia as the primary display face.
 - Don't imply that example photographs document fictional trips.
-- Don't depict routes or imply real uploads, cloud AI or SQLite integration. Google Maps is optional and requires a local browser key.
+- Keep provider and storage labels accurate. Photos and optional AI belong to the local album. Google Maps requires a local browser key.
 - Don't use decorative shadows on every card or add motion beyond the restrained marker state change.

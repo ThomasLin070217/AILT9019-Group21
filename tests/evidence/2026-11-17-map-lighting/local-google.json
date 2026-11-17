@@ -1,0 +1,15 @@
+{
+  "before": "0 visits",
+  "first": {
+    "count": "1 visit",
+    "tier": "1",
+    "region": "1"
+  },
+  "second": {
+    "count": "2 visits",
+    "tier": "2",
+    "region": "2"
+  },
+  "provider": "Google Maps",
+  "public": false
+}

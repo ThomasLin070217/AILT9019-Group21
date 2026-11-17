@@ -3,10 +3,12 @@ import {DemoRepository,ApiRepository,getJSON,DraftStore,photoURL} from './reposi
 import {createGoogleMap} from './google-map.mjs';
 import {createStreetsMap} from './streets-map.mjs';
 import {regionPath,viewForRegion} from './city-regions.mjs';
+import {pulseVisit} from './visit-colors.mjs';
 const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
 const mode=new URLSearchParams(location.search).get('mode')==='api'?'api':'demo';
+$('album-mode').textContent=mode==='api'?'Local album':'Sample album';
 let cities=[],trips=[],selected='jp-osaka',repository,view=initialView(),busy=false,ready=false,regionData;
-let liveMap=null,mapStarted=false,mapFailed=false;
+let liveMap=null,mapStarted=false;
 const regionElements=new Map(),regionFeatures=new Map();
 let draftStorage;try{draftStorage=sessionStorage;}catch{}
 const drafts=new DraftStore(draftStorage,text=>message(text));
@@ -51,12 +53,15 @@ function visibleCities(){return filterCities(cities,trips,filters());}
 function render(){
  const visible=visibleCities(),counts=countVisits(trips);
  if(!visible.some(c=>c.id===selected))selected=visible[0]?.id||null;
- $('progress').replaceChildren(node('strong',`${counts.size} cities visited`),document.createTextNode(` of ${cities.length} supported · ${trips.length} trips`));
+ $('progress').textContent=`${counts.size} of ${cities.length} cities visited · ${trips.length} ${trips.length===1?'trip':'trips'}`;
  $('result-count').textContent=`${visible.length} of ${cities.length} cities`;
  $('clear-filters').hidden=!($('search').value||$('region').value||$('visited').checked);
+ $('result-count').hidden=$('clear-filters').hidden;
  const chosen=cities.find(city=>city.id===selected),visits=counts.get(selected)||0;
  $('map-selection').textContent=chosen?`${chosen.name} · ${visits?`${visits} ${visits===1?'trip':'trips'} saved · area lit`:'No saved trips yet · area unlit'}`:'Choose a city to see its visit area.';
- $('focus-city').disabled=!chosen;$('focus-city-text').disabled=!chosen;
+ $('focus-city').disabled=!chosen;
+ $('jump-memories').hidden=!chosen;
+ if(chosen)$('jump-memories').textContent=`View ${chosen.name} memories`;
  $('cities').replaceChildren();
  if(!visible.length)$('cities').append(node('p','No matching cities. Change your search or turn off the visited filter.','empty'));
  const catalogue=[...visible].sort((a,b)=>Number(counts.has(b.id))-Number(counts.has(a.id))||a.name.localeCompare(b.name));
@@ -64,6 +69,15 @@ function render(){
   const count=counts.get(city.id)||0,button=node('button',undefined,'city-button');button.type='button';button.dataset.cityId=city.id;button.setAttribute('aria-pressed',String(city.id===selected));button.setAttribute('aria-label',`${city.name}, ${count} ${count===1?'visit':'visits'}`);
   const label=node('span',city.name);label.append(node('small',city.local_name));button.append(label,node('span',count?String(count):'—',`visit-badge ${count?'visited':''}`));button.addEventListener('click',event=>choose(city.id,event.detail===0));$('cities').append(button);
  }
+ const cityList=$('cities');
+ const selectedRow=cityList.querySelector('[aria-pressed="true"]');
+ if(selectedRow&&matchMedia('(max-width:850px)').matches){
+  const listBounds=cityList.getBoundingClientRect();
+  const rowBounds=selectedRow.getBoundingClientRect();
+  if(rowBounds.right>listBounds.right-4)cityList.scrollLeft+=rowBounds.right-listBounds.right+4;
+  if(rowBounds.left<listBounds.left+4)cityList.scrollLeft+=rowBounds.left-listBounds.left-4;
+ }
+
  renderMarkers(visible,counts);renderMemories();
 }
 function drawLand(data){
@@ -138,16 +152,31 @@ function renderMarkers(visible,counts){
  }
 }
 function renderMemories(){
- const city=cities.find(c=>c.id===selected);$('trip-list').replaceChildren();$('demo-tools').hidden=mode!=='demo'||!city;$('api-handoff').hidden=mode!=='api'||!city;$('add-sample').hidden=mode!=='demo'||!city;$('trip-sort').disabled=!city;
+ const city=cities.find(c=>c.id===selected);
+ const rows=city?cityTrips(trips,city.id):[];
+ $('trip-list').replaceChildren();
+ $('demo-tools').hidden=mode!=='demo'||!city;
+ $('api-handoff').hidden=mode!=='api'||!city;
+ $('add-sample').hidden=mode!=='demo'||!city;
+ $('trip-sort').parentElement.hidden=rows.length<2;
+ syncBusyControls();
  if(!city){$('city-region').textContent='No city selected';$('city-name').textContent='Keep exploring';$('city-local').textContent='';$('city-count').textContent='Clear a filter to return to your cities.';return;}
- const rows=cityTrips(trips,city.id);if($('trip-sort').value==='oldest')rows.reverse();$('city-region').textContent=city.region;$('city-name').textContent=city.name;$('city-local').textContent=city.local_name;$('city-count').textContent=`${rows.length} ${rows.length===1?'visit':'visits'} · ${rows.length?'Each trip, its own memory.':'A story still to come.'}`;
+ if($('trip-sort').value==='oldest')rows.reverse();
+ $('city-region').textContent=city.region;$('city-name').textContent=city.name;$('city-local').textContent=city.local_name;$('city-count').textContent=`${rows.length} ${rows.length===1?'visit':'visits'}`;
  if(mode==='api'){const composer=node('details',undefined,'composer-disclosure');composer.open=!rows.length||Boolean(composerDraft(city.id));composer.append(node('summary','Add a memory'),makeTripComposer(city));$('trip-list').append(composer);}
- if(!rows.length){const empty=node('div',undefined,'empty');empty.append(node('strong','Your first memory belongs here.'),node('p',mode==='demo'?'Choose “Add sample visit” above to light up this city with a fictional visit.':'No saved trips for this city yet. Add one above.'));$('trip-list').append(empty);}
+ if(!rows.length){const empty=node('div',undefined,'empty');empty.append(node('strong','No trips yet'),node('p',mode==='demo'?'Add a sample visit to see this city light up.':'Save a trip to start this city’s album.'));$('trip-list').append(empty);}
  for(const trip of rows){
   const card=node('article',undefined,'trip-card');card.dataset.tripId=trip.id;
   const date=node('time',trip.trip_date?new Intl.DateTimeFormat('en',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(trip.trip_date)):'Date not recorded');if(trip.trip_date)date.dateTime=trip.trip_date;
-  const cover=makeCover(trip);if(cover)card.append(cover);
-  card.append(date,node('h3',trip.title||'Untitled memory'),node('p',trip.memory_text||trip.notes||'No notes yet.'),node('p',mode==='demo'?'Fictional trip · sample content':`${trip.photos.length} ${trip.photos.length===1?'photo':'photos'}`,'photo-count'));
+  const header=node('header',undefined,'trip-entry-heading');
+  const meta=node('div',undefined,'trip-entry-meta');
+  meta.append(date);
+  if(mode==='demo')meta.append(node('span','Fictional trip','trip-source'));
+  header.append(meta,node('h3',trip.title||'Untitled memory'));
+  card.append(header);
+  const cover=makeCover(trip);
+  if(cover)card.append(cover);
+  card.append(node('p',trip.memory_text||trip.notes||'No notes yet.','trip-prose'));
   if(mode==='api'){
    const strip=makePhotoStrip(trip);if(strip)card.append(strip);
    card.append(makeApiActions(card,trip));
@@ -214,8 +243,8 @@ function makeTripComposer(city){
  const save=node('button','Save this trip','primary');save.type='submit';
  const remember=()=>saveComposerDraft(city.id,{date:date.value,title:title.value,notes:notes.value});
  date.addEventListener('change',remember);title.addEventListener('input',remember);notes.addEventListener('input',remember);
- form.append(node('h3',`Add a memory to ${city.name}`,'form-title'),formField('Date',date),formField('Title',title),formField('Notes',notes),save,node('p','Saved to the local backend on this computer. Add photos after saving. Your unsaved text stays in this tab.','form-hint'));
- form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;const hadVisit=Boolean(countVisits(trips).get(city.id));let recovered=false;mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});recovered=trips.some(row=>row.id===created.id);return [...trips.filter(row=>row.id!==created.id),created];},()=>recovered?'Saved trip recovered. Visit count unchanged.':`${city.name} ${hadVisit?'brightened':'lit up'}. Add photos or write a memory.`,()=>{clearComposerDraft(city.id);queueMicrotask(()=>focusCity(city.id));});});
+ form.append(formField('Date',date),formField('Title',title),formField('Notes',notes),save,node('p','Saved to the local backend on this computer. Add photos after saving. Your unsaved text stays in this tab.','form-hint'));
+ form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;const hadVisit=Boolean(countVisits(trips).get(city.id));let recovered=false;mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});recovered=trips.some(row=>row.id===created.id);return [...trips.filter(row=>row.id!==created.id),created];},()=>recovered?'Saved trip recovered. Visit count unchanged.':`${city.name} ${hadVisit?'brightened':'lit up'}. Add photos or write a memory.`,()=>{clearComposerDraft(city.id);queueMicrotask(()=>{if(selected===city.id){focusCity(city.id);lightCity(city.id);}});});});
  return form;
 }
 function makeApiActions(card,trip){
@@ -332,40 +361,108 @@ async function load(){
  finally{$('loading').hidden=true;setBusy(false);}
  if(ready)startOnlineMap();
 }
-async function startOnlineMap(){
+async function googleConfig(path) {
+ try {
+  const result=await getJSON(path);
+  return typeof result?.apiKey==='string'&&result.apiKey.trim()?result:null;
+ } catch {
+  return null;
+ }
+}
+
+async function startOnlineMap() {
  const choice=new URLSearchParams(location.search).get('map');
- if(mapStarted||choice==='local')return;
- // Do not load third-party tiles while the user is only browsing the album.
- if(document.body.classList.contains('album-view'))return;
+ if(mapStarted||choice==='local'||document.body.classList.contains('album-view'))return;
  mapStarted=true;
- const useGoogle=choice==='google',container=useGoogle?$('google-map'):$('streets-map');
- const fallback=()=>{
-  mapFailed=true;liveMap?.destroy();liveMap=null;document.body.classList.remove('google-active','streets-active');
-  container.setAttribute('aria-hidden','true');container.inert=true;
-  $('map-provider').textContent='East Asia · local map';$('google-credit').hidden=true;$('streets-credit').hidden=true;$('local-credit').hidden=false;
-  $('map-notice').hidden=false;$('map-notice').textContent='Online map unavailable. Showing the local city map; reload to retry.';
-  if(ready){applyView();renderMarkers(visibleCities(),countVisits(trips));}
+
+ const localFallback=()=>{
+  $('map-provider').textContent='East Asia · local map';
+  $('map-notice').hidden=false;
+  $('map-notice').textContent='Online map unavailable. Showing the local city map.';
+  applyView();
  };
- try{
-  let config;
-  if(useGoogle){const response=await fetch('/api/map-config');if(!response.ok)throw new Error('Google settings unavailable');config=await response.json();if(!config.apiKey)throw new Error('Google key missing');}
-  $('map-provider').textContent=useGoogle?'Connecting to Google Maps…':'Loading city map…';
-  const options={container,config,regionData,onSelect:choose,onNearby:showNearby,onFailure:fallback,onZoom:zoom=>{$('zoom-in').disabled=zoom>=18;$('zoom-out').disabled=zoom<=3;}};
-  const candidate=await(useGoogle?createGoogleMap(options):createStreetsMap(options));
-  if(mapFailed){candidate.destroy();return;}
-  liveMap=candidate;renderMarkers(visibleCities(),countVisits(trips));await candidate.ready;
-  if(mapFailed)return;
-  document.body.classList.add(useGoogle?'google-active':'streets-active');container.setAttribute('aria-hidden','false');container.inert=false;
-  $('map-provider').textContent=useGoogle?'Google Maps':'City map · OpenFreeMap';$('google-credit').hidden=!useGoogle;$('streets-credit').hidden=useGoogle;$('local-credit').hidden=true;
- }catch(error){if(!mapFailed){fallback();$('map-notice').textContent=`Online map unavailable (${error.message}). Showing the local city map.`;}}
+
+ async function mount(provider,config) {
+  const useGoogle=provider==='google';
+  const container=$(useGoogle?'google-map':'streets-map');
+  const activeClass=useGoogle?'google-active':'streets-active';
+  let candidate,failed=false,active=false;
+  const cleanup=()=>{
+   if(liveMap===candidate)liveMap=null;
+   candidate?.destroy();
+   document.body.classList.remove(activeClass);
+   container.setAttribute('aria-hidden','true');
+   container.inert=true;
+   $('google-credit').hidden=true;
+   $('streets-credit').hidden=true;
+   $('local-credit').hidden=false;
+  };
+  const onFailure=()=>{
+   if(failed)return;
+   failed=true;
+   if(active){cleanup();void fallback(provider);}
+  };
+  try {
+   $('map-provider').textContent=useGoogle?'Connecting to Google Maps…':'Loading city map…';
+   const options={container,config,regionData,onSelect:choose,onNearby:showNearby,onFailure,
+    onZoom:zoom=>{$('zoom-in').disabled=zoom>=18;$('zoom-out').disabled=zoom<=3;}};
+   candidate=await (useGoogle?createGoogleMap(options):createStreetsMap(options));
+   liveMap=candidate;
+   renderMarkers(visibleCities(),countVisits(trips));
+   await candidate.ready;
+   if(failed)throw new Error('Map provider unavailable');
+   active=true;
+   document.body.classList.add(activeClass);
+   container.setAttribute('aria-hidden','false');
+   container.inert=false;
+   $('map-provider').textContent=useGoogle?'Google Maps':'City map · OpenFreeMap';
+   $('google-credit').hidden=!useGoogle;
+   $('streets-credit').hidden=useGoogle;
+   $('local-credit').hidden=true;
+   return true;
+  } catch {
+   failed=true;
+   cleanup();
+   return false;
+  }
+ }
+ async function fallback(provider) {
+  if(provider==='google'&&await mount('streets')){
+   $('map-notice').hidden=false;
+   $('map-notice').textContent='Google Maps unavailable. Showing OpenFreeMap.';
+  } else {
+   localFallback();
+  }
+ }
+
+ const config=choice==='google'
+  ? await googleConfig('./google-maps-config.json')||await googleConfig('/api/map-config')
+  : mode==='demo'&&choice!=='streets'?await googleConfig('./google-maps-config.json'):null;
+ if(config){
+  if(!await mount('google',config))await fallback('google');
+ } else if(choice==='google'){
+  await fallback('google');
+ } else if(!await mount('streets')){
+  localFallback();
+ }
+}
+
+function lightCity(id) {
+ const selector=`[data-city-id="${CSS.escape(id)}"]`;
+ const pin=document.body.classList.contains('google-active')
+  ? $('google-map').querySelector(`${selector} .google-visit-count`)
+  : document.body.classList.contains('streets-active')
+   ? $('streets-map').querySelector(`${selector} .street-pin-count`)
+   : $('markers').querySelector(`${selector} .pin`);
+ pulseVisit(pin);
 }
 $('trip-sort').addEventListener('change',()=>{if(ready)renderMemories();});
 $('clear-filters').addEventListener('click',()=>{$('search').value='';$('region').value='';$('visited').checked=false;render();$('search').focus();});
 for(const id of ['search','region','visited'])$(id).addEventListener(id==='search'?'input':'change',()=>{if(ready)render();});
 $('zoom-in').addEventListener('click',()=>{if(liveMap){liveMap.zoom(1);return;}view=zoomView(view,.65);applyView();});$('zoom-out').addEventListener('click',()=>{if(liveMap){liveMap.zoom(-1);return;}view=zoomView(view,1/.65);applyView();});$('fit').addEventListener('click',()=>{if(liveMap){liveMap.fit();return;}view=initialView();applyView();});
 $('focus-city').addEventListener('click',()=>{if(selected)focusCity(selected);});
-$('focus-city-text').addEventListener('click',()=>{if(selected)focusCity(selected);});
-$('add-sample').addEventListener('click',()=>{if(selected){const id=selected,city=cities.find(row=>row.id===id),hadVisit=Boolean(countVisits(trips).get(id));mutate(()=>repository.add(id),`${city.name} ${hadVisit?'brightened':'lit up'} in this sample album.`,()=>queueMicrotask(()=>focusCity(id)));}});
+
+$('add-sample').addEventListener('click',()=>{if(selected){const id=selected,city=cities.find(row=>row.id===id),hadVisit=Boolean(countVisits(trips).get(id));mutate(()=>repository.add(id),`${city.name} ${hadVisit?'brightened':'lit up'} in this sample album.`,()=>queueMicrotask(()=>{if(selected===id){focusCity(id);lightCity(id);}}));}});
 $('reset').addEventListener('click',()=>{if(confirm('Replace your sample edits with the original fictional trips?'))mutate(()=>repository.reset(),'Original sample album restored.',()=>drafts.clear());});
 $('recover').addEventListener('click',async()=>{if(confirm('Replace damaged demo records with the original samples?')){try{await repository.reset();drafts.clear();await load();}catch(error){showError(error);}}});
 $('retry').addEventListener('click',load);$('refresh').addEventListener('click',load);

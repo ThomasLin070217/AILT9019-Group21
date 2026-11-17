@@ -1,8 +1,25 @@
-# Google Maps local setup
+# Google Maps setup
 
-Google Maps JavaScript API is an optional live base map. The default online map is OpenFreeMap/MapLibre, which needs no key; `?map=local` uses the bundled Natural Earth SVG, and `?map=google` opts into Google Maps. API and album query flags can be combined.
+The hosted sample album uses Google Maps when the Pages build supplies a browser key. The normal local startup uses OpenFreeMap. Use `?map=streets` for OpenFreeMap, `?map=local` for the bundled map, or `?map=google` to request Google Maps explicitly. API and album query flags can be combined.
 
-## Configure
+## Hosted sample album
+
+To activate this workflow, set Pages → Build and deployment → Source to GitHub Actions
+and the repository variable `AILT_PAGES_ACTIONS` to `true`.
+The Pages workflow copies `docs/` into its deployment artifact and writes the repository secret
+`GOOGLE_MAPS_BROWSER_KEY` to the sample app's runtime configuration. The checked-in config is empty.
+Google receives the key from the browser. Set the key’s Website restriction to
+`https://thomaslin070217.github.io/*` and its API restriction to Maps JavaScript API.
+The hosted album tries Google first, then OpenFreeMap, then the bundled map. The Maps Demo project is
+subject to Google’s demo limits.
+
+The app loads its 19 OpenStreetMap display footprints into Google's geographic Data layer as
+GeoJSON longitude/latitude pairs. It uses Google's projection and viewport controls to keep each
+footprint aligned with the basemap at any zoom. Visit counts set three green fill levels.
+Clicking a footprint selects the same city as its marker. Footprints are approximate and can
+differ from administrative lines drawn by Google.
+
+## Configure locally
 
 Copy `.env.example` to `.env.maps.local`, enter a Maps JavaScript API browser key, run `python3 serve.py`, and open `/app/?map=google`. `.env.maps.local` is ignored by Git. Keep it local; don't put a key in source, a PR, screenshots or test logs. Environment variables `GOOGLE_MAPS_API_KEY` and `GOOGLE_MAPS_MAP_ID` override the file.
 
@@ -18,9 +35,9 @@ The browser must receive the Maps key to load Google's SDK; it is not a server-o
 
 ## Behaviour
 
-Google Maps loads only when opening Map view with `?map=google` and a configured key, not when opening directly in Album view. Google owns map tiles, attribution and its normal map requests. The app overlays the existing 19 city centres, trip counts/tiers and selected photo thumbnail. Our code does not upload the local photo files or travel notes to Google. Cloud memory generation remains unconnected.
+Google Maps loads in Map view when the hosted config is present, or when Google is explicitly requested with a configured local key. Opening directly in Album defers map loading. Google owns map tiles, attribution and its normal map requests. The app overlays the existing 19 city centres, trip counts/tiers and selected photo thumbnail. Our code does not upload the local photo files or travel notes to Google. AI memory generation uses the separate local backend.
 
-Custom markers use AdvancedMarkerElement with `gmp-click`, keyboard support and the existing exact-city chooser for nearby pins. Filters update markers; selection connects to the same album/drafts. Zoom and fit use Google's geographic view. A timeout, rejected key or SDK load failure restores the local map with a visible explanation. Reload retries; `?map=local` intentionally avoids Google loading.
+Custom markers use AdvancedMarkerElement with `gmp-click`, keyboard support and the existing exact-city chooser for nearby pins. Filters update markers; selection connects to the same album/drafts. Zoom and fit use Google's geographic view. A timeout, rejected key or SDK load failure tries OpenFreeMap and shows the provider change. If both online options fail, the bundled map remains available. Reload retries; `?map=local` intentionally avoids Google loading.
 
 Google's logo/attribution remain visible and unmodified. Advanced markers currently use Google's default development Map ID styling; cloud custom styling is not configured. CSP permits Google's documented map/script/image/font/connect domains and the SDK's eval/blob requirements; local map mode makes no third-party requests. For the default OpenFreeMap source, see [map data and modes](MAP_BASEMAP.md).
 
