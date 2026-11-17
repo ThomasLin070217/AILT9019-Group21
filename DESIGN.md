@@ -15,8 +15,8 @@ colors:
   selected-city-ink: "#8c3c20"
   tier-0: "#829b9b"
   tier-1: "#16643b"
-  tier-2: "#148347"
-  tier-3: "#75de36"
+  tier-2: "#56e62e"
+  tier-3: "#bdff24"
 typography:
   display:
     fontFamily: "Fraunces,Georgia,serif"
@@ -135,7 +135,7 @@ The palette places rust selection against white controls, warm paper and pale bl
 
 - **Pale water** (`sea`) establishes the map field and missing-photo fallback.
 - **Forest status** (`green`) is reserved for the small status message; it is not the dominant brand accent.
-- **Visit tiers** (`tier-0` through `tier-3`) move from slate through deep green and emerald to bright green for no visits, one visit, two–three visits and four or more. They are data colours, not alternative button themes.
+- **Visit tiers** (`tier-0` through `tier-3`) move from slate through green to more fluorescent lime for no visits, one visit, two–three visits and four or more. They are data colours, not alternative button themes.
 
 ### Neutral
 
