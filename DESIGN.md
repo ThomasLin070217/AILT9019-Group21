@@ -50,6 +50,12 @@ typography:
     fontFamily: "system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
     fontSize: "11px"
     fontWeight: 600
+  guide-title:
+    fontFamily: "Fraunces,Georgia,serif"
+    fontSize: "20px"
+    fontWeight: 470
+    lineHeight: 1.2
+    letterSpacing: "-.02em"
 rounded:
   control: "8px"
   switch: "10px"
@@ -104,6 +110,20 @@ components:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
     padding: "16px 0 12px"
+  trip-list-label:
+    fontFamily: "{typography.label.fontFamily}"
+    fontSize: "11px"
+    fontWeight: 600
+    textColor: "{colors.accent-ink}"
+  lead-photo:
+    backgroundColor: "{colors.sea}"
+    rounded: "4px"
+    aspectRatio: "16 / 10"
+  quick-guide:
+    backgroundColor: "{colors.surface}"
+    borderTop: "1px solid {colors.line}"
+    padding: "12px 16px"
+    position: "fixed-bottom"
 ---
 
 # Design System: Travel Memory Map
@@ -159,7 +179,7 @@ The softly shaped display face makes cities and memories feel personal while com
 - **Headline:** city index heading at 28px, reduced to 23px on phones.
 - **Title:** trip heading at 25px on both desktop and phone.
 - **Body:** general interface copy. Trip prose uses 14px type with 1.65 line height, up to 68 characters per line, and preserves user line breaks.
-- **Label:** rust trip dates. Other metadata uses 10–13px sans text; visit counts use tabular numerals. There is no imposed scale ratio or uppercase-label system.
+- **Label:** rust trip dates and the 11px semibold `trip-list-label` (“Latest memory” / “Earliest memory”) that introduces the lead entry. Other metadata uses 10–13px sans text; visit counts use tabular numerals. There is no imposed scale ratio or uppercase-label system.
 - **Brand:** Fraunces at 23px, weight 540, line height 1 and letter spacing −.035em; reduced to 21px and then 19px at smaller widths. The sample or local album label sits beneath it in 11px system sans.
 
 **The Album Voice Rule.** Use Fraunces for the brand, city headings and memory titles; use system sans for controls, dates, counts and readable memory text.
@@ -172,7 +192,7 @@ At 850px and below, the workspace flows vertically: compact two-column search/fi
 
 Album view hides the map and retains the city index. Its desktop card grid uses `repeat(auto-fit,minmax(min(100%,300px),1fr))` with a 24px gap, so available cards occupy the width without an empty phantom column. Stacked breakpoints explicitly use two columns, then one. Switching views preserves selected records and drafts.
 
-The desktop journal uses 28px panel padding and entries sit flush to the prose column. A rule and 16px of top padding separate each entry. Use 4px between date and title, 12px between title, cover and prose, and 8px before actions. Phone journal padding is 16px and Album view has up to 40px on each side.
+The desktop journal uses 28px panel padding and entries sit flush to the prose column. A rule and 16px of top padding separate each entry. Use 4px between date and title, 12px between title, cover and prose, and 8px before actions. Phone journal padding is 16px and Album view has up to 40px on each side. The sample-visit action sits with region and visit count in the selected heading; the sort control keeps its own toolbar only when two or more trips can be reordered. On phones the four map buttons form a 2×2 grid at the map's top-right, leaving the lower map labels and attribution clear; the jump-to-album link is a full-height white control in the selection row. A first-run quick guide uses a fixed bottom strip on phones only, adds equivalent page padding while open, and can be replayed from the footer.
 
 ## Elevation & Depth
 
@@ -205,7 +225,11 @@ Search, select and textarea fields have one-pixel grey borders and rounded contr
 
 ### Navigation
 
-The Map/Album segmented control sits on a pale neutral enclosure; its active segment becomes white with a small shadow. `aria-pressed` communicates the current view. At phone widths icons and labels are both visible. The city index pairs English and local names with a textual count, showing visited cities first. A warm selected row and filled rust count badge tie the index to the active map marker.
+The Map/Album segmented control sits on a pale neutral enclosure; its active segment becomes white with a small shadow. `aria-pressed` communicates the current view. At phone widths icons and labels are both visible. The city index pairs English and local names with a textual count, showing visited cities first. A warm selected row and filled rust count badge tie the index to the active map marker. The phone jump link reads `Open <city> album` and uses the standard white control surface; its arrow is a text cue, not a new icon set. Only the programmatically focused city heading drops the focus ring; real keyboard controls keep it.
+
+### Quick Guide
+
+The phone-only first-run guide has three steps: pick a city, save a memory, then open the city album. It appears once, is stored as `done` or `skipped` in browser storage, and can be reopened from the footer. Each step uses a fixed white strip above a fine rule, with `n of 3` over a Fraunces title, a short system-sans sentence, and Skip / Next (or Done) controls. Choosing a city advances to the save step. The viewport reserves the measured strip height so the focused form controls stay reachable. During replay in Album view the last step points to the first saved entry or the city heading. The current target gets a temporary rust outline; no modal backdrop, card stack, progress dots or animation is added. Desktop never shows the strip.
 
 ### Chips / Badges
 
@@ -213,7 +237,7 @@ The visit badge is a circular numerical count with a pale green neutral field; s
 
 ### Cards / Containers
 
-Read each entry in order from date and sample provenance to title, optional cover and credit, then memory text and actions. Show sorting with two or more entries. In local mode the Add a memory disclosure uses the light rust treatment. Write with AI is a text action beside editing and photo controls. The text-only and missing-photo states retain the date, title and prose.
+Read each entry in order from date and sample provenance to title, optional cover and credit, then memory text and actions. Show sorting with two or more entries. The first local photo is the 16:10 cover and has its own Remove cover photo action. Only the remaining photos appear in the compact `More photos from this trip` strip, with a maximum thumbnail width of 104px. The next photo becomes the cover after removal. In local mode the Add a memory disclosure uses the light rust treatment. Write with AI is a text action beside editing and photo controls. The text-only and missing-photo states retain the date, title and prose.
 
 ### Memory Map
 
@@ -231,6 +255,9 @@ The sample album stores fictional edits in the browser. The local album uses Fas
 
 ### Do:
 - Do preserve visible counts, keyboard selection, focus outlines and reduced-motion support.
+- Do show a local photograph exactly once; the cover and thumbnail strip are complementary, not duplicates.
+- Do keep phone map controls in the upper-right grid so place labels and attribution stay readable.
+- Do keep the first-run guide skippable, replayable and limited to phone widths.
 - Do use the same selected city and drafts when switching Map and Album views.
 - Do retain photo credits, fictional-story labels and useful memory text when media fails.
 - Do let long city names and trip titles wrap without clipping.
@@ -241,3 +268,4 @@ The sample album stores fictional edits in the browser. The local album uses Fas
 - Don't imply that example photographs document fictional trips.
 - Keep provider and storage labels accurate. Photos and optional AI belong to the local album. Google Maps requires a local browser key.
 - Don't use decorative shadows on every card or add motion beyond the restrained marker state change.
+- Don't turn the quick guide into a blocking modal or a decorative card stack.

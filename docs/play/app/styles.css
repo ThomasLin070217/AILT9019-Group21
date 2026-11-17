@@ -469,3 +469,104 @@ main{margin:0}.workspace{display:grid;grid-template-columns:264px minmax(0,1fr) 
 
 /* The pulse scales only the count mark, keeping the geographic anchor fixed. */
 .marker .pin { transform-box: fill-box; transform-origin: center; }
+
+/* Album-first layout: the selected city introduces a memory, not a toolbar. */
+.trip-list-label {
+  margin: 0 0 8px;
+  font: 600 11px/1.4 var(--font);
+  color: var(--accent-ink);
+}
+.city-details #add-sample {
+  width: auto;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.workspace .memory-toolbar:has(.sort-field[hidden] > select) { display: none; }
+#city-name:focus,
+#city-name:focus-visible { outline: none; }
+
+/* Each photo has one preview. Additional images stay compact even when only one remains. */
+.strip-label {
+  grid-column: 1 / -1;
+  margin: 0 0 2px;
+  font: 600 11px/1.4 var(--font);
+  color: var(--muted);
+}
+.workspace .photo-strip {
+  grid-template-columns: repeat(auto-fill, minmax(72px, 104px));
+}
+.trip-cover > .photo-remove {
+  display: block;
+  margin-inline-start: auto;
+}
+
+@media (max-width: 540px) {
+  .workspace .map-controls,
+  .workspace.streets-active .map-controls,
+  .workspace.google-active .map-controls {
+    top: 8px;
+    bottom: auto;
+    right: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 44px);
+    gap: 4px;
+  }
+  .workspace .map-controls #focus-city { margin: 0; }
+  .workspace .map-selection .jump-memories:not([hidden]) {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid #c8cecb;
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+  }
+  .workspace .map-selection .jump-memories:not([hidden])::after { content: " →"; }
+  .city-details #back-map { margin-inline-start: auto; }
+}
+
+/* Mobile quick guide: a quiet bottom strip, not a blocking card or modal. */
+.replay-guide { display: none; }
+.onboarding { display: none; }
+.guide-focus { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+@media (max-width: 850px) {
+  .replay-guide { display: inline-flex; font-size: 11px; }
+  html:has(body.onboarding-active) { scroll-padding-bottom: calc(var(--guide-height, 0px) + 12px); }
+  body.onboarding-active { padding-bottom: calc(var(--guide-height, 0px) + 12px); }
+  .onboarding-active .composer-disclosure > summary { scroll-margin-top: 88px; }
+  .onboarding:not([hidden]) {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 25;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+  }
+  .guide-step { margin: 0 0 3px; font: 600 10px/1.2 var(--font); color: var(--accent-ink); }
+  .onboarding h2 { margin: 0 0 4px; font: 470 20px/1.2 var(--display); letter-spacing: -.02em; }
+  .guide-body { margin: 0 0 10px; max-width: 58ch; font-size: 12px; line-height: 1.5; color: var(--muted); }
+  .guide-actions { display: flex; align-items: center; gap: 12px; }
+  .guide-actions .primary {
+    margin-inline-start: auto;
+    min-height: 44px;
+    padding: 8px 14px;
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+  }
+  .guide-actions .primary:hover { background: #8c381e; }
+}
+
+@media (max-width: 359px) {
+  .onboarding-active .composer-disclosure > summary { scroll-margin-top: 132px; }
+}
