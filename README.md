@@ -4,6 +4,12 @@ Travel Memory Map is a local travel album. A person selects one of 19 supported 
 
 The integrated product is on `main`. It uses FastAPI, SQLite and a browser interface. Photos are re-encoded before local storage to remove location/camera metadata. **Write with AI** is optional and user-triggered: the interface shows the selected trip fields before requesting a draft, and the draft must be reviewed and saved separately. The provider setting is named `AI_PROVIDER=responses` for compatibility, but the current adapter uses an OpenAI-compatible **Chat Completions** endpoint. [Real Qwen integration was verified on 14 November](tests/evidence/2026-11-14-live-ai/RESULTS.md), including editable drafts, explicit save and restart persistence. T01/T02/T04/T05 and two safety cases have live outputs; T03 cloud-transfer permission and independent human scores remain pending.
 
+## Try the public interactive demo
+
+[Open the browser demo](https://thomaslin070217.github.io/AILT9019-Group21/play/app/?mode=demo&map=local): explore cities, open sample photo cards, edit fictional memories, add repeat visits and reload browser-local changes. No installation or API key is required. Photo uploads and cloud AI require the local backend below; they are not hosted on GitHub Pages.
+
+The Pages site uses `docs/`. After changing the UI or public sample assets, run `python3 scripts/build_public_demo.py`, then `python3 scripts/build_public_demo.py --check`. The allowlist excludes personal fixtures, backend state and credentials.
+
 ## Run the working local product
 
 Python 3.10+ is required. From a clone of this repository:

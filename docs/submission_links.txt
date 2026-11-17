@@ -1,0 +1,6 @@
+Team ID: Group 21
+Public project webpage: https://thomaslin070217.github.io/AILT9019-Group21/
+GitHub repository: https://github.com/ThomasLin070217/AILT9019-Group21
+Presentation YouTube link: PENDING — four-member Zoom recording and upload required
+Demo YouTube link: PENDING — separate genuine workflow recording and upload required
+Interactive browser demo (sample data; no hosted AI): https://thomaslin070217.github.io/AILT9019-Group21/play/app/?mode=demo&map=local
