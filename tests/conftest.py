@@ -70,7 +70,7 @@ def settings(tmp_path: Path) -> Settings:
 
 @pytest.fixture
 def client(settings: Settings) -> TestClient:
-    return TestClient(create_app(settings=settings, generator=NullGenerator()))
+    return TestClient(create_app(settings=settings, generator=NullGenerator()), base_url=f"http://127.0.0.1:{settings.port}")
 
 
 @pytest.fixture
@@ -80,7 +80,7 @@ def client_factory(tmp_path: Path):
     def build(generator=None, **overrides):
         settings = build_settings(tmp_path, **overrides)
         app = create_app(settings=settings, generator=generator or NullGenerator())
-        test_client = TestClient(app)
+        test_client = TestClient(app, base_url=f"http://127.0.0.1:{settings.port}")
         created.append(test_client)
         return test_client, settings
 

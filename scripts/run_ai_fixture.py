@@ -44,7 +44,7 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="travel-memory-eval-") as temporary:
         root = Path(temporary)
         settings = replace(source_settings, db_path=root / "travel.db", media_dir=root / "media", tmp_dir=root / "tmp")
-        with TestClient(create_app(settings=settings, generator=generator)) as client:
+        with TestClient(create_app(settings=settings, generator=generator), base_url=f"http://127.0.0.1:{settings.port}") as client:
             payload = {"city_id": case["input"]["city_id"], "notes": case["input"]["notes"]}
             created = client.post("/api/trips", json=payload)
             created.raise_for_status()
