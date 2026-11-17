@@ -189,3 +189,280 @@ main{margin:0}.workspace{display:grid;grid-template-columns:264px minmax(0,1fr) 
 }
 @media(max-width:359px){.topbar .view-switch{width:100%;margin:0}.view-switch button{flex:1}.topbar .brand{min-height:30px}.memory-panel,.map-wrap{scroll-margin-top:132px}.memory-toolbar{gap:8px}.sort-field{max-width:136px}}
 @media(prefers-reduced-motion:reduce){.view-switch button{transition:none}}
+
+/* City index and travel journal. Keep controls on the paper, with rules between entries. */
+.brand-mode {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font: 500 11px/1.15 var(--font);
+  letter-spacing: 0;
+}
+
+.workspace .catalogue-intro {
+  display: block;
+}
+.catalogue-intro h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+.workspace .catalogue-intro .progress {
+  display: block;
+  margin: 0;
+  text-align: start;
+  font: 500 12px/1.45 var(--font);
+}
+.workspace .catalogue-controls {
+  padding-top: 16px;
+  padding-bottom: 8px;
+  gap: 8px;
+}
+.workspace .filter-toggle {
+  border: 0;
+  background: transparent;
+  padding-inline: 2px;
+  min-height: 44px;
+  width: fit-content;
+}
+.workspace .filter-toggle:has(input:checked) {
+  color: var(--accent-ink);
+}
+.workspace .list-heading {
+  padding-bottom: 4px;
+}
+.workspace .list-heading:has([hidden]) {
+  display: none;
+}
+.workspace .city-list {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+.workspace .city-button {
+  min-height: 52px;
+}
+.city-button > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.visit-badge {
+  flex-shrink: 0;
+}
+
+.map-heading {
+  padding-top: 20px;
+  padding-bottom: 6px;
+}
+.map-bottom {
+  padding-block: 8px 14px;
+}
+.map-selection {
+  margin-bottom: 6px;
+}
+.jump-memories {
+  display: none;
+}
+
+.workspace .selected-heading {
+  padding-bottom: 12px;
+}
+.city-title {
+  column-gap: 12px;
+  row-gap: 2px;
+}
+.city-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 12px;
+  margin-top: 6px;
+}
+.city-details #city-region,
+.city-details #city-count {
+  margin: 0;
+  font-size: 13px;
+}
+.city-details #city-count:not(:empty) {
+  font-weight: 650;
+  color: var(--accent-ink);
+}
+.workspace .memory-toolbar {
+  gap: 8px;
+  margin-bottom: 0;
+  padding-bottom: 12px;
+  border-bottom: 0;
+}
+.workspace .memory-toolbar:has(.sort-field[hidden] > select):has(#add-sample[hidden]) {
+  display: none;
+}
+.memory-toolbar #add-sample {
+  margin-inline-start: auto;
+}
+.memory-toolbar select {
+  padding-inline: 9px;
+}
+.workspace .composer-disclosure {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  margin: 0;
+}
+.workspace .composer-disclosure > summary {
+  width: fit-content;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  margin-bottom: 12px;
+  font-weight: 650;
+  line-height: 1.45;
+  min-height: 44px;
+  padding: 12px 14px;
+}
+.workspace .composer-disclosure[open] {
+  margin-bottom: 16px;
+}
+.workspace .composer-disclosure .api-composer {
+  padding-inline: 0;
+}
+.workspace .trip-card {
+  margin: 0;
+  padding: 16px 0 12px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.trip-entry-meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.trip-card .trip-entry-meta time,
+.trip-source {
+  margin: 0;
+  font-size: 12px;
+}
+.trip-source {
+  color: var(--muted);
+}
+.workspace .trip-card h3 {
+  margin: 4px 0 12px;
+  text-wrap: pretty;
+}
+.workspace .trip-cover {
+  margin: 0 0 12px;
+}
+.workspace .cover-button {
+  border-radius: 4px;
+  overflow: hidden;
+}
+.workspace .cover-button img {
+  aspect-ratio: 16 / 10;
+}
+.workspace .trip-cover figcaption {
+  margin: 6px 0 0;
+}
+.workspace .trip-prose {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+.workspace .trip-card .card-actions {
+  border: 0;
+  padding-top: 0;
+  margin-top: 8px;
+  gap: 4px 8px;
+}
+.workspace .trip-card .text-button {
+  border-radius: 6px;
+}
+.workspace .trip-card .ai-action {
+  background: transparent;
+}
+.workspace .empty {
+  border-top: 1px solid var(--line);
+  padding: 16px 2px;
+}
+
+@media (max-width: 850px) {
+  .workspace .catalogue-intro {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .workspace .catalogue-intro h1 {
+    margin: 0;
+  }
+  .workspace .list-heading:not(:has([hidden])) {
+    display: flex;
+  }
+  .workspace .city-list {
+    margin-top: 0;
+  }
+  .workspace #trip-list {
+    gap: 8px 20px;
+  }
+  .workspace .city-details {
+    min-height: 44px;
+  }
+  .workspace #back-map {
+    margin: 0 0 0 auto;
+  }
+  .workspace .map-panel {
+    min-height: 0;
+  }
+  .workspace .map-wrap,
+  .workspace #map {
+    height: 280px;
+    min-height: 280px;
+  }
+  .map-bottom {
+    padding: 2px 16px 12px;
+  }
+  .map-selection {
+    gap: 0 12px;
+  }
+  .jump-memories:not([hidden]) {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: var(--accent-ink);
+  }
+  #city-name {
+    scroll-margin-top: 120px;
+  }
+}
+
+@media (max-width: 540px) {
+  .workspace .catalogue-intro h1 {
+    font-size: 23px;
+  }
+  .workspace .city-button {
+    flex-basis: clamp(106px, 30vw, 132px);
+    padding-inline: 8px;
+  }
+  .workspace .catalogue-controls {
+    padding-top: 10px;
+  }
+  .map-heading {
+    padding-top: 10px;
+  }
+  .workspace .map-controls,
+  .workspace.streets-active .map-controls,
+  .workspace.google-active .map-controls {
+    flex-direction: row;
+    gap: 4px;
+  }
+  .workspace .map-controls #focus-city {
+    margin: 0;
+  }
+  .workspace .memory-panel,
+  .album-view .workspace .memory-panel {
+    padding-top: 16px;
+  }
+  .workspace .selected-heading h2 {
+    font-size: clamp(30px, 9vw, 38px);
+  }
+}
