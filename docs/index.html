@@ -16,7 +16,8 @@
       <a class="wordmark" href="#top" aria-label="Travel Memory Map, back to top"><span class="pin" aria-hidden="true">✦</span><span>Travel Memory <em>Map</em></span></a>
       <nav aria-label="Main navigation">
         <a href="#experience">Experience</a>
-        <a href="#demo">Demo</a>
+        <a href="./play/app/?mode=demo&amp;map=local">Try demo</a>
+        <a href="#demo">Video</a>
         <a href="#run">Run it</a>
         <a class="nav-repo" href="https://github.com/ThomasLin070217/AILT9019-Group21">GitHub <span aria-hidden="true">↗</span></a>
       </nav>
@@ -29,7 +30,7 @@
         <p class="eyebrow"><span class="dot"></span> AILT9019 · GROUP 21 · WORKING PROJECT</p>
         <h1>Let the places<br>you've been <i>stay.</i></h1>
         <p class="hero-lead">A travel album that lights a city when you save a trip. Return to the same place, add another card, and watch your map grow with your memories.</p>
-        <div class="hero-actions"><a class="button solid" href="#demo">Watch the real workflow <span aria-hidden="true">↘</span></a><a class="button outline" href="#run">Run it locally</a></div>
+        <div class="hero-actions"><a class="button solid" href="./play/app/?mode=demo&amp;map=local">Try the interactive demo <span aria-hidden="true">↗</span></a><a class="button outline" href="#demo">Watch the real AI workflow</a></div>
         <p class="hero-fact">19 supported cities across Mainland China, Hong Kong, Macau, Taiwan and Japan · Local storage by default</p>
       </div>
       <div class="hero-visual">
@@ -63,6 +64,8 @@
     <section class="demo-section" id="demo" aria-labelledby="demo-title">
       <div class="wrap"><div class="section-head inverted"><p class="eyebrow">REAL SYSTEM DEMONSTRATION</p><h2 id="demo-title">From a city to two saved memories.</h2><p>Recorded on 14 November 2026 from an isolated local backend with real Qwen calls. Synthetic inputs show draft generation, explicit save, persistence and a photo–note conflict that requires clarification.</p></div><div class="demo-grid"><div class="video-frame"><video controls playsinline preload="metadata"  aria-label="Real Qwen draft and conflict-clarification demo with captions"><source src="./assets/real-ai-demo.mp4" type="video/mp4">Your browser cannot play MP4. <a href="./assets/real-ai-demo.mp4">Download the recording</a>.</video></div><ol class="demo-steps"><li><span>01</span>Choose Osaka, save notes and upload a synthetic photo.</li><li><span>02</span>Confirm the current-trip disclosure; call real Qwen.</li><li><span>03</span>Edit the generated draft, explicitly save and reload.</li><li><span>04</span>Add a second trip with conflicting photo and notes.</li><li><span>05</span>Receive clarification; saved facts remain unchanged.</li></ol></div><p class="video-note">71-second assistant-operated browser capture at original elapsed speed, with English captions; low capture frame rate, no substituted responses. Human quality ratings remain pending. <a href="https://github.com/ThomasLin070217/AILT9019-Group21/blob/main/tests/evidence/2026-11-14-final-demo/RESULTS.md">Timings, cloud outputs and limits ↗</a> · <a href="./assets/workflow.webm">Earlier no-key demo (2 November)</a></p></div>
     </section>
+
+    <section class="section wrap" id="try-online"><h2>Try it in your browser.</h2><p>Explore 19 cities, open sample photo cards, edit a memory and add another fictional visit to brighten its city. Changes stay in this browser; no login or API key is needed.</p><p><a class="button solid" href="./play/app/?mode=demo&amp;map=local">Open interactive demo ↗</a></p><p>This is a sample-data demo. Photo uploads and live AI are available in the installed backend, not on this static website. Please use fictional text. The video above demonstrates the real AI workflow.</p></section>
 
     <section class="section wrap run-section" id="run" aria-labelledby="run-title"><div class="run-copy"><p class="eyebrow">TRY IT YOURSELF</p><h2 id="run-title">Run the album<br>on your computer.</h2><p>Python 3.10+ is the only runtime requirement for the core app. The bundled map works without a map key, AI key or account.</p><a class="text-link" href="https://github.com/ThomasLin070217/AILT9019-Group21/blob/main/docs/QUICK_START.md">Full quick start and Windows notes <span aria-hidden="true">↗</span></a></div><div class="terminal" role="region" aria-label="Local setup commands"><div class="terminal-bar"><span></span><span></span><span></span><small>terminal · repository root</small></div><pre><code>git clone https://github.com/ThomasLin070217/AILT9019-Group21.git
 cd AILT9019-Group21
