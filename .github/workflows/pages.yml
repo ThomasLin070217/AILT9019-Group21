@@ -1,0 +1,47 @@
+name: Deploy project demo
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main' && vars.AILT_PAGES_ACTIONS == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Assemble public site
+        env:
+          GOOGLE_MAPS_BROWSER_KEY: ${{ secrets.GOOGLE_MAPS_BROWSER_KEY }}
+        run: |
+          python3 scripts/build_public_demo.py --check
+          cp -R docs "$RUNNER_TEMP/site"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          # The browser must be able to read this restricted Maps key. Keep it out of Git.
+          key = os.environ.get("GOOGLE_MAPS_BROWSER_KEY", "").strip()
+          config = {"apiKey": key} if key else {}
+          path = Path(os.environ["RUNNER_TEMP"]) / "site/play/app/google-maps-config.json"
+          path.write_text(json.dumps(config) + "\n", encoding="utf-8")
+          PY
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+      - uses: actions/deploy-pages@v4
+        id: deploy

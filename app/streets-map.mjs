@@ -1,3 +1,6 @@
+import {visitTier} from './domain.mjs';
+import {REGION_COLORS,REGION_OPACITY} from './visit-colors.mjs';
+
 /** Optional geographic basemap; trip records and city geometry stay in this app. */
 const STYLE='https://tiles.openfreemap.org/styles/positron';
 let sdkPromise;
@@ -25,7 +28,7 @@ export async function createStreetsMap({container,regionData,onSelect,onNearby,o
  const markers=new Map();
  const fail=()=>{if(!failed&&!disposed){failed=true;onFailure();}};
  const areas=()=>({type:'FeatureCollection',features:regionData.features.map(feature=>({
-  ...feature,properties:{...feature.properties,visible:Number(shown.has(feature.properties.city_id)),tier:Math.min(counts.get(feature.properties.city_id)||0,4),selected:Number(feature.properties.city_id===selected)}
+  ...feature,properties:{...feature.properties,visible:Number(shown.has(feature.properties.city_id)),tier:visitTier(counts.get(feature.properties.city_id)||0),selected:Number(feature.properties.city_id===selected)}
  }))});
  const fit=()=>{if(!current.length)return;const bounds=new lib.LngLatBounds();for(const city of current)bounds.extend([city.longitude,city.latitude]);map.fitBounds(bounds,{padding:50,maxZoom:9,duration:0});};
  const near=city=>{const p=map.project([city.longitude,city.latitude]);return current.filter(other=>{const q=map.project([other.longitude,other.latitude]);return Math.hypot(p.x-q.x,p.y-q.y)<38;});};
@@ -36,11 +39,11 @@ export async function createStreetsMap({container,regionData,onSelect,onNearby,o
    loaded=true;map.addSource('city-areas',{type:'geojson',data:areas()});
    const before=map.getStyle().layers.find(layer=>layer.type==='symbol')?.id;
    map.addLayer({id:'city-visit-fill',type:'fill',source:'city-areas',filter:['==',['get','visible'],1],paint:{
-    'fill-color':['match',['get','tier'],1,'#71946a',2,'#cb754d',3,'#eca33f',4,'#eca33f','#ad4a29'],
-    'fill-opacity':['case',['==',['get','tier'],0],['case',['==',['get','selected'],1],.12,0],['interpolate',['linear'],['get','tier'],1,.3,4,.55]]
+    'fill-color':['match',['get','tier'],1,REGION_COLORS[1],2,REGION_COLORS[2],3,REGION_COLORS[3],REGION_COLORS[0]],
+    'fill-opacity':['case',['==',['get','tier'],0],['case',['==',['get','selected'],1],.12,0],['match',['get','tier'],1,REGION_OPACITY[1],2,REGION_OPACITY[2],3,REGION_OPACITY[3],0]]
    }},before);
    map.addLayer({id:'city-outline',type:'line',source:'city-areas',filter:['==',['get','visible'],1],paint:{
-    'line-color':['case',['==',['get','selected'],1],'#9b3d23',['>', ['get','tier'],0],'#4f7354','#7d9794'],
+    'line-color':['case',['==',['get','selected'],1],'#126738',['>', ['get','tier'],0],'#4f7354','#7d9794'],
     'line-opacity':['case',['==',['get','selected'],1],1,['>', ['get','tier'],0],.9,.75],
     'line-width':['case',['==',['get','selected'],1],2.4,1.2]
    }},before);

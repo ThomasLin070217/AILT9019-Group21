@@ -3,11 +3,12 @@ import {DemoRepository,ApiRepository,getJSON,DraftStore,photoURL} from './reposi
 import {createGoogleMap} from './google-map.mjs';
 import {createStreetsMap} from './streets-map.mjs';
 import {regionPath,viewForRegion} from './city-regions.mjs';
+import {pulseVisit} from './visit-colors.mjs';
 const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
 const mode=new URLSearchParams(location.search).get('mode')==='api'?'api':'demo';
 $('album-mode').textContent=mode==='api'?'Local album':'Sample album';
 let cities=[],trips=[],selected='jp-osaka',repository,view=initialView(),busy=false,ready=false,regionData;
-let liveMap=null,mapStarted=false,mapFailed=false;
+let liveMap=null,mapStarted=false;
 const regionElements=new Map(),regionFeatures=new Map();
 let draftStorage;try{draftStorage=sessionStorage;}catch{}
 const drafts=new DraftStore(draftStorage,text=>message(text));
@@ -243,7 +244,7 @@ function makeTripComposer(city){
  const remember=()=>saveComposerDraft(city.id,{date:date.value,title:title.value,notes:notes.value});
  date.addEventListener('change',remember);title.addEventListener('input',remember);notes.addEventListener('input',remember);
  form.append(formField('Date',date),formField('Title',title),formField('Notes',notes),save,node('p','Saved to the local backend on this computer. Add photos after saving. Your unsaved text stays in this tab.','form-hint'));
- form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;const hadVisit=Boolean(countVisits(trips).get(city.id));let recovered=false;mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});recovered=trips.some(row=>row.id===created.id);return [...trips.filter(row=>row.id!==created.id),created];},()=>recovered?'Saved trip recovered. Visit count unchanged.':`${city.name} ${hadVisit?'brightened':'lit up'}. Add photos or write a memory.`,()=>{clearComposerDraft(city.id);queueMicrotask(()=>focusCity(city.id));});});
+ form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;const hadVisit=Boolean(countVisits(trips).get(city.id));let recovered=false;mutate(async()=>{const created=await repository.create({city_id:city.id,trip_date:date.value||null,title:title.value.trim(),notes:notes.value.trim()});recovered=trips.some(row=>row.id===created.id);return [...trips.filter(row=>row.id!==created.id),created];},()=>recovered?'Saved trip recovered. Visit count unchanged.':`${city.name} ${hadVisit?'brightened':'lit up'}. Add photos or write a memory.`,()=>{clearComposerDraft(city.id);queueMicrotask(()=>{if(selected===city.id){focusCity(city.id);lightCity(city.id);}});});});
  return form;
 }
 function makeApiActions(card,trip){
@@ -360,32 +361,100 @@ async function load(){
  finally{$('loading').hidden=true;setBusy(false);}
  if(ready)startOnlineMap();
 }
-async function startOnlineMap(){
+async function googleConfig(path) {
+ try {
+  const result=await getJSON(path);
+  return typeof result?.apiKey==='string'&&result.apiKey.trim()?result:null;
+ } catch {
+  return null;
+ }
+}
+
+async function startOnlineMap() {
  const choice=new URLSearchParams(location.search).get('map');
- if(mapStarted||choice==='local')return;
- // Do not load third-party tiles while the user is only browsing the album.
- if(document.body.classList.contains('album-view'))return;
+ if(mapStarted||choice==='local'||document.body.classList.contains('album-view'))return;
  mapStarted=true;
- const useGoogle=choice==='google',container=useGoogle?$('google-map'):$('streets-map');
- const fallback=()=>{
-  mapFailed=true;liveMap?.destroy();liveMap=null;document.body.classList.remove('google-active','streets-active');
-  container.setAttribute('aria-hidden','true');container.inert=true;
-  $('map-provider').textContent='East Asia · local map';$('google-credit').hidden=true;$('streets-credit').hidden=true;$('local-credit').hidden=false;
-  $('map-notice').hidden=false;$('map-notice').textContent='Online map unavailable. Showing the local city map; reload to retry.';
-  if(ready){applyView();renderMarkers(visibleCities(),countVisits(trips));}
+
+ const localFallback=()=>{
+  $('map-provider').textContent='East Asia · local map';
+  $('map-notice').hidden=false;
+  $('map-notice').textContent='Online map unavailable. Showing the local city map.';
+  applyView();
  };
- try{
-  let config;
-  if(useGoogle){const response=await fetch('/api/map-config');if(!response.ok)throw new Error('Google settings unavailable');config=await response.json();if(!config.apiKey)throw new Error('Google key missing');}
-  $('map-provider').textContent=useGoogle?'Connecting to Google Maps…':'Loading city map…';
-  const options={container,config,regionData,onSelect:choose,onNearby:showNearby,onFailure:fallback,onZoom:zoom=>{$('zoom-in').disabled=zoom>=18;$('zoom-out').disabled=zoom<=3;}};
-  const candidate=await(useGoogle?createGoogleMap(options):createStreetsMap(options));
-  if(mapFailed){candidate.destroy();return;}
-  liveMap=candidate;renderMarkers(visibleCities(),countVisits(trips));await candidate.ready;
-  if(mapFailed)return;
-  document.body.classList.add(useGoogle?'google-active':'streets-active');container.setAttribute('aria-hidden','false');container.inert=false;
-  $('map-provider').textContent=useGoogle?'Google Maps':'City map · OpenFreeMap';$('google-credit').hidden=!useGoogle;$('streets-credit').hidden=useGoogle;$('local-credit').hidden=true;
- }catch(error){if(!mapFailed){fallback();$('map-notice').textContent=`Online map unavailable (${error.message}). Showing the local city map.`;}}
+
+ async function mount(provider,config) {
+  const useGoogle=provider==='google';
+  const container=$(useGoogle?'google-map':'streets-map');
+  const activeClass=useGoogle?'google-active':'streets-active';
+  let candidate,failed=false,active=false;
+  const cleanup=()=>{
+   if(liveMap===candidate)liveMap=null;
+   candidate?.destroy();
+   document.body.classList.remove(activeClass);
+   container.setAttribute('aria-hidden','true');
+   container.inert=true;
+   $('google-credit').hidden=true;
+   $('streets-credit').hidden=true;
+   $('local-credit').hidden=false;
+  };
+  const onFailure=()=>{
+   if(failed)return;
+   failed=true;
+   if(active){cleanup();void fallback(provider);}
+  };
+  try {
+   $('map-provider').textContent=useGoogle?'Connecting to Google Maps…':'Loading city map…';
+   const options={container,config,regionData,onSelect:choose,onNearby:showNearby,onFailure,
+    onZoom:zoom=>{$('zoom-in').disabled=zoom>=18;$('zoom-out').disabled=zoom<=3;}};
+   candidate=await (useGoogle?createGoogleMap(options):createStreetsMap(options));
+   liveMap=candidate;
+   renderMarkers(visibleCities(),countVisits(trips));
+   await candidate.ready;
+   if(failed)throw new Error('Map provider unavailable');
+   active=true;
+   document.body.classList.add(activeClass);
+   container.setAttribute('aria-hidden','false');
+   container.inert=false;
+   $('map-provider').textContent=useGoogle?'Google Maps':'City map · OpenFreeMap';
+   $('google-credit').hidden=!useGoogle;
+   $('streets-credit').hidden=useGoogle;
+   $('local-credit').hidden=true;
+   return true;
+  } catch {
+   failed=true;
+   cleanup();
+   return false;
+  }
+ }
+ async function fallback(provider) {
+  if(provider==='google'&&await mount('streets')){
+   $('map-notice').hidden=false;
+   $('map-notice').textContent='Google Maps unavailable. Showing OpenFreeMap.';
+  } else {
+   localFallback();
+  }
+ }
+
+ const config=choice==='google'
+  ? await googleConfig('./google-maps-config.json')||await googleConfig('/api/map-config')
+  : mode==='demo'&&choice!=='streets'?await googleConfig('./google-maps-config.json'):null;
+ if(config){
+  if(!await mount('google',config))await fallback('google');
+ } else if(choice==='google'){
+  await fallback('google');
+ } else if(!await mount('streets')){
+  localFallback();
+ }
+}
+
+function lightCity(id) {
+ const selector=`[data-city-id="${CSS.escape(id)}"]`;
+ const pin=document.body.classList.contains('google-active')
+  ? $('google-map').querySelector(`${selector} .google-visit-count`)
+  : document.body.classList.contains('streets-active')
+   ? $('streets-map').querySelector(`${selector} .street-pin-count`)
+   : $('markers').querySelector(`${selector} .pin`);
+ pulseVisit(pin);
 }
 $('trip-sort').addEventListener('change',()=>{if(ready)renderMemories();});
 $('clear-filters').addEventListener('click',()=>{$('search').value='';$('region').value='';$('visited').checked=false;render();$('search').focus();});
@@ -393,7 +462,7 @@ for(const id of ['search','region','visited'])$(id).addEventListener(id==='searc
 $('zoom-in').addEventListener('click',()=>{if(liveMap){liveMap.zoom(1);return;}view=zoomView(view,.65);applyView();});$('zoom-out').addEventListener('click',()=>{if(liveMap){liveMap.zoom(-1);return;}view=zoomView(view,1/.65);applyView();});$('fit').addEventListener('click',()=>{if(liveMap){liveMap.fit();return;}view=initialView();applyView();});
 $('focus-city').addEventListener('click',()=>{if(selected)focusCity(selected);});
 
-$('add-sample').addEventListener('click',()=>{if(selected){const id=selected,city=cities.find(row=>row.id===id),hadVisit=Boolean(countVisits(trips).get(id));mutate(()=>repository.add(id),`${city.name} ${hadVisit?'brightened':'lit up'} in this sample album.`,()=>queueMicrotask(()=>focusCity(id)));}});
+$('add-sample').addEventListener('click',()=>{if(selected){const id=selected,city=cities.find(row=>row.id===id),hadVisit=Boolean(countVisits(trips).get(id));mutate(()=>repository.add(id),`${city.name} ${hadVisit?'brightened':'lit up'} in this sample album.`,()=>queueMicrotask(()=>{if(selected===id){focusCity(id);lightCity(id);}}));}});
 $('reset').addEventListener('click',()=>{if(confirm('Replace your sample edits with the original fictional trips?'))mutate(()=>repository.reset(),'Original sample album restored.',()=>drafts.clear());});
 $('recover').addEventListener('click',async()=>{if(confirm('Replace damaged demo records with the original samples?')){try{await repository.reset();drafts.clear();await load();}catch(error){showError(error);}}});
 $('retry').addEventListener('click',load);$('refresh').addEventListener('click',load);

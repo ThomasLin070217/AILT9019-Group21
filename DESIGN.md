@@ -14,9 +14,9 @@ colors:
   selected-city: "#f5e8dd"
   selected-city-ink: "#8c3c20"
   tier-0: "#829b9b"
-  tier-1: "#516442"
-  tier-2: "#9f502f"
-  tier-3: "#eea348"
+  tier-1: "#16643b"
+  tier-2: "#148347"
+  tier-3: "#75de36"
 typography:
   display:
     fontFamily: "Fraunces,Georgia,serif"
@@ -135,7 +135,7 @@ The palette places rust selection against white controls, warm paper and pale bl
 
 - **Pale water** (`sea`) establishes the map field and missing-photo fallback.
 - **Forest status** (`green`) is reserved for the small status message; it is not the dominant brand accent.
-- **Visit tiers** (`tier-0` through `tier-3`) move from slate through olive and rust to amber for no visits, one visit, two–three visits and four or more. They are data colours, not alternative button themes.
+- **Visit tiers** (`tier-0` through `tier-3`) move from slate through deep green and emerald to bright green for no visits, one visit, two–three visits and four or more. They are data colours, not alternative button themes.
 
 ### Neutral
 
@@ -219,7 +219,7 @@ Read each entry in order from date and sample provenance to title, optional cove
 
 The offline map uses local Natural Earth SVG geometry and Mercator coordinates. With a configured key, Google Maps supplies the live base map, attribution and native map gestures; custom advanced markers inherit the same count/selection palette and link to the same album. The application preserves Google attribution, exposes provider/loading/fallback status and retains the local map on SDK failure. Marker brightness is derived from saved trip IDs; labels and the written legend supply the meaning. Markers support keyboard activation, retain focus through selection and have large invisible hit areas. Close marker groups offer explicit city choices. Zoom and fit controls are fixed-size white buttons. Panning is enabled only after zoom so the default map permits normal mobile page scrolling.
 
-The only animated state is marker fill (`180ms ease-out`); reduced-motion preference removes it. Card-cover hover uses a small brightness change without added animation.
+On successful save a city marker pulses once for 440ms. The fill uses green at three intensities and remains visible after the pulse. Reduced-motion preference skips the pulse. Card-cover hover uses a small brightness change without added animation.
 
 ### Photo Viewer and Feedback
 

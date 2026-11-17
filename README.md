@@ -6,7 +6,7 @@ The integrated product is on `main`. It uses FastAPI, SQLite and a browser inter
 
 ## Try the public interactive demo
 
-[Open the browser demo](https://thomaslin070217.github.io/AILT9019-Group21/play/app/?mode=demo&map=local): explore cities, open sample photo cards, edit fictional memories, add repeat visits and reload browser-local changes. No installation or API key is required. Photo uploads and cloud AI require the local backend below; they are not hosted on GitHub Pages.
+[Open the browser demo](https://thomaslin070217.github.io/AILT9019-Group21/play/app/?mode=demo): explore cities, open sample photo cards, edit fictional memories, add repeat visits and reload browser-local changes. No installation or API key is required. Photo uploads and cloud AI require the local backend below; they are not hosted on GitHub Pages.
 
 The Pages site uses `docs/`. After changing the UI or public sample assets, run `python3 scripts/build_public_demo.py`, then `python3 scripts/build_public_demo.py --check`. The allowlist excludes personal fixtures, backend state and credentials.
 
