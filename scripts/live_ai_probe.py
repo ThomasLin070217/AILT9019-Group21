@@ -148,7 +148,7 @@ def run_case(case_id: str, settings: Settings, output: Path) -> dict:
     generator = AuditedGenerator(settings, output / case_id)
     with tempfile.TemporaryDirectory(prefix='tmm-live-case-') as temp:
         local = replace(settings, db_path=Path(temp)/'travel.db', media_dir=Path(temp)/'media', tmp_dir=Path(temp)/'tmp')
-        with TestClient(create_app(settings=local, generator=generator)) as client:
+        with TestClient(create_app(settings=local, generator=generator), base_url=f"http://127.0.0.1:{local.port}") as client:
             client.post('/api/trips', json={'city_id': 'jp-tokyo', 'notes': 'OTHER-TRIP-CANARY-DO-NOT-SEND'}).raise_for_status()
             created = client.post('/api/trips', json={'city_id': case['input']['city_id'], 'notes': notes})
             created.raise_for_status()

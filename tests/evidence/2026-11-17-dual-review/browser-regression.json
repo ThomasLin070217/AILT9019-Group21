@@ -1,0 +1,20 @@
+{
+  "pending": {
+    "disabled": true,
+    "allLocked": true,
+    "busy": "true"
+  },
+  "switchedLocked": true,
+  "draftProtection": {
+    "text": "Fictional test only.",
+    "noticeOpened": false,
+    "message": "Save or discard your unsaved memory changes before requesting AI. Your draft has been kept."
+  },
+  "restored": {
+    "warning": "Synthetic warning: review before saving.",
+    "save": "Save reviewed draft",
+    "text": "Fictional test only."
+  },
+  "aiTest": "Synthetic response only; no cloud request made.",
+  "measurement_note": "The text field in draftProtection/restored selected the notes textarea, not the memory textarea; use editor-regression.json and the UI snapshot for memory text assertions."
+}

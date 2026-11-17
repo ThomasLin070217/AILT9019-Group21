@@ -1,0 +1,55 @@
+{
+  "caption": {
+    "captionHeight": 98.390625,
+    "captionTop": 501.609375,
+    "imageBottom": 493,
+    "gap": 8.609375
+  },
+  "measurements": [
+    {
+      "width": 900,
+      "height": 600,
+      "scrollWidth": 900,
+      "bodyHeight": 684,
+      "mapWidth": 350,
+      "inert": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "bodyHeight": 768,
+      "mapWidth": 474,
+      "inert": false
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "scrollWidth": 1280,
+      "bodyHeight": 720,
+      "mapWidth": 608,
+      "inert": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "bodyHeight": 900,
+      "mapWidth": 768,
+      "inert": false
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "bodyHeight": 1080,
+      "mapWidth": 1172,
+      "inert": false
+    }
+  ],
+  "perf": {
+    "samples": 40,
+    "p95ms": 1.6000000014901161,
+    "maxMs": 3.099999997764826
+  }
+}

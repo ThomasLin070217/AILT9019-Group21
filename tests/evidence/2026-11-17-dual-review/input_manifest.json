@@ -1,0 +1,29 @@
+{
+  "source_commit": "635b459409f94a209d37cf2c2ccf18dd64399b57",
+  "files": {
+    "app/index.html": "0c49a1ece767adc338a791e8db68a7f9ebb825461f2a995dfb1d5c9e416e186e",
+    "app/main.mjs": "b613daedf7c142a2068603e3de6c69381429f3a12c08189107db823f4ff3b3b1",
+    "app/styles.css": "05a197c05866e5cc5d8db829634982044feeb39edacc364cb6cb992835c465fa",
+    "app/photo-gallery.mjs": "88e0557aca3e34ddf0d871b3cb1ba0069b6fe5a44717361d98844b3d0d5bfd3c",
+    "app/repository.mjs": "ae69e94d76f0c77c33921f75df71d014755777eda38718d218eb96f22633ebdb",
+    "app/domain.mjs": "2d746e2736179a8483137b2d83acd6ffd4525035ec5a9f8fc448f98cdccce297",
+    "backend/security.py": "59a10cee65727610f1608d1c428860492b9a6326ec6ac95ecded5da1ad6a3461",
+    "backend/app.py": "838300d1c43ad13a7b6a2e33cc45be53d903acb937dfc07c5df1aa2a9895a450",
+    "backend/static.py": "7a71d36863b9601253e260477236ed73d5f0590e89a4e4d2505081a406150169",
+    "backend/models.py": "9305cf79682d09b773d7ce8ef936ae8fd00fc7c99ca6344f965c705e2d1c2400",
+    "backend/routers/trips.py": "7c699e43cb9dd14ef03a9a0428dd19dcfcca57e49a8450ae8c800c37c348c404",
+    "backend/routers/photos.py": "e89ac35ade8d1e78db7f848106cd0b7bdcfb825d29c47d843366b4ec1c14cfbe",
+    "backend/routers/memory.py": "35f0d62d1f44e93347e2d2b38808ba3b271deb3b98750a9fc8e5c46ba1295564",
+    "backend/storage/trips.py": "11480463bfb564be0d342805efbd3266f540585fbe3a70d17adf2478678b448a",
+    "backend/storage/files.py": "b2bd92c225bfc6d916c424d7067f5b8e1971ae663e5f8deef7e57e305f8e5313"
+  },
+  "input_sha256": "a90dd28a90c36c38e918f9759dc2a6b7d24064e98125d130e7e446c45a9c2b64",
+  "characters": 132168,
+  "memory_isolation": "fresh independent system/user messages; no prior review/history; same allowlisted code packet",
+  "excluded": [
+    "credentials",
+    "personal photos",
+    "conversation",
+    "local runtime data"
+  ]
+}

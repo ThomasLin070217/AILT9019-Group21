@@ -1,0 +1,11 @@
+{
+  "brokenPhotoRecovery": {
+    "inert": false
+  },
+  "protectedDraft": {
+    "text": "Human draft must survive",
+    "message": "Save or discard your unsaved memory changes before requesting AI. Your draft has been kept."
+  },
+  "pendingPatchAllControlsDisabled": true,
+  "saved": "Human draft must survive"
+}

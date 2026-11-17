@@ -24,12 +24,27 @@ export async function showPhotoGallery(items,index,trigger){
  ]);
  // Another caller may have completed loading while this one was waiting.
  if(activeGallery)return;
+ // Reserve the measured caption height, including wrapped long titles and alt text.
+ const captionHeights=new Map();
+ function captionPadding(viewport){
+  const key=`${viewport.x}:${viewport.y}`;
+  if(!captionHeights.has(key)){
+   const probe=document.createElement('div');probe.className='pswp__memory-caption';
+   Object.assign(probe.style,{position:'fixed',width:`${viewport.x}px`,visibility:'hidden',pointerEvents:'none'});
+   probe.setAttribute('aria-hidden','true');document.body.append(probe);
+   let height=0;
+   try{for(const item of items){probe.textContent=item.caption||'';height=Math.max(height,probe.getBoundingClientRect().height);}}
+   finally{probe.remove();}
+   captionHeights.set(key,Math.ceil(height)+8);
+  }
+  return {top:64,bottom:captionHeights.get(key),left:16,right:16};
+ }
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const gallery=new PhotoSwipe({
   dataSource:items.map((item,i)=>({...item,...sizes[i]})),index,loop:false,
   bgOpacity:1,showHideAnimationType:reduced?'none':'fade',
   showAnimationDuration:180,hideAnimationDuration:140,zoomAnimationDuration:reduced?0:180,
-  paddingFn:viewport=>({top:64,bottom:viewport.x<600?130:88,left:16,right:16}),
+  paddingFn:captionPadding,
   closeTitle:'Close photos',zoomTitle:'Zoom photo',arrowPrevTitle:'Previous photo',arrowNextTitle:'Next photo',
   errorMsg:'Photo unavailable. Close the viewer to return to your saved memories.',
   trapFocus:true,returnFocus:true

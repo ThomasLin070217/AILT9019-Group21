@@ -30,7 +30,12 @@ function message(text){$('status').textContent=text;}
 function showError(error){$('error').hidden=false;$('retry').hidden=false;$('error-text').textContent=mode==='api'?`Could not load backend records. ${error.message} Start the backend and retry. Demo data has not been substituted.`:`Could not read or save this browser's sample album. ${error.message} Retry, or restore samples if the saved demo is damaged.`;$('recover').hidden=mode!=='demo'||!repository;}
 function showActionError(error,prefix='Could not complete this change.'){$('error').hidden=false;$('retry').hidden=true;$('error-text').textContent=`${prefix} ${error.message}`;$('recover').hidden=true;}
 function clearError(){$('error').hidden=true;$('error-text').textContent='';}
-function setBusy(value){busy=value;for(const id of ['add-sample','reset','refresh','retry','recover'])$(id).disabled=value;$('workspace').setAttribute('aria-busy',String(value));}
+function syncBusyControls(){
+ for(const id of ['add-sample','reset','refresh','retry','recover'])$(id).disabled=busy;
+ $('trip-sort').disabled=busy||!selected;
+ for(const control of $('trip-list').querySelectorAll('input,textarea,select,button'))control.disabled=busy;
+}
+function setBusy(value){busy=value;syncBusyControls();$('workspace').setAttribute('aria-busy',String(value));}
 async function mutate(action,success,afterSave=()=>{}){if(busy)return;setBusy(true);clearError();try{trips=await action();afterSave();render();message(typeof success==='function'?success():success);}catch(error){showActionError(error);}finally{setBusy(false);}}
 function filters(){return {query:$('search').value,region:$('region').value,visitedOnly:$('visited').checked};}
 function choose(id,keyboard=false){
@@ -155,6 +160,7 @@ function renderMemories(){
   $('trip-list').append(card);if(mode==='demo'&&drafts.has(trip.id))editCard(card,trip,false);
   if(mode==='api'&&apiEditorDraft(trip.id))openApiEditor(card,trip,{focus:false});
  }
+ syncBusyControls();
 }
 function editCard(card,trip,focus=false){
  const existing=card.querySelector('form');if(existing){if(focus)existing.querySelector('textarea').focus();return;}
@@ -244,23 +250,30 @@ function openApiEditor(card,trip,initial={}){
  const existing=card.querySelector('form.memory-editor');if(existing)existing.remove();
  if(initial.notice)clearApiEditorDraft(trip.id);
  const stored=initial.notice?null:apiEditorDraft(trip.id);
+ const reviewNotice=initial.notice||stored?.notice||'';
  const form=node('form',undefined,'trip-form memory-editor');
  const title=node('input');title.type='text';title.maxLength=200;title.value=initial.title??stored?.title??trip.title??'';
  const notes=node('textarea');notes.rows=2;notes.maxLength=5000;notes.value=initial.notes??stored?.notes??trip.notes??'';
  const text=node('textarea');text.rows=6;text.maxLength=5000;text.value=initial.text??stored?.text??trip.memory_text??'';
- const remember=()=>saveApiEditorDraft(trip.id,{title:title.value,notes:notes.value,text:text.value});
+ const remember=()=>saveApiEditorDraft(trip.id,{title:title.value,notes:notes.value,text:text.value,notice:reviewNotice});
  [title,notes,text].forEach(control=>control.addEventListener('input',remember));
  if(initial.notice)remember();
- const save=node('button',initial.notice?'Save reviewed draft':'Save memory','primary');save.type='submit';
+ const save=node('button',reviewNotice?'Save reviewed draft':'Save memory','primary');save.type='submit';
  const cancel=node('button','Discard changes');cancel.type='button';
  cancel.addEventListener('click',()=>{if(confirm('Discard this unsaved draft?')){clearApiEditorDraft(trip.id);form.remove();card.querySelector('.api-actions button')?.focus({preventScroll:true});}});
- form.append(node('h4',initial.notice?'Review this memory':'Edit this memory'),formField('Title',title),formField('Notes',notes),formField('Memory text',text));
- if(initial.notice)form.append(node('p',initial.notice,'form-notice'));
+ form.append(node('h4',reviewNotice?'Review this memory':'Edit this memory'),formField('Title',title),formField('Notes',notes),formField('Memory text',text));
+ if(reviewNotice)form.append(node('p',reviewNotice,'form-notice'));
  form.append(save,cancel);
  form.addEventListener('submit',event=>{event.preventDefault();if(busy)return;mutate(async()=>{const updated=await repository.edit(trip.id,{title:title.value.trim(),notes:notes.value.trim(),memory_text:text.value});return trips.map(row=>row.id===updated.id?updated:row);},'Memory saved. Visit count unchanged.',()=>clearApiEditorDraft(trip.id));});
- card.append(form);if(initial.focus!==false)(initial.notice?text:title).focus({preventScroll:true});
+ card.append(form);syncBusyControls();if(initial.focus!==false)(initial.notice?text:title).focus({preventScroll:true});
+}
+function requireSavedMemory(trip){
+ if(!apiEditorDraft(trip.id))return true;
+ message('Save or discard your unsaved memory changes before requesting AI. Your draft has been kept.');
+ return false;
 }
 function openAiNotice(card,trip){
+ if(busy||!requireSavedMemory(trip))return;
  const existing=card.querySelector('.ai-notice');if(existing){existing.remove();return;}
  const notice=node('div',undefined,'ai-notice');
  const city=cities.find(item=>item.id===trip.city_id);
@@ -279,7 +292,7 @@ function openAiNotice(card,trip){
  const cancel=node('button','Cancel');cancel.type='button';
  cancel.addEventListener('click',()=>notice.remove());
  send.addEventListener('click',async()=>{
-  if(busy)return;
+  if(busy||!requireSavedMemory(trip))return;
   send.disabled=true;setBusy(true);clearError();message('Requesting an AI draft…');
   try{
    const result=await repository.requestMemory(trip.id,{confirmed:true});

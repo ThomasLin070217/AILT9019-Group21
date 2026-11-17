@@ -52,9 +52,9 @@ def test_health_never_exposes_paths_or_keys(client):
 
 
 def test_map_config_is_forbidden_from_a_non_local_host(client):
-    response = client.get("/api/map-config")
+    response = client.get("/api/map-config", headers={"Host": "untrusted.example:8019"})
     assert response.status_code == 403
-    assert response.json()["error"]["code"] == "forbidden_origin"
+    assert response.json()["error"]["code"] == "invalid_host"
 
 
 def test_map_config_is_available_on_the_local_preview_origin(tmp_path):
@@ -82,3 +82,40 @@ def test_media_directory_is_not_mounted(client, tmp_path):
     stray.write_bytes(b"not an image")
     response = client.get(f"/media/{stray.name}")
     assert response.status_code == 404
+
+
+def test_untrusted_host_cannot_read_or_change_records(client, make_trip):
+    trip = make_trip()
+    headers = {"Host": "untrusted.example:8019"}
+    assert client.get("/api/trips", headers=headers).status_code == 403
+    assert client.patch(f"/api/trips/{trip['id']}", json={"title": "changed"}, headers=headers).status_code == 403
+    assert client.get("/api/trips").json()[0]["title"] == trip["title"]
+
+
+def test_foreign_origin_cannot_upload_or_change_records(client, make_trip):
+    from conftest import jpeg_bytes
+    trip = make_trip()
+    for origin in ["https://evil.example", "null", "http://localhost:8019", "http://127.0.0.1:9999"]:
+        headers = {"Origin": origin}
+        assert client.get("/api/trips", headers=headers).status_code == 403
+        assert client.post(f"/api/trips/{trip['id']}/photos", files={"file": ("photo.jpg", jpeg_bytes(), "image/jpeg")}, headers=headers).status_code == 403
+    assert client.get("/api/trips").json()[0]["photos"] == []
+
+
+def test_same_origin_and_cli_requests_still_work(client, make_trip):
+    trip = make_trip()
+    response = client.patch(f"/api/trips/{trip['id']}", json={"title": "Edited"}, headers={"Origin": str(client.base_url).rstrip('/')})
+    assert response.status_code == 200
+    assert client.get("/api/trips").json()[0]["title"] == "Edited"
+
+
+def test_cross_site_mutation_without_origin_is_rejected(client, make_trip):
+    trip = make_trip()
+    assert client.delete(f"/api/trips/{trip['id']}", headers={"Sec-Fetch-Site": "cross-site"}).status_code == 403
+    assert len(client.get("/api/trips").json()) == 1
+
+
+def test_eval_exception_is_limited_to_explicit_google_app(client):
+    for path in ["/app/", "/app/?map=local", "/app/?map=openfreemap", "/api/health?map=google"]:
+        assert "'unsafe-eval'" not in client.get(path).headers["content-security-policy"]
+    assert "'unsafe-eval'" in client.get("/app/?map=google").headers["content-security-policy"]
