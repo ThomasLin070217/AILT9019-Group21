@@ -43,3 +43,6 @@ Under Thomas's instruction to finish directly actionable review items, Codex add
 ## 16 November 2026 · Thomas final review preparation
 
 Codex checked remote main, PRs/issues/comments and Pages deployment, consolidated the retained evidence, corrected stale recording-script counts, updated the agreed internal deadline to 17 November 23:59 HKT, and prepared a new five-page report/review bundle. It added a blank accessible human-review CSV, corrected bundle worksheet links and performed local artifact/link/hash/submission checks. New AI-authored review notes for Thomas's T02/T05 assignments are explicitly preliminary; they are not Thomas's human verdicts. No live cloud calls, teammate approvals, new human ratings, YouTube URLs or Moodle submission were made.
+## 17 November 2026 · Human rating collection
+
+Qingyang asked an assistant to read the retained final-v3 outputs and prepare the review CSV. The four verdicts recorded for T01, T02, S01 and S02 are Qingyang's own after reading each raw output; the assistant formatted the CSV rows and drafted wording, and set no verdict attributed to another reviewer. Rows for other named reviewers remain blank pending their own review. T03 remains untested because cloud-transfer permission was not granted. No Moodle submission was made.

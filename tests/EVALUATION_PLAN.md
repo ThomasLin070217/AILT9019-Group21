@@ -30,8 +30,10 @@ Each case must preserve its pre-labelled facts, introduce no unsupported factual
 
 | Case/run | Commit | Model/settings and prompt version | Raw-output evidence | Facts retained | No invention | Uncertainty handled | Reviewer verdicts | Final result |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| T01/T02/T04/T05/S01/S02 | `a95a108` | qwen3.8-flash; v3-city-attribution; settings/hashes in evidence | [Raw outputs](evidence/2026-11-14-live-ai/final-v3/) | Pending human review | Pending human review | Expected statuses observed | Pending two reviewers | Pending |
-| T03 | — | — | Not sent: cloud permission pending | — | — | — | — | Pending |
+| T01/T02/T04/T05/S01/S02 | `a95a108` | qwen3.8-flash; v3-city-attribution; settings/hashes in evidence | [Raw outputs](evidence/2026-11-14-live-ai/final-v3/) | Retained in T01/T02/S01/S02 (reviewed) | No unsupported claim found in those four | Stated in those four | T01/T02/S01/S02: 1 of 2 reviewers passed (Qingyang, 17 Nov); T04/T05: none recorded; second verdicts pending | 4 pass · 2 awaiting verdict · T03 untested |
+| T03 | — | — | Not sent: cloud permission pending | — | — | — | — | Untested (not assessable) |
+
+Human verdicts are recorded per reviewer in [HUMAN_REVIEW.csv](evidence/2026-11-14-human-review/HUMAN_REVIEW.csv). As of 17 November an independent verdict exists for T01, T02, S01 and S02 (all pass, Qingyang); T04 and T05 have no recorded verdict yet; T03 remains untested because cloud-transfer permission was not granted. Blank rows mean pending, not pass. Two reviewers per case is our internal plan, not a course requirement.
 
 Report actual counts (for example, 4/5), edits required and failure details. Five internal cases cannot establish general accuracy; repeated runs of the same fixtures are not new independent test cases.
 
