@@ -60,10 +60,11 @@ try {
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
   await page.goto(base + '/app/?mode=api&map=local', {waitUntil: 'networkidle'});
-  await page.locator('.api-composer').waitFor();
+  await page.locator('.composer-disclosure').waitFor();
   const choose = async id => {await page.locator(`#cities button[data-city-id="${id}"]`).click();};
   const createTrip = async (title, notes) => {
-    await page.locator('.api-composer input[type=text]').fill(title);
+    if (!(await page.locator('.composer-disclosure').evaluate(el => el.open))) await page.locator('.composer-disclosure > summary').click();
+  await page.locator('.api-composer input[type=text]').fill(title);
     await page.locator('.api-composer textarea').fill(notes);
     await page.locator('.api-composer button[type=submit]').click();
     const card = page.locator('.trip-card').filter({hasText: title}).first();

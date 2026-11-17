@@ -22,7 +22,7 @@ function saveApiEditorDraft(tripId,value){apiEditorDrafts[tripId]=value;try{sess
 function clearApiEditorDraft(tripId){delete apiEditorDrafts[tripId];try{sessionStorage.setItem(apiDraftKey,JSON.stringify(apiEditorDrafts));}catch{}}
 function todayISO(){const now=new Date();return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;}
 const demoCovers={'demo-01':{file:'osaka-castle-2.jpg',author:'Eleni Afiontzi',source:'https://unsplash.com/photos/JdIC1dJtO_U'},'demo-02':{file:'osaka-castle-1.jpg',author:'欣慧',source:'https://unsplash.com/photos/dEMBfH4nWY8'}};
-let viewerTrigger;
+let viewerTrigger, galleryOpening=false;
 const prominent=new Set(['cn-beijing','cn-shanghai','cn-chengdu','hk-hong-kong','tw-taipei','jp-osaka','jp-tokyo','jp-sapporo']);
 function node(tag,text,classes){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(classes)el.className=classes;return el;}
 function svg(tag,attrs={}){const el=document.createElementNS(NS,tag);for(const [key,value]of Object.entries(attrs))el.setAttribute(key,value);return el;}
@@ -48,6 +48,7 @@ function render(){
  if(!visible.some(c=>c.id===selected))selected=visible[0]?.id||null;
  $('progress').replaceChildren(node('strong',`${counts.size} cities visited`),document.createTextNode(` of ${cities.length} supported · ${trips.length} trips`));
  $('result-count').textContent=`${visible.length} of ${cities.length} cities`;
+ $('clear-filters').hidden=!($('search').value||$('region').value||$('visited').checked);
  const chosen=cities.find(city=>city.id===selected),visits=counts.get(selected)||0;
  $('map-selection').textContent=chosen?`${chosen.name} · ${visits?`${visits} ${visits===1?'trip':'trips'} saved · area lit`:'No saved trips yet · area unlit'}`:'Choose a city to see its visit area.';
  $('focus-city').disabled=!chosen;$('focus-city-text').disabled=!chosen;
@@ -132,11 +133,11 @@ function renderMarkers(visible,counts){
  }
 }
 function renderMemories(){
- const city=cities.find(c=>c.id===selected);$('trip-list').replaceChildren();$('demo-tools').hidden=mode!=='demo'||!city;$('api-handoff').hidden=mode!=='api'||!city;
+ const city=cities.find(c=>c.id===selected);$('trip-list').replaceChildren();$('demo-tools').hidden=mode!=='demo'||!city;$('api-handoff').hidden=mode!=='api'||!city;$('add-sample').hidden=mode!=='demo'||!city;$('trip-sort').disabled=!city;
  if(!city){$('city-region').textContent='No city selected';$('city-name').textContent='Keep exploring';$('city-local').textContent='';$('city-count').textContent='Clear a filter to return to your cities.';return;}
- const rows=cityTrips(trips,city.id);$('city-region').textContent=city.region;$('city-name').textContent=city.name;$('city-local').textContent=city.local_name;$('city-count').textContent=`${rows.length} ${rows.length===1?'visit':'visits'} · ${rows.length?'Each trip, its own memory.':'A story still to come.'}`;
- if(mode==='api')$('trip-list').append(makeTripComposer(city));
- if(!rows.length){const empty=node('div',undefined,'empty');empty.append(node('strong','Your first memory belongs here.'),node('p',mode==='demo'?'Open “Try visit counting” below to light up this city with a fictional visit.':'No saved trips for this city yet. Add one above.'));$('trip-list').append(empty);}
+ const rows=cityTrips(trips,city.id);if($('trip-sort').value==='oldest')rows.reverse();$('city-region').textContent=city.region;$('city-name').textContent=city.name;$('city-local').textContent=city.local_name;$('city-count').textContent=`${rows.length} ${rows.length===1?'visit':'visits'} · ${rows.length?'Each trip, its own memory.':'A story still to come.'}`;
+ if(mode==='api'){const composer=node('details',undefined,'composer-disclosure');composer.open=!rows.length||Boolean(composerDraft(city.id));composer.append(node('summary','Add a memory'),makeTripComposer(city));$('trip-list').append(composer);}
+ if(!rows.length){const empty=node('div',undefined,'empty');empty.append(node('strong','Your first memory belongs here.'),node('p',mode==='demo'?'Choose “Add sample visit” above to light up this city with a fictional visit.':'No saved trips for this city yet. Add one above.'));$('trip-list').append(empty);}
  for(const trip of rows){
   const card=node('article',undefined,'trip-card');card.dataset.tripId=trip.id;
   const date=node('time',trip.trip_date?new Intl.DateTimeFormat('en',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(trip.trip_date)):'Date not recorded');if(trip.trip_date)date.dateTime=trip.trip_date;
@@ -174,13 +175,30 @@ function makeCover(trip){
  const figure=node('figure',undefined,'trip-cover'),button=node('button',undefined,'cover-button'),img=node('img');
  const alt=sample?'Osaka Castle — example photograph':(typeof photo.alt==='string'?photo.alt:'Trip photograph');
  button.setAttribute('aria-label',`Open photo for ${trip.title||'this memory'}`);img.alt=alt;img.src=url;img.loading='lazy';img.decoding='async';img.width=960;img.height=640;
- button.append(img);button.addEventListener('click',()=>openViewer(url,alt,sample?`Example photo by ${sample.author} / Unsplash · not a photo from this fictional trip`:alt,button));
+ button.append(img,node('span',mode==='demo'?'View photo':`${trip.photos.length} ${trip.photos.length===1?'photo':'photos'} · View`,'cover-action'));button.addEventListener('click',()=>openGallery(trip,url,button));
  figure.append(button);if(sample){const caption=node('figcaption','Example photo · '),link=node('a',`${sample.author} / Unsplash`);link.href=sample.source;link.target='_blank';link.rel='noreferrer';caption.append(link);figure.append(caption);}
  img.addEventListener('error',()=>{button.replaceWith(node('p','Photo unavailable. Your memory text is still here.','photo-missing'));});return figure;
 }
 let formSeq=0;
 function formField(text,control){const id=`field-${++formSeq}`;control.id=id;const label=node('label',text);label.htmlFor=id;const field=node('div',undefined,'field');field.append(label,control);return field;}
 function openViewer(url,alt,caption,trigger){viewerTrigger=trigger;$('viewer-image').src=url;$('viewer-image').alt=alt;$('viewer-caption').textContent=caption;$('photo-viewer').showModal();}
+function galleryItems(trip){
+ if(mode==='demo')return cityTrips(trips,trip.city_id).filter(row=>demoCovers[row.id]).map(row=>{
+  const sample=demoCovers[row.id];return {src:new URL(`../data/demo-covers/${sample.file}`,location.href).href,alt:'Osaka Castle — example photograph',caption:`${row.title} · ${row.trip_date} · Example photo by ${sample.author} / Unsplash. Not a photo from this fictional trip.`};
+ });
+ return trip.photos.filter(photo=>photoURL(photo,location.origin)).map(photo=>({src:photoURL(photo,location.origin),alt:photo.alt||'Trip photograph',caption:`${trip.title||'Untitled memory'}${trip.trip_date?` · ${trip.trip_date}`:''} · ${photo.alt||'Trip photograph'}`}));
+}
+async function openGallery(trip,url,trigger){
+ if(galleryOpening)return;
+ galleryOpening=true;trigger.setAttribute('aria-busy','true');
+ const items=galleryItems(trip),target=new URL(url,location.href).href,index=Math.max(0,items.findIndex(item=>item.src===target));
+ try{
+  const {showPhotoGallery}=await import('./photo-gallery.mjs');
+  await showPhotoGallery(items,index,trigger);
+ }catch{
+  const item=items[index];openViewer(url,item?.alt||'Trip photograph',item?.caption||'Trip photograph',trigger);
+ }finally{galleryOpening=false;trigger.removeAttribute('aria-busy');}
+}
 function makeTripComposer(city){
  const form=node('form',undefined,'trip-form api-composer');form.setAttribute('aria-label',`Add a memory for ${city.name}`);
  const draft=composerDraft(city.id);
@@ -200,7 +218,7 @@ function makeApiActions(card,trip){
  const add=node('button','Add photo','text-button');add.type='button';add.addEventListener('click',()=>input.click());
  input.addEventListener('change',()=>{const file=input.files?.[0];input.value='';if(file)uploadTripPhoto(trip,file);});
  const edit=node('button','Edit memory','text-button');edit.type='button';edit.addEventListener('click',()=>openApiEditor(card,trip));
- const ai=node('button','Write with AI','text-button');ai.type='button';ai.addEventListener('click',()=>openAiNotice(card,trip));
+ const ai=node('button','Write with AI','text-button ai-action');ai.type='button';ai.addEventListener('click',()=>openAiNotice(card,trip));
  const remove=node('button','Delete trip','text-button danger');remove.type='button';remove.addEventListener('click',()=>{if(confirm(`Delete “${trip.title||'this trip'}” and its photos? This cannot be undone.`))mutate(async()=>{await repository.remove(trip.id);return trips.filter(row=>row.id!==trip.id);},'Trip deleted. Its photos were removed too.',()=>clearApiEditorDraft(trip.id));});
  actions.append(add,input,edit,ai,remove);return actions;
 }
@@ -209,7 +227,7 @@ function makePhotoStrip(trip){
  const strip=node('div',undefined,'photo-strip');
  for(const photo of trip.photos){
   const item=node('div',undefined,'photo-item'),url=photoURL(photo,location.origin);
-  if(url){const image=node('img');image.src=url;image.alt=photo.alt||'Trip photograph';image.loading='lazy';image.decoding='async';const view=node('button',undefined,'photo-thumb');view.type='button';view.setAttribute('aria-label',`Open ${photo.alt||'trip photograph'}`);view.append(image);view.addEventListener('click',()=>openViewer(url,image.alt,image.alt,view));item.append(view);}
+  if(url){const image=node('img');image.src=url;image.alt=photo.alt||'Trip photograph';image.loading='lazy';image.decoding='async';const view=node('button',undefined,'photo-thumb');view.type='button';view.setAttribute('aria-label',`Open ${photo.alt||'trip photograph'}`);view.append(image);view.addEventListener('click',()=>openGallery(trip,url,view));item.append(view);}
   const remove=node('button','Remove','text-button danger photo-remove');remove.type='button';remove.addEventListener('click',()=>{if(confirm('Remove this photo from the trip?'))mutate(async()=>{await repository.deletePhoto(trip.id,photo.id);const updated={...trip,photos:trip.photos.filter(row=>row.id!==photo.id)};return trips.map(row=>row.id===trip.id?updated:row);},'Photo removed.');});
   item.append(remove);strip.append(item);
  }
@@ -328,6 +346,8 @@ async function startOnlineMap(){
   $('map-provider').textContent=useGoogle?'Google Maps':'City map · OpenFreeMap';$('google-credit').hidden=!useGoogle;$('streets-credit').hidden=useGoogle;$('local-credit').hidden=true;
  }catch(error){if(!mapFailed){fallback();$('map-notice').textContent=`Online map unavailable (${error.message}). Showing the local city map.`;}}
 }
+$('trip-sort').addEventListener('change',()=>{if(ready)renderMemories();});
+$('clear-filters').addEventListener('click',()=>{$('search').value='';$('region').value='';$('visited').checked=false;render();$('search').focus();});
 for(const id of ['search','region','visited'])$(id).addEventListener(id==='search'?'input':'change',()=>{if(ready)render();});
 $('zoom-in').addEventListener('click',()=>{if(liveMap){liveMap.zoom(1);return;}view=zoomView(view,.65);applyView();});$('zoom-out').addEventListener('click',()=>{if(liveMap){liveMap.zoom(-1);return;}view=zoomView(view,1/.65);applyView();});$('fit').addEventListener('click',()=>{if(liveMap){liveMap.fit();return;}view=initialView();applyView();});
 $('focus-city').addEventListener('click',()=>{if(selected)focusCity(selected);});

@@ -10,9 +10,10 @@ const checks=[],errors=[];let tripId=null;
 try{
  const p=await browser.newPage({viewport:{width:1440,height:1000}});
  p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());
- await p.goto(base+'/app/?mode=api&map=local',{waitUntil:'networkidle'});await p.waitForSelector('.api-composer');
+ await p.goto(base+'/app/?mode=api&map=local',{waitUntil:'networkidle'});await p.waitForSelector('.composer-disclosure');
  await p.locator('#cities button[data-city-id="cn-nanjing"]').click();await p.waitForFunction(()=>document.querySelector('#city-name')?.textContent==='Nanjing');
  const title=`API UI test ${Date.now()}`;
+ if (!(await p.locator('.composer-disclosure').evaluate(el=>el.open))) await p.locator('.composer-disclosure > summary').click();
  await p.locator('.api-composer input[type=text]').fill(title);await p.locator('.api-composer textarea').fill('Fictional notes from the browser workflow.');await p.locator('.api-composer button[type=submit]').click();
  await p.waitForFunction(t=>[...document.querySelectorAll('.trip-card h3')].some(h=>h.textContent===t),title);
  const card=p.locator('.trip-card').filter({hasText:title}).first();tripId=await card.getAttribute('data-trip-id');assert.ok(tripId,'the server trip ID is present on the card');
