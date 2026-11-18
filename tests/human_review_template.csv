@@ -3,7 +3,7 @@ T01,Xinyue Li,,tests/evidence/2026-11-14-live-ai/final-v3/T01.json,,,,,
 T01,Qingyang Lin,,tests/evidence/2026-11-14-live-ai/final-v3/T01.json,,,,,
 T02,Yunian Lin,,tests/evidence/2026-11-14-live-ai/final-v3/T02.json,,,,,
 T02,Qingyang Lin,,tests/evidence/2026-11-14-live-ai/final-v3/T02.json,,,,,
-T03,Ho Yeung Seto,,NOT RUN — cloud permission pending,,,,,
+T03,Ho Yeung Seto,2026-11-18,NOT RUN — cloud permission pending,not-assessable,not-assessable,not-assessable,not-assessable,No run: provider-transfer permission pending; no substitution made.
 T03,Yunian Lin,,NOT RUN — cloud permission pending,,,,,
 T04,Xinyue Li,,tests/evidence/2026-11-14-live-ai/final-v3/T04.json,,,,,
 T04,Ho Yeung Seto,18-11-2026,tests/evidence/2026-11-14-live-ai/final-v3/T04.json,pass,pass,pass,pass,
