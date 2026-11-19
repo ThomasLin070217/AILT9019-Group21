@@ -26,7 +26,9 @@ def _load_env_file(path: Path, environ: dict[str, str]) -> None:
             continue
         name, separator, value = stripped.partition("=")
         name = name.strip()
-        if not separator or not name or name in environ:
+        # A blank variable inherited from a Windows shell is not a real
+        # override. Let the local configuration supply it instead.
+        if not separator or not name or (name in environ and environ[name].strip()):
             continue
         environ[name] = value.strip().strip("\"'")
 

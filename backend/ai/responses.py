@@ -175,7 +175,10 @@ class ResponsesGenerator:
                     if response.status_code in (301, 302, 303, 307, 308):
                         raise ProviderError("The AI endpoint redirected the request.")
                     if response.status_code in (401, 403):
-                        raise ProviderUnavailable("The AI provider rejected the credentials.")
+                        # The local configuration is present, but the remote
+                        # provider rejected it. Keep this distinct from a
+                        # genuinely unconfigured local backend.
+                        raise ProviderError("The AI provider rejected the credentials.")
                     if response.status_code >= 400:
                         raise ProviderError(f"The AI provider returned HTTP {response.status_code}.")
                     chunks: list[bytes] = []

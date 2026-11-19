@@ -109,6 +109,14 @@ def test_invalid_model_output_and_redirect_are_rejected(tmp_path):
         run(generator(tmp_path, redirect).generate(request(tmp_path)))
 
 
+def test_rejected_credentials_are_a_provider_failure(tmp_path):
+    def rejected(req):
+        return httpx.Response(401, json={"error": {"message": "bad key"}})
+
+    with pytest.raises(ProviderError, match="rejected the credentials"):
+        run(generator(tmp_path, rejected).generate(request(tmp_path)))
+
+
 def test_unsafe_request_can_return_refusal_without_a_draft(tmp_path):
     def refusal(req):
         return httpx.Response(200, json=completion({"status": "refusal", "title": "",
@@ -135,6 +143,21 @@ def test_existing_local_ai_config_is_recognised(tmp_path):
     assert settings.ai_provider == "responses"
     assert settings.ai_api_key == "test"
     assert settings.ai_model == "qwen3.8-flash"
+
+
+def test_blank_process_ai_variables_do_not_hide_local_config(tmp_path):
+    (tmp_path / ".env").write_text(
+        "AI_PROVIDER=responses\nAI_API_KEY=test\nAI_MODEL=qwen3.8-flash\n"
+        "AI_BASE_URL=https://api.openai.com/v1\n"
+    )
+    settings = Settings.from_env(
+        tmp_path,
+        environ={"AI_PROVIDER": "", "AI_API_KEY": "", "AI_MODEL": "", "AI_BASE_URL": ""},
+    )
+    assert settings.ai_provider == "responses"
+    assert settings.ai_api_key == "test"
+    assert settings.ai_model == "qwen3.8-flash"
+    assert settings.ai_base_url == "https://api.openai.com/v1"
 
 
 def test_combined_route_returns_editable_draft_without_changing_saved_trip(tmp_path, client_factory):
